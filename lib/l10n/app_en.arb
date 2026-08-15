@@ -1,0 +1,76 @@
+{
+  "@@locale": "en",
+  "appTitle": "PaintForge",
+  "appTagline": "Your miniature paint inventory",
+  "tabCatalog": "Catalog",
+  "tabInventory": "My paints",
+  "tabShopping": "Shopping list",
+  "tabSettings": "Settings",
+  "searchHint": "Search by name, code or range…",
+  "filterAllBrands": "All",
+  "resultsCount": "{count, plural, =0{No paints found} =1{1 paint} other{{count} paints}}",
+  "@resultsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "statusNotOwned": "Not owned",
+  "statusInStock": "Owned",
+  "statusLow": "Running low",
+  "statusWishlist": "To buy",
+  "actionMarkInStock": "I own it",
+  "actionMarkLow": "Running low",
+  "actionAddToShopping": "Add to shopping list",
+  "actionRemove": "Remove from my inventory",
+  "actionPurchased": "Bought it",
+  "inventoryEmptyTitle": "No paints yet",
+  "inventoryEmptyBody": "Find your paints in the catalog and mark them as owned.",
+  "inventorySummary": "{total, plural, =1{1 paint in your collection} other{{total} paints in your collection}}",
+  "@inventorySummary": {
+    "placeholders": {
+      "total": {"type": "int"}
+    }
+  },
+  "inventoryLowCount": "{count, plural, =1{1 running low} other{{count} running low}}",
+  "@inventoryLowCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "shoppingEmptyTitle": "Nothing to buy",
+  "shoppingEmptyBody": "Paints marked as running low or to buy will show up here.",
+  "shoppingLowSection": "Running low",
+  "shoppingWishlistSection": "Want to buy",
+  "shoppingCopied": "Shopping list copied to clipboard",
+  "shoppingCopyTooltip": "Copy list",
+  "signIn": "Sign in",
+  "signUp": "Create account",
+  "email": "Email",
+  "password": "Password",
+  "signInWithGoogle": "Continue with Google",
+  "orDivider": "or",
+  "noAccountPrompt": "Don't have an account? Sign up",
+  "haveAccountPrompt": "Already have an account? Sign in",
+  "signOut": "Sign out",
+  "authInvalidEmail": "That email address is not valid.",
+  "authWeakPassword": "The password is too weak (minimum 6 characters).",
+  "authEmailInUse": "An account already exists with that email.",
+  "authWrongCredentials": "Wrong email or password.",
+  "authGenericError": "Sign-in failed. Please try again.",
+  "fieldRequired": "Required field",
+  "settingsAccount": "Account",
+  "settingsCatalogTitle": "Paint catalog",
+  "settingsCatalogSubtitle": "{count} paints from Citadel, Vallejo, The Army Painter and Green Stuff World",
+  "@settingsCatalogSubtitle": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "settingsVersion": "Version",
+  "firebaseSetupTitle": "Firebase is not configured",
+  "firebaseSetupBody": "Run \"flutterfire configure\" and rebuild the app to enable sign-in and cloud sync. See README.md for the full setup guide.",
+  "loading": "Loading…",
+  "paintDetailsRange": "Range",
+  "paintDetailsCode": "Code",
+  "paintDetailsBrand": "Brand"
+}
