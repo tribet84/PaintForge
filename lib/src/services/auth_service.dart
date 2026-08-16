@@ -6,6 +6,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 abstract class AuthService {
   Stream<User?> authStateChanges();
 
+  /// Like [authStateChanges] but ALSO fires when the signed-in user's profile
+  /// changes — including the moment a federated provider's photo and display
+  /// name finish hydrating. Screens that render profile data must use this;
+  /// authStateChanges only fires on sign-in and sign-out, so a photo that
+  /// arrives a beat later would never be drawn.
+  Stream<User?> userChanges();
+
   User? get currentUser;
 
   Future<void> signInWithEmail(String email, String password);
@@ -50,6 +57,9 @@ class FirebaseAuthService implements AuthService {
 
   @override
   Stream<User?> authStateChanges() => _auth.authStateChanges();
+
+  @override
+  Stream<User?> userChanges() => _auth.userChanges();
 
   @override
   User? get currentUser => _auth.currentUser;

@@ -94,7 +94,9 @@ class _AuthGate extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = context.read<AuthService>();
     return StreamBuilder<User?>(
-      stream: auth.authStateChanges(),
+      // userChanges, not authStateChanges: the latter never fires when the
+      // profile picture finishes loading, so the avatar stayed a gear.
+      stream: auth.userChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const _PaintForgeMaterialApp(

@@ -15,6 +15,9 @@ class FakeAuthService implements AuthService {
   Stream<User?> authStateChanges() => Stream<User?>.value(null);
 
   @override
+  Stream<User?> userChanges() => Stream<User?>.value(null);
+
+  @override
   User? get currentUser => null;
 
   @override

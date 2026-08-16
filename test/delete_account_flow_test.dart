@@ -20,6 +20,9 @@ class FakeAuthService implements AuthService {
   Stream<User?> authStateChanges() => const Stream.empty();
 
   @override
+  Stream<User?> userChanges() => const Stream.empty();
+
+  @override
   User? get currentUser => null;
 
   @override
@@ -247,6 +250,9 @@ class _OrderedAuthService implements AuthService {
 
   @override
   Stream<User?> authStateChanges() => _inner.authStateChanges();
+
+  @override
+  Stream<User?> userChanges() => _inner.userChanges();
 
   @override
   User? get currentUser => _inner.currentUser;
