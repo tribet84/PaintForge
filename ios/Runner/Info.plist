@@ -50,8 +50,8 @@
 	     enabled (see README.md). -->
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
-	<!-- Google Sign-In: replace REVERSED_CLIENT_ID with the value from your
-	     GoogleService-Info.plist after running `flutterfire configure`. -->
+	<!-- Google Sign-In callback scheme. Must stay in sync with
+	     REVERSED_CLIENT_ID in ios/Runner/GoogleService-Info.plist. -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -59,7 +59,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>REVERSED_CLIENT_ID</string>
+				<string>com.googleusercontent.apps.86463026904-bpppnlov2836c7jldsh5b4a3nhbuqtlt</string>
 			</array>
 		</dict>
 	</array>

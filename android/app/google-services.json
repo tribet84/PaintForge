@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "86463026904",
+    "project_id": "paintforge-d8cf2",
+    "storage_bucket": "paintforge-d8cf2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86463026904:android:67c1d6b7507eaf5acfa9ad",
+        "android_client_info": {
+          "package_name": "com.robermac.paintforge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86463026904-4ns68ke3jorguem00r6mnns7aldqv66f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpG491VLn6Ygyz-a-pQaOSbrP5ZoRW1r8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86463026904-4ns68ke3jorguem00r6mnns7aldqv66f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "86463026904-7el6q993n48udt5sfmdtsn36urag9719.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.orvium.paintforge"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86463026904:android:b9c39d8f24e73e3acfa9ad",
+        "android_client_info": {
+          "package_name": "io.orvium.paintforge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86463026904-4ns68ke3jorguem00r6mnns7aldqv66f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpG491VLn6Ygyz-a-pQaOSbrP5ZoRW1r8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86463026904-4ns68ke3jorguem00r6mnns7aldqv66f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "86463026904-7el6q993n48udt5sfmdtsn36urag9719.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.orvium.paintforge"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
