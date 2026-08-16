@@ -1,42 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter_test/flutter_test.dart';
-import 'package:paintforge/src/data/inventory_repository.dart';
 import 'package:paintforge/src/models/inventory_entry.dart';
 import 'package:paintforge/src/state/inventory_provider.dart';
 
-/// In-memory repository so provider logic can be tested without Firestore.
-class FakeInventoryRepository implements InventoryRepository {
-  final _entries = <String, InventoryEntry>{};
-  final _controller =
-      StreamController<Map<String, InventoryEntry>>.broadcast();
-
-  void _emit() => _controller.add(Map.of(_entries));
-
-  @override
-  Stream<Map<String, InventoryEntry>> watchEntries() {
-    // Subscribe to the broadcast stream synchronously so no update emitted
-    // right after construction is ever missed, and replay the current state
-    // to the new listener.
-    final controller = StreamController<Map<String, InventoryEntry>>();
-    controller.add(Map.of(_entries));
-    final subscription = _controller.stream.listen(controller.add);
-    controller.onCancel = subscription.cancel;
-    return controller.stream;
-  }
-
-  @override
-  Future<void> setStatus(String paintId, PaintStatus status) async {
-    _entries[paintId] = InventoryEntry(paintId: paintId, status: status);
-    _emit();
-  }
-
-  @override
-  Future<void> remove(String paintId) async {
-    _entries.remove(paintId);
-    _emit();
-  }
-}
+import 'fakes.dart';
 
 Future<void> pump() => Future<void>.delayed(Duration.zero);
 
@@ -96,4 +62,5 @@ void main() {
     expect(provider.statusOf('paint-e'), isNull);
     expect(provider.owned, isEmpty);
   });
+
 }
