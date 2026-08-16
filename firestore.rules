@@ -1,11 +1,65 @@
 rules_version = '2';
 
-// Each user can only read and write their own inventory.
+// Private data lives under users/{userId}; a signed-in user can only touch
+// their own subtree. Shared recipes live in the top-level publishedRecipes
+// collection: readable by any signed-in user, writable only by their owner.
 // Deploy with: firebase deploy --only firestore:rules
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{userId}/inventory/{paintId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+    match /users/{userId} {
+      function isOwner() {
+        return request.auth != null && request.auth.uid == userId;
+      }
+
+      // The user doc itself holds one-shot flags (e.g. sample recipe seeded).
+      allow read, write: if isOwner();
+
+      // Paint status: users/{userId}/inventory/{paintId}
+      match /inventory/{paintId} {
+        allow read, write: if isOwner();
+      }
+
+      // Custom paint lists: users/{userId}/paintLists/{listId}
+      match /paintLists/{listId} {
+        allow read, write: if isOwner();
+      }
+
+      // Painting recipes: users/{userId}/recipes/{recipeId}
+      match /recipes/{recipeId} {
+        allow read, write: if isOwner();
+      }
+
+      // Links to other painters' published recipes.
+      match /linkedRecipes/{publishedId} {
+        allow read, write: if isOwner();
+      }
+    }
+
+    // Public copies of shared recipes. Anyone signed in can read; only the
+    // owner can create, update or remove them, and ownership can never be
+    // reassigned.
+    match /publishedRecipes/{publishedId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.ownerUid == request.auth.uid;
+      allow update: if request.auth != null
+        && resource.data.ownerUid == request.auth.uid
+        && request.resource.data.ownerUid == request.auth.uid;
+      allow delete: if request.auth != null
+        && resource.data.ownerUid == request.auth.uid;
+
+      // One marker doc per painter who linked this recipe, keyed by their
+      // uid, so the link count is computable without server code and nobody
+      // can inflate it beyond their single vote. The recipe owner can also
+      // delete markers here — needed to clean up on unpublish and on account
+      // deletion, since a marker's linker is not the recipe's owner.
+      match /links/{linkerUid} {
+        allow read: if request.auth != null;
+        allow create: if request.auth != null && request.auth.uid == linkerUid;
+        allow delete: if request.auth != null
+          && (request.auth.uid == linkerUid
+            || get(/databases/$(database)/documents/publishedRecipes/$(publishedId)).data.ownerUid == request.auth.uid);
+      }
     }
   }
 }

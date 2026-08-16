@@ -1,0 +1,362 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../l10n/generated/app_localizations.dart';
+import '../../models/recipe.dart';
+import '../../services/image_compressor.dart';
+import '../../state/recipes_provider.dart';
+import '../../widgets/technique_widgets.dart';
+import 'recipe_photo_picker.dart';
+import 'recipe_section_edit_screen.dart';
+
+/// Create or edit a recipe: name, description, inspiration links and the
+/// per-section breakdown. Everything is edited as an in-memory draft and only
+/// persisted when the user saves.
+class RecipeEditScreen extends StatefulWidget {
+  const RecipeEditScreen({super.key, this.recipe});
+
+  /// Null when creating a new recipe.
+  final Recipe? recipe;
+
+  @override
+  State<RecipeEditScreen> createState() => _RecipeEditScreenState();
+}
+
+class _RecipeEditScreenState extends State<RecipeEditScreen> {
+  late final TextEditingController _nameController;
+  late final TextEditingController _descriptionController;
+  late List<RecipeSection> _sections;
+  late List<RecipeLink> _links;
+  String? _photo;
+  var _saving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.recipe?.name ?? '');
+    _descriptionController =
+        TextEditingController(text: widget.recipe?.description ?? '');
+    _sections = List.of(widget.recipe?.sections ?? const []);
+    _links = List.of(widget.recipe?.links ?? const []);
+    _photo = widget.recipe?.photo;
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.recipe == null ? l10n.recipesNew : l10n.recipeEdit),
+        actions: [
+          TextButton(
+            onPressed: _saving ? null : _save,
+            child: Text(l10n.actionSave),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            _PhotoField(
+              photo: _photo,
+              onPick: () async {
+                final encoded = await pickAndCompressRecipePhoto(context);
+                if (encoded != null) setState(() => _photo = encoded);
+              },
+              onRemove: () => setState(() => _photo = null),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _nameController,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(
+                labelText: l10n.recipeNameLabel,
+                hintText: l10n.recipeNameHint,
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _descriptionController,
+              textCapitalization: TextCapitalization.sentences,
+              maxLines: 2,
+              decoration: InputDecoration(
+                labelText: l10n.recipeDescriptionLabel,
+              ),
+            ),
+            const SizedBox(height: 24),
+            _Header(
+              title: l10n.recipeLinksTitle,
+              onAdd: _addLink,
+              addLabel: l10n.recipeAddLink,
+            ),
+            for (var i = 0; i < _links.length; i++)
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: Icon(
+                  _links[i].isYouTube ? Icons.ondemand_video : Icons.link,
+                ),
+                title: Text(_links[i].title),
+                subtitle: Text(
+                  _links[i].url,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete_outline),
+                  onPressed: () => setState(() => _links.removeAt(i)),
+                ),
+              ),
+            const SizedBox(height: 16),
+            _Header(
+              title: l10n.recipeSectionsTitle,
+              onAdd: _addSection,
+              addLabel: l10n.recipeAddSection,
+            ),
+            for (var i = 0; i < _sections.length; i++)
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 4),
+                child: ListTile(
+                  title: Text(_sections[i].name),
+                  subtitle: Text(
+                    '${l10n.listPaintCount(_sections[i].paintIds.length)}'
+                    '${_sections[i].techniques.isEmpty ? '' : ' · ${_sections[i].techniques.map((t) => techniqueLabel(l10n, t)).join(', ')}'}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  trailing: IconButton(
+                    tooltip: l10n.recipeRemoveSection,
+                    icon: const Icon(Icons.delete_outline),
+                    onPressed: () => setState(() => _sections.removeAt(i)),
+                  ),
+                  onTap: () => _editSection(i),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _addLink() async {
+    final link = await showRecipeLinkDialog(context);
+    if (link == null) return;
+    setState(() => _links.add(link));
+  }
+
+  Future<void> _addSection() async {
+    final section = await Navigator.of(context).push<RecipeSection>(
+      MaterialPageRoute(builder: (_) => const RecipeSectionEditScreen()),
+    );
+    if (section == null) return;
+    setState(() => _sections.add(section));
+  }
+
+  Future<void> _editSection(int index) async {
+    final section = await Navigator.of(context).push<RecipeSection>(
+      MaterialPageRoute(
+        builder: (_) => RecipeSectionEditScreen(section: _sections[index]),
+      ),
+    );
+    if (section == null) return;
+    setState(() => _sections[index] = section);
+  }
+
+  Future<void> _save() async {
+    final l10n = AppLocalizations.of(context);
+    final navigator = Navigator.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final provider = context.read<RecipesProvider>();
+
+    final name = _nameController.text.trim();
+    if (name.isEmpty) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.fieldRequired)));
+      return;
+    }
+
+    setState(() => _saving = true);
+    final draft = Recipe(
+      id: widget.recipe?.id ?? '',
+      name: name,
+      description: _descriptionController.text.trim(),
+      sections: _sections,
+      links: _links,
+      photo: _photo,
+      // Keep the published link alive so saving pushes the update to
+      // everyone who linked the recipe.
+      publishedId: widget.recipe?.publishedId,
+      updatedAt: widget.recipe?.updatedAt ?? DateTime.now(),
+    );
+    if (widget.recipe == null) {
+      await provider.create(draft);
+    } else {
+      await provider.update(draft);
+    }
+    messenger.showSnackBar(SnackBar(content: Text(l10n.recipeSaved)));
+    navigator.pop();
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header({
+    required this.title,
+    required this.onAdd,
+    required this.addLabel,
+  });
+
+  final String title;
+  final VoidCallback onAdd;
+  final String addLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+          ),
+        ),
+        TextButton.icon(
+          onPressed: onAdd,
+          icon: const Icon(Icons.add, size: 18),
+          label: Text(addLabel),
+        ),
+      ],
+    );
+  }
+}
+
+/// Prompts for a link title and URL; returns null if cancelled.
+Future<RecipeLink?> showRecipeLinkDialog(BuildContext context) {
+  final l10n = AppLocalizations.of(context);
+  final titleController = TextEditingController();
+  final urlController = TextEditingController();
+
+  return showDialog<RecipeLink>(
+    context: context,
+    builder: (dialogContext) {
+      var urlError = false;
+      return StatefulBuilder(
+        builder: (dialogContext, setState) => AlertDialog(
+          title: Text(l10n.recipeAddLink),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: titleController,
+                autofocus: true,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(labelText: l10n.linkTitleLabel),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: urlController,
+                keyboardType: TextInputType.url,
+                decoration: InputDecoration(
+                  labelText: l10n.linkUrlLabel,
+                  errorText: urlError ? l10n.linkInvalidUrl : null,
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text(l10n.actionCancel),
+            ),
+            FilledButton(
+              onPressed: () {
+                final title = titleController.text.trim();
+                final url = urlController.text.trim();
+                final uri = Uri.tryParse(url);
+                final valid = uri != null &&
+                    (uri.scheme == 'http' || uri.scheme == 'https') &&
+                    uri.host.isNotEmpty;
+                if (title.isEmpty || !valid) {
+                  setState(() => urlError = !valid);
+                  return;
+                }
+                Navigator.of(dialogContext)
+                    .pop(RecipeLink(title: title, url: url));
+              },
+              child: Text(l10n.actionSave),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+/// Cover photo field: a preview with replace/remove, or a prompt to add one.
+class _PhotoField extends StatelessWidget {
+  const _PhotoField({
+    required this.photo,
+    required this.onPick,
+    required this.onRemove,
+  });
+
+  final String? photo;
+  final VoidCallback onPick;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final bytes = decodePhoto(photo);
+
+    if (bytes == null) {
+      return OutlinedButton.icon(
+        onPressed: onPick,
+        icon: const Icon(Icons.add_a_photo_outlined),
+        label: Text(l10n.recipeAddPhoto),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.memory(
+            bytes,
+            height: 180,
+            width: double.infinity,
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            TextButton.icon(
+              onPressed: onPick,
+              icon: const Icon(Icons.swap_horiz, size: 18),
+              label: Text(l10n.recipeReplacePhoto),
+            ),
+            TextButton.icon(
+              onPressed: onRemove,
+              icon: const Icon(Icons.delete_outline, size: 18),
+              label: Text(l10n.recipeRemovePhoto),
+              style: TextButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

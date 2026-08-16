@@ -1,0 +1,128 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../l10n/generated/app_localizations.dart';
+import '../../data/published_recipe_repository.dart';
+import '../../state/inventory_provider.dart';
+import '../../state/recipes_provider.dart';
+import '../../widgets/paint_widgets.dart';
+import '../../widgets/recipe_card.dart';
+import 'public_recipe_screen.dart';
+import 'recipe_detail_screen.dart';
+import 'recipe_edit_screen.dart';
+
+/// Every recipe available to the user — the ones they wrote and the ones they
+/// linked — rendered by the SAME card, since they read the same way. Only the
+/// badge distinguishes them.
+class RecipesScreen extends StatelessWidget {
+  const RecipesScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final recipes = context.watch<RecipesProvider>();
+    final inventory = context.watch<InventoryProvider>();
+
+    return SafeArea(
+      child: Stack(
+        children: [
+          if (recipes.recipes.isEmpty && recipes.linkedIds.isEmpty)
+            EmptyState(
+              icon: Icons.auto_stories_outlined,
+              title: l10n.recipesEmptyTitle,
+              body: l10n.recipesEmptyBody,
+            )
+          else
+            ListView(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 96),
+              children: [
+                for (final recipe in recipes.recipes)
+                  RecipeCard(
+                    recipe: recipe,
+                    origin: recipe.isPublished
+                        ? RecipeOrigin.ownShared
+                        : RecipeOrigin.ownPrivate,
+                    readiness: recipe.readiness(inventory.entries),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => RecipeDetailScreen(recipeId: recipe.id),
+                      ),
+                    ),
+                  ),
+                for (final publishedId in recipes.linkedIds)
+                  _LinkedRecipeCard(publishedId: publishedId),
+              ],
+            ),
+          Positioned(
+            right: 16,
+            bottom: 16,
+            child: FloatingActionButton.extended(
+              heroTag: 'recipes-new',
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const RecipeEditScreen(),
+                ),
+              ),
+              icon: const Icon(Icons.add),
+              label: Text(l10n.recipesNew),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// A linked recipe, streamed live from the public collection so it always
+/// shows the author's latest version — then handed to the very same card.
+class _LinkedRecipeCard extends StatelessWidget {
+  const _LinkedRecipeCard({required this.publishedId});
+
+  final String publishedId;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final repository = context.read<PublishedRecipeRepository>();
+    final inventory = context.watch<InventoryProvider>();
+
+    return StreamBuilder<PublishedRecipe?>(
+      stream: repository.watchPublished(publishedId),
+      builder: (context, snapshot) {
+        final published = snapshot.data;
+        if (published == null) {
+          // Either still loading, or the author stopped sharing it.
+          return Card(
+            margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: ListTile(
+              leading: const Icon(Icons.link_off),
+              title: Text(
+                snapshot.connectionState == ConnectionState.waiting
+                    ? l10n.loading
+                    : l10n.recipeNotShared,
+              ),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) =>
+                      PublicRecipeScreen(publishedId: publishedId),
+                ),
+              ),
+            ),
+          );
+        }
+
+        return RecipeCard(
+          recipe: published.recipe,
+          origin: RecipeOrigin.linked,
+          authorName: published.authorName,
+          readiness: published.recipe.readiness(inventory.entries),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => PublicRecipeScreen(publishedId: publishedId),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
