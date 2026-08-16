@@ -8,8 +8,15 @@ import '../../models/paint.dart' as catalog;
 import '../../state/inventory_provider.dart';
 import '../../widgets/paint_widgets.dart';
 
-class InventoryScreen extends StatelessWidget {
+class InventoryScreen extends StatefulWidget {
   const InventoryScreen({super.key});
+
+  @override
+  State<InventoryScreen> createState() => _InventoryScreenState();
+}
+
+class _InventoryScreenState extends State<InventoryScreen> {
+  catalog.PaintBrand? _brandFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -35,73 +42,106 @@ class InventoryScreen extends StatelessWidget {
       );
     }
 
+    // Brand chips only ever offer brands the user actually owns something
+    // from — filtering by a brand with nothing in it would be a dead end.
+    final brandNames = <catalog.PaintBrand, String>{
+      for (final (_, paint) in owned) paint.brand: paint.brandName,
+    };
+    if (_brandFilter != null && !brandNames.containsKey(_brandFilter)) {
+      // The only owned paint of the selected brand was just removed.
+      _brandFilter = null;
+    }
+
+    final visible = _brandFilter == null
+        ? owned
+        : owned.where((pair) => pair.$2.brand == _brandFilter).toList();
+
     // Group by brand, brands and paints alphabetically.
     final byBrand = <String, List<(InventoryEntry, catalog.Paint)>>{};
-    for (final pair in owned) {
+    for (final pair in visible) {
       byBrand.putIfAbsent(pair.$2.brandName, () => []).add(pair);
     }
-    final brandNames = byBrand.keys.toList()..sort();
-    for (final brand in brandNames) {
+    final sortedBrandNames = byBrand.keys.toList()..sort();
+    for (final brand in sortedBrandNames) {
       byBrand[brand]!.sort((a, b) => a.$2.name.compareTo(b.$2.name));
     }
 
     final lowCount = inventory.runningLow.length;
 
     return SafeArea(
-      child: ListView(
+      child: Column(
         children: [
+          // A single discreet line rather than a full card — this screen is
+          // about the paints below it, not about restating their count.
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.palette,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            l10n.inventorySummary(owned.length),
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          if (lowCount > 0)
-                            Text(
-                              l10n.inventoryLowCount(lowCount),
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.error,
-                              ),
-                            ),
-                        ],
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    l10n.inventorySummary(owned.length),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+                if (lowCount > 0)
+                  Text(
+                    l10n.inventoryLowCount(lowCount),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                  ),
+              ],
+            ),
+          ),
+          if (brandNames.length > 1)
+            SizedBox(
+              height: 40,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                children: [
+                  FilterChip(
+                    label: Text(l10n.filterAllBrands),
+                    selected: _brandFilter == null,
+                    onSelected: (_) => setState(() => _brandFilter = null),
+                  ),
+                  for (final entry in brandNames.entries) ...[
+                    const SizedBox(width: 8),
+                    FilterChip(
+                      label: Text(entry.value),
+                      selected: _brandFilter == entry.key,
+                      onSelected: (_) => setState(
+                        () => _brandFilter =
+                            _brandFilter == entry.key ? null : entry.key,
                       ),
                     ),
                   ],
-                ),
+                ],
               ),
+            ),
+          Expanded(
+            child: ListView(
+              children: [
+                for (final brand in sortedBrandNames) ...[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                    child: Text(
+                      brand,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                    ),
+                  ),
+                  for (final (entry, paint) in byBrand[brand]!)
+                    PaintTile(
+                      paint: paint,
+                      trailing: StatusChip(status: entry.status),
+                    ),
+                ],
+                const SizedBox(height: 24),
+              ],
             ),
           ),
-          for (final brand in brandNames) ...[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-              child: Text(
-                brand,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
-            ),
-            for (final (entry, paint) in byBrand[brand]!)
-              PaintTile(
-                paint: paint,
-                trailing: StatusChip(status: entry.status),
-              ),
-          ],
-          const SizedBox(height: 24),
         ],
       ),
     );

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
+import '../../build_info.dart';
 import '../../data/catalog_repository.dart';
 import '../../services/auth_service.dart';
+import '../../widgets/account_avatar.dart';
+import 'delete_account_flow.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -15,14 +18,21 @@ class SettingsScreen extends StatelessWidget {
     final catalog = context.read<CatalogRepository>();
     final user = auth.currentUser;
 
-    return SafeArea(
-      child: ListView(
+    return Scaffold(
+      appBar: AppBar(title: Text(l10n.tabSettings)),
+      body: SafeArea(
+        child: ListView(
         children: [
           const SizedBox(height: 8),
           ListTile(
-            leading: CircleAvatar(
-              child: Text(
-                (user?.email ?? '?').substring(0, 1).toUpperCase(),
+            leading: AccountAvatar(
+              photoUrl: auth.photoUrl,
+              size: 40,
+              // Password accounts have no picture, so they keep the initial.
+              fallback: CircleAvatar(
+                child: Text(
+                  (user?.email ?? '?').substring(0, 1).toUpperCase(),
+                ),
               ),
             ),
             title: Text(user?.displayName ?? user?.email ?? ''),
@@ -37,7 +47,10 @@ class SettingsScreen extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: Text(l10n.settingsVersion),
-            subtitle: const Text('1.0.0'),
+            // The build stamp is injected at build time. Without it there is
+            // no way to tell a stale cached bundle from a fresh one, which
+            // turns "I don't see the update" into pure guesswork.
+            subtitle: const Text('1.0.0 · $buildStamp'),
           ),
           const Divider(),
           ListTile(
@@ -51,7 +64,30 @@ class SettingsScreen extends StatelessWidget {
             ),
             onTap: () => auth.signOut(),
           ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+            child: Text(
+              l10n.settingsDangerZone,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.delete_forever_outlined,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            title: Text(
+              l10n.deleteAccountTitle,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+            subtitle: Text(l10n.deleteAccountSubtitle),
+            onTap: () => runDeleteAccountFlow(context),
+          ),
         ],
+        ),
       ),
     );
   }

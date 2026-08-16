@@ -4,6 +4,7 @@
   "appTagline": "Your miniature paint inventory",
   "tabCatalog": "Catalog",
   "tabInventory": "My paints",
+  "tabLists": "Lists",
   "tabShopping": "Shopping list",
   "tabSettings": "Settings",
   "searchHint": "Search by name, code or range…",
@@ -11,7 +12,9 @@
   "resultsCount": "{count, plural, =0{No paints found} =1{1 paint} other{{count} paints}}",
   "@resultsCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "statusNotOwned": "Not owned",
@@ -21,20 +24,29 @@
   "actionMarkInStock": "I own it",
   "actionMarkLow": "Running low",
   "actionAddToShopping": "Add to shopping list",
+  "actionAddToList": "Add to a list",
   "actionRemove": "Remove from my inventory",
   "actionPurchased": "Bought it",
+  "actionCancel": "Cancel",
+  "actionConfirm": "Confirm",
+  "actionDelete": "Delete",
+  "actionSave": "Save",
   "inventoryEmptyTitle": "No paints yet",
   "inventoryEmptyBody": "Find your paints in the catalog and mark them as owned.",
   "inventorySummary": "{total, plural, =1{1 paint in your collection} other{{total} paints in your collection}}",
   "@inventorySummary": {
     "placeholders": {
-      "total": {"type": "int"}
+      "total": {
+        "type": "int"
+      }
     }
   },
   "inventoryLowCount": "{count, plural, =1{1 running low} other{{count} running low}}",
   "@inventoryLowCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "shoppingEmptyTitle": "Nothing to buy",
@@ -43,6 +55,268 @@
   "shoppingWishlistSection": "Want to buy",
   "shoppingCopied": "Shopping list copied to clipboard",
   "shoppingCopyTooltip": "Copy list",
+  "shoppingShareTooltip": "Share list",
+  "shoppingMarkAllBought": "Mark all as bought",
+  "shoppingMarkAllConfirmTitle": "Mark everything as bought?",
+  "shoppingMarkAllConfirmBody": "{count, plural, =1{1 paint will be marked as owned and leave the shopping list.} other{{count} paints will be marked as owned and leave the shopping list.}}",
+  "@shoppingMarkAllConfirmBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shoppingMarkAllDone": "{count, plural, =1{1 paint marked as bought} other{{count} paints marked as bought}}",
+  "@shoppingMarkAllDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shareFallbackCopied": "Your device doesn't support sharing directly, so the text was copied instead",
+  "shoppingListTitle": "PaintForge — Shopping list",
+  "shoppingShareSubject": "My PaintForge shopping list",
+  "shoppingAttribution": "Generated with PaintForge · https://paintforge-d8cf2.web.app",
+  "confirmPurchaseTitle": "Mark as bought?",
+  "confirmPurchaseBody": "{paint} goes back on the shelf as owned and leaves the shopping list.",
+  "@confirmPurchaseBody": {
+    "placeholders": {
+      "paint": {
+        "type": "String"
+      }
+    }
+  },
+  "purchaseConfirmed": "{paint} marked as owned",
+  "@purchaseConfirmed": {
+    "placeholders": {
+      "paint": {
+        "type": "String"
+      }
+    }
+  },
+  "tabRecipes": "Recipes",
+  "recipesEmptyTitle": "No recipes yet",
+  "recipesEmptyBody": "Save how you painted a miniature — section by section, with the paints, techniques and links you want to keep.",
+  "recipesNew": "New recipe",
+  "recipeSaved": "Recipe saved",
+  "recipeDeleted": "Recipe deleted",
+  "recipeDeleteConfirmTitle": "Delete this recipe?",
+  "recipeDeleteConfirmBody": "“{name}” will be deleted. Your paints and their status are not affected.",
+  "@recipeDeleteConfirmBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeEdit": "Edit recipe",
+  "recipeDelete": "Delete recipe",
+  "recipeNameLabel": "Recipe name",
+  "recipeNameHint": "e.g. Ultramarines Captain",
+  "recipeDescriptionLabel": "Description (optional)",
+  "recipeSectionsTitle": "Sections",
+  "recipeSectionsCount": "{count, plural, =0{No sections} =1{1 section} other{{count} sections}}",
+  "@recipeSectionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeAddSection": "Add section",
+  "recipeEditSection": "Edit section",
+  "recipeRemoveSection": "Remove section",
+  "sectionNameLabel": "Section name",
+  "sectionNameHint": "e.g. Armour, cloak, base…",
+  "sectionTechniquesLabel": "Techniques",
+  "sectionPaintsLabel": "Paints",
+  "sectionNotesLabel": "Process",
+  "sectionNotesHint": "e.g. Two thin coats over a black undercoat, then…",
+  "recipeLinksTitle": "Inspiration links",
+  "recipeAddLink": "Add link",
+  "linkTitleLabel": "Title",
+  "linkUrlLabel": "URL",
+  "linkInvalidUrl": "Enter a valid http(s) URL",
+  "recipeEmptySection": "No paints in this section yet",
+  "sectionStepsLabel": "Steps",
+  "sectionStepsHelp": "The order is the recipe: basecoat first, then washes, then highlights. Drag to reorder.",
+  "recipeAddStep": "Add step",
+  "recipeEditStep": "Edit step",
+  "stepTitleLabel": "What happens",
+  "stepTitleHint": "e.g. Basecoat, wash, first highlight…",
+  "stepChoosePaint": "Choose a paint (optional)",
+  "stepClearPaint": "Remove paint",
+  "stepNoteLabel": "Note (optional)",
+  "stepNoteHint": "e.g. heavy drybrush, thin it down…",
+  "recipeShare": "Share recipe",
+  "recipeInvitationTitle": "Save this recipe?",
+  "recipeInvitationBody": "“{name}” by {author}. Linking it keeps it in your account and you will always see the author's latest version.",
+  "@recipeInvitationBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "author": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeInvitationLink": "Save to my account",
+  "recipeInvitationJustLook": "Just have a look",
+  "recipeAlreadyLinked": "This recipe is already in your account",
+  "recipeCreateList": "Create a list from this recipe",
+  "recipeCreateListBody": "A new list will be created with the {count, plural, =1{1 paint} other{{count} paints}} used in “{name}”.",
+  "@recipeCreateListBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeListCreated": "List “{name}” created",
+  "@recipeListCreated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeShareTitle": "Share this recipe?",
+  "recipeShareBody": "Anyone with the link can view it and link it to their account. When you update the recipe, everyone sees your latest version — links follow the recipe, they never copy it.",
+  "recipeSharedBadge": "Shared",
+  "recipeLinkCopied": "Link copied to clipboard",
+  "recipeCopyLink": "Copy link",
+  "recipeShareLink": "Share link…",
+  "recipeStopSharing": "Stop sharing",
+  "recipeStopSharingBody": "The link will stop working and the recipe will disappear from the accounts that linked it. Your local copy is not affected.",
+  "recipeUnpublished": "Recipe is no longer shared",
+  "recipeByAuthor": "by {author}",
+  "@recipeByAuthor": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeUpdatedOn": "Updated {date}",
+  "@recipeUpdatedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeLinkAction": "Link to my account",
+  "recipeUnlinkAction": "Remove from my account",
+  "recipeLinked": "Recipe linked — you will always see the latest version",
+  "recipeUnlinked": "Recipe removed from your account",
+  "recipeLinkedCount": "{count, plural, =0{Nobody has linked this recipe yet} =1{1 painter has linked this recipe} other{{count} painters have linked this recipe}}",
+  "@recipeLinkedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeLinkedSectionTitle": "Linked recipes",
+  "recipeLinkedSectionHelp": "Recipes from other painters. They update automatically when the author updates them.",
+  "recipeNotShared": "This recipe is not shared anymore",
+  "recipeNotSharedBody": "The author stopped sharing it or the link is wrong.",
+  "recipeShareText": "{name} — a PaintForge recipe: {url}",
+  "@recipeShareText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "techniqueBasecoat": "Basecoat",
+  "techniqueLayering": "Layering",
+  "techniqueWash": "Wash",
+  "techniqueDrybrush": "Drybrush",
+  "techniqueHighlight": "Highlight",
+  "techniqueGlaze": "Glaze",
+  "techniqueStipple": "Stipple",
+  "techniqueBlending": "Blending",
+  "techniqueFreehand": "Freehand",
+  "listsMySection": "My lists",
+  "listsShoppingEmpty": "Nothing to buy right now",
+  "listsShoppingLocked": "Always here — it cannot be deleted or renamed",
+  "listsEmptyTitle": "No lists yet",
+  "listsEmptyBody": "Create a list for a miniature, a unit or a whole army and PaintForge will tell you when its paints are running out.",
+  "listsNew": "New list",
+  "listsNameLabel": "List name",
+  "listsNameHint": "e.g. Ultramarines squad",
+  "listsCreated": "List created",
+  "listsRename": "Rename list",
+  "listsDelete": "Delete list",
+  "listsDeleteConfirmTitle": "Delete this list?",
+  "listsDeleteConfirmBody": "“{name}” will be deleted. Your paints and their status are not affected.",
+  "@listsDeleteConfirmBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listsDeleted": "List deleted",
+  "listPaintCount": "{count, plural, =0{No paints} =1{1 paint} other{{count} paints}}",
+  "@listPaintCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listStatusReady": "Ready to paint",
+  "listStatusRunningLow": "Running low",
+  "listStatusIncomplete": "Missing paints",
+  "listStatusEmpty": "Empty list",
+  "listReadinessDetail": "{inStock} owned · {low} running low · {missing} missing",
+  "@listReadinessDetail": {
+    "placeholders": {
+      "inStock": {
+        "type": "int"
+      },
+      "low": {
+        "type": "int"
+      },
+      "missing": {
+        "type": "int"
+      }
+    }
+  },
+  "listNeedsBuying": "{count, plural, =1{1 paint to buy} other{{count} paints to buy}}",
+  "@listNeedsBuying": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listDetailEmptyTitle": "This list is empty",
+  "listDetailEmptyBody": "Add paints from the catalog to start tracking this list.",
+  "listAddPaints": "Add paints",
+  "listRemovePaint": "Remove from list",
+  "listPaintRemoved": "Paint removed from the list",
+  "listAddMissingToShopping": "Add what's needed to the shopping list",
+  "listAddedToShopping": "{count, plural, =0{Nothing to add} =1{1 paint added to the shopping list} other{{count} paints added to the shopping list}}",
+  "@listAddedToShopping": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "addToListTitle": "Add to list",
+  "addToListEmpty": "You have no lists yet. Create one from the Lists tab.",
   "signIn": "Sign in",
   "signUp": "Create account",
   "email": "Email",
@@ -63,14 +337,52 @@
   "settingsCatalogSubtitle": "{count} paints from Citadel, Vallejo, The Army Painter and Green Stuff World",
   "@settingsCatalogSubtitle": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "settingsVersion": "Version",
+  "settingsDangerZone": "Danger zone",
+  "deleteAccountTitle": "Delete account",
+  "deleteAccountSubtitle": "Permanently delete your account and all your data",
+  "deleteAccountConfirmTitle": "Delete your account?",
+  "deleteAccountConfirmBody": "This permanently deletes your inventory, your lists, your recipes and your links to other painters' recipes. Recipes you shared will disappear for everyone who linked them. This cannot be undone.",
+  "deleteAccountConfirmPhrase": "DELETE",
+  "deleteAccountConfirmInstruction": "Type {phrase} to confirm.",
+  "@deleteAccountConfirmInstruction": {
+    "placeholders": {
+      "phrase": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountConfirmFieldLabel": "Confirmation",
+  "deleteAccountButton": "Delete my account",
+  "deleteAccountReauthTitle": "Confirm your identity",
+  "deleteAccountReauthBody": "For your security, sign in again before deleting your account.",
+  "deleteAccountReauthPasswordLabel": "Password",
+  "deleteAccountReauthWithGoogle": "Continue with Google",
+  "deleteAccountReauthWrongPassword": "Wrong password.",
+  "deleteAccountReauthCancelled": "Re-authentication was cancelled. Your account was not deleted.",
+  "deleteAccountDeleting": "Deleting your account…",
+  "deleteAccountError": "Something went wrong. Your account was not deleted.",
   "firebaseSetupTitle": "Firebase is not configured",
   "firebaseSetupBody": "Run \"flutterfire configure\" and rebuild the app to enable sign-in and cloud sync. See README.md for the full setup guide.",
   "loading": "Loading…",
   "paintDetailsRange": "Range",
   "paintDetailsCode": "Code",
-  "paintDetailsBrand": "Brand"
+  "paintDetailsBrand": "Brand",
+  "recipePrivate": "Private",
+  "recipeLinkedBadge": "Linked",
+  "recipePhoto": "Photo",
+  "recipeAddPhoto": "Add photo",
+  "recipeReplacePhoto": "Replace photo",
+  "recipeRemovePhoto": "Remove photo",
+  "recipePhotoFromCamera": "Take a photo",
+  "recipePhotoFromGallery": "Choose from gallery",
+  "recipePhotoTooLarge": "That image is too detailed to store even compressed. Try a smaller one.",
+  "recipePhotoUnreadable": "That file could not be read as an image.",
+  "recipePhotoCompressing": "Compressing photo…",
+  "recipePhotoHelp": "Photos are shrunk on your device before being saved, so a huge camera shot never gets uploaded at full size."
 }

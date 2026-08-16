@@ -5,6 +5,7 @@ import '../../l10n/generated/app_localizations.dart';
 import '../models/inventory_entry.dart';
 import '../models/paint.dart';
 import '../state/inventory_provider.dart';
+import '../state/paint_lists_provider.dart';
 
 /// Round swatch showing the paint color.
 class PaintSwatch extends StatelessWidget {
@@ -155,11 +156,78 @@ Future<void> showPaintActions(BuildContext context, Paint paint) {
               icon: Icons.add_shopping_cart,
               label: l10n.actionAddToShopping,
             ),
+            ListTile(
+              leading: const Icon(Icons.playlist_add),
+              title: Text(l10n.actionAddToList),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                showAddToListSheet(context, paint);
+              },
+            ),
             if (status != null)
               option(
                 value: null,
                 icon: Icons.delete_outline,
                 label: l10n.actionRemove,
+              ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+/// Bottom sheet to toggle [paint] in and out of the user's paint lists.
+Future<void> showAddToListSheet(BuildContext context, Paint paint) {
+  return showModalBottomSheet<void>(
+    context: context,
+    showDragHandle: true,
+    builder: (sheetContext) {
+      final l10n = AppLocalizations.of(sheetContext);
+      // Watch, so the checkboxes reflect writes without closing the sheet.
+      final lists = sheetContext.watch<PaintListsProvider>();
+
+      return SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: PaintSwatch(paint: paint, size: 40),
+              title: Text(l10n.addToListTitle),
+              subtitle: Text(paint.name),
+            ),
+            const Divider(height: 1),
+            if (lists.lists.isEmpty)
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(
+                  l10n.addToListEmpty,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(sheetContext).textTheme.bodyMedium,
+                ),
+              )
+            else
+              Flexible(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    for (final list in lists.lists)
+                      CheckboxListTile(
+                        value: list.paintIds.contains(paint.id),
+                        title: Text(list.name),
+                        subtitle:
+                            Text(l10n.listPaintCount(list.paintIds.length)),
+                        onChanged: (value) {
+                          if (value ?? false) {
+                            lists.addPaint(list.id, paint.id);
+                          } else {
+                            lists.removePaint(list.id, paint.id);
+                          }
+                        },
+                      ),
+                  ],
+                ),
               ),
             const SizedBox(height: 8),
           ],
