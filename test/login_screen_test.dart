@@ -34,6 +34,21 @@ class FakeAuthService implements AuthService {
 
   @override
   Future<void> signOut() async {}
+
+  @override
+  List<String> providerIds = const ['password'];
+
+  @override
+  String? photoUrl;
+
+  @override
+  Future<void> reauthenticateWithPassword(String password) async {}
+
+  @override
+  Future<void> reauthenticateWithGoogle() async {}
+
+  @override
+  Future<void> deleteAccount() async {}
 }
 
 Widget wrap(AuthService auth) {
