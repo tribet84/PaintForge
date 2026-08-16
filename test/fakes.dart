@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:paintforge/src/data/inventory_repository.dart';
 import 'package:paintforge/src/data/paint_list_repository.dart';
+import 'package:paintforge/src/data/published_recipe_repository.dart';
 import 'package:paintforge/src/data/recipe_repository.dart';
 import 'package:paintforge/src/models/inventory_entry.dart';
 import 'package:paintforge/src/models/paint_list.dart';
@@ -161,4 +162,74 @@ class FakeRecipeRepository implements RecipeRepository {
     _recipes.removeWhere((r) => r.id == recipeId);
     _emit();
   }
+}
+
+/// In-memory public sharing layer, keyed by published id.
+class FakePublishedRecipeRepository implements PublishedRecipeRepository {
+  final _published = <String, PublishedRecipe>{};
+  final _linkedIds = <String>{};
+  final _linkedController = StreamController<List<String>>.broadcast();
+
+  void _emitLinked() => _linkedController.add(_linkedIds.toList());
+
+  /// Seeds a public recipe so tests can watch/link/unpublish it.
+  void seed(PublishedRecipe published) => _published[published.id] = published;
+
+  /// Simulates the author unsharing it: the doc disappears, the follower's
+  /// own bookmark does not — that mismatch is exactly what leaves a dead
+  /// linked entry in a subscriber's account.
+  void unpublishFromAuthorSide(String publishedId) =>
+      _published.remove(publishedId);
+
+  @override
+  Future<String> publish(Recipe recipe, {required String authorName}) async {
+    final id = 'pub-${_published.length}';
+    _published[id] = PublishedRecipe(
+      id: id,
+      ownerUid: 'owner',
+      authorName: authorName,
+      recipe: recipe,
+    );
+    return id;
+  }
+
+  @override
+  Future<void> updatePublished(Recipe recipe, {required String authorName}) async {
+    final id = recipe.publishedId;
+    if (id == null || !_published.containsKey(id)) return;
+    _published[id] = PublishedRecipe(
+      id: id,
+      ownerUid: _published[id]!.ownerUid,
+      authorName: authorName,
+      recipe: recipe,
+    );
+  }
+
+  @override
+  Future<void> unpublish(String publishedId) async {
+    _published.remove(publishedId);
+  }
+
+  @override
+  Stream<PublishedRecipe?> watchPublished(String publishedId) =>
+      Stream.value(_published[publishedId]);
+
+  @override
+  Stream<List<String>> watchLinkedIds() =>
+      _replay(_linkedController, () => _linkedIds.toList());
+
+  @override
+  Future<void> link(String publishedId) async {
+    _linkedIds.add(publishedId);
+    _emitLinked();
+  }
+
+  @override
+  Future<void> unlink(String publishedId) async {
+    _linkedIds.remove(publishedId);
+    _emitLinked();
+  }
+
+  @override
+  Future<int> linkCount(String publishedId) async => 0;
 }

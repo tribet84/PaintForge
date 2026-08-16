@@ -304,11 +304,16 @@ class EmptyState extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.body,
+    this.action,
   });
 
   final IconData icon;
   final String title;
   final String body;
+
+  /// Optional way out of the empty state, e.g. a button to clear whatever
+  /// left the screen with nothing to show.
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -328,6 +333,10 @@ class EmptyState extends StatelessWidget {
               style: theme.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
+            if (action != null) ...[
+              const SizedBox(height: 16),
+              action!,
+            ],
           ],
         ),
       ),

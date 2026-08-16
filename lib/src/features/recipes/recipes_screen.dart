@@ -91,22 +91,30 @@ class _LinkedRecipeCard extends StatelessWidget {
       builder: (context, snapshot) {
         final published = snapshot.data;
         if (published == null) {
-          // Either still loading, or the author stopped sharing it.
+          final stillLoading =
+              snapshot.connectionState == ConnectionState.waiting;
+          // Either still loading, or the author stopped sharing it — in
+          // which case there is nothing left to open, only to clear.
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: ListTile(
               leading: const Icon(Icons.link_off),
-              title: Text(
-                snapshot.connectionState == ConnectionState.waiting
-                    ? l10n.loading
-                    : l10n.recipeNotShared,
-              ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) =>
-                      PublicRecipeScreen(publishedId: publishedId),
-                ),
-              ),
+              title: Text(stillLoading ? l10n.loading : l10n.recipeNotShared),
+              trailing: stillLoading
+                  ? null
+                  : IconButton(
+                      tooltip: l10n.recipeUnlinkAction,
+                      icon: const Icon(Icons.delete_outline),
+                      onPressed: () => _removeDeadLink(context),
+                    ),
+              onTap: stillLoading
+                  ? null
+                  : () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) =>
+                              PublicRecipeScreen(publishedId: publishedId),
+                        ),
+                      ),
             ),
           );
         }
@@ -124,5 +132,12 @@ class _LinkedRecipeCard extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _removeDeadLink(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    await context.read<RecipesProvider>().unlink(publishedId);
+    messenger.showSnackBar(SnackBar(content: Text(l10n.recipeUnlinked)));
   }
 }

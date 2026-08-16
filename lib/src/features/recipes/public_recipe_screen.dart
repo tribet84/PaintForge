@@ -123,12 +123,22 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
         }
         final published = snapshot.data;
         if (published == null) {
+          final isLinked = recipes.isLinked(widget.publishedId);
           return Scaffold(
             appBar: AppBar(),
             body: EmptyState(
               icon: Icons.link_off,
               title: l10n.recipeNotShared,
               body: l10n.recipeNotSharedBody,
+              // Otherwise a dead link stays in the user's recipe list
+              // forever, with no way to clear it.
+              action: isLinked
+                  ? OutlinedButton.icon(
+                      onPressed: () => _removeDeadLink(context),
+                      icon: const Icon(Icons.delete_outline),
+                      label: Text(l10n.recipeUnlinkAction),
+                    )
+                  : null,
             ),
           );
         }
@@ -287,6 +297,17 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
         );
       },
     );
+  }
+
+  Future<void> _removeDeadLink(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    final navigator = Navigator.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final recipes = context.read<RecipesProvider>();
+
+    await recipes.unlink(widget.publishedId);
+    messenger.showSnackBar(SnackBar(content: Text(l10n.recipeUnlinked)));
+    navigator.pop();
   }
 
   Future<void> _toggleLink(BuildContext context, bool linked) async {
