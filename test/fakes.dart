@@ -43,6 +43,31 @@ class FakeInventoryRepository implements InventoryRepository {
     _entries.remove(paintId);
     _emit();
   }
+
+  /// Counts how many times the repository was asked to write, so tests can
+  /// prove a bulk action is ONE round trip rather than one per paint.
+  int writeCalls = 0;
+
+  @override
+  Future<void> setStatusForAll(
+    Iterable<String> paintIds,
+    PaintStatus status,
+  ) async {
+    writeCalls++;
+    for (final id in paintIds) {
+      _entries[id] = InventoryEntry(paintId: id, status: status);
+    }
+    _emit();
+  }
+
+  @override
+  Future<void> removeAll(Iterable<String> paintIds) async {
+    writeCalls++;
+    for (final id in paintIds) {
+      _entries.remove(id);
+    }
+    _emit();
+  }
 }
 
 /// In-memory custom paint lists.

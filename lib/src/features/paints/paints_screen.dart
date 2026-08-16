@@ -56,12 +56,12 @@ class _PaintsScreenState extends State<PaintsScreen> {
     final ids = List.of(_selection);
     if (ids.isEmpty) return;
 
-    for (final id in ids) {
-      if (status == null) {
-        await inventory.remove(id);
-      } else {
-        await inventory.setStatus(id, status);
-      }
+    // One batched write, not one per paint: a 40-paint selection was 40
+    // round trips and 40 billed operations.
+    if (status == null) {
+      await inventory.removeAll(ids);
+    } else {
+      await inventory.setStatusForAll(ids, status);
     }
     _exitSelection();
     messenger

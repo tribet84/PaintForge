@@ -47,6 +47,20 @@ class InventoryProvider extends ChangeNotifier {
 
   Future<void> remove(String paintId) => _repository.remove(paintId);
 
+  /// Bulk equivalents — one round trip instead of one per paint.
+  Future<void> setStatusForAll(
+    Iterable<String> paintIds,
+    PaintStatus status,
+  ) =>
+      _repository.setStatusForAll(paintIds, status);
+
+  Future<void> removeAll(Iterable<String> paintIds) =>
+      _repository.removeAll(paintIds);
+
+  /// Every purchased paint goes (back) to the shelf as in stock, in one write.
+  Future<void> markAllPurchased(Iterable<String> paintIds) =>
+      _repository.setStatusForAll(paintIds, PaintStatus.inStock);
+
   /// A purchased paint goes (back) to the shelf as in stock.
   Future<void> markPurchased(String paintId) =>
       setStatus(paintId, PaintStatus.inStock);

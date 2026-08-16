@@ -249,9 +249,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
     // a few hundred milliseconds later, restating a subset of the same news.
     _purchaseBatcher.discard();
 
-    for (final (_, paint) in all) {
-      await inventory.markPurchased(paint.id);
-    }
+    await inventory.markAllPurchased(all.map((pair) => pair.$2.id));
     messenger.clearSnackBars();
     messenger.showSnackBar(
       SnackBar(content: Text(l10n.shoppingMarkAllDone(all.length))),

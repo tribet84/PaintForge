@@ -203,18 +203,14 @@ class PaintListDetailScreen extends StatelessWidget {
     final messenger = ScaffoldMessenger.of(context);
     final inventory = context.read<InventoryProvider>();
 
-    var added = 0;
-    for (final paintId in list.paintIds) {
-      final status = inventory.statusOf(paintId);
-      // Already running low or already on the wishlist: nothing to do.
-      if (status == PaintStatus.low || status == PaintStatus.wishlist) continue;
-      if (status == null) {
-        await inventory.setStatus(paintId, PaintStatus.wishlist);
-        added++;
-      }
-    }
+    // Only paints with no entry at all need adding; low and wishlisted ones
+    // are already on the shopping list. One batched write, not one per paint.
+    final missing = list.paintIds
+        .where((paintId) => inventory.statusOf(paintId) == null)
+        .toList();
+    await inventory.setStatusForAll(missing, PaintStatus.wishlist);
     messenger.showSnackBar(
-      SnackBar(content: Text(l10n.listAddedToShopping(added))),
+      SnackBar(content: Text(l10n.listAddedToShopping(missing.length))),
     );
   }
 }

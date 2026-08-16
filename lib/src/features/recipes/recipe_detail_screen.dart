@@ -337,15 +337,14 @@ class RecipeDetailScreen extends StatelessWidget {
     final messenger = ScaffoldMessenger.of(context);
     final inventory = context.read<InventoryProvider>();
 
-    var added = 0;
-    for (final paintId in recipe.allPaintIds) {
-      if (inventory.statusOf(paintId) == null) {
-        await inventory.setStatus(paintId, PaintStatus.wishlist);
-        added++;
-      }
-    }
+    // Only paints with no entry at all need adding; the rest are already
+    // low or wishlisted, so they are on the list already.
+    final missing = recipe.allPaintIds
+        .where((paintId) => inventory.statusOf(paintId) == null)
+        .toList();
+    await inventory.setStatusForAll(missing, PaintStatus.wishlist);
     messenger.showSnackBar(
-      SnackBar(content: Text(l10n.listAddedToShopping(added))),
+      SnackBar(content: Text(l10n.listAddedToShopping(missing.length))),
     );
   }
 }

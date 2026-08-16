@@ -97,6 +97,53 @@ void main() {
     expect(find.text('Abaddon Black'), findsOneWidget);
   });
 
+  testWidgets(
+      'a bulk action is ONE write, not one per paint',
+      (tester) async {
+    // The point of batching: N paints used to mean N round trips and N
+    // billed operations. This fails loudly if the loop ever comes back.
+    final repository = FakeInventoryRepository();
+    final inventory = InventoryProvider(repository: repository);
+    addTearDown(inventory.dispose);
+
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          Provider<CatalogRepository>.value(value: catalog),
+          ChangeNotifierProvider<InventoryProvider>.value(value: inventory),
+        ],
+        child: MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale('en'),
+          home: const Scaffold(body: PaintsScreen()),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'green');
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Select'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Select all'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Owned'));
+    await tester.pumpAndSettle();
+
+    expect(
+      inventory.entries.length,
+      greaterThan(1),
+      reason: 'the search must have matched several paints for this to prove '
+          'anything',
+    );
+    expect(
+      repository.writeCalls,
+      1,
+      reason: 'every selected paint must land in a single batched write',
+    );
+  });
+
   group('bulk selection', () {
     testWidgets('marking several paints at once updates every one of them',
         (tester) async {
