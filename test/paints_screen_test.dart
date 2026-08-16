@@ -144,6 +144,20 @@ void main() {
     );
   });
 
+  testWidgets('the Mine count matches what the list actually shows',
+      (tester) async {
+    final real = catalog.paints.first;
+    // A paint id that is no longer in the bundled catalogue used to inflate
+    // the toggle's count, so it claimed more paints than it could ever show.
+    await pumpPaints(tester, owned: {
+      real.id: PaintStatus.inStock,
+      'citadel-retired-paint-that-no-longer-exists': PaintStatus.inStock,
+    });
+
+    expect(find.text('Mine 1'), findsOneWidget);
+    expect(find.text('1 paint'), findsOneWidget);
+  });
+
   group('bulk selection', () {
     testWidgets('marking several paints at once updates every one of them',
         (tester) async {

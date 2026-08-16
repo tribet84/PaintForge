@@ -82,10 +82,17 @@ class _PaintsScreenState extends State<PaintsScreen> {
     final scope = _scope ??
         (owned.isEmpty ? PaintScope.all : PaintScope.mine);
 
+
     var results = catalog.search(_searchController.text, brand: _brandFilter);
     if (scope == PaintScope.mine) {
       results = results.where((p) => owned.containsKey(p.id)).toList();
     }
+
+    // Count what the user can actually SEE. Raw inventory entries can include
+    // ids that are no longer in the bundled catalogue, and counting those
+    // made the toggle claim more paints than the list ever showed.
+    final mineCount =
+        catalog.paints.where((p) => owned.containsKey(p.id)).length;
 
     // Brand chips offer every brand in scope — filtering to a brand you own
     // nothing from would be a dead end.
@@ -115,7 +122,7 @@ class _PaintsScreenState extends State<PaintsScreen> {
             _FilterHeader(
               searchController: _searchController,
               scope: scope,
-              mineCount: owned.length,
+              mineCount: mineCount,
               brandNames: brandNames,
               brandFilter: _brandFilter,
               resultCount: results.length,
@@ -200,51 +207,64 @@ class _FilterHeader extends StatelessWidget {
             onChanged: (_) => onSearchChanged(),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-          child: SegmentedButton<PaintScope>(
-            segments: [
-              ButtonSegment(
-                value: PaintScope.mine,
-                label: Text('${l10n.paintsScopeMine} $mineCount'),
-                icon: const Icon(Icons.palette_outlined, size: 18),
+        // Scope and brand share one row: both narrow the same list, so they
+        // belong at the same level. The scope stays pinned while the brands
+        // scroll — it is the primary control and must never scroll away.
+        SizedBox(
+          height: 48,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 12, right: 4),
+                child: SegmentedButton<PaintScope>(
+                  segments: [
+                    ButtonSegment(
+                      value: PaintScope.mine,
+                      label: Text('${l10n.paintsScopeMine} $mineCount'),
+                    ),
+                    ButtonSegment(
+                      value: PaintScope.all,
+                      label: Text(l10n.paintsScopeAll),
+                    ),
+                  ],
+                  selected: {scope},
+                  showSelectedIcon: false,
+                  style: const ButtonStyle(
+                    visualDensity: VisualDensity.compact,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  onSelectionChanged: (s) => onScopeChanged(s.first),
+                ),
               ),
-              ButtonSegment(
-                value: PaintScope.all,
-                label: Text(l10n.paintsScopeAll),
-                icon: const Icon(Icons.grid_view, size: 18),
-              ),
+              if (brandNames.length > 1)
+                Expanded(
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.fromLTRB(4, 6, 12, 6),
+                    children: [
+                      FilterChip(
+                        label: Text(l10n.filterAllBrands),
+                        selected: brandFilter == null,
+                        visualDensity: VisualDensity.compact,
+                        onSelected: (_) => onBrandChanged(null),
+                      ),
+                      for (final entry in brandNames.entries) ...[
+                        const SizedBox(width: 6),
+                        FilterChip(
+                          label: Text(entry.value),
+                          selected: brandFilter == entry.key,
+                          visualDensity: VisualDensity.compact,
+                          onSelected: (_) => onBrandChanged(
+                            brandFilter == entry.key ? null : entry.key,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
             ],
-            selected: {scope},
-            showSelectedIcon: false,
-            onSelectionChanged: (s) => onScopeChanged(s.first),
           ),
         ),
-        if (brandNames.length > 1)
-          SizedBox(
-            height: 44,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              children: [
-                FilterChip(
-                  label: Text(l10n.filterAllBrands),
-                  selected: brandFilter == null,
-                  onSelected: (_) => onBrandChanged(null),
-                ),
-                for (final entry in brandNames.entries) ...[
-                  const SizedBox(width: 8),
-                  FilterChip(
-                    label: Text(entry.value),
-                    selected: brandFilter == entry.key,
-                    onSelected: (_) => onBrandChanged(
-                      brandFilter == entry.key ? null : entry.key,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
           child: Row(
