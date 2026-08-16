@@ -1,5 +1,28 @@
 import 'package:flutter/material.dart';
 
+/// Stock status colours.
+///
+/// Kept OUT of the seeded ColorScheme on purpose: those roles already mean
+/// something (primary is the brand, error is a failure), and reusing them
+/// made a healthy shelf render in brand-brown and a nearly-empty pot in
+/// alarm-red. Status needs its own good / warning / absent scale, readable
+/// in both themes.
+class StockColors {
+  const StockColors._();
+
+  static Color inStock(Brightness b) =>
+      b == Brightness.dark ? const Color(0xFF7FC98A) : const Color(0xFF3E8E4E);
+
+  static Color low(Brightness b) =>
+      b == Brightness.dark ? const Color(0xFFE8B45C) : const Color(0xFFB77410);
+
+  static Color missing(Brightness b) =>
+      b == Brightness.dark ? const Color(0xFF6E6157) : const Color(0xFFC9BDB3);
+
+  static Color of(BuildContext context, Color Function(Brightness) role) =>
+      role(Theme.of(context).brightness);
+}
+
 /// PaintForge look & feel: forge orange over dark steel.
 class PaintForgeTheme {
   static const seed = Color(0xFFE8590C);

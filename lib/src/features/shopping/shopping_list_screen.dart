@@ -125,6 +125,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
             for (final paint in entry.value)
               PaintTile(
                 paint: paint,
+                showBrand: false,
                 trailing: FilledButton.tonalIcon(
                   icon: const Icon(Icons.check, size: 18),
                   label: Text(l10n.actionPurchased),

@@ -6,6 +6,7 @@ import '../../models/paint_list.dart';
 import '../../state/inventory_provider.dart';
 import '../../state/paint_lists_provider.dart';
 import '../../widgets/paint_list_widgets.dart';
+import '../../widgets/readiness_detail.dart';
 import '../../widgets/paint_widgets.dart';
 import 'paint_list_detail_screen.dart';
 
@@ -114,11 +115,7 @@ class _PaintListCard extends StatelessWidget {
               ),
               if (readiness.total > 0)
                 Text(
-                  l10n.listReadinessDetail(
-                    readiness.inStock,
-                    readiness.low,
-                    readiness.missing,
-                  ),
+                  readinessDetailText(l10n, readiness),
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),

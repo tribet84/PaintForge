@@ -10,6 +10,7 @@ import '../../state/inventory_provider.dart';
 import '../../state/paint_lists_provider.dart';
 import '../../widgets/paint_list_widgets.dart';
 import '../../widgets/paint_widgets.dart';
+import '../../widgets/readiness_detail.dart';
 import 'lists_screen.dart' show showListNameDialog;
 import 'paint_picker_screen.dart';
 
@@ -247,11 +248,7 @@ class _ReadinessHeader extends StatelessWidget {
           if (readiness.total > 0) ...[
             const SizedBox(height: 8),
             Text(
-              l10n.listReadinessDetail(
-                readiness.inStock,
-                readiness.low,
-                readiness.missing,
-              ),
+              readinessDetailText(l10n, readiness),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),

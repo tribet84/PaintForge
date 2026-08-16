@@ -208,5 +208,8 @@
   "recipePhotoTooLarge": "Esa imagen tiene demasiado detalle para guardarla ni comprimida. Prueba con otra más pequeña.",
   "recipePhotoUnreadable": "No se ha podido leer ese archivo como imagen.",
   "recipePhotoCompressing": "Comprimiendo foto…",
-  "recipePhotoHelp": "Las fotos se reducen en tu dispositivo antes de guardarse, así una foto enorme de la cámara nunca se sube a tamaño completo."
+  "recipePhotoHelp": "Las fotos se reducen en tu dispositivo antes de guardarse, así una foto enorme de la cámara nunca se sube a tamaño completo.",
+  "listReadinessInStock": "{count} en stock",
+  "listReadinessLow": "{count} casi vacías",
+  "listReadinessMissing": "{count} te faltan"
 }

@@ -135,7 +135,10 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   for (final (entry, paint) in byBrand[brand]!)
                     PaintTile(
                       paint: paint,
-                      trailing: StatusChip(status: entry.status),
+                      showBrand: false,
+                      // Everything on this screen is owned, so labelling each
+                      // row "Owned" is noise; only the exceptions are shown.
+                      showStatus: entry.status != PaintStatus.inStock,
                     ),
                 ],
                 const SizedBox(height: 24),

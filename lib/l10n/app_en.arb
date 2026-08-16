@@ -384,5 +384,29 @@
   "recipePhotoTooLarge": "That image is too detailed to store even compressed. Try a smaller one.",
   "recipePhotoUnreadable": "That file could not be read as an image.",
   "recipePhotoCompressing": "Compressing photo…",
-  "recipePhotoHelp": "Photos are shrunk on your device before being saved, so a huge camera shot never gets uploaded at full size."
+  "recipePhotoHelp": "Photos are shrunk on your device before being saved, so a huge camera shot never gets uploaded at full size.",
+  "listReadinessInStock": "{count} owned",
+  "@listReadinessInStock": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listReadinessLow": "{count} running low",
+  "@listReadinessLow": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listReadinessMissing": "{count} missing",
+  "@listReadinessMissing": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

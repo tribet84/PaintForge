@@ -6,6 +6,7 @@ import '../models/inventory_entry.dart';
 import '../models/paint.dart';
 import '../state/inventory_provider.dart';
 import '../state/paint_lists_provider.dart';
+import '../theme.dart';
 
 /// Round swatch showing the paint color.
 class PaintSwatch extends StatelessWidget {
@@ -33,19 +34,44 @@ class PaintSwatch extends StatelessWidget {
 
 /// Small colored label for an inventory status.
 class StatusChip extends StatelessWidget {
-  const StatusChip({super.key, required this.status});
+  const StatusChip({super.key, required this.status, this.compact = false});
 
   final PaintStatus status;
+
+  /// Drops the wording and keeps the icon. Used where the row is already
+  /// telling the user what the status is — repeating it in every row costs
+  /// horizontal space and adds no information.
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final scheme = Theme.of(context).colorScheme;
+    final brightness = Theme.of(context).brightness;
     final (label, icon, color) = switch (status) {
-      PaintStatus.inStock => (l10n.statusInStock, Icons.check_circle, scheme.primary),
-      PaintStatus.low => (l10n.statusLow, Icons.hourglass_bottom, scheme.error),
-      PaintStatus.wishlist => (l10n.statusWishlist, Icons.shopping_cart, scheme.tertiary),
+      PaintStatus.inStock => (
+          l10n.statusInStock,
+          Icons.check_circle,
+          StockColors.inStock(brightness),
+        ),
+      PaintStatus.low => (
+          l10n.statusLow,
+          Icons.hourglass_bottom,
+          StockColors.low(brightness),
+        ),
+      PaintStatus.wishlist => (
+          l10n.statusWishlist,
+          Icons.shopping_cart,
+          scheme.error,
+        ),
     };
+    if (compact) {
+      // Still announced to screen readers, just not drawn.
+      return Tooltip(
+        message: label,
+        child: Icon(icon, size: 18, color: color),
+      );
+    }
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -65,26 +91,60 @@ class StatusChip extends StatelessWidget {
 
 /// List tile for a catalog paint; tapping opens the status action sheet.
 class PaintTile extends StatelessWidget {
-  const PaintTile({super.key, required this.paint, this.trailing});
+  const PaintTile({
+    super.key,
+    required this.paint,
+    this.trailing,
+    this.showBrand = true,
+    this.compactStatus = false,
+    this.showStatus = true,
+  });
 
   final Paint paint;
   final Widget? trailing;
+
+  /// Set false where the surrounding section is already a brand heading —
+  /// repeating "Citadel" on every row under a "Citadel" header spends the
+  /// subtitle on something the user already knows.
+  final bool showBrand;
+
+  /// Show the status as an icon rather than icon + wording.
+  final bool compactStatus;
+
+  /// Suppress the status entirely. Passing `trailing: null` does NOT do this
+  /// — it falls through to the default chip — so screens that want a bare
+  /// row have to say so explicitly.
+  final bool showStatus;
 
   @override
   Widget build(BuildContext context) {
     final status = context
         .select<InventoryProvider, PaintStatus?>((p) => p.statusOf(paint.id));
     final subtitle = [
-      paint.brandName,
+      if (showBrand) paint.brandName,
       paint.range,
       if (paint.code != null) paint.code!,
     ].join(' · ');
     return ListTile(
-      leading: PaintSwatch(paint: paint),
-      title: Text(paint.name),
-      subtitle: Text(subtitle),
+      // These lists are long — 400+ paints in the catalog — so the row is
+      // tightened to fit noticeably more on screen while staying above the
+      // 48px minimum touch target.
+      dense: true,
+      visualDensity: VisualDensity.compact,
+      minVerticalPadding: 2,
+      horizontalTitleGap: 12,
+      leading: PaintSwatch(paint: paint, size: 36),
+      title: Text(paint.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+      subtitle: Text(
+        subtitle,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
       trailing: trailing ??
-          (status == null ? null : StatusChip(status: status)),
+          (!showStatus || status == null
+              ? null
+              : StatusChip(status: status, compact: compactStatus)),
       onTap: () => showPaintActions(context, paint),
     );
   }
