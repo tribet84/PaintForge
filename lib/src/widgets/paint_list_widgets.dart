@@ -72,6 +72,10 @@ class PaintListReadinessBar extends StatelessWidget {
       child: SizedBox(
         height: 6,
         child: Row(
+          // A childless ColoredBox given a loose height collapses to nothing,
+          // and Row centres its children by default — which rendered this bar
+          // at zero height. Stretching forces each segment to fill the 6px.
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             if (readiness.inStock > 0)
               Expanded(flex: readiness.inStock, child: ColoredBox(color: scheme.primary)),
