@@ -33,23 +33,28 @@ void main() {
     expect(result.length, lessThanOrEqualTo(compressor.maxBytes));
   });
 
-  test('the longest edge is capped', () {
+  test('the longest edge never exceeds the cap', () {
     final result = compressor.compress(syntheticPhoto(2400, 1200));
     final decoded = img.decodeImage(result)!;
 
-    expect(decoded.width, compressor.maxDimension);
-    expect(
-      decoded.height,
-      lessThanOrEqualTo(compressor.maxDimension),
-    );
+    // Not equality: a photo too detailed to fit the byte budget at the cap
+    // is downscaled further, which is the compressor doing its job.
+    expect(decoded.width, lessThanOrEqualTo(compressor.maxDimension));
+    expect(decoded.height, lessThanOrEqualTo(compressor.maxDimension));
+    expect(decoded.width, lessThan(2400), reason: 'it must have shrunk');
   });
 
-  test('a portrait photo is capped on its height, keeping aspect ratio', () {
+  test('a portrait photo shrinks on its height, keeping aspect ratio', () {
     final result = compressor.compress(syntheticPhoto(1200, 2400));
     final decoded = img.decodeImage(result)!;
 
-    expect(decoded.height, compressor.maxDimension);
-    expect(decoded.width, lessThan(decoded.height));
+    expect(decoded.height, lessThanOrEqualTo(compressor.maxDimension));
+    expect(decoded.height, lessThan(2400));
+    expect(
+      decoded.width / decoded.height,
+      closeTo(1200 / 2400, 0.02),
+      reason: 'aspect ratio must survive the resize',
+    );
   });
 
   test('a small photo is not upscaled', () {

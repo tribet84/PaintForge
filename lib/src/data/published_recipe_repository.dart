@@ -73,6 +73,7 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
         'sections': recipe.sections.map((s) => s.toMap()).toList(),
         'links': recipe.links.map((l) => l.toMap()).toList(),
         if (recipe.photo != null) 'photo': recipe.photo,
+        if (recipe.photoUrl != null) 'photoUrl': recipe.photoUrl,
         'updatedAt': FieldValue.serverTimestamp(),
       };
 
@@ -137,6 +138,7 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
               .whereType<RecipeLink>()
               .toList(),
           photo: data['photo'] as String?,
+          photoUrl: data['photoUrl'] as String?,
           updatedAt:
               (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
         ),

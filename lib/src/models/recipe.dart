@@ -166,6 +166,7 @@ class Recipe {
     this.sections = const [],
     this.links = const [],
     this.photo,
+    this.photoUrl,
     this.publishedId,
     required this.updatedAt,
   });
@@ -176,13 +177,20 @@ class Recipe {
   final List<RecipeSection> sections;
   final List<RecipeLink> links;
 
-  /// Cover photo, stored base64-encoded INSIDE this document.
+  /// LEGACY cover photo, base64 inside the document.
   ///
-  /// Firebase Storage needs a billing-enabled project, so the photo is
-  /// compressed hard on the device (see ImageCompressor) and rides along in
-  /// the document instead. Firestore caps a document at 1 MiB, which is why
-  /// the compressor's budget is a small fraction of that.
+  /// Written before Cloud Storage was available on this project. Still read
+  /// so existing recipes keep their picture, but never written again — new
+  /// photos go to [photoUrl].
   final String? photo;
+
+  /// Cover photo in Cloud Storage, as a download URL.
+  final String? photoUrl;
+
+  /// Whether this recipe has a picture at all, from either source.
+  bool get hasPhoto =>
+      (photoUrl != null && photoUrl!.isNotEmpty) ||
+      (photo != null && photo!.isNotEmpty);
 
   /// Id of the public copy in `publishedRecipes`, or null if never shared.
   final String? publishedId;
@@ -205,6 +213,7 @@ class Recipe {
     List<RecipeSection>? sections,
     List<RecipeLink>? links,
     String? photo,
+    String? photoUrl,
     bool clearPhoto = false,
     String? publishedId,
     bool clearPublishedId = false,
@@ -216,6 +225,7 @@ class Recipe {
       sections: sections ?? this.sections,
       links: links ?? this.links,
       photo: clearPhoto ? null : (photo ?? this.photo),
+      photoUrl: clearPhoto ? null : (photoUrl ?? this.photoUrl),
       publishedId:
           clearPublishedId ? null : (publishedId ?? this.publishedId),
       updatedAt: updatedAt,
@@ -228,6 +238,7 @@ class Recipe {
         'sections': sections.map((s) => s.toMap()).toList(),
         'links': links.map((l) => l.toMap()).toList(),
         if (photo != null) 'photo': photo,
+        if (photoUrl != null) 'photoUrl': photoUrl,
         if (publishedId != null) 'publishedId': publishedId,
       };
 }

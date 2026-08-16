@@ -127,5 +127,8 @@
         }
       }
     }
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

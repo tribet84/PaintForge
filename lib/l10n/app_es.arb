@@ -221,5 +221,6 @@
   "paintsSelectionCancel": "Cancelar selección",
   "paintsBulkApplied": "{count, plural, =1{1 pintura actualizada} other{{count} pinturas actualizadas}}",
   "paintsMineEmptyFiltered": "Ninguna de tus pinturas coincide con este filtro.",
-  "paintsAllEmptyFiltered": "Ninguna pintura coincide con esta búsqueda."
+  "paintsAllEmptyFiltered": "Ninguna pintura coincide con esta búsqueda.",
+  "recipePhotoUploadFailed": "No se ha podido subir la foto. Tu receta no se ha guardado."
 }

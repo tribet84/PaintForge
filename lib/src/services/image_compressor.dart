@@ -17,19 +17,20 @@ class PhotoCompressionException implements Exception {
   final PhotoRejection reason;
 }
 
-/// Compresses a picked photo down to something safe to store inline.
+/// Compresses a picked photo before it is uploaded.
 ///
-/// The result is embedded in the recipe's Firestore document, and Firestore
-/// caps a document at 1 MiB *including* every other field, so the budget here
-/// is deliberately far below that. Compression happens on the device before
-/// anything is uploaded: a 20 MB camera photo never leaves the phone at full
-/// size.
+/// Photos now go to Cloud Storage rather than into the recipe document, so
+/// the budget is no longer squeezed by Firestore's 1 MiB per-document cap and
+/// can afford a sharper image. It stays a HARD limit regardless: compression
+/// happens on the device, so a 20 MB camera photo never leaves the phone at
+/// full size, and neither the user's data plan nor the project's egress pays
+/// for it.
 class ImageCompressor {
   const ImageCompressor({
-    this.maxDimension = 1024,
-    this.maxBytes = 220 * 1024,
-    this.initialQuality = 80,
-    this.minQuality = 35,
+    this.maxDimension = 1600,
+    this.maxBytes = 600 * 1024,
+    this.initialQuality = 85,
+    this.minQuality = 45,
   });
 
   /// Longest edge of the stored image, in pixels.

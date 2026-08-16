@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'recipe_photo_repository.dart';
+
 /// Persistence boundary for wiping a user's Firestore data.
 ///
 /// Deleting the Firebase Auth account itself is a separate step (see
@@ -11,11 +13,16 @@ abstract class AccountRepository {
 }
 
 class FirestoreAccountRepository implements AccountRepository {
-  FirestoreAccountRepository({required this.uid, FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  FirestoreAccountRepository({
+    required this.uid,
+    FirebaseFirestore? firestore,
+    RecipePhotoRepository? photos,
+  })  : _firestore = firestore ?? FirebaseFirestore.instance,
+        _photos = photos;
 
   final String uid;
   final FirebaseFirestore _firestore;
+  final RecipePhotoRepository? _photos;
 
   DocumentReference<Map<String, dynamic>> get _userDoc =>
       _firestore.collection('users').doc(uid);
@@ -50,6 +57,10 @@ class FirestoreAccountRepository implements AccountRepository {
           .delete();
     }
     await _deleteAllDocs(_userDoc.collection('linkedRecipes'));
+
+    // Uploaded photos are user data too, and Storage does not cascade with
+    // the Firestore documents that referenced them.
+    await _photos?.deleteAll();
 
     await _userDoc.delete();
   }

@@ -9,6 +9,7 @@ import 'data/catalog_repository.dart';
 import 'data/inventory_repository.dart';
 import 'data/paint_list_repository.dart';
 import 'data/published_recipe_repository.dart';
+import 'data/recipe_photo_repository.dart';
 import 'data/recipe_repository.dart';
 import 'features/auth/login_screen.dart';
 import 'features/home/home_screen.dart';
@@ -116,6 +117,8 @@ class _AuthGate extends StatelessWidget {
         final recipeRepository = FirestoreRecipeRepository(uid: user.uid);
         final publishedRepository =
             FirestorePublishedRecipeRepository(uid: user.uid);
+        final photoRepository =
+            FirebaseRecipePhotoRepository(uid: user.uid);
         return MultiProvider(
           key: ValueKey(user.uid),
           providers: [
@@ -132,10 +135,12 @@ class _AuthGate extends StatelessWidget {
             Provider<PublishedRecipeRepository>.value(
               value: publishedRepository,
             ),
+            Provider<RecipePhotoRepository>.value(value: photoRepository),
             ChangeNotifierProvider<RecipesProvider>(
               create: (_) => RecipesProvider(
                 repository: recipeRepository,
                 publishedRepository: publishedRepository,
+                photoRepository: photoRepository,
                 // Public name shown on shared recipes.
                 authorName: () =>
                     user.displayName ??
@@ -150,7 +155,10 @@ class _AuthGate extends StatelessWidget {
               ),
             ),
             Provider<AccountRepository>(
-              create: (_) => FirestoreAccountRepository(uid: user.uid),
+              create: (_) => FirestoreAccountRepository(
+                uid: user.uid,
+                photos: photoRepository,
+              ),
             ),
           ],
           child: _PaintForgeMaterialApp(

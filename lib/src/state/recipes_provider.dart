@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 
 import '../data/published_recipe_repository.dart';
+import '../data/recipe_photo_repository.dart';
 import '../data/recipe_repository.dart';
 import '../models/recipe.dart';
 
@@ -11,9 +12,11 @@ class RecipesProvider extends ChangeNotifier {
   RecipesProvider({
     required RecipeRepository repository,
     PublishedRecipeRepository? publishedRepository,
+    RecipePhotoRepository? photoRepository,
     String Function()? authorName,
   })  : _repository = repository,
         _publishedRepository = publishedRepository,
+        _photoRepository = photoRepository,
         _authorName = authorName ?? (() => '') {
     _subscription = _repository.watchRecipes().listen((recipes) {
       _recipes = recipes;
@@ -29,6 +32,7 @@ class RecipesProvider extends ChangeNotifier {
 
   final RecipeRepository _repository;
   final PublishedRecipeRepository? _publishedRepository;
+  final RecipePhotoRepository? _photoRepository;
   final String Function() _authorName;
   StreamSubscription<List<Recipe>>? _subscription;
   StreamSubscription<List<String>>? _linkedSubscription;
@@ -70,6 +74,13 @@ class RecipesProvider extends ChangeNotifier {
       await _publishedRepository?.unpublish(recipe.publishedId!);
     }
     await _repository.delete(recipe.id);
+    // Last, so a failure here cannot leave a recipe pointing at a photo that
+    // is already gone. An orphaned object costs pennies; a broken recipe does
+    // not.
+    final photoUrl = recipe.photoUrl;
+    if (photoUrl != null) {
+      await _photoRepository?.deleteByUrl(photoUrl);
+    }
   }
 
   /// Publishes the recipe and returns the public id (existing one if it is

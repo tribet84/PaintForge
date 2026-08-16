@@ -8,12 +8,12 @@ import '../../data/catalog_repository.dart';
 import '../../models/inventory_entry.dart';
 import '../../models/recipe.dart';
 import '../../services/external_link.dart';
-import '../../services/image_compressor.dart';
 import '../../services/share_links.dart';
 import '../../state/inventory_provider.dart';
 import '../../state/recipes_provider.dart';
 import '../../widgets/paint_list_widgets.dart';
 import '../../widgets/paint_widgets.dart';
+import '../../widgets/recipe_photo.dart';
 import '../../widgets/recipe_section_card.dart';
 import 'recipe_actions.dart';
 import 'recipe_edit_screen.dart';
@@ -88,17 +88,12 @@ class RecipeDetailScreen extends StatelessWidget {
             readiness.needsShopping ? 160 : 96,
           ),
           children: [
-            if (decodePhoto(recipe.photo) case final photoBytes?) ...[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.memory(
-                  photoBytes,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const SizedBox.shrink(),
-                ),
-              ),
+            if (recipe.hasPhoto) ...[
+                  RecipePhoto(
+                    recipe: recipe,
+                    height: 200,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
               const SizedBox(height: 16),
             ],
             Row(

@@ -432,5 +432,6 @@
     }
   },
   "paintsMineEmptyFiltered": "None of your paints match this filter.",
-  "paintsAllEmptyFiltered": "No paints match this search."
+  "paintsAllEmptyFiltered": "No paints match this search.",
+  "recipePhotoUploadFailed": "The photo could not be uploaded. Your recipe was not saved."
 }

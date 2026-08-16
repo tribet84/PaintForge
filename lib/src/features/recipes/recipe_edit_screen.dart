@@ -1,7 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
+import '../../data/recipe_photo_repository.dart';
 import '../../models/recipe.dart';
 import '../../services/image_compressor.dart';
 import '../../state/recipes_provider.dart';
@@ -27,7 +30,16 @@ class _RecipeEditScreenState extends State<RecipeEditScreen> {
   late final TextEditingController _descriptionController;
   late List<RecipeSection> _sections;
   late List<RecipeLink> _links;
-  String? _photo;
+  /// Existing photo URL, if the recipe already had one.
+  String? _photoUrl;
+
+  /// Newly picked bytes, held in memory until save so an abandoned edit
+  /// leaves nothing behind in Storage.
+  Uint8List? _pendingPhoto;
+
+  /// Set when the user explicitly removed the existing photo.
+  var _photoCleared = false;
+
   var _saving = false;
 
   @override
@@ -38,7 +50,7 @@ class _RecipeEditScreenState extends State<RecipeEditScreen> {
         TextEditingController(text: widget.recipe?.description ?? '');
     _sections = List.of(widget.recipe?.sections ?? const []);
     _links = List.of(widget.recipe?.links ?? const []);
-    _photo = widget.recipe?.photo;
+    _photoUrl = widget.recipe?.photoUrl;
   }
 
   @override
@@ -67,12 +79,22 @@ class _RecipeEditScreenState extends State<RecipeEditScreen> {
           padding: const EdgeInsets.all(16),
           children: [
             _PhotoField(
-              photo: _photo,
+              pendingPhoto: _pendingPhoto,
+              photoUrl: _photoCleared ? null : _photoUrl,
+              legacyPhoto: _photoCleared ? null : widget.recipe?.photo,
               onPick: () async {
-                final encoded = await pickAndCompressRecipePhoto(context);
-                if (encoded != null) setState(() => _photo = encoded);
+                final bytes = await pickAndCompressRecipePhoto(context);
+                if (bytes != null) {
+                  setState(() {
+                    _pendingPhoto = bytes;
+                    _photoCleared = false;
+                  });
+                }
               },
-              onRemove: () => setState(() => _photo = null),
+              onRemove: () => setState(() {
+                _pendingPhoto = null;
+                _photoCleared = true;
+              }),
             ),
             const SizedBox(height: 16),
             TextField(
@@ -183,13 +205,40 @@ class _RecipeEditScreenState extends State<RecipeEditScreen> {
     }
 
     setState(() => _saving = true);
+
+    // Upload only now, so a draft that was never saved costs nothing.
+    final photos = context.read<RecipePhotoRepository>();
+    var photoUrl = _photoCleared ? null : _photoUrl;
+    if (_pendingPhoto != null) {
+      try {
+        photoUrl = await photos.upload(_pendingPhoto!);
+      } catch (_) {
+        setState(() => _saving = false);
+        messenger.showSnackBar(
+          SnackBar(content: Text(l10n.recipePhotoUploadFailed)),
+        );
+        return;
+      }
+    }
+    // The replaced or removed photo is only unreachable once the recipe no
+    // longer points at it, so clean up after the new URL is decided.
+    final previousUrl = widget.recipe?.photoUrl;
+    if (previousUrl != null && previousUrl != photoUrl) {
+      await photos.deleteByUrl(previousUrl);
+    }
+
     final draft = Recipe(
       id: widget.recipe?.id ?? '',
       name: name,
       description: _descriptionController.text.trim(),
       sections: _sections,
       links: _links,
-      photo: _photo,
+      // The legacy base64 field is never written again; it is only kept
+      // when the recipe still carries one and the user did not replace it.
+      photo: (_photoCleared || _pendingPhoto != null)
+          ? null
+          : widget.recipe?.photo,
+      photoUrl: photoUrl,
       // Keep the published link alive so saving pushes the update to
       // everyone who linked the recipe.
       publishedId: widget.recipe?.publishedId,
@@ -301,23 +350,32 @@ Future<RecipeLink?> showRecipeLinkDialog(BuildContext context) {
 }
 
 /// Cover photo field: a preview with replace/remove, or a prompt to add one.
+///
+/// Shows, in order of preference, the freshly picked bytes, the uploaded
+/// photo, or a legacy base64 one from before Storage existed.
 class _PhotoField extends StatelessWidget {
   const _PhotoField({
-    required this.photo,
+    required this.pendingPhoto,
+    required this.photoUrl,
+    required this.legacyPhoto,
     required this.onPick,
     required this.onRemove,
   });
 
-  final String? photo;
+  final Uint8List? pendingPhoto;
+  final String? photoUrl;
+  final String? legacyPhoto;
   final VoidCallback onPick;
   final VoidCallback onRemove;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final bytes = decodePhoto(photo);
+    final legacyBytes = decodePhoto(legacyPhoto);
+    final hasPhoto =
+        pendingPhoto != null || photoUrl != null || legacyBytes != null;
 
-    if (bytes == null) {
+    if (!hasPhoto) {
       return OutlinedButton.icon(
         onPressed: onPick,
         icon: const Icon(Icons.add_a_photo_outlined),
@@ -325,18 +383,29 @@ class _PhotoField extends StatelessWidget {
       );
     }
 
+    final Widget preview;
+    if (pendingPhoto != null) {
+      preview = Image.memory(pendingPhoto!, height: 180,
+          width: double.infinity, fit: BoxFit.cover);
+    } else if (photoUrl != null) {
+      preview = Image.network(
+        photoUrl!,
+        height: 180,
+        width: double.infinity,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+      );
+    } else {
+      preview = Image.memory(legacyBytes!, height: 180,
+          width: double.infinity, fit: BoxFit.cover);
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.memory(
-            bytes,
-            height: 180,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => const SizedBox.shrink(),
-          ),
+          child: preview,
         ),
         const SizedBox(height: 4),
         Row(

@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// Recipe photos live under users/{userId}/. Only the owner writes there.
+//
+// Reads are open to any signed-in user because a published recipe's photo
+// has to render for the painters who linked it. Download URLs handed out by
+// getDownloadURL() carry their own access token, so this rule governs SDK
+// access and listing rather than being the only gate.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /users/{userId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.auth.uid == userId
+        // A hard server-side ceiling, so a client that skips the on-device
+        // compressor still cannot park a 20 MB photo in the bucket.
+        && request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

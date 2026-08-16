@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../models/paint_list.dart';
 import '../models/recipe.dart';
-import '../services/image_compressor.dart';
 import 'paint_list_widgets.dart';
+import 'recipe_photo.dart';
 
 /// How this recipe relates to the signed-in user, which is the only thing
 /// that differs between a recipe you wrote and one you linked.
@@ -48,7 +48,6 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    final photo = decodePhoto(recipe.photo);
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -58,17 +57,8 @@ class RecipeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (photo != null)
-              SizedBox(
-                height: 140,
-                width: double.infinity,
-                child: Image.memory(
-                  photo,
-                  fit: BoxFit.cover,
-                  // A corrupt stored photo must not take the card with it.
-                  errorBuilder: (_, __, ___) => const SizedBox.shrink(),
-                ),
-              ),
+            if (recipe.hasPhoto)
+              RecipePhoto(recipe: recipe, height: 140),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

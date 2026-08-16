@@ -152,6 +152,8 @@ publishedRecipes/{pubId}           { ownerUid, authorName, name, description, se
 publishedRecipes/{pubId}/links/{linkerUid}  { linkedAt }
 ```
 
+Recipe cover photos live in Cloud Storage under `users/{uid}/recipePhotos/`, referenced from the recipe by download URL. Recipes saved before Storage was enabled carry base64 in a legacy `photo` field, which is still read so their picture keeps working but is never written again. Photos are compressed on the device before upload — a hard cap, so a 20 MB camera shot never leaves the phone at full size — and `storage.rules` enforces a second ceiling server-side for clients that skip it.
+
 A recipe section is `{ name, steps[], techniques[], notes }` where each step is `{ title, paintId?, note }` — the **order of the steps is the recipe**. Section paint lists are derived from the steps. Readiness (for lists and recipes alike) is derived from the inventory by a single shared function: *ready* when every paint is in stock, *running low* when some pots are nearly empty, and *incomplete* when a paint is missing outright.
 
 ### Recipe sharing

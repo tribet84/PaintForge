@@ -51,6 +51,7 @@ class FirestoreRecipeRepository implements RecipeRepository {
                 .whereType<RecipeLink>()
                 .toList(),
             photo: data['photo'] as String?,
+            photoUrl: data['photoUrl'] as String?,
             publishedId: data['publishedId'] as String?,
             // Null while a server timestamp is still pending locally.
             updatedAt:
