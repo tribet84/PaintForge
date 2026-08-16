@@ -18,7 +18,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="PaintForge — inventario de pinturas para miniaturas">
+  <meta name="description" content="PaintForge — miniature paint inventory">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -33,6 +33,41 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script>
+    // Self-heal stale installs.
+    //
+    // Flutter's service worker is deprecated, and devices that installed an
+    // older one keep serving its cached bundle - clearing browsing data does
+    // not reliably unregister it, so the app can look frozen on an old
+    // version forever. This runs before the bundle loads, tears down any
+    // registration plus its caches, and reloads ONCE so the fresh assets are
+    // fetched from the network.
+    (function () {
+      if (!('serviceWorker' in navigator)) return;
+      var RELOAD_GUARD = 'paintforge-sw-cleared';
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        if (!registrations.length) return;
+        return Promise.all(
+          registrations.map(function (r) { return r.unregister(); })
+        ).then(function () {
+          return window.caches
+            ? caches.keys().then(function (keys) {
+                return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+              })
+            : null;
+        }).then(function () {
+          // sessionStorage keeps this to a single reload per tab, so a
+          // registration that reappears can never cause a reload loop.
+          if (!sessionStorage.getItem(RELOAD_GUARD)) {
+            sessionStorage.setItem(RELOAD_GUARD, '1');
+            window.location.reload();
+          }
+        });
+      }).catch(function (error) {
+        console.warn('Service worker cleanup skipped:', error);
+      });
+    })();
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
