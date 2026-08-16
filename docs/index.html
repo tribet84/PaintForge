@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PaintForge — miniature paint inventory</title>
+<meta name="description" content="Track the miniature paints you own, know what is running out, save how you painted something, and share the recipe.">
+<meta property="og:title" content="PaintForge">
+<meta property="og:description" content="Know what paint you have, what you are about to run out of, and how you painted it last time.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+<style>
+  :root {
+    --forge: #E8590C;
+    --forge-soft: #FF8A3D;
+    --ink: #1A1614;
+    --panel: #241E1A;
+    --panel-2: #2E2621;
+    --text: #F2EAE4;
+    --muted: #B9A99D;
+    --line: #3D332C;
+    --ok: #6FBF73;
+    --warn: #E5A83D;
+    --miss: #7A6A5E;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { width: min(1080px, 92vw); margin: 0 auto; }
+  a { color: var(--forge-soft); }
+
+  header {
+    padding: 76px 0 56px;
+    background:
+      radial-gradient(1100px 420px at 12% -12%, rgba(232,89,12,.30), transparent 62%),
+      linear-gradient(180deg, #1E1917, var(--ink));
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .2px; }
+  .brand .mark { font-size: 30px; }
+  h1 {
+    font-size: clamp(2.1rem, 5.4vw, 3.4rem);
+    line-height: 1.1;
+    margin: 26px 0 14px;
+    letter-spacing: -.5px;
+  }
+  h1 em { color: var(--forge-soft); font-style: normal; }
+  .lede { font-size: clamp(1.02rem, 2.3vw, 1.22rem); color: var(--muted); max-width: 62ch; margin: 0; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .btn {
+    display: inline-block; padding: 13px 22px; border-radius: 10px;
+    text-decoration: none; font-weight: 600; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--forge); color: #fff; }
+  .btn-primary:hover { background: #d24f08; }
+  .btn-ghost { border-color: var(--line); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--forge); }
+  .note { margin-top: 16px; color: var(--muted); font-size: .9rem; }
+
+  section { padding: 62px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); margin: 0 0 10px; letter-spacing: -.3px; }
+  .sub { color: var(--muted); margin: 0 0 34px; max-width: 66ch; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 18px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px;
+  }
+  .card h3 { margin: 12px 0 8px; font-size: 1.06rem; }
+  .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+  .ico { font-size: 24px; line-height: 1; }
+
+  .steps { counter-reset: s; display: grid; gap: 14px; }
+  .step {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px;
+  }
+  .step::before {
+    counter-increment: s; content: counter(s);
+    flex: 0 0 30px; height: 30px; border-radius: 50%;
+    background: var(--forge); color: #fff;
+    display: grid; place-items: center; font-weight: 700; font-size: .9rem;
+  }
+  .step h3 { margin: 3px 0 6px; font-size: 1.02rem; }
+  .step p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  /* Readiness demo — mirrors the verdict the app computes. */
+  .demo { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .demo-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .demo-name { font-weight: 600; }
+  .verdict { font-size: .85rem; font-weight: 700; }
+  .verdict.low { color: var(--warn); }
+  .bar { display: flex; height: 8px; border-radius: 5px; overflow: hidden; margin: 14px 0 10px; }
+  .bar span { display: block; }
+  .bar .s-ok { background: var(--ok); }
+  .bar .s-low { background: var(--warn); }
+  .bar .s-miss { background: var(--miss); }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: .85rem; }
+  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; }
+
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  ul.plain { margin: 0; padding-left: 20px; color: var(--muted); }
+  ul.plain li { margin-bottom: 9px; }
+
+  .callout {
+    background: var(--panel-2); border: 1px solid var(--line);
+    border-left: 3px solid var(--forge); border-radius: 10px;
+    padding: 18px 20px; color: var(--muted); font-size: .95rem;
+  }
+  .callout strong { color: var(--text); }
+
+  footer { padding: 46px 0 66px; color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--forge-soft); }
+
+  @media (max-width: 560px) {
+    header { padding: 54px 0 42px; }
+    section { padding: 46px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><span class="mark">🎨</span><span>PaintForge</span></div>
+    <h1>Know what paint you have,<br>and <em>how you painted it</em> last time.</h1>
+    <p class="lede">
+      A miniature paint inventory for people whose shelf has outgrown their memory.
+      Track what you own, spot what is running out before it strands a project, and
+      keep the recipe that made a model look right — then share it.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://paintforge-d8cf2.web.app">Open the app</a>
+      <a class="btn btn-ghost" href="https://github.com/tribet84/PaintForge">View the source</a>
+    </div>
+    <p class="note">Free · works in the browser · English and Spanish</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The problem it solves</h2>
+    <p class="sub">
+      Four questions every painter answers badly from memory — and the whole app is
+      built around them.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">🫙</div>
+        <h3>“Do I already own this?”</h3>
+        <p>A built-in catalogue of Citadel, Vallejo, The Army Painter and Green Stuff World. Mark what is on your shelf; search by name, code or range.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📉</div>
+        <h3>“Am I about to run out?”</h3>
+        <p>Flag a pot as running low the moment you notice. It lands on the shopping list automatically, long before it stops you mid-project.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧾</div>
+        <h3>“How did I paint this?”</h3>
+        <p>Recipes record the process section by section, as ordered steps — basecoat, wash, highlight — with the paints, the technique and your own notes.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🎯</div>
+        <h3>“Can I start this army today?”</h3>
+        <p>Group paints into a list for a miniature or a whole force. PaintForge tells you whether the shelf can actually finish it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Readiness, not just a list</h2>
+    <p class="sub">
+      Every list and every recipe is checked against your inventory. A paint you have
+      wishlisted counts as missing — it is not on the shelf yet — and one missing pot
+      outranks several running low, because it blocks the job outright.
+    </p>
+    <div class="demo">
+      <div class="demo-row">
+        <span class="demo-name">Ultramarines squad</span>
+        <span class="verdict low">⚠ Running low</span>
+      </div>
+      <div class="bar" role="img" aria-label="Six paints in stock, two running low, one missing">
+        <span class="s-ok" style="flex:6"></span>
+        <span class="s-low" style="flex:2"></span>
+        <span class="s-miss" style="flex:1"></span>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--ok)"></i>6 in stock</span>
+        <span><i style="background:var(--warn)"></i>2 running low</span>
+        <span><i style="background:var(--miss)"></i>1 missing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How you use it</h2>
+    <p class="sub">Nothing to set up beyond signing in.</p>
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h3>Stock your shelf</h3>
+          <p>Search the catalogue and mark the paints you own. It takes one session and you only do it once.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Flag pots as they run down</h3>
+          <p>Tap a paint to mark it running low, or add one you want to buy. Both feed the shopping list on their own.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Shop from a list that reads like a list</h3>
+          <p>Grouped by urgency and then by brand, so it matches how you actually buy. Copy it or share it straight to a chat.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Write the recipe while it is fresh</h3>
+          <p>Record the steps, the techniques and the videos that inspired you — then add the missing paints to your shopping list in one tap.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Recipes worth sharing</h2>
+    <p class="sub">
+      Publish a recipe and anyone with the link can save it to their account.
+    </p>
+    <div class="cols">
+      <div>
+        <ul class="plain">
+          <li><strong>Links, not copies.</strong> When you update a shared recipe, everyone who saved it sees the new version — nobody is stuck on a stale fork.</li>
+          <li><strong>Credit stays attached.</strong> Your name and last update date travel with it, and you can see how many painters follow it.</li>
+          <li><strong>Straight to the shopping list.</strong> Opening someone's recipe shows which of its paints you are missing, and adds them in one tap.</li>
+          <li><strong>Photos stay small.</strong> A cover photo is compressed on your device before it is ever saved, so a 20 MB camera shot never gets uploaded at full size.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <p style="margin:0 0 10px"><strong>Built for tutorial makers.</strong></p>
+        <p style="margin:0">
+          If you publish painting guides, your recipes become something people keep
+          rather than screenshot. Update the scheme once and every follower has it.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Your data is yours</h2>
+    <div class="cols">
+      <div>
+        <ul class="plain">
+          <li>Sign in with email or Google.</li>
+          <li>Everything syncs to your account and works offline; it catches up when you reconnect.</li>
+          <li>Only you can read or write your inventory, lists and recipes. A recipe becomes readable by others only when you publish it, and you can stop sharing at any time.</li>
+          <li>You can delete your account and all of its data from Settings — including anything you published.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <p style="margin:0 0 10px"><strong>Open source.</strong></p>
+        <p style="margin:0">
+          Built with Flutter and Firebase. The code, the security rules and the
+          reasoning behind the design decisions are all public.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 8px">
+      <a href="https://paintforge-d8cf2.web.app">Open PaintForge</a> ·
+      <a href="https://github.com/tribet84/PaintForge">Source on GitHub</a>
+    </p>
+    <p style="margin:0">
+      PaintForge is an independent hobby project. Paint names and ranges are
+      trademarks of their respective manufacturers and are used here only to
+      identify the products.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
