@@ -8,9 +8,8 @@ import '../../services/share_links.dart';
 import '../../state/inventory_provider.dart';
 import '../../widgets/account_avatar.dart';
 import '../../widgets/banner_ad_widget.dart';
-import '../catalog/catalog_screen.dart';
-import '../inventory/inventory_screen.dart';
 import '../lists/lists_screen.dart';
+import '../paints/paints_screen.dart';
 import '../recipes/public_recipe_screen.dart';
 import '../recipes/recipes_screen.dart';
 import '../settings/settings_screen.dart';
@@ -103,8 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: IndexedStack(
         index: _index,
         children: const [
-          CatalogScreen(),
-          InventoryScreen(),
+          PaintsScreen(),
           ListsScreen(),
           RecipesScreen(),
         ],
@@ -118,13 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
             onDestinationSelected: (value) => setState(() => _index = value),
             destinations: [
               NavigationDestination(
-                icon: const Icon(Icons.search),
-                label: l10n.tabCatalog,
-              ),
-              NavigationDestination(
                 icon: const Icon(Icons.palette_outlined),
                 selectedIcon: const Icon(Icons.palette),
-                label: l10n.tabInventory,
+                label: l10n.tabPaints,
               ),
               NavigationDestination(
                 icon: const Icon(Icons.checklist_rtl_outlined),
