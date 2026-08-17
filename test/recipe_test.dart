@@ -96,14 +96,31 @@ void main() {
         id: 'r1',
         name: 'Test',
         publishedId: 'pub-1',
+        published: true,
         updatedAt: DateTime(2026, 1, 1),
       );
 
       expect(recipe.toMap()['publishedId'], 'pub-1');
       expect(recipe.isPublished, isTrue);
+    });
+
+    test('unpublishing keeps the id so a reshare can reuse it', () {
+      final recipe = Recipe(
+        id: 'r1',
+        name: 'Test',
+        publishedId: 'pub-1',
+        published: true,
+        updatedAt: DateTime(2026, 1, 1),
+      );
+
+      final unpublished = recipe.copyWith(published: false);
+
+      expect(unpublished.isPublished, isFalse);
       expect(
-        recipe.copyWith(clearPublishedId: true).isPublished,
-        isFalse,
+        unpublished.publishedId,
+        'pub-1',
+        reason: 'the id must survive so a reshare reuses it instead of '
+            'orphaning the old link',
       );
     });
   });

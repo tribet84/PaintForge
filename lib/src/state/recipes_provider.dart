@@ -70,7 +70,7 @@ class RecipesProvider extends ChangeNotifier {
   }
 
   Future<void> delete(Recipe recipe) async {
-    if (recipe.isPublished) {
+    if (recipe.publishedId != null) {
       await _publishedRepository?.unpublish(recipe.publishedId!);
     }
     await _repository.delete(recipe.id);
@@ -83,18 +83,27 @@ class RecipesProvider extends ChangeNotifier {
     }
   }
 
-  /// Publishes the recipe and returns the public id (existing one if it is
-  /// already published).
+  /// Publishes the recipe and returns the public id.
+  ///
+  /// Reuses the id from any previous share of this recipe, even one that was
+  /// later unpublished — otherwise every reshare would hand out a fresh id,
+  /// permanently orphaning the old share link and everyone who had linked
+  /// the recipe before.
   Future<String?> publish(Recipe recipe) async {
     final published = _publishedRepository;
     if (published == null) return null;
-    if (recipe.isPublished) {
+    if (recipe.publishedId != null) {
       await published.updatePublished(recipe, authorName: _authorName());
+      if (!recipe.isPublished) {
+        await _repository.update(recipe.copyWith(published: true));
+      }
       return recipe.publishedId;
     }
     final publishedId =
         await published.publish(recipe, authorName: _authorName());
-    await _repository.update(recipe.copyWith(publishedId: publishedId));
+    await _repository.update(
+      recipe.copyWith(publishedId: publishedId, published: true),
+    );
     return publishedId;
   }
 
@@ -102,7 +111,7 @@ class RecipesProvider extends ChangeNotifier {
     final publishedId = recipe.publishedId;
     if (publishedId == null) return;
     await _publishedRepository?.unpublish(publishedId);
-    await _repository.update(recipe.copyWith(clearPublishedId: true));
+    await _repository.update(recipe.copyWith(published: false));
   }
 
   Future<void> link(String publishedId) async {

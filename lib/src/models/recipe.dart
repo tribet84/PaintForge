@@ -168,6 +168,7 @@ class Recipe {
     this.photo,
     this.photoUrl,
     this.publishedId,
+    this.published = false,
     required this.updatedAt,
   });
 
@@ -192,12 +193,22 @@ class Recipe {
       (photoUrl != null && photoUrl!.isNotEmpty) ||
       (photo != null && photo!.isNotEmpty);
 
-  /// Id of the public copy in `publishedRecipes`, or null if never shared.
+  /// Id of the public copy in `publishedRecipes`, assigned the first time
+  /// this recipe is shared and then kept forever — including through an
+  /// unshare/reshare cycle — so a share link and a follower's link both
+  /// keep pointing at the same place instead of going stale when the recipe
+  /// comes back.
   final String? publishedId;
 
   final DateTime updatedAt;
 
-  bool get isPublished => publishedId != null;
+  /// Whether the recipe is shared RIGHT NOW, as opposed to merely having a
+  /// [publishedId] from a past share. Deliberately separate from
+  /// [publishedId] not being null: unsharing must not forget the id, or
+  /// resharing would hand out a new one and orphan every existing link.
+  final bool published;
+
+  bool get isPublished => published;
 
   /// Every paint used across all sections, deduplicated.
   Set<String> get allPaintIds =>
@@ -216,7 +227,7 @@ class Recipe {
     String? photoUrl,
     bool clearPhoto = false,
     String? publishedId,
-    bool clearPublishedId = false,
+    bool? published,
   }) {
     return Recipe(
       id: id,
@@ -226,8 +237,8 @@ class Recipe {
       links: links ?? this.links,
       photo: clearPhoto ? null : (photo ?? this.photo),
       photoUrl: clearPhoto ? null : (photoUrl ?? this.photoUrl),
-      publishedId:
-          clearPublishedId ? null : (publishedId ?? this.publishedId),
+      publishedId: publishedId ?? this.publishedId,
+      published: published ?? this.published,
       updatedAt: updatedAt,
     );
   }
@@ -240,5 +251,6 @@ class Recipe {
         if (photo != null) 'photo': photo,
         if (photoUrl != null) 'photoUrl': photoUrl,
         if (publishedId != null) 'publishedId': publishedId,
+        'published': published,
       };
 }

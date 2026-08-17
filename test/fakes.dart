@@ -166,6 +166,9 @@ class FakeRecipeRepository implements RecipeRepository {
 
 /// In-memory public sharing layer, keyed by published id.
 class FakePublishedRecipeRepository implements PublishedRecipeRepository {
+  FakePublishedRecipeRepository({this.uid = 'owner'});
+
+  final String uid;
   final _published = <String, PublishedRecipe>{};
   final _linkedIds = <String>{};
   final _linkedController = StreamController<List<String>>.broadcast();
@@ -186,7 +189,7 @@ class FakePublishedRecipeRepository implements PublishedRecipeRepository {
     final id = 'pub-${_published.length}';
     _published[id] = PublishedRecipe(
       id: id,
-      ownerUid: 'owner',
+      ownerUid: uid,
       authorName: authorName,
       recipe: recipe,
     );
@@ -196,10 +199,12 @@ class FakePublishedRecipeRepository implements PublishedRecipeRepository {
   @override
   Future<void> updatePublished(Recipe recipe, {required String authorName}) async {
     final id = recipe.publishedId;
-    if (id == null || !_published.containsKey(id)) return;
+    if (id == null) return;
+    // A real Firestore .set() recreates a deleted doc under the same id —
+    // exactly what a reshare after unpublish relies on.
     _published[id] = PublishedRecipe(
       id: id,
-      ownerUid: _published[id]!.ownerUid,
+      ownerUid: uid,
       authorName: authorName,
       recipe: recipe,
     );

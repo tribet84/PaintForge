@@ -53,6 +53,11 @@ class FirestoreRecipeRepository implements RecipeRepository {
             photo: data['photo'] as String?,
             photoUrl: data['photoUrl'] as String?,
             publishedId: data['publishedId'] as String?,
+            // Recipes shared before this field existed have no 'published'
+            // value; a publishedId with nothing saying otherwise means it
+            // was live under the old all-or-nothing sharing model.
+            published:
+                data['published'] as bool? ?? data['publishedId'] != null,
             // Null while a server timestamp is still pending locally.
             updatedAt:
                 (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
