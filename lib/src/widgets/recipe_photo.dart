@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/recipe.dart';
 import '../services/image_compressor.dart';
+import '../services/photo_cdn.dart';
 
 /// Renders a recipe's cover photo from whichever source it has.
 ///
@@ -29,7 +30,7 @@ class RecipePhoto extends StatelessWidget {
     Widget? image;
     if (url != null && url.isNotEmpty) {
       image = Image.network(
-        url,
+        cdnPhotoUrl(url),
         height: height,
         width: double.infinity,
         fit: BoxFit.cover,
