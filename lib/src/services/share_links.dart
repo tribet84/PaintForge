@@ -1,7 +1,12 @@
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
 /// Where the web app lives; shared recipe links point here.
-const kAppUrl = 'https://paintforge-d8cf2.web.app';
+///
+/// The custom domain rather than the Firebase one: a shared link is the most
+/// public thing the app produces, and it outlives whatever hosting sits
+/// behind it. The `.web.app` address still serves the same site, so links
+/// already out there keep working.
+const kAppUrl = 'https://pintaminis.com';
 
 /// Shareable URL for a published recipe.
 ///

@@ -85,7 +85,7 @@ flutter build web --release
 firebase deploy --only hosting
 ```
 
-Live at <https://paintforge-d8cf2.web.app>.
+Live at <https://pintaminis.com>.
 
 To deploy the security rules together with the site:
 
