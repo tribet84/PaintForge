@@ -23,8 +23,8 @@ class StockColors {
       role(Theme.of(context).brightness);
 }
 
-/// PaintForge look & feel: forge orange over dark steel.
-class PaintForgeTheme {
+/// PintaMinis look & feel: forge orange over dark steel.
+class PintaMinisTheme {
   static const seed = Color(0xFFE8590C);
 
   static ThemeData light() => _base(Brightness.light);

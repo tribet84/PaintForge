@@ -20,8 +20,8 @@ import 'state/paint_lists_provider.dart';
 import 'state/recipes_provider.dart';
 import 'theme.dart';
 
-class PaintForgeApp extends StatelessWidget {
-  const PaintForgeApp({
+class PintaMinisApp extends StatelessWidget {
+  const PintaMinisApp({
     super.key,
     required this.catalog,
     required this.firebaseReady,
@@ -40,7 +40,7 @@ class PaintForgeApp extends StatelessWidget {
       ],
       child: firebaseReady
           ? const _AuthGate()
-          : const _PaintForgeMaterialApp(
+          : const _PintaMinisMaterialApp(
               key: ValueKey('setup'),
               home: FirebaseSetupScreen(),
             ),
@@ -55,8 +55,8 @@ class PaintForgeApp extends StatelessWidget {
 /// provider placed inside `home:` would sit below the root Navigator, and
 /// then every pushed route and modal sheet would fail with
 /// ProviderNotFoundException. See test/provider_scope_test.dart.
-class _PaintForgeMaterialApp extends StatelessWidget {
-  const _PaintForgeMaterialApp({super.key, required this.home});
+class _PintaMinisMaterialApp extends StatelessWidget {
+  const _PintaMinisMaterialApp({super.key, required this.home});
 
   final Widget home;
 
@@ -64,8 +64,8 @@ class _PaintForgeMaterialApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      theme: PaintForgeTheme.light(),
-      darkTheme: PaintForgeTheme.dark(),
+      theme: PintaMinisTheme.light(),
+      darkTheme: PintaMinisTheme.dark(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -81,7 +81,7 @@ class _PaintForgeMaterialApp extends StatelessWidget {
 /// Shows the login screen or the app depending on the auth state, wrapping the
 /// signed-in case with the user-scoped providers.
 ///
-/// Every branch gives [_PaintForgeMaterialApp] a DIFFERENT key on purpose.
+/// Every branch gives [_PintaMinisMaterialApp] a DIFFERENT key on purpose.
 /// Without one, the MaterialApp is the same widget type across branches, so
 /// Flutter updates it in place and the Navigator keeps its existing route
 /// stack — swapping `home:` then only replaces the route *underneath*
@@ -100,14 +100,14 @@ class _AuthGate extends StatelessWidget {
       stream: auth.userChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const _PaintForgeMaterialApp(
+          return const _PintaMinisMaterialApp(
             key: ValueKey('loading'),
             home: _LoadingScreen(),
           );
         }
         final user = snapshot.data;
         if (user == null) {
-          return const _PaintForgeMaterialApp(
+          return const _PintaMinisMaterialApp(
             key: ValueKey('signed-out'),
             home: LoginScreen(),
           );
@@ -161,7 +161,7 @@ class _AuthGate extends StatelessWidget {
               ),
             ),
           ],
-          child: _PaintForgeMaterialApp(
+          child: _PintaMinisMaterialApp(
             key: ValueKey('signed-in-${user.uid}'),
             home: const HomeScreen(),
           ),

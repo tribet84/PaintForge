@@ -1,5 +1,5 @@
 name: paintforge
-description: "PaintForge — miniature paint inventory (Citadel, Vallejo, The Army Painter, Green Stuff World)."
+description: "PintaMinis — miniature paint inventory (Citadel, Vallejo, The Army Painter, Green Stuff World)."
 publish_to: 'none'
 
 version: 1.0.0+1

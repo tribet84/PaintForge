@@ -2,7 +2,7 @@
     <!-- Firebase Auth/Firestore need network access in release builds. -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="PaintForge"
+        android:label="PintaMinis"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

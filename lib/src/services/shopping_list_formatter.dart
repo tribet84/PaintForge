@@ -14,7 +14,7 @@ class ShoppingListLabels {
   final String lowSection;
   final String wishlistSection;
 
-  /// Credit line appended when sharing, e.g. "Generated with PaintForge".
+  /// Credit line appended when sharing, e.g. "Generated with PintaMinis".
   final String attribution;
 }
 

@@ -23,10 +23,10 @@ Paint paint(
 }
 
 const labels = ShoppingListLabels(
-  title: 'PaintForge — Shopping list',
+  title: 'PintaMinis — Shopping list',
   lowSection: 'Running low',
   wishlistSection: 'Want to buy',
-  attribution: 'Generated with PaintForge · https://example.test',
+  attribution: 'Generated with PintaMinis · https://example.test',
 );
 
 void main() {
@@ -104,14 +104,14 @@ void main() {
       includeAttribution: true,
     );
 
-    expect(without, isNot(contains('Generated with PaintForge')));
-    expect(with_, contains('Generated with PaintForge'));
+    expect(without, isNot(contains('Generated with PintaMinis')));
+    expect(with_, contains('Generated with PintaMinis'));
     expect(with_, endsWith('https://example.test'));
   });
 
   test('an empty list still carries the title', () {
     final text = formatter.format(low: const [], wishlist: const []);
-    expect(text, 'PaintForge — Shopping list');
+    expect(text, 'PintaMinis — Shopping list');
   });
 
   test('groupByBrand sorts brands and paints alphabetically', () {

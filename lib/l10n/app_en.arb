@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "PaintForge",
+  "appTitle": "PintaMinis",
   "appTagline": "Your miniature paint inventory",
   "tabCatalog": "Catalog",
   "tabInventory": "My paints",
@@ -75,9 +75,9 @@
     }
   },
   "shareFallbackCopied": "Your device doesn't support sharing directly, so the text was copied instead",
-  "shoppingListTitle": "PaintForge — Shopping list",
-  "shoppingShareSubject": "My PaintForge shopping list",
-  "shoppingAttribution": "Generated with PaintForge · https://paintforge-d8cf2.web.app",
+  "shoppingListTitle": "PintaMinis — Shopping list",
+  "shoppingShareSubject": "My PintaMinis shopping list",
+  "shoppingAttribution": "Generated with PintaMinis · https://paintforge-d8cf2.web.app",
   "confirmPurchaseTitle": "Mark as bought?",
   "confirmPurchaseBody": "{paint} goes back on the shelf as owned and leaves the shopping list.",
   "@confirmPurchaseBody": {
@@ -226,7 +226,7 @@
   "recipeLinkedSectionHelp": "Recipes from other painters. They update automatically when the author updates them.",
   "recipeNotShared": "This recipe is not shared anymore",
   "recipeNotSharedBody": "The author stopped sharing it or the link is wrong.",
-  "recipeShareText": "{name} — a PaintForge recipe: {url}",
+  "recipeShareText": "{name} — a PintaMinis recipe: {url}",
   "@recipeShareText": {
     "placeholders": {
       "name": {
@@ -250,7 +250,7 @@
   "listsShoppingEmpty": "Nothing to buy right now",
   "listsShoppingLocked": "Always here — it cannot be deleted or renamed",
   "listsEmptyTitle": "No lists yet",
-  "listsEmptyBody": "Create a list for a miniature, a unit or a whole army and PaintForge will tell you when its paints are running out.",
+  "listsEmptyBody": "Create a list for a miniature, a unit or a whole army and PintaMinis will tell you when its paints are running out.",
   "listsNew": "New list",
   "listsNameLabel": "List name",
   "listsNameHint": "e.g. Ultramarines squad",

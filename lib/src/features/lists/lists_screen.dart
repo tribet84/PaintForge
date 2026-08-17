@@ -15,7 +15,7 @@ import 'paint_list_detail_screen.dart';
 /// The built-in shopping list lives elsewhere (its own icon next to the
 /// avatar): it is derived from inventory status rather than a document a
 /// user created, so mixing it in here would blur "things I made" with
-/// "things PaintForge computes for me".
+/// "things PintaMinis computes for me".
 class ListsScreen extends StatelessWidget {
   const ListsScreen({super.key});
 

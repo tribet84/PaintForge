@@ -1,4 +1,4 @@
-# PaintForge 🎨🔨
+# PintaMinis 🎨🔨
 
 Miniature paint inventory, cross-platform (Android, iOS and web), built with **Flutter**.
 

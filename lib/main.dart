@@ -35,5 +35,5 @@ Future<void> main() async {
 
   final catalog = await CatalogRepository.loadFromAssets();
 
-  runApp(PaintForgeApp(catalog: catalog, firebaseReady: firebaseReady));
+  runApp(PintaMinisApp(catalog: catalog, firebaseReady: firebaseReady));
 }
