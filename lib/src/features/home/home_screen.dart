@@ -6,6 +6,7 @@ import '../../services/auth_service.dart';
 import '../../services/sample_recipe_seeder.dart';
 import '../../services/share_links.dart';
 import '../../state/inventory_provider.dart';
+import '../../widgets/brand_logo.dart';
 import '../../widgets/account_avatar.dart';
 import '../../widgets/banner_ad_widget.dart';
 import '../lists/lists_screen.dart';
@@ -61,10 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.local_fire_department,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            const BrandLogo(size: 32),
             const SizedBox(width: 8),
             Text(l10n.appTitle),
           ],

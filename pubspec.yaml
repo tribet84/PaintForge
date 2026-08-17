@@ -28,6 +28,7 @@ dependencies:
   image: ^4.9.1
   firebase_storage: ^13.4.6
   firebase_app_check: ^0.4.6
+  flutter_svg: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -43,3 +44,4 @@ flutter:
     - assets/catalog/vallejo.json
     - assets/catalog/army_painter.json
     - assets/catalog/green_stuff_world.json
+    - assets/brand/logo.svg

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../services/auth_service.dart';
+import '../../widgets/brand_logo.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -95,11 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Icon(
-                    Icons.format_paint,
-                    size: 64,
-                    color: theme.colorScheme.primary,
-                  ),
+                  const BrandLogo(size: 88),
                   const SizedBox(height: 8),
                   Text(
                     l10n.appTitle,
