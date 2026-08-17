@@ -5,6 +5,7 @@ import 'firebase_options.dart';
 import 'src/app.dart';
 import 'src/data/catalog_repository.dart';
 import 'src/services/ads_service.dart';
+import 'src/services/app_check_service.dart';
 import 'src/services/share_links.dart';
 
 Future<void> main() async {
@@ -21,6 +22,9 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     firebaseReady = true;
+    // Must run after initializeApp and before anything touches Firestore or
+    // Storage, so the very first request already carries an App Check token.
+    await initializeAppCheck();
   } catch (error) {
     // Most likely `flutterfire configure` has not been run yet. The app
     // still boots and explains how to finish the setup.
