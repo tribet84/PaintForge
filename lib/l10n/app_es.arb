@@ -175,6 +175,8 @@
   "settingsCatalogTitle": "Catálogo de pinturas",
   "settingsCatalogSubtitle": "{count} pinturas de Citadel, Vallejo, The Army Painter y Green Stuff World",
   "settingsVersion": "Versión",
+  "settingsLegal": "Legal",
+  "settingsLegalSubtitle": "Privacidad, términos y cookies",
   "settingsDangerZone": "Zona de peligro",
   "deleteAccountTitle": "Eliminar cuenta",
   "deleteAccountSubtitle": "Elimina permanentemente tu cuenta y todos tus datos",

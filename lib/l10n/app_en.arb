@@ -344,6 +344,8 @@
     }
   },
   "settingsVersion": "Version",
+  "settingsLegal": "Legal",
+  "settingsLegalSubtitle": "Privacy, terms and cookies",
   "settingsDangerZone": "Danger zone",
   "deleteAccountTitle": "Delete account",
   "deleteAccountSubtitle": "Permanently delete your account and all your data",

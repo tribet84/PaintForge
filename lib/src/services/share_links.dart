@@ -8,6 +8,13 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 /// already out there keep working.
 const kAppUrl = 'https://pintaminis.com';
 
+/// Where the legal documents live.
+///
+/// GitHub Pages rather than the app's own domain: they are static pages that
+/// must stay readable even if the app itself is down, and hosting them beside
+/// the source keeps them versioned with the behaviour they describe.
+const kLegalUrl = 'https://tribet84.github.io/PaintForge/';
+
 /// Shareable URL for a published recipe.
 ///
 /// Uses the hash fragment so it works with Flutter web's default URL

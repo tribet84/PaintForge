@@ -5,6 +5,8 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../build_info.dart';
 import '../../data/catalog_repository.dart';
 import '../../services/auth_service.dart';
+import '../../services/external_link.dart';
+import '../../services/share_links.dart';
 import '../../widgets/account_avatar.dart';
 import 'delete_account_flow.dart';
 
@@ -51,6 +53,13 @@ class SettingsScreen extends StatelessWidget {
             // no way to tell a stale cached bundle from a fresh one, which
             // turns "I don't see the update" into pure guesswork.
             subtitle: const Text('1.0.0 · $buildStamp'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.gavel_outlined),
+            title: Text(l10n.settingsLegal),
+            subtitle: Text(l10n.settingsLegalSubtitle),
+            trailing: const Icon(Icons.open_in_new, size: 18),
+            onTap: () => openExternalLink(kLegalUrl),
           ),
           const Divider(),
           ListTile(
