@@ -9,6 +9,18 @@
 <meta property="og:description" content="Know what paint you have, what you are about to run out of, and how you painted it last time.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
+<script>
+  // Recipe links shared before the app moved to its own subdomain point at
+  // this apex and carry the recipe id in the fragment. A fragment never
+  // reaches the server, so no redirect rule can catch these — only the
+  // browser can, and it has to happen before the page renders.
+  (function () {
+    var hash = window.location.hash;
+    if (hash && hash.indexOf('#/r/') === 0) {
+      window.location.replace('https://app.pintaminis.com/' + hash);
+    }
+  })();
+</script>
 <style>
   :root {
     --forge: #E8590C;
@@ -335,9 +347,9 @@
       <a href="https://github.com/tribet84/PaintForge">Source on GitHub</a>
     </p>
     <p style="margin:0 0 8px">
-      <a href="privacy.html">Privacy Policy</a> ·
-      <a href="terms.html">Terms of Service</a> ·
-      <a href="cookies.html">Cookie Policy</a>
+      <a href="/privacy">Privacy Policy</a> ·
+      <a href="/terms">Terms of Service</a> ·
+      <a href="/cookies">Cookie Policy</a>
     </p>
     <p style="margin:0">
       PintaMinis is an independent hobby project. Paint names and ranges are

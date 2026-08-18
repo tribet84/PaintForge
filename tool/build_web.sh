@@ -2,14 +2,9 @@
 #
 # Builds the web app and stages the legal documents alongside it.
 #
-# The policies are served from the app's own domain rather than from GitHub
-# Pages so the link in Settings carries the brand, and because pintaminis.com
-# already sits behind Cloudflare — a separate static host would add moving
-# parts without adding a CDN the site does not already have.
-#
-# Firebase Hosting serves real files before applying the single-page rewrite,
-# so /legal/privacy.html resolves to the file and never reaches Flutter's
-# router.
+# The legal documents are NOT staged here. They belong to the public site
+# (docs/, deployed with `firebase deploy --only hosting:site`), which is where
+# someone who has not signed in can still read them.
 #
 # Usage: tool/build_web.sh
 set -euo pipefail
@@ -26,18 +21,4 @@ flutter build web --release \
   --dart-define=PHOTO_CDN_HOST="$PHOTO_CDN_HOST" \
   --dart-define=RECAPTCHA_SITE_KEY="$RECAPTCHA_SITE_KEY"
 
-echo "==> staging legal documents at /legal"
-mkdir -p build/web/legal
-# The landing page stays on GitHub Pages; only the documents the app links to
-# are served here.
-for f in legal.html privacy.html terms.html cookies.html \
-         privacy.es.html terms.es.html cookies.es.html \
-         legal.css logo.svg logo-light.svg; do
-  [ -f "docs/$f" ] && cp "docs/$f" build/web/legal/
-done
-# /legal on its own lands on the privacy policy rather than a directory
-# listing, which Hosting would answer with the app's index.html.
-cp docs/legal.html build/web/legal/index.html
-
 echo "==> done"
-ls build/web/legal

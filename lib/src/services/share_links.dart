@@ -1,20 +1,22 @@
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
+/// Where the project's public site lives.
+const kSiteUrl = 'https://pintaminis.com';
+
 /// Where the web app lives; shared recipe links point here.
 ///
-/// The custom domain rather than the Firebase one: a shared link is the most
-/// public thing the app produces, and it outlives whatever hosting sits
-/// behind it. The `.web.app` address still serves the same site, so links
-/// already out there keep working.
-const kAppUrl = 'https://pintaminis.com';
-
-/// Where the legal documents live.
+/// Its own subdomain, separate from the site at the apex: a visitor arriving
+/// at the bare domain wants to read what this is, while someone opening a
+/// shared recipe wants the app itself, and one address cannot be both.
 ///
-/// Served from the app's own domain, which already sits behind the same CDN
-/// and firewall as everything else — a separate static host would add moving
-/// parts without adding reach. Hosting serves real files before applying the
-/// single-page rewrite, so this path never reaches Flutter's router.
-const kLegalUrl = '$kAppUrl/legal/';
+/// Links shared before the split pointed at the apex. The site carries a
+/// redirect for those, so they still land in the right place.
+const kAppUrl = 'https://app.pintaminis.com';
+
+/// Where the legal documents live, on the public site rather than inside the
+/// app: they have to stay readable to someone who has not signed in, and to
+/// someone deciding whether to.
+const kLegalUrl = '$kSiteUrl/legal';
 
 /// Shareable URL for a published recipe.
 ///

@@ -128,6 +128,19 @@
             }
           ]
         }
+      ],
+      "cleanUrls": true,
+      "redirects": [
+        {
+          "source": "/r/**",
+          "destination": "https://app.pintaminis.com/:splat",
+          "type": 301
+        },
+        {
+          "source": "/app",
+          "destination": "https://app.pintaminis.com",
+          "type": 301
+        }
       ]
     }
   ],
