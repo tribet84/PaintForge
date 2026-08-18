@@ -3,6 +3,318 @@
   "brandName": "Citadel",
   "paints": [
     {
+      "id": "citadel-air-abaddon-black",
+      "name": "Abaddon Black",
+      "range": "Air",
+      "code": null,
+      "hex": "#231F20"
+    },
+    {
+      "id": "citadel-air-administratum-grey",
+      "name": "Administratum Grey",
+      "range": "Air",
+      "code": null,
+      "hex": "#949B95"
+    },
+    {
+      "id": "citadel-angron-red-clear",
+      "name": "Angron Red Clear",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-averland-sunset",
+      "name": "Averland Sunset",
+      "range": "Air",
+      "code": null,
+      "hex": "#FBB81C"
+    },
+    {
+      "id": "citadel-air-balthasar-gold",
+      "name": "Balthasar Gold",
+      "range": "Air",
+      "code": null,
+      "hex": "#A47552"
+    },
+    {
+      "id": "citadel-air-baneblade-brown",
+      "name": "Baneblade Brown",
+      "range": "Air",
+      "code": null,
+      "hex": "#9D7C5C"
+    },
+    {
+      "id": "citadel-air-caliban-green",
+      "name": "Caliban Green",
+      "range": "Air",
+      "code": null,
+      "hex": "#00401A"
+    },
+    {
+      "id": "citadel-calth-blue-clear",
+      "name": "Calth Blue Clear",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-castellan-green",
+      "name": "Castellan Green",
+      "range": "Air",
+      "code": null,
+      "hex": "#314D22"
+    },
+    {
+      "id": "citadel-air-corvus-black",
+      "name": "Corvus Black",
+      "range": "Air",
+      "code": null,
+      "hex": "#22252A"
+    },
+    {
+      "id": "citadel-air-dawnstone",
+      "name": "Dawnstone",
+      "range": "Air",
+      "code": null,
+      "hex": "#70756D"
+    },
+    {
+      "id": "citadel-air-deathworld-forest",
+      "name": "Deathworld Forest",
+      "range": "Air",
+      "code": null,
+      "hex": "#5A6435"
+    },
+    {
+      "id": "citadel-eidolon-purple-clear",
+      "name": "Eidolon Purple Clear",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-elysian-green",
+      "name": "Elysian Green",
+      "range": "Air",
+      "code": null,
+      "hex": "#5E8A3F"
+    },
+    {
+      "id": "citadel-air-evil-sunz-scarlet",
+      "name": "Evil Sunz Scarlet",
+      "range": "Air",
+      "code": null,
+      "hex": "#C21B1B"
+    },
+    {
+      "id": "citadel-air-fenrisian-grey",
+      "name": "Fenrisian Grey",
+      "range": "Air",
+      "code": null,
+      "hex": "#749BB5"
+    },
+    {
+      "id": "citadel-air-flash-gitz-yellow",
+      "name": "Flash Gitz Yellow",
+      "range": "Air",
+      "code": null,
+      "hex": "#FFF200"
+    },
+    {
+      "id": "citadel-grey-knights-steel",
+      "name": "Grey Knights Steel",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-kantor-blue",
+      "name": "Kantor Blue",
+      "range": "Air",
+      "code": null,
+      "hex": "#02174E"
+    },
+    {
+      "id": "citadel-air-khorne-red",
+      "name": "Khorne Red",
+      "range": "Air",
+      "code": null,
+      "hex": "#6A0001"
+    },
+    {
+      "id": "citadel-air-kislev-flesh",
+      "name": "Kislev Flesh",
+      "range": "Air",
+      "code": null,
+      "hex": "#D6A875"
+    },
+    {
+      "id": "citadel-air-leadbelcher",
+      "name": "Leadbelcher",
+      "range": "Air",
+      "code": null,
+      "hex": "#888D8F"
+    },
+    {
+      "id": "citadel-air-lothern-blue",
+      "name": "Lothern Blue",
+      "range": "Air",
+      "code": null,
+      "hex": "#34A5D8"
+    },
+    {
+      "id": "citadel-air-macragge-blue",
+      "name": "Macragge Blue",
+      "range": "Air",
+      "code": null,
+      "hex": "#0F3D7C"
+    },
+    {
+      "id": "citadel-air-mechanicus-standard-grey",
+      "name": "Mechanicus Standard Grey",
+      "range": "Air",
+      "code": null,
+      "hex": "#3D4B4D"
+    },
+    {
+      "id": "citadel-air-mephiston-red",
+      "name": "Mephiston Red",
+      "range": "Air",
+      "code": null,
+      "hex": "#9A1115"
+    },
+    {
+      "id": "citadel-air-moot-green",
+      "name": "Moot Green",
+      "range": "Air",
+      "code": null,
+      "hex": "#54B93D"
+    },
+    {
+      "id": "citadel-mortarion-green",
+      "name": "Mortarion Green",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-mournfang-brown",
+      "name": "Mournfang Brown",
+      "range": "Air",
+      "code": null,
+      "hex": "#64432A"
+    },
+    {
+      "id": "citadel-night-lords-blue",
+      "name": "Night Lords Blue",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-ogryn-camo",
+      "name": "Ogryn Camo",
+      "range": "Air",
+      "code": null,
+      "hex": "#9DAF6B"
+    },
+    {
+      "id": "citadel-phalanx-yellow",
+      "name": "Phalanx Yellow",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-phoenician-purple",
+      "name": "Phoenician Purple",
+      "range": "Air",
+      "code": null,
+      "hex": "#48206B"
+    },
+    {
+      "id": "citadel-air-runefang-steel",
+      "name": "Runefang Steel",
+      "range": "Air",
+      "code": null,
+      "hex": "#C3C6C8"
+    },
+    {
+      "id": "citadel-air-russ-grey",
+      "name": "Russ Grey",
+      "range": "Air",
+      "code": null,
+      "hex": "#5A7F9C"
+    },
+    {
+      "id": "citadel-air-tallarn-sand",
+      "name": "Tallarn Sand",
+      "range": "Air",
+      "code": null,
+      "hex": "#B08A4E"
+    },
+    {
+      "id": "citadel-air-temple-guard-blue",
+      "name": "Temple Guard Blue",
+      "range": "Air",
+      "code": null,
+      "hex": "#239489"
+    },
+    {
+      "id": "citadel-thallax-gold",
+      "name": "Thallax Gold",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-the-fang",
+      "name": "The Fang",
+      "range": "Air",
+      "code": null,
+      "hex": "#4B5F6E"
+    },
+    {
+      "id": "citadel-air-troll-slayer-orange",
+      "name": "Troll Slayer Orange",
+      "range": "Air",
+      "code": null,
+      "hex": "#F36D24"
+    },
+    {
+      "id": "citadel-typhon-ash",
+      "name": "Typhon Ash",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-ulthuan-grey",
+      "name": "Ulthuan Grey",
+      "range": "Air",
+      "code": null,
+      "hex": "#C5DFDF"
+    },
+    {
+      "id": "citadel-air-ushabti-bone",
+      "name": "Ushabti Bone",
+      "range": "Air",
+      "code": null,
+      "hex": "#B8A878"
+    },
+    {
+      "id": "citadel-valdor-gold",
+      "name": "Valdor Gold",
+      "range": "Air",
+      "code": null
+    },
+    {
+      "id": "citadel-air-white-scar",
+      "name": "White Scar",
+      "range": "Air",
+      "code": null,
+      "hex": "#FFFFFF"
+    },
+    {
+      "id": "citadel-air-zandri-dust",
+      "name": "Zandri Dust",
+      "range": "Air",
+      "code": null,
+      "hex": "#9E915C"
+    },
+    {
       "id": "citadel-abaddon-black",
       "name": "Abaddon Black",
       "range": "Base",

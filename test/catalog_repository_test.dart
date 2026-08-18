@@ -51,6 +51,20 @@ Future<void> main() async {
     final paint = repository.byId('citadel-mephiston-red');
     expect(paint, isNotNull);
     expect(paint!.name, 'Mephiston Red');
-    expect(paint.color.toARGB32(), 0xFF9A1115);
+    expect(paint.color?.toARGB32(), 0xFF9A1115);
+  });
+
+  test('a paint whose colour nobody has recorded parses with a null colour',
+      () {
+    // The catalogue lists names we can verify from the manufacturer long
+    // before anyone measures the pot. Those must load, and must not be given
+    // an invented colour on the way in.
+    final paint = Paint.fromJson(
+      const {'id': 'x-1', 'name': 'Unknown', 'range': 'Test'},
+      brand: PaintBrand.citadel,
+      brandName: 'Citadel',
+    );
+
+    expect(paint.color, isNull);
   });
 }

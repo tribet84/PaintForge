@@ -17,17 +17,21 @@ class PaintSwatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final color = paint.color;
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: paint.color,
+        color: color ?? scheme.surfaceContainerHighest,
         shape: BoxShape.circle,
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outlineVariant,
-          width: 2,
-        ),
+        border: Border.all(color: scheme.outlineVariant, width: 2),
       ),
+      // A paint we list but have no colour for says so, rather than passing
+      // off a default grey as the real thing.
+      child: color != null
+          ? null
+          : Icon(Icons.question_mark, size: size * 0.45, color: scheme.outline),
     );
   }
 }

@@ -20,7 +20,7 @@ class Paint {
     required this.brandName,
     required this.name,
     required this.range,
-    required this.color,
+    this.color,
     this.code,
   });
 
@@ -30,7 +30,11 @@ class Paint {
   final String name;
   final String range;
   final String? code;
-  final Color color;
+
+  /// Null when the catalogue lists the paint but nobody has recorded its
+  /// colour yet. Better an honest blank than a swatch that is quietly wrong:
+  /// the swatch is how people pick a paint off the screen.
+  final Color? color;
 
   factory Paint.fromJson(
     Map<String, dynamic> json, {
@@ -44,11 +48,12 @@ class Paint {
       name: json['name'] as String,
       range: json['range'] as String,
       code: json['code'] as String?,
-      color: _parseHex(json['hex'] as String),
+      color: _parseHex(json['hex'] as String?),
     );
   }
 
-  static Color _parseHex(String hex) {
+  static Color? _parseHex(String? hex) {
+    if (hex == null || hex.isEmpty) return null;
     final value = int.parse(hex.replaceFirst('#', ''), radix: 16);
     return Color(0xFF000000 | value);
   }
