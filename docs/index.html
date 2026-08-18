@@ -71,8 +71,7 @@
   <div class="wrap">
     <h2>The problem it solves</h2>
     <p class="sub">
-      Four questions every painter answers badly from memory — and the whole app is
-      built around them.
+      Four questions every painter answers badly from memory.
     </p>
     <div class="grid">
       <div class="card">
@@ -83,7 +82,7 @@
       <div class="card">
         <div class="ico">📉</div>
         <h3>“Am I about to run out?”</h3>
-        <p>Flag a pot as running low the moment you notice. It lands on the shopping list automatically, long before it stops you mid-project.</p>
+        <p>Flag a pot as running low the moment you notice. It joins the shopping list on its own, grouped by brand and ready to send to a shop.</p>
       </div>
       <div class="card">
         <div class="ico">🧾</div>
@@ -103,9 +102,9 @@
   <div class="wrap">
     <h2>Readiness, not just a list</h2>
     <p class="sub">
-      Every list and every recipe is checked against your inventory. A paint you have
-      wishlisted counts as missing — it is not on the shelf yet — and one missing pot
-      outranks several running low, because it blocks the job outright.
+      Every list and every recipe is checked against your inventory. A paint you
+      have wishlisted counts as missing — it is not on the shelf yet — and one
+      missing pot outranks several running low, because it blocks the job outright.
     </p>
     <div class="demo">
       <div class="demo-row">
@@ -128,39 +127,6 @@
 
 <section>
   <div class="wrap">
-    <h2>How you use it</h2>
-    <p class="sub">Nothing to set up beyond signing in.</p>
-    <div class="steps">
-      <div class="step">
-        <div>
-          <h3>Stock your shelf</h3>
-          <p>Search the catalogue and mark the paints you own. It takes one session and you only do it once.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div>
-          <h3>Flag pots as they run down</h3>
-          <p>Tap a paint to mark it running low, or add one you want to buy. Both feed the shopping list on their own.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div>
-          <h3>Shop from a list that reads like a list</h3>
-          <p>Grouped by urgency and then by brand, so it matches how you actually buy. Copy it or share it straight to a chat.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div>
-          <h3>Write the recipe while it is fresh</h3>
-          <p>Record the steps, the techniques and the videos that inspired you — then add the missing paints to your shopping list in one tap.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
     <h2>Recipes worth sharing</h2>
     <p class="sub">
       Publish a recipe and anyone with the link can save it to their account.
@@ -168,10 +134,9 @@
     <div class="cols">
       <div>
         <ul class="plain">
-          <li><strong>Links, not copies.</strong> When you update a shared recipe, everyone who saved it sees the new version — nobody is stuck on a stale fork.</li>
-          <li><strong>Credit stays attached.</strong> Your name and last update date travel with it, and you can see how many painters follow it.</li>
+          <li><strong>Links, not copies.</strong> Update a shared recipe and everyone who saved it sees the new version — nobody is stuck on a stale fork.</li>
           <li><strong>Straight to the shopping list.</strong> Opening someone's recipe shows which of its paints you are missing, and adds them in one tap.</li>
-          <li><strong>Photos stay small.</strong> A cover photo is compressed on your device before it is ever saved, so a 20 MB camera shot never gets uploaded at full size.</li>
+          <li><strong>Photos of the real thing.</strong> Give a recipe a cover photo and the list becomes a gallery; open one full screen to see the brushwork.</li>
         </ul>
       </div>
       <div class="callout">
@@ -191,10 +156,10 @@
     <div class="cols">
       <div>
         <ul class="plain">
-          <li>Sign in with email or Google.</li>
-          <li>Everything syncs to your account and works offline; it catches up when you reconnect.</li>
-          <li>Only you can read or write your inventory, lists and recipes. A recipe becomes readable by others only when you publish it, and you can stop sharing at any time.</li>
-          <li>You can delete your account and all of its data from Settings — including anything you published.</li>
+          <li>Private by default. A recipe becomes readable by others only when you publish it, and you can stop sharing at any time.</li>
+          <li>No ads, no analytics, no tracking cookies.</li>
+          <li>Works offline and catches up when you reconnect.</li>
+          <li>Delete your account from Settings and everything goes with it, including anything you published.</li>
         </ul>
       </div>
       <div class="callout">
@@ -203,48 +168,6 @@
           Built with Flutter and Firebase. The code, the security rules and the
           reasoning behind the design decisions are all public.
         </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="more">
-  <div class="wrap">
-    <h2>Also in the app</h2>
-    <p class="sub">
-      Smaller things, added because they were missing the moment someone actually
-      used it.
-    </p>
-    <div class="grid">
-      <div class="card">
-        <div class="ico">📷</div>
-        <h3>Photos of what you painted</h3>
-        <p>Give a recipe a cover photo and the list becomes a gallery. Tap one to open it full screen and pinch in — the detail you want is in the brushwork, not the thumbnail.</p>
-      </div>
-      <div class="card">
-        <div class="ico">🔗</div>
-        <h3>Share a recipe by link</h3>
-        <p>Publish a recipe and send the link. Other painters link it into their account instead of copying it, so they always see your latest version — and unshare puts it back to private.</p>
-      </div>
-      <div class="card">
-        <div class="ico">🛒</div>
-        <h3>A shopping list that writes itself</h3>
-        <p>Anything running low or wishlisted, grouped by section and brand, ready to copy into a message or share straight to a shop.</p>
-      </div>
-      <div class="card">
-        <div class="ico">🌓</div>
-        <h3>Light and dark, English and Spanish</h3>
-        <p>Follows the system on both counts. Works offline too — Firestore keeps a local cache and syncs when the connection returns.</p>
-      </div>
-      <div class="card">
-        <div class="ico">🛡️</div>
-        <h3>Your data stays yours</h3>
-        <p>Private by default, no analytics, no ads, no tracking cookies. Deleting your account erases everything, including photos and anything you published.</p>
-      </div>
-      <div class="card">
-        <div class="ico">🧹</div>
-        <h3>Leave whenever you want</h3>
-        <p>Account deletion is one confirmed action away, and it cascades — inventory, lists, recipes, photos and public copies all go together.</p>
       </div>
     </div>
   </div>
