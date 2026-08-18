@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "paintforge-d8cf2"
-  }
+  },
+  "targets": {
+    "paintforge-d8cf2": {
+      "hosting": {
+        "app": [
+          "paintforge-d8cf2"
+        ],
+        "site": [
+          "pintaminis-web"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

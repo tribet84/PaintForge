@@ -85,7 +85,12 @@ flutter build web --release
 firebase deploy --only hosting
 ```
 
-Live at <https://pintaminis.com>.
+Live at <https://pintaminis.com>. The project site and the legal documents are
+at <https://www.pintaminis.com>.
+
+Hosting serves two sites from one project: `app` (the Flutter build) and `site`
+(the `docs/` folder). Deploy them separately with `--only hosting:app` or
+`--only hosting:site`.
 
 To deploy the security rules together with the site:
 
