@@ -132,8 +132,8 @@
       "cleanUrls": true,
       "redirects": [
         {
-          "source": "/r/**",
-          "destination": "https://app.pintaminis.com/:splat",
+          "source": "/r/:recipeId",
+          "destination": "https://app.pintaminis.com/r/:recipeId",
           "type": 301
         },
         {
