@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Cookies — PintaMinis</title>
+<meta name="description" content="Qué guarda exactamente PintaMinis en tu navegador, y por qué nada de ello es seguimiento.">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="https://pintaminis.com"><img src="logo-light.svg" alt=""><span>PintaMinis</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Política de Cookies</h1>
+  <p class="updated">Última actualización: 18 de agosto de 2026 · <a href="cookies.html">English version</a></p>
+
+  <div class="callout">
+    <p><strong>Por qué no hay banner de cookies.</strong> PintaMinis no instala
+    cookies de analítica, de publicidad ni de seguimiento: ninguna. Todo lo que
+    aparece abajo es estrictamente necesario para iniciar tu sesión y para impedir
+    que se abuse del servicio. Conforme a la Directiva ePrivacy y al art. 22.2 de
+    la LSSI, el almacenamiento estrictamente necesario no requiere consentimiento,
+    así que pedirlo sería puro teatro. Si algún día se añade seguimiento, vendrá
+    acompañado de un banner de consentimiento real.</p>
+  </div>
+
+  <h2 id="que">Qué se almacena realmente</h2>
+  <p>La lista siguiente se obtuvo auditando la aplicación en funcionamiento, no
+  copiando una plantilla. Aquí «cookies» incluye también las tecnologías de
+  almacenamiento equivalentes del navegador, porque la ley las trata igual.</p>
+
+  <h3>Cookies</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Nombre</th><th>Instalada por</th><th>Finalidad</th><th>Duración</th></tr>
+    <tr>
+      <td><code>_GRECAPTCHA</code></td>
+      <td>Google (<code>www.google.com</code>)</td>
+      <td>Antiabuso. Permite a reCAPTCHA Enterprise distinguir la aplicación
+      auténtica de un script automatizado, que es lo que impide que alguien
+      extraiga la base de recetas o dispare la factura de alojamiento</td>
+      <td>Hasta 6 meses</td>
+    </tr>
+  </table>
+  </div>
+  <p>Esa es la única cookie. No hay ninguna otra, ni propia ni de terceros.</p>
+
+  <h3>Almacenamiento local (localStorage)</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Clave</th><th>Finalidad</th></tr>
+    <tr>
+      <td><code>FlutterFire-[DEFAULT]-recaptchaSiteKey</code><br>
+          <code>FlutterFire-[DEFAULT]-recaptchaType</code></td>
+      <td>Recuerda qué proveedor antiabuso está configurado, para no tener que
+      renegociar la verificación en cada carga</td>
+    </tr>
+    <tr>
+      <td><code>_grecaptcha</code></td>
+      <td>Datos de trabajo de la biblioteca reCAPTCHA</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3>Almacenamiento de sesión (sessionStorage)</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Clave</th><th>Finalidad</th></tr>
+    <tr>
+      <td><code>flutterfire-flutter-fire-*</code></td>
+      <td>Marcadores de versión de las bibliotecas de Firebase en uso. Se borran
+      al cerrar la pestaña</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3>IndexedDB</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Base de datos</th><th>Finalidad</th></tr>
+    <tr>
+      <td><code>firebaseLocalStorageDb</code></td>
+      <td>Mantiene tu sesión iniciada entre visitas. Sin ella tendrías que
+      introducir la contraseña cada vez que abrieras la aplicación</td>
+    </tr>
+    <tr>
+      <td><code>firebase-app-check-database</code></td>
+      <td>Guarda en caché el token antiabuso para no repetir la verificación en
+      cada petición</td>
+    </tr>
+    <tr>
+      <td><code>firebase-heartbeat-database</code></td>
+      <td>Registra que se han usado las bibliotecas de Firebase, para los
+      diagnósticos del propio servicio de Google</td>
+    </tr>
+  </table>
+  </div>
+  <p>Cloud Firestore mantiene además una caché sin conexión de <em>tus propios</em>
+  datos en el navegador, para que la aplicación siga funcionando sin conexión y
+  sincronice al recuperarla. Esa caché contiene únicamente datos a los que tu
+  cuenta ya tiene acceso.</p>
+
+  <h2 id="no">Qué no hay</h2>
+  <ul>
+    <li>Ni Google Analytics, ni analítica de ningún otro tipo.</li>
+    <li>Ninguna cookie publicitaria ni de remarketing. La integración de AdMob que
+    hay en el código está desactivada y no se compila en la versión publicada.</li>
+    <li>Ningún píxel de redes sociales, ningún seguimiento entre sitios, ninguna
+    huella digital con fines de perfilado.</li>
+    <li>Ninguna cookie de Cloudflare, que actúa como CDN y cortafuegos del sitio
+    sin instalar ninguna.</li>
+  </ul>
+
+  <h2 id="control">Cómo controlarlo</h2>
+  <p>Puedes borrar o bloquear este almacenamiento desde la configuración de tu
+  navegador cuando quieras. Ten en cuenta lo que implica: al borrarlo se cierra tu
+  sesión, y bloquearlo por completo impedirá directamente iniciar sesión, porque
+  ni se puede recordar la sesión ni completar la verificación antiabuso.</p>
+  <p>Google publica su propia información sobre reCAPTCHA en su
+  <a href="https://policies.google.com/privacy?hl=es">Política de Privacidad</a> y
+  sus <a href="https://policies.google.com/terms?hl=es">Condiciones del
+  Servicio</a>.</p>
+
+  <h2 id="mas">Relacionado</h2>
+  <p>Para saber qué ocurre con tus datos una vez llegan al servidor, consulta la
+  <a href="privacy.es.html">Política de Privacidad</a>.</p>
+</main>
+
+<footer class="wrap">
+  <p>
+    <a href="legal.html">Todos los documentos legales</a> ·
+    <a href="privacy.es.html">Política de Privacidad</a> ·
+    <a href="terms.es.html">Términos del Servicio</a> ·
+    <a href="https://github.com/tribet84/PaintForge">Código en GitHub</a>
+  </p>
+  <p>PintaMinis es un proyecto personal independiente, sin relación con ningún
+  fabricante de pinturas ni compañía de juegos.</p>
+</footer>
+
+</body>
+</html>

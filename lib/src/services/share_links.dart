@@ -10,10 +10,11 @@ const kAppUrl = 'https://pintaminis.com';
 
 /// Where the legal documents live.
 ///
-/// GitHub Pages rather than the app's own domain: they are static pages that
-/// must stay readable even if the app itself is down, and hosting them beside
-/// the source keeps them versioned with the behaviour they describe.
-const kLegalUrl = 'https://tribet84.github.io/PaintForge/';
+/// Served from the app's own domain, which already sits behind the same CDN
+/// and firewall as everything else — a separate static host would add moving
+/// parts without adding reach. Hosting serves real files before applying the
+/// single-page rewrite, so this path never reaches Flutter's router.
+const kLegalUrl = '$kAppUrl/legal/';
 
 /// Shareable URL for a published recipe.
 ///
