@@ -78,7 +78,7 @@
   "shareFallbackCopied": "Your device doesn't support sharing directly, so the text was copied instead",
   "shoppingListTitle": "PintaMinis — Shopping list",
   "shoppingShareSubject": "My PintaMinis shopping list",
-  "shoppingAttribution": "Generated with PintaMinis · https://paintforge-d8cf2.web.app",
+  "shoppingAttribution": "Generated with PintaMinis · https://pintaminis.com",
   "confirmPurchaseTitle": "Mark as bought?",
   "confirmPurchaseBody": "{paint} goes back on the shelf as owned and leaves the shopping list.",
   "@confirmPurchaseBody": {
