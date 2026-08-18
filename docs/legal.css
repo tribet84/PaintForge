@@ -1,0 +1,84 @@
+/* Shared styling for the legal pages, matching the landing page's palette. */
+:root {
+  --forge: #E8590C;
+  --forge-soft: #FF8A3D;
+  --ink: #1A1614;
+  --panel: #241E1A;
+  --panel-2: #2E2621;
+  --text: #F2EAE4;
+  --muted: #B9A99D;
+  --line: #3D332C;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { width: min(820px, 92vw); margin: 0 auto; }
+a { color: var(--forge-soft); }
+
+header {
+  padding: 40px 0 30px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, #1E1917, var(--ink));
+}
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 700; text-decoration: none; color: var(--text);
+}
+.brand img { width: 30px; height: 32px; }
+
+main { padding: 44px 0 20px; }
+h1 { font-size: clamp(1.8rem, 4.5vw, 2.4rem); margin: 0 0 6px; letter-spacing: -.4px; }
+.updated { color: var(--muted); font-size: .9rem; margin: 0 0 34px; }
+h2 {
+  font-size: 1.22rem; margin: 38px 0 10px;
+  padding-top: 14px; border-top: 1px solid var(--line);
+}
+h3 { font-size: 1.02rem; margin: 22px 0 6px; }
+p, li { color: var(--muted); }
+strong { color: var(--text); }
+ul { padding-left: 20px; }
+li { margin-bottom: 8px; }
+
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .93rem; }
+th, td {
+  text-align: left; padding: 10px 12px;
+  border-bottom: 1px solid var(--line); vertical-align: top;
+}
+th { color: var(--text); font-weight: 600; }
+td { color: var(--muted); }
+td code {
+  background: var(--panel-2); padding: 1px 6px;
+  border-radius: 5px; font-size: .88em; color: var(--text);
+}
+/* Wide tables must scroll on their own rather than push the page sideways. */
+.scroll { overflow-x: auto; }
+
+.callout {
+  background: var(--panel-2); border: 1px solid var(--line);
+  border-left: 3px solid var(--forge); border-radius: 10px;
+  padding: 16px 20px; margin: 22px 0; font-size: .95rem;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+.toc {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 12px; padding: 18px 22px; margin-bottom: 30px;
+}
+.toc ul { margin: 0; }
+
+footer {
+  padding: 34px 0 60px; margin-top: 30px;
+  border-top: 1px solid var(--line);
+  color: var(--muted); font-size: .9rem;
+}
+footer a { color: var(--muted); }
+footer a:hover { color: var(--forge-soft); }
+
+@media (max-width: 560px) {
+  main { padding: 32px 0 10px; }
+}

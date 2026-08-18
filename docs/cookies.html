@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cookie Policy — PintaMinis</title>
+<meta name="description" content="Exactly what PintaMinis stores in your browser, and why none of it is tracking.">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="logo-light.svg" alt=""><span>PintaMinis</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Cookie Policy</h1>
+  <p class="updated">Last updated: 18 August 2026</p>
+
+  <div class="callout">
+    <p><strong>Why there is no cookie banner.</strong> PintaMinis sets no
+    analytics, advertising or tracking cookies — none at all. Everything listed
+    below is strictly necessary to sign you in and to keep the service from being
+    abused. Under the ePrivacy Directive and Spain's LSSI (Art. 22.2), strictly
+    necessary storage does not require consent, so asking for it would be
+    theatre. If tracking is ever added, a real consent banner will come with
+    it.</p>
+  </div>
+
+  <h2 id="what">What is actually stored</h2>
+  <p>The list below was produced by auditing the running application, not copied
+  from a template. "Cookies" here covers the equivalent browser storage
+  technologies too, since the law treats them the same way.</p>
+
+  <h3>Cookies</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Name</th><th>Set by</th><th>Purpose</th><th>Lifetime</th></tr>
+    <tr>
+      <td><code>_GRECAPTCHA</code></td>
+      <td>Google (<code>www.google.com</code>)</td>
+      <td>Anti-abuse. Lets reCAPTCHA Enterprise tell a genuine app apart from an
+      automated script, which is what stops someone scraping the recipe database
+      or running up the hosting bill</td>
+      <td>Up to 6 months</td>
+    </tr>
+  </table>
+  </div>
+  <p>That is the only cookie. There are no others, first-party or third-party.</p>
+
+  <h3>Local storage</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Key</th><th>Purpose</th></tr>
+    <tr>
+      <td><code>FlutterFire-[DEFAULT]-recaptchaSiteKey</code><br>
+          <code>FlutterFire-[DEFAULT]-recaptchaType</code></td>
+      <td>Remembers which anti-abuse provider is configured, so the check does not
+      have to be renegotiated on every page load</td>
+    </tr>
+    <tr>
+      <td><code>_grecaptcha</code></td>
+      <td>Working data for the reCAPTCHA library</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3>Session storage</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Key</th><th>Purpose</th></tr>
+    <tr>
+      <td><code>flutterfire-flutter-fire-*</code></td>
+      <td>Version markers for the Firebase libraries in use. Cleared when you
+      close the tab</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3>IndexedDB</h3>
+  <div class="scroll">
+  <table>
+    <tr><th>Database</th><th>Purpose</th></tr>
+    <tr>
+      <td><code>firebaseLocalStorageDb</code></td>
+      <td>Keeps you signed in between visits. Without it you would have to enter
+      your password every time you opened the app</td>
+    </tr>
+    <tr>
+      <td><code>firebase-app-check-database</code></td>
+      <td>Caches the anti-abuse token so a fresh check is not needed on every
+      request</td>
+    </tr>
+    <tr>
+      <td><code>firebase-heartbeat-database</code></td>
+      <td>Records that the Firebase libraries were used, for Google's own service
+      diagnostics</td>
+    </tr>
+  </table>
+  </div>
+  <p>Cloud Firestore also keeps an offline cache of <em>your own</em> data in the
+  browser, so the app keeps working without a connection and syncs when the
+  network returns. That cache holds only data your account already has access
+  to.</p>
+
+  <h2 id="not">What is not there</h2>
+  <ul>
+    <li>No Google Analytics, and no analytics of any other kind.</li>
+    <li>No advertising or remarketing cookies. The AdMob integration in the source
+    code is disabled and not compiled into the published build.</li>
+    <li>No social network pixels, no cross-site tracking, no fingerprinting for
+    profiling.</li>
+    <li>No cookies from Cloudflare, which fronts the site as a CDN and firewall
+    without setting any.</li>
+  </ul>
+
+  <h2 id="control">Controlling it</h2>
+  <p>You can clear or block this storage from your browser's settings at any
+  time. Be aware of what that costs: clearing it signs you out, and blocking it
+  outright will prevent sign-in from working at all, because the session cannot
+  be remembered and the anti-abuse check cannot complete.</p>
+  <p>Google publishes its own information about reCAPTCHA in its
+  <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+  <a href="https://policies.google.com/terms">Terms of Service</a>.</p>
+
+  <h2 id="more">Related</h2>
+  <p>For what happens to your data once it reaches the server, see the
+  <a href="privacy.html">Privacy Policy</a>.</p>
+</main>
+
+<footer class="wrap">
+  <p>
+    <a href="index.html">Home</a> ·
+    <a href="privacy.html">Privacy Policy</a> ·
+    <a href="terms.html">Terms of Service</a> ·
+    <a href="https://github.com/tribet84/PaintForge">Source on GitHub</a>
+  </p>
+  <p>PintaMinis is an independent hobby project, not affiliated with any paint
+  manufacturer or games company.</p>
+</footer>
+
+</body>
+</html>

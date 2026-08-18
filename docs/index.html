@@ -8,7 +8,7 @@
 <meta property="og:title" content="PintaMinis">
 <meta property="og:description" content="Know what paint you have, what you are about to run out of, and how you painted it last time.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
 <style>
   :root {
     --forge: #E8590C;
@@ -130,7 +130,7 @@
 
 <header>
   <div class="wrap">
-    <div class="brand"><img class="mark" src="logo.svg" alt="" width="28" height="30"><span>PintaMinis</span></div>
+    <div class="brand"><img class="mark" src="logo-light.svg" alt="" width="28" height="30"><span>PintaMinis</span></div>
     <h1>Know what paint you have,<br>and <em>how you painted it</em> last time.</h1>
     <p class="lede">
       A miniature paint inventory for people whose shelf has outgrown their memory.
@@ -286,11 +286,58 @@
   </div>
 </section>
 
+<section id="more">
+  <div class="wrap">
+    <h2>Also in the app</h2>
+    <p class="sub">
+      Smaller things, added because they were missing the moment someone actually
+      used it.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">📷</div>
+        <h3>Photos of what you painted</h3>
+        <p>Give a recipe a cover photo and the list becomes a gallery. Tap one to open it full screen and pinch in — the detail you want is in the brushwork, not the thumbnail.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔗</div>
+        <h3>Share a recipe by link</h3>
+        <p>Publish a recipe and send the link. Other painters link it into their account instead of copying it, so they always see your latest version — and unshare puts it back to private.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🛒</div>
+        <h3>A shopping list that writes itself</h3>
+        <p>Anything running low or wishlisted, grouped by section and brand, ready to copy into a message or share straight to a shop.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🌓</div>
+        <h3>Light and dark, English and Spanish</h3>
+        <p>Follows the system on both counts. Works offline too — Firestore keeps a local cache and syncs when the connection returns.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🛡️</div>
+        <h3>Your data stays yours</h3>
+        <p>Private by default, no analytics, no ads, no tracking cookies. Deleting your account erases everything, including photos and anything you published.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧹</div>
+        <h3>Leave whenever you want</h3>
+        <p>Account deletion is one confirmed action away, and it cascades — inventory, lists, recipes, photos and public copies all go together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <p style="margin:0 0 8px">
       <a href="https://pintaminis.com">Open PintaMinis</a> ·
       <a href="https://github.com/tribet84/PaintForge">Source on GitHub</a>
+    </p>
+    <p style="margin:0 0 8px">
+      <a href="privacy.html">Privacy Policy</a> ·
+      <a href="terms.html">Terms of Service</a> ·
+      <a href="cookies.html">Cookie Policy</a>
     </p>
     <p style="margin:0">
       PintaMinis is an independent hobby project. Paint names and ranges are
