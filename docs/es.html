@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PintaMinis — inventario de pinturas de miniaturas</title>
+<meta name="description" content="Controla las pinturas que tienes, entérate de cuáles se acaban, guarda cómo pintaste algo y comparte la receta.">
+<meta property="og:title" content="PintaMinis">
+<meta property="og:description" content="Sabe qué pintura tienes, cuál estás a punto de agotar y cómo la pintaste la última vez.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="alternate" hreflang="en" href="https://pintaminis.com/">
+<link rel="alternate" hreflang="es" href="https://pintaminis.com/es">
+<link rel="alternate" hreflang="x-default" href="https://pintaminis.com/">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <img class="mark" src="logo-light.svg" alt="" width="28" height="30"><span>PintaMinis</span>
+      <a class="lang" href="/?lang=en">English</a>
+    </div>
+    <h1>Sabe qué pintura tienes,<br>y <em>cómo la pintaste</em> la última vez.</h1>
+    <p class="lede">
+      Un inventario de pinturas de miniaturas para quien ya no recuerda todo lo que
+      tiene en la estantería. Controla lo que tienes, detecta lo que se está acabando
+      antes de que te deje un proyecto a medias y guarda la receta con la que un
+      modelo quedó bien — y luego compártela.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://app.pintaminis.com">Abrir la aplicación</a>
+      <a class="btn btn-ghost" href="https://github.com/tribet84/PaintForge">Ver el código</a>
+    </div>
+    <p class="note">Gratis · funciona en el navegador · español e inglés</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>El problema que resuelve</h2>
+    <p class="sub">
+      Cuatro preguntas que todo pintor responde mal de memoria — y sobre las que está
+      construida la aplicación entera.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">🫙</div>
+        <h3>«¿Esta ya la tengo?»</h3>
+        <p>Un catálogo integrado de Citadel, Vallejo, The Army Painter y Green Stuff World. Marca lo que hay en tu estantería y busca por nombre, código o gama.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📉</div>
+        <h3>«¿Estoy a punto de quedarme sin ella?»</h3>
+        <p>Marca un bote como "se acaba" en cuanto lo notes. Aparece solo en la lista de la compra, mucho antes de dejarte tirado a mitad de proyecto.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧾</div>
+        <h3>«¿Cómo pinté esto?»</h3>
+        <p>Las recetas registran el proceso sección por sección, como pasos ordenados — base, lavado, luces — con las pinturas, la técnica y tus propias notas.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🎯</div>
+        <h3>«¿Puedo empezar este ejército hoy?»</h3>
+        <p>Agrupa pinturas en una lista para una miniatura o un ejército entero. PintaMinis te dice si la estantería da para terminarlo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Disponibilidad, no solo una lista</h2>
+    <p class="sub">
+      Cada lista y cada receta se contrasta con tu inventario. Una pintura que has
+      apuntado para comprar cuenta como ausente — todavía no está en la estantería —
+      y un bote que falta pesa más que varios acabándose, porque bloquea el trabajo
+      del todo.
+    </p>
+    <div class="demo">
+      <div class="demo-row">
+        <span class="demo-name">Escuadra Ultramarines</span>
+        <span class="verdict low">⚠ Se están acabando</span>
+      </div>
+      <div class="bar" role="img" aria-label="Seis pinturas disponibles, dos acabándose, una ausente">
+        <span class="s-ok" style="flex:6"></span>
+        <span class="s-low" style="flex:2"></span>
+        <span class="s-miss" style="flex:1"></span>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--ok)"></i>6 disponibles</span>
+        <span><i style="background:var(--warn)"></i>2 acabándose</span>
+        <span><i style="background:var(--miss)"></i>1 ausente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Cómo se usa</h2>
+    <p class="sub">No hay nada que configurar más allá de iniciar sesión.</p>
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h3>Registra tu estantería</h3>
+          <p>Busca en el catálogo y marca las pinturas que tienes. Es una sesión, y solo se hace una vez.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Marca los botes según se agotan</h3>
+          <p>Toca una pintura para marcarla como "se acaba", o añade una que quieras comprar. Las dos alimentan solas la lista de la compra.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Compra con una lista que parece una lista</h3>
+          <p>Agrupada por urgencia y luego por marca, tal como compras de verdad. Cópiala o compártela directamente en un chat.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Escribe la receta mientras la tienes fresca</h3>
+          <p>Anota los pasos, las técnicas y los vídeos que te inspiraron — y añade de un toque las pinturas que te faltan a la lista de la compra.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Recetas que merece la pena compartir</h2>
+    <p class="sub">
+      Publica una receta y cualquiera con el enlace puede guardarla en su cuenta.
+    </p>
+    <div class="cols">
+      <div>
+        <ul class="plain">
+          <li><strong>Vínculos, no copias.</strong> Cuando actualizas una receta compartida, todo el que la guardó ve la versión nueva — nadie se queda con una copia vieja.</li>
+          <li><strong>El crédito viaja con ella.</strong> Tu nombre y la fecha de la última actualización van incluidos, y puedes ver cuántos pintores la siguen.</li>
+          <li><strong>Directa a la lista de la compra.</strong> Al abrir la receta de otra persona ves cuáles de sus pinturas te faltan, y las añades de un toque.</li>
+          <li><strong>Las fotos no engordan.</strong> La foto de portada se comprime en tu dispositivo antes de guardarse, así que una foto de 20 MB nunca se sube a tamaño completo.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <p style="margin:0 0 10px"><strong>Pensado para quien hace tutoriales.</strong></p>
+        <p style="margin:0">
+          Si publicas guías de pintura, tus recetas pasan a ser algo que la gente
+          guarda en lugar de capturar en pantalla. Actualiza el esquema una vez y lo
+          tienen todos tus seguidores.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Tus datos son tuyos</h2>
+    <div class="cols">
+      <div>
+        <ul class="plain">
+          <li>Inicia sesión con correo o con Google.</li>
+          <li>Todo se sincroniza con tu cuenta y funciona sin conexión; se pone al día al reconectar.</li>
+          <li>Solo tú puedes leer o modificar tu inventario, tus listas y tus recetas. Una receta pasa a ser legible por otros únicamente cuando la publicas, y puedes dejar de compartirla cuando quieras.</li>
+          <li>Puedes borrar tu cuenta y todos sus datos desde Configuración — incluido lo que hayas publicado.</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <p style="margin:0 0 10px"><strong>Código abierto.</strong></p>
+        <p style="margin:0">
+          Hecho con Flutter y Firebase. El código, las reglas de seguridad y el
+          razonamiento detrás de las decisiones de diseño son públicos.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="more">
+  <div class="wrap">
+    <h2>También en la aplicación</h2>
+    <p class="sub">
+      Cosas más pequeñas, añadidas porque se echaban en falta en cuanto alguien la
+      usaba de verdad.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">📷</div>
+        <h3>Fotos de lo que pintaste</h3>
+        <p>Ponle una foto de portada a una receta y la lista se convierte en una galería. Tócala para verla a pantalla completa y ampliarla — el detalle que buscas está en la pincelada, no en la miniatura.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔗</div>
+        <h3>Comparte una receta por enlace</h3>
+        <p>Publica una receta y envía el enlace. Otros pintores la vinculan a su cuenta en lugar de copiarla, así que siempre ven tu última versión — y al dejar de compartirla vuelve a ser privada.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🛒</div>
+        <h3>Una lista de la compra que se escribe sola</h3>
+        <p>Todo lo que se está acabando o quieres comprar, agrupado por sección y marca, listo para copiar en un mensaje o compartir con una tienda.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🌓</div>
+        <h3>Claro y oscuro, español e inglés</h3>
+        <p>Sigue al sistema en ambas cosas. También funciona sin conexión — Firestore mantiene una caché local y sincroniza al volver la cobertura.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🛡️</div>
+        <h3>Tus datos siguen siendo tuyos</h3>
+        <p>Privado por defecto, sin analítica, sin anuncios, sin cookies de seguimiento. Borrar tu cuenta elimina todo, incluidas las fotos y lo que hayas publicado.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧹</div>
+        <h3>Vete cuando quieras</h3>
+        <p>Eliminar la cuenta está a una confirmación de distancia, y arrastra todo consigo: inventario, listas, recetas, fotos y copias públicas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 8px">
+      <a href="https://app.pintaminis.com">Abrir PintaMinis</a> ·
+      <a href="https://github.com/tribet84/PaintForge">Código en GitHub</a> ·
+      <a href="/?lang=en">English</a>
+    </p>
+    <p style="margin:0 0 8px">
+      <a href="/privacy.es">Política de Privacidad</a> ·
+      <a href="/terms.es">Términos del Servicio</a> ·
+      <a href="/cookies.es">Política de Cookies</a>
+    </p>
+    <p style="margin:0">
+      PintaMinis es un proyecto personal independiente. Los nombres y gamas de
+      pinturas son marcas de sus respectivos fabricantes y se usan aquí únicamente
+      para identificar los productos.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

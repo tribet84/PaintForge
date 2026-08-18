@@ -9,140 +9,50 @@
 <meta property="og:description" content="Know what paint you have, what you are about to run out of, and how you painted it last time.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="alternate" hreflang="en" href="https://pintaminis.com/">
+<link rel="alternate" hreflang="es" href="https://pintaminis.com/es">
+<link rel="alternate" hreflang="x-default" href="https://pintaminis.com/">
 <script>
-  // Recipe links shared before the app moved to its own subdomain point at
-  // this apex and carry the recipe id in the fragment. A fragment never
-  // reaches the server, so no redirect rule can catch these — only the
-  // browser can, and it has to happen before the page renders.
   (function () {
+    // Order matters. A shared recipe link must be forwarded before anything
+    // else looks at the URL, or a Spanish browser would divert it to /es and
+    // lose the recipe on the way.
     var hash = window.location.hash;
     if (hash && hash.indexOf('#/r/') === 0) {
       window.location.replace('https://app.pintaminis.com/' + hash);
+      return;
     }
+
+    // Language. An explicit choice always wins over the browser's guess and
+    // is remembered, so picking English does not bounce a Spanish browser
+    // straight back to Spanish on the next visit.
+    var KEY = 'pintaminis-lang';
+    var chosen = null;
+    try {
+      var param = new URLSearchParams(window.location.search).get('lang');
+      if (param === 'en' || param === 'es') {
+        localStorage.setItem(KEY, param);
+        chosen = param;
+      } else {
+        chosen = localStorage.getItem(KEY);
+      }
+    } catch (e) {
+      // Private mode, or storage blocked. Fall back to the browser's setting.
+    }
+
+    var lang = chosen || (navigator.language || 'en').slice(0, 2).toLowerCase();
+    if (lang === 'es') window.location.replace('/es');
   })();
 </script>
-<style>
-  :root {
-    --forge: #E8590C;
-    --forge-soft: #FF8A3D;
-    --ink: #1A1614;
-    --panel: #241E1A;
-    --panel-2: #2E2621;
-    --text: #F2EAE4;
-    --muted: #B9A99D;
-    --line: #3D332C;
-    --ok: #6FBF73;
-    --warn: #E5A83D;
-    --miss: #7A6A5E;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--ink);
-    color: var(--text);
-    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { width: min(1080px, 92vw); margin: 0 auto; }
-  a { color: var(--forge-soft); }
-
-  header {
-    padding: 76px 0 56px;
-    background:
-      radial-gradient(1100px 420px at 12% -12%, rgba(232,89,12,.30), transparent 62%),
-      linear-gradient(180deg, #1E1917, var(--ink));
-    border-bottom: 1px solid var(--line);
-  }
-  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .2px; }
-  .brand .mark { font-size: 30px; }
-  h1 {
-    font-size: clamp(2.1rem, 5.4vw, 3.4rem);
-    line-height: 1.1;
-    margin: 26px 0 14px;
-    letter-spacing: -.5px;
-  }
-  h1 em { color: var(--forge-soft); font-style: normal; }
-  .lede { font-size: clamp(1.02rem, 2.3vw, 1.22rem); color: var(--muted); max-width: 62ch; margin: 0; }
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-  .btn {
-    display: inline-block; padding: 13px 22px; border-radius: 10px;
-    text-decoration: none; font-weight: 600; border: 1px solid transparent;
-  }
-  .btn-primary { background: var(--forge); color: #fff; }
-  .btn-primary:hover { background: #d24f08; }
-  .btn-ghost { border-color: var(--line); color: var(--text); }
-  .btn-ghost:hover { border-color: var(--forge); }
-  .note { margin-top: 16px; color: var(--muted); font-size: .9rem; }
-
-  section { padding: 62px 0; border-bottom: 1px solid var(--line); }
-  h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); margin: 0 0 10px; letter-spacing: -.3px; }
-  .sub { color: var(--muted); margin: 0 0 34px; max-width: 66ch; }
-
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 18px; }
-  .card {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 14px; padding: 22px;
-  }
-  .card h3 { margin: 12px 0 8px; font-size: 1.06rem; }
-  .card p { margin: 0; color: var(--muted); font-size: .95rem; }
-  .ico { font-size: 24px; line-height: 1; }
-
-  .steps { counter-reset: s; display: grid; gap: 14px; }
-  .step {
-    display: flex; gap: 16px; align-items: flex-start;
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 14px; padding: 18px 20px;
-  }
-  .step::before {
-    counter-increment: s; content: counter(s);
-    flex: 0 0 30px; height: 30px; border-radius: 50%;
-    background: var(--forge); color: #fff;
-    display: grid; place-items: center; font-weight: 700; font-size: .9rem;
-  }
-  .step h3 { margin: 3px 0 6px; font-size: 1.02rem; }
-  .step p { margin: 0; color: var(--muted); font-size: .95rem; }
-
-  /* Readiness demo — mirrors the verdict the app computes. */
-  .demo { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-  .demo-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .demo-name { font-weight: 600; }
-  .verdict { font-size: .85rem; font-weight: 700; }
-  .verdict.low { color: var(--warn); }
-  .bar { display: flex; height: 8px; border-radius: 5px; overflow: hidden; margin: 14px 0 10px; }
-  .bar span { display: block; }
-  .bar .s-ok { background: var(--ok); }
-  .bar .s-low { background: var(--warn); }
-  .bar .s-miss { background: var(--miss); }
-  .legend { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: .85rem; }
-  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; }
-
-  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-  ul.plain { margin: 0; padding-left: 20px; color: var(--muted); }
-  ul.plain li { margin-bottom: 9px; }
-
-  .callout {
-    background: var(--panel-2); border: 1px solid var(--line);
-    border-left: 3px solid var(--forge); border-radius: 10px;
-    padding: 18px 20px; color: var(--muted); font-size: .95rem;
-  }
-  .callout strong { color: var(--text); }
-
-  footer { padding: 46px 0 66px; color: var(--muted); font-size: .9rem; }
-  footer a { color: var(--muted); }
-  footer a:hover { color: var(--forge-soft); }
-
-  @media (max-width: 560px) {
-    header { padding: 54px 0 42px; }
-    section { padding: 46px 0; }
-  }
-</style>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <div class="brand"><img class="mark" src="logo-light.svg" alt="" width="28" height="30"><span>PintaMinis</span></div>
+    <div class="brand"><img class="mark" src="logo-light.svg" alt="" width="28" height="30"><span>PintaMinis</span>
+      <a class="lang" href="/es?lang=es">Español</a>
+    </div>
     <h1>Know what paint you have,<br>and <em>how you painted it</em> last time.</h1>
     <p class="lede">
       A miniature paint inventory for people whose shelf has outgrown their memory.
@@ -150,7 +60,7 @@
       keep the recipe that made a model look right — then share it.
     </p>
     <div class="cta">
-      <a class="btn btn-primary" href="https://pintaminis.com">Open the app</a>
+      <a class="btn btn-primary" href="https://app.pintaminis.com">Open the app</a>
       <a class="btn btn-ghost" href="https://github.com/tribet84/PaintForge">View the source</a>
     </div>
     <p class="note">Free · works in the browser · English and Spanish</p>
@@ -343,8 +253,9 @@
 <footer>
   <div class="wrap">
     <p style="margin:0 0 8px">
-      <a href="https://pintaminis.com">Open PintaMinis</a> ·
-      <a href="https://github.com/tribet84/PaintForge">Source on GitHub</a>
+      <a href="https://app.pintaminis.com">Open PintaMinis</a> ·
+      <a href="https://github.com/tribet84/PaintForge">Source on GitHub</a> ·
+      <a href="/es?lang=es">Español</a>
     </p>
     <p style="margin:0 0 8px">
       <a href="/privacy">Privacy Policy</a> ·
