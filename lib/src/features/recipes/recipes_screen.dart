@@ -10,6 +10,7 @@ import '../../widgets/recipe_card.dart';
 import 'public_recipe_screen.dart';
 import 'recipe_detail_screen.dart';
 import 'recipe_edit_screen.dart';
+import '../../widgets/brand_loader.dart';
 
 /// Every recipe available to the user — the ones they wrote and the ones they
 /// linked — rendered by the SAME card, since they read the same way. Only the
@@ -26,7 +27,12 @@ class RecipesScreen extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          if (recipes.recipes.isEmpty && recipes.linkedIds.isEmpty)
+          // "Still loading" and "genuinely empty" both look like an empty
+          // list, so without this check a painter with a shelf full of
+          // recipes is told they have none until Firestore answers.
+          if (!recipes.loaded)
+            const Center(child: BrandLoader())
+          else if (recipes.recipes.isEmpty && recipes.linkedIds.isEmpty)
             EmptyState(
               icon: Icons.auto_stories_outlined,
               title: l10n.recipesEmptyTitle,

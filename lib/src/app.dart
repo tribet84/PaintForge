@@ -19,6 +19,7 @@ import 'state/inventory_provider.dart';
 import 'state/paint_lists_provider.dart';
 import 'state/recipes_provider.dart';
 import 'theme.dart';
+import 'widgets/brand_loader.dart';
 
 class PintaMinisApp extends StatelessWidget {
   const PintaMinisApp({
@@ -176,7 +177,11 @@ class _LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    // No delay here: this IS the app starting up, so there is no risk of
+    // flashing over content that was already on screen.
+    return const Scaffold(
+      body: Center(child: BrandLoader(delay: Duration.zero)),
+    );
   }
 }
 

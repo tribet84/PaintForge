@@ -26,6 +26,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _index = 0;
 
+  /// Tabs the user has actually opened.
+  ///
+  /// Providers are lazy, so a tab that is never built never subscribes to
+  /// Firestore and never costs a read. An IndexedStack builds every child up
+  /// front, which quietly undid that: opening the app fetched lists and
+  /// recipes even for someone who only came to tick off a paint.
+  ///
+  /// The set only grows, so a tab keeps its scroll position and state once
+  /// visited — the reason to reach for IndexedStack in the first place.
+  final _visited = <int>{0};
+
+  static const _tabs = [PaintsScreen(), ListsScreen(), RecipesScreen()];
+
   @override
   void initState() {
     super.initState();
@@ -99,10 +112,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: IndexedStack(
         index: _index,
-        children: const [
-          PaintsScreen(),
-          ListsScreen(),
-          RecipesScreen(),
+        children: [
+          for (var i = 0; i < _tabs.length; i++)
+            // An unvisited tab renders nothing, so its provider is never
+            // read and its Firestore listener never opens.
+            if (_visited.contains(i)) _tabs[i] else const SizedBox.shrink(),
         ],
       ),
       bottomNavigationBar: Column(
@@ -111,7 +125,10 @@ class _HomeScreenState extends State<HomeScreen> {
           const BannerAdWidget(),
           NavigationBar(
             selectedIndex: _index,
-            onDestinationSelected: (value) => setState(() => _index = value),
+            onDestinationSelected: (value) => setState(() {
+              _index = value;
+              _visited.add(value);
+            }),
             destinations: [
               NavigationDestination(
                 icon: const Icon(Icons.palette_outlined),

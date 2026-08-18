@@ -9,6 +9,7 @@ import '../../widgets/paint_list_widgets.dart';
 import '../../widgets/readiness_detail.dart';
 import '../../widgets/paint_widgets.dart';
 import 'paint_list_detail_screen.dart';
+import '../../widgets/brand_loader.dart';
 
 /// The user's own paint lists — one per miniature, unit or army.
 ///
@@ -28,7 +29,11 @@ class ListsScreen extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          if (lists.lists.isEmpty)
+          // Same trap as the recipes tab: an unloaded list and an empty one
+          // are indistinguishable by isEmpty alone.
+          if (!lists.loaded)
+            const Center(child: BrandLoader())
+          else if (lists.lists.isEmpty)
             EmptyState(
               icon: Icons.checklist_rtl,
               title: l10n.listsEmptyTitle,

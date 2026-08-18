@@ -11,6 +11,7 @@ import '../../services/action_batcher.dart';
 import '../../services/shopping_list_formatter.dart';
 import '../../state/inventory_provider.dart';
 import '../../widgets/paint_widgets.dart';
+import '../../widgets/brand_loader.dart';
 
 /// The built-in shopping list: every paint marked as running low or to buy.
 ///
@@ -82,6 +83,13 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
 
     final low = _resolve(inventory.runningLow, repository);
     final wishlist = _resolve(inventory.wishlist, repository);
+
+    if (!inventory.loaded) {
+      return Scaffold(
+        appBar: AppBar(title: Text(l10n.tabShopping)),
+        body: const Center(child: BrandLoader()),
+      );
+    }
 
     if (low.isEmpty && wishlist.isEmpty) {
       return Scaffold(

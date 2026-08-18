@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../data/account_repository.dart';
 import '../../services/auth_service.dart';
+import '../../widgets/brand_loader.dart';
 
 /// Whether [input] confirms the delete-account prompt for [phrase].
 ///
@@ -311,12 +312,16 @@ Future<void> _performDeletion(
       context: context,
       barrierDismissible: false,
       builder: (dialogContext) => AlertDialog(
-        content: Row(
-          children: [
-            const CircularProgressIndicator(),
-            const SizedBox(width: 24),
-            Expanded(child: Text(l10n.deleteAccountDeleting)),
-          ],
+        content: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          // Deleting cascades across Firestore and Storage, so this is a
+          // genuinely slow wait and shows immediately rather than after the
+          // usual anti-flicker delay.
+          child: BrandLoader(
+            size: 64,
+            label: l10n.deleteAccountDeleting,
+            delay: Duration.zero,
+          ),
         ),
       ),
     ),

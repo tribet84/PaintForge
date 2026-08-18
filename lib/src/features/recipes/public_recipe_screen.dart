@@ -15,6 +15,7 @@ import '../../widgets/paint_widgets.dart';
 import '../../widgets/recipe_photo.dart';
 import '../../widgets/recipe_section_card.dart';
 import 'recipe_actions.dart';
+import '../../widgets/brand_loader.dart';
 
 /// A recipe shared by another painter, opened from a link or from the
 /// "linked recipes" section.
@@ -118,7 +119,7 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(),
-            body: const Center(child: CircularProgressIndicator()),
+            body: const Center(child: BrandLoader()),
           );
         }
         final published = snapshot.data;

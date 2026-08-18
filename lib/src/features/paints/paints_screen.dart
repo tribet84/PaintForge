@@ -7,6 +7,7 @@ import '../../models/inventory_entry.dart';
 import '../../models/paint.dart';
 import '../../state/inventory_provider.dart';
 import '../../widgets/paint_widgets.dart';
+import '../../widgets/brand_loader.dart';
 
 /// Which slice of the catalogue is on screen.
 enum PaintScope { mine, all }
@@ -78,6 +79,12 @@ class _PaintsScreenState extends State<PaintsScreen> {
     final inventory = context.watch<InventoryProvider>();
 
     final owned = inventory.entries;
+    // The default scope is derived from the shelf, so it cannot be chosen
+    // until the shelf is known: guessing from an unloaded inventory lands
+    // everyone on "All" and then visibly snaps to "Mine" a moment later.
+    if (!inventory.loaded) {
+      return const Center(child: BrandLoader());
+    }
     // First build decides the default; after that the user is in charge.
     final scope = _scope ??
         (owned.isEmpty ? PaintScope.all : PaintScope.mine);

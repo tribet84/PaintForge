@@ -78,9 +78,14 @@ class FakePaintListRepository implements PaintListRepository {
 
   void _emit() => _controller.add(List.of(_lists));
 
+  /// See [FakeRecipeRepository.watchCalls].
+  int watchCalls = 0;
+
   @override
-  Stream<List<PaintList>> watchLists() =>
-      _replay(_controller, () => List.of(_lists));
+  Stream<List<PaintList>> watchLists() {
+    watchCalls++;
+    return _replay(_controller, () => List.of(_lists));
+  }
 
   @override
   Future<String> create(String name, {List<String> paintIds = const []}) async {
@@ -127,9 +132,15 @@ class FakeRecipeRepository implements RecipeRepository {
 
   void _emit() => _controller.add(List.of(_recipes));
 
+  /// How many times a subscription was opened — the thing that actually
+  /// costs Firestore reads, so a test can prove a tab nobody opened is free.
+  int watchCalls = 0;
+
   @override
-  Stream<List<Recipe>> watchRecipes() =>
-      _replay(_controller, () => List.of(_recipes));
+  Stream<List<Recipe>> watchRecipes() {
+    watchCalls++;
+    return _replay(_controller, () => List.of(_recipes));
+  }
 
   @override
   Future<String> create(Recipe recipe) async {
