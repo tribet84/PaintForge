@@ -16,6 +16,7 @@ import '../../widgets/recipe_photo.dart';
 import '../../widgets/recipe_section_card.dart';
 import 'recipe_actions.dart';
 import '../../widgets/brand_loader.dart';
+import '../../widgets/recipe_photo_viewer.dart';
 
 /// A recipe shared by another painter, opened from a link or from the
 /// "linked recipes" section.
@@ -180,10 +181,14 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
               ),
               children: [
                 if (recipe.hasPhoto) ...[
-                  RecipePhoto(
-                    recipe: recipe,
-                    height: 200,
-                    borderRadius: BorderRadius.circular(12),
+                  GestureDetector(
+                    onTap: () => showRecipePhoto(context, recipe),
+                    child: RecipePhoto(
+                      recipe: recipe,
+                      height: 200,
+                      borderRadius: BorderRadius.circular(12),
+                      heroTag: 'recipe-photo-${recipe.id}',
+                    ),
                   ),
                   const SizedBox(height: 16),
                 ],

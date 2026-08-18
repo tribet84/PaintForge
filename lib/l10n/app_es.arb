@@ -21,6 +21,7 @@
   "actionRemove": "Quitar de mi inventario",
   "actionPurchased": "Comprada",
   "actionCancel": "Cancelar",
+  "actionClose": "Cerrar",
   "actionConfirm": "Confirmar",
   "actionDelete": "Eliminar",
   "actionSave": "Guardar",

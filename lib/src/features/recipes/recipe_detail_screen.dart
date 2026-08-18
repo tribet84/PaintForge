@@ -17,6 +17,7 @@ import '../../widgets/recipe_photo.dart';
 import '../../widgets/recipe_section_card.dart';
 import 'recipe_actions.dart';
 import 'recipe_edit_screen.dart';
+import '../../widgets/recipe_photo_viewer.dart';
 
 /// One of the user's own recipes.
 class RecipeDetailScreen extends StatelessWidget {
@@ -89,10 +90,14 @@ class RecipeDetailScreen extends StatelessWidget {
           ),
           children: [
             if (recipe.hasPhoto) ...[
-                  RecipePhoto(
-                    recipe: recipe,
-                    height: 200,
-                    borderRadius: BorderRadius.circular(12),
+                  GestureDetector(
+                    onTap: () => showRecipePhoto(context, recipe),
+                    child: RecipePhoto(
+                      recipe: recipe,
+                      height: 200,
+                      borderRadius: BorderRadius.circular(12),
+                      heroTag: 'recipe-photo-${recipe.id}',
+                    ),
                   ),
               const SizedBox(height: 16),
             ],

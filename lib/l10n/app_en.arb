@@ -28,6 +28,7 @@
   "actionRemove": "Remove from my inventory",
   "actionPurchased": "Bought it",
   "actionCancel": "Cancel",
+  "actionClose": "Close",
   "actionConfirm": "Confirm",
   "actionDelete": "Delete",
   "actionSave": "Save",
