@@ -927,11 +927,39 @@
       "hex": "#E9E7E1"
     },
     {
+      "id": "vallejo-72466-armour-green",
+      "name": "Armour Green",
+      "range": "Xpress Color",
+      "code": "72.466",
+      "hex": "#4A5A3A"
+    },
+    {
+      "id": "vallejo-72450-bag-of-bones",
+      "name": "Bag of Bones",
+      "range": "Xpress Color",
+      "code": "72.450",
+      "hex": "#C9BB90"
+    },
+    {
+      "id": "vallejo-72473-battledress-brown",
+      "name": "Battledress Brown",
+      "range": "Xpress Color",
+      "code": "72.473",
+      "hex": "#7A5A3A"
+    },
+    {
       "id": "vallejo-72423-black-lotus",
       "name": "Black Lotus",
       "range": "Xpress Color",
       "code": "72.423",
       "hex": "#2E3639"
+    },
+    {
+      "id": "vallejo-72467-camouflage-green",
+      "name": "Camouflage Green",
+      "range": "Xpress Color",
+      "code": "72.467",
+      "hex": "#5E6E3E"
     },
     {
       "id": "vallejo-72408-cardinal-purple",
@@ -948,6 +976,20 @@
       "hex": "#2A8298"
     },
     {
+      "id": "vallejo-72455-chameleon-orange",
+      "name": "Chameleon Orange",
+      "range": "Xpress Color",
+      "code": "72.455",
+      "hex": "#D97E2A"
+    },
+    {
+      "id": "vallejo-72468-commando-green",
+      "name": "Commando Green",
+      "range": "Xpress Color",
+      "code": "72.468",
+      "hex": "#4E5A44"
+    },
+    {
       "id": "vallejo-72421-copper-brown",
       "name": "Copper Brown",
       "range": "Xpress Color",
@@ -962,11 +1004,53 @@
       "hex": "#8E3C6E"
     },
     {
+      "id": "vallejo-72458-demonic-skin",
+      "name": "Demonic Skin",
+      "range": "Xpress Color",
+      "code": "72.458",
+      "hex": "#B4452E"
+    },
+    {
+      "id": "vallejo-72454-desert-ochre",
+      "name": "Desert Ochre",
+      "range": "Xpress Color",
+      "code": "72.454",
+      "hex": "#B57F35"
+    },
+    {
+      "id": "vallejo-72477-dreadnaught-yellow-intense",
+      "name": "Dreadnaught Yellow Intense",
+      "range": "Xpress Color",
+      "code": "72.477",
+      "hex": "#E8B400"
+    },
+    {
       "id": "vallejo-72402-dwarf-skin",
       "name": "Dwarf Skin",
       "range": "Xpress Color",
       "code": "72.402",
       "hex": "#C08A5F"
+    },
+    {
+      "id": "vallejo-72457-fairy-skin",
+      "name": "Fairy Skin",
+      "range": "Xpress Color",
+      "code": "72.457",
+      "hex": "#E8B4A4"
+    },
+    {
+      "id": "vallejo-72459-fluid-pink",
+      "name": "Fluid Pink",
+      "range": "Xpress Color",
+      "code": "72.459",
+      "hex": "#E86FA0"
+    },
+    {
+      "id": "vallejo-72465-forest-green",
+      "name": "Forest Green",
+      "range": "Xpress Color",
+      "code": "72.465",
+      "hex": "#2E5A35"
     },
     {
       "id": "vallejo-72410-gloomy-violet",
@@ -976,11 +1060,60 @@
       "hex": "#5B3F8E"
     },
     {
+      "id": "vallejo-72476-greasy-black",
+      "name": "Greasy Black",
+      "range": "Xpress Color",
+      "code": "72.476",
+      "hex": "#2E2E2A"
+    },
+    {
+      "id": "vallejo-72481-heretic-turquoise-intense",
+      "name": "Heretic Turquoise Intense",
+      "range": "Xpress Color",
+      "code": "72.481",
+      "hex": "#14848C"
+    },
+    {
+      "id": "vallejo-72484-hospitaller-black-intense",
+      "name": "Hospitaller Black Intense",
+      "range": "Xpress Color",
+      "code": "72.484",
+      "hex": "#1E1E22"
+    },
+    {
+      "id": "vallejo-72463-iceberg-grey",
+      "name": "Iceberg Grey",
+      "range": "Xpress Color",
+      "code": "72.463",
+      "hex": "#AEBBC4"
+    },
+    {
       "id": "vallejo-72403-imperial-yellow",
       "name": "Imperial Yellow",
       "range": "Xpress Color",
       "code": "72.403",
       "hex": "#F2D63C"
+    },
+    {
+      "id": "vallejo-72451-khaki-drill",
+      "name": "Khaki Drill",
+      "range": "Xpress Color",
+      "code": "72.451",
+      "hex": "#A89A6A"
+    },
+    {
+      "id": "vallejo-72469-landser-grey",
+      "name": "Landser Grey",
+      "range": "Xpress Color",
+      "code": "72.469",
+      "hex": "#6E7268"
+    },
+    {
+      "id": "vallejo-72480-legacy-blue-intense",
+      "name": "Legacy Blue Intense",
+      "range": "Xpress Color",
+      "code": "72.480",
+      "hex": "#1E4A9C"
     },
     {
       "id": "vallejo-72418-lizard-green",
@@ -990,11 +1123,46 @@
       "hex": "#4E7F3B"
     },
     {
+      "id": "vallejo-72472-mahogany",
+      "name": "Mahogany",
+      "range": "Xpress Color",
+      "code": "72.472",
+      "hex": "#6E3A26"
+    },
+    {
       "id": "vallejo-72405-martian-orange",
       "name": "Martian Orange",
       "range": "Xpress Color",
       "code": "72.405",
       "hex": "#E2762F"
+    },
+    {
+      "id": "vallejo-72453-military-yellow",
+      "name": "Military Yellow",
+      "range": "Xpress Color",
+      "code": "72.453",
+      "hex": "#B9932E"
+    },
+    {
+      "id": "vallejo-72482-monastic-green-intense",
+      "name": "Monastic Green Intense",
+      "range": "Xpress Color",
+      "code": "72.482",
+      "hex": "#1E6E3A"
+    },
+    {
+      "id": "vallejo-72475-muddy-ground",
+      "name": "Muddy Ground",
+      "range": "Xpress Color",
+      "code": "72.475",
+      "hex": "#6E5A3E"
+    },
+    {
+      "id": "vallejo-72449-mummy-white",
+      "name": "Mummy White",
+      "range": "Xpress Color",
+      "code": "72.449",
+      "hex": "#DDD6C4"
     },
     {
       "id": "vallejo-72411-mystic-blue",
@@ -1025,6 +1193,13 @@
       "hex": "#9BC244"
     },
     {
+      "id": "vallejo-72478-phoenix-orange-intense",
+      "name": "Phoenix Orange Intense",
+      "range": "Xpress Color",
+      "code": "72.478",
+      "hex": "#D45A12"
+    },
+    {
       "id": "vallejo-72419-plague-green",
       "name": "Plague Green",
       "range": "Xpress Color",
@@ -1037,6 +1212,20 @@
       "range": "Xpress Color",
       "code": "72.406",
       "hex": "#C3341F"
+    },
+    {
+      "id": "vallejo-72452-rotten-flesh",
+      "name": "Rotten Flesh",
+      "range": "Xpress Color",
+      "code": "72.452",
+      "hex": "#BFB080"
+    },
+    {
+      "id": "vallejo-72479-seraph-red-intense",
+      "name": "Seraph Red Intense",
+      "range": "Xpress Color",
+      "code": "72.479",
+      "hex": "#A81C1C"
     },
     {
       "id": "vallejo-72417-snake-green",
@@ -1053,11 +1242,25 @@
       "hex": "#7E9AA0"
     },
     {
+      "id": "vallejo-72462-starship-steel",
+      "name": "Starship Steel",
+      "range": "Xpress Color",
+      "code": "72.462",
+      "hex": "#7A8290"
+    },
+    {
       "id": "vallejo-72412-storm-blue",
       "name": "Storm Blue",
       "range": "Xpress Color",
       "code": "72.412",
       "hex": "#5A5F98"
+    },
+    {
+      "id": "vallejo-72471-tanned-skin",
+      "name": "Tanned Skin",
+      "range": "Xpress Color",
+      "code": "72.471",
+      "hex": "#B4744A"
     },
     {
       "id": "vallejo-72401-templar-white",
@@ -1074,6 +1277,20 @@
       "hex": "#3FA85C"
     },
     {
+      "id": "vallejo-72460-twilight-rose",
+      "name": "Twilight Rose",
+      "range": "Xpress Color",
+      "code": "72.460",
+      "hex": "#C24E6E"
+    },
+    {
+      "id": "vallejo-72461-vampiric-purple",
+      "name": "Vampiric Purple",
+      "range": "Xpress Color",
+      "code": "72.461",
+      "hex": "#8C4A66"
+    },
+    {
       "id": "vallejo-72407-velvet-red",
       "name": "Velvet Red",
       "range": "Xpress Color",
@@ -1081,11 +1298,46 @@
       "hex": "#B23F48"
     },
     {
+      "id": "vallejo-72483-viking-grey-intense",
+      "name": "Viking Grey Intense",
+      "range": "Xpress Color",
+      "code": "72.483",
+      "hex": "#6E7A88"
+    },
+    {
+      "id": "vallejo-72464-wagram-blue",
+      "name": "Wagram Blue",
+      "range": "Xpress Color",
+      "code": "72.464",
+      "hex": "#4A6EA8"
+    },
+    {
       "id": "vallejo-72420-wasteland-brown",
       "name": "Wasteland Brown",
       "range": "Xpress Color",
       "code": "72.420",
       "hex": "#8C6428"
+    },
+    {
+      "id": "vallejo-72456-wicked-purple",
+      "name": "Wicked Purple",
+      "range": "Xpress Color",
+      "code": "72.456",
+      "hex": "#7E3A8C"
+    },
+    {
+      "id": "vallejo-72474-willow-bark",
+      "name": "Willow Bark",
+      "range": "Xpress Color",
+      "code": "72.474",
+      "hex": "#8C7A5E"
+    },
+    {
+      "id": "vallejo-72470-zombie-flesh",
+      "name": "Zombie Flesh",
+      "range": "Xpress Color",
+      "code": "72.470",
+      "hex": "#A8B486"
     }
   ]
 }

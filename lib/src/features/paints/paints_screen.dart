@@ -33,6 +33,7 @@ class PaintsScreen extends StatefulWidget {
 class _PaintsScreenState extends State<PaintsScreen> {
   final _searchController = TextEditingController();
   PaintBrand? _brandFilter;
+  String? _rangeFilter;
   PaintScope? _scope;
   var _selecting = false;
   final _selection = <String>{};
@@ -90,7 +91,11 @@ class _PaintsScreenState extends State<PaintsScreen> {
         (owned.isEmpty ? PaintScope.all : PaintScope.mine);
 
 
-    var results = catalog.search(_searchController.text, brand: _brandFilter);
+    var results = catalog.search(
+      _searchController.text,
+      brand: _brandFilter,
+      range: _rangeFilter,
+    );
     if (scope == PaintScope.mine) {
       results = results.where((p) => owned.containsKey(p.id)).toList();
     }
@@ -111,6 +116,24 @@ class _PaintsScreenState extends State<PaintsScreen> {
     };
     if (_brandFilter != null && !brandNames.containsKey(_brandFilter)) {
       _brandFilter = null;
+      _rangeFilter = null;
+    }
+
+    // Range chips only exist once a brand is picked: range names collide
+    // across brands (several have a wash range), and a flat list of every
+    // range in the catalogue would be longer than the brand row it refines.
+    // Catalog order is kept — the JSON sorts by range, then name.
+    final ranges = <String>{};
+    if (_brandFilter != null) {
+      final source = scope == PaintScope.mine
+          ? catalog.paints.where((p) => owned.containsKey(p.id))
+          : catalog.paints;
+      for (final paint in source) {
+        if (paint.brand == _brandFilter) ranges.add(paint.range);
+      }
+    }
+    if (_rangeFilter != null && !ranges.contains(_rangeFilter)) {
+      _rangeFilter = null;
     }
 
     return SafeArea(
@@ -132,10 +155,18 @@ class _PaintsScreenState extends State<PaintsScreen> {
               mineCount: mineCount,
               brandNames: brandNames,
               brandFilter: _brandFilter,
+              ranges: ranges,
+              rangeFilter: _rangeFilter,
               resultCount: results.length,
               onSearchChanged: () => setState(() {}),
               onScopeChanged: (value) => setState(() => _scope = value),
-              onBrandChanged: (value) => setState(() => _brandFilter = value),
+              onBrandChanged: (value) => setState(() {
+                // A range belongs to its brand; keeping it across a brand
+                // switch would silently show an empty list.
+                if (value != _brandFilter) _rangeFilter = null;
+                _brandFilter = value;
+              }),
+              onRangeChanged: (value) => setState(() => _rangeFilter = value),
               onStartSelecting: () => setState(() => _selecting = true),
             ),
           Expanded(
@@ -170,10 +201,13 @@ class _FilterHeader extends StatelessWidget {
     required this.mineCount,
     required this.brandNames,
     required this.brandFilter,
+    required this.ranges,
+    required this.rangeFilter,
     required this.resultCount,
     required this.onSearchChanged,
     required this.onScopeChanged,
     required this.onBrandChanged,
+    required this.onRangeChanged,
     required this.onStartSelecting,
   });
 
@@ -182,10 +216,16 @@ class _FilterHeader extends StatelessWidget {
   final int mineCount;
   final Map<PaintBrand, String> brandNames;
   final PaintBrand? brandFilter;
+
+  /// Ranges of the selected brand (empty when no brand is selected).
+  final Set<String> ranges;
+  final String? rangeFilter;
+
   final int resultCount;
   final VoidCallback onSearchChanged;
   final ValueChanged<PaintScope> onScopeChanged;
   final ValueChanged<PaintBrand?> onBrandChanged;
+  final ValueChanged<String?> onRangeChanged;
   final VoidCallback onStartSelecting;
 
   @override
@@ -272,6 +312,36 @@ class _FilterHeader extends StatelessWidget {
             ],
           ),
         ),
+        // The selected brand's ranges, one level below the brand row. A
+        // single-range brand gets no row — the chip could never narrow
+        // anything.
+        if (ranges.length > 1)
+          SizedBox(
+            height: 40,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 6),
+              children: [
+                FilterChip(
+                  label: Text(l10n.filterAllRanges),
+                  selected: rangeFilter == null,
+                  visualDensity: VisualDensity.compact,
+                  onSelected: (_) => onRangeChanged(null),
+                ),
+                for (final range in ranges) ...[
+                  const SizedBox(width: 6),
+                  FilterChip(
+                    label: Text(range),
+                    selected: rangeFilter == range,
+                    visualDensity: VisualDensity.compact,
+                    onSelected: (_) => onRangeChanged(
+                      rangeFilter == range ? null : range,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
           child: Row(

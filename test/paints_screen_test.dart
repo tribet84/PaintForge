@@ -4,6 +4,7 @@ import 'package:paintforge/l10n/generated/app_localizations.dart';
 import 'package:paintforge/src/data/catalog_repository.dart';
 import 'package:paintforge/src/features/paints/paints_screen.dart';
 import 'package:paintforge/src/models/inventory_entry.dart';
+import 'package:paintforge/src/models/paint.dart';
 import 'package:paintforge/src/state/inventory_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -85,6 +86,44 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('${catalog.paints.length} paints'), findsOneWidget);
+  });
+
+  testWidgets('range chips appear once a brand is picked and narrow the list',
+      (tester) async {
+    await pumpPaints(tester);
+
+    // No brand selected: ranges collide across brands, so no range row yet.
+    expect(find.text('All ranges'), findsNothing);
+
+    await tester.tap(find.text('Vallejo'));
+    await tester.pumpAndSettle();
+    expect(find.text('All ranges'), findsOneWidget);
+
+    await tester.tap(find.text('Game Color'));
+    await tester.pumpAndSettle();
+
+    final gameColor =
+        catalog.search('', brand: PaintBrand.vallejo, range: 'Game Color');
+    expect(find.text('${gameColor.length} paints'), findsOneWidget);
+  });
+
+  testWidgets('switching brand drops the old brand\'s range filter',
+      (tester) async {
+    await pumpPaints(tester);
+
+    await tester.tap(find.text('Vallejo'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Game Color'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Citadel'));
+    await tester.pumpAndSettle();
+
+    // A Vallejo range kept across the switch would show an empty list.
+    final citadelCount =
+        catalog.paints.where((p) => p.brand == PaintBrand.citadel).length;
+    expect(find.text('$citadelCount paints'), findsOneWidget);
+    expect(find.text('Game Color'), findsNothing);
   });
 
   testWidgets('search narrows the current scope', (tester) async {

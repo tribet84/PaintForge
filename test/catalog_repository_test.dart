@@ -36,6 +36,16 @@ Future<void> main() async {
     expect(results.single.brand, PaintBrand.vallejo);
   });
 
+  test('range filter narrows a brand to one of its ranges', () {
+    final washes = repository.search(
+      '',
+      brand: PaintBrand.vallejo,
+      range: 'Game Color Wash',
+    );
+    expect(washes, hasLength(8));
+    expect(washes.every((p) => p.range == 'Game Color Wash'), isTrue);
+  });
+
   test('brand filter restricts results', () {
     final results = repository.search('black', brand: PaintBrand.armyPainter);
     expect(results, isNotEmpty);

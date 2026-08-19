@@ -41,10 +41,16 @@ class CatalogRepository {
 
   Paint? byId(String id) => _byId[id];
 
-  /// Free-text search, optionally restricted to a single brand.
-  List<Paint> search(String query, {PaintBrand? brand}) {
+  /// Free-text search, optionally restricted to a single brand and, within
+  /// it, to a single range (e.g. Vallejo "Model Wash"). Range names only make
+  /// sense per brand — several brands have a "Washes"-like range — so [range]
+  /// is meaningless without [brand].
+  List<Paint> search(String query, {PaintBrand? brand, String? range}) {
     return paints
-        .where((p) => (brand == null || p.brand == brand) && p.matches(query))
+        .where((p) =>
+            (brand == null || p.brand == brand) &&
+            (range == null || p.range == range) &&
+            p.matches(query))
         .toList();
   }
 }

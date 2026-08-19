@@ -9,6 +9,7 @@
   "tabSettings": "Ajustes",
   "searchHint": "Busca por nombre, código o gama…",
   "filterAllBrands": "Todas",
+  "filterAllRanges": "Todas las gamas",
   "resultsCount": "{count, plural, =0{No se encontraron pinturas} =1{1 pintura} other{{count} pinturas}}",
   "statusNotOwned": "No la tengo",
   "statusInStock": "La tengo",

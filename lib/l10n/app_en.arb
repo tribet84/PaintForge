@@ -9,6 +9,7 @@
   "tabSettings": "Settings",
   "searchHint": "Search by name, code or range…",
   "filterAllBrands": "All",
+  "filterAllRanges": "All ranges",
   "resultsCount": "{count, plural, =0{No paints found} =1{1 paint} other{{count} paints}}",
   "@resultsCount": {
     "placeholders": {
