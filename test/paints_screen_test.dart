@@ -107,6 +107,43 @@ void main() {
     expect(find.text('${gameColor.length} paints'), findsOneWidget);
   });
 
+  testWidgets('a search can never leave a range chip with an empty list',
+      (tester) async {
+    await pumpPaints(tester);
+
+    await tester.tap(find.text('Vallejo'));
+    await tester.pumpAndSettle();
+
+    // 'wash' matches nothing in Xpress Color, so that chip must disappear
+    // instead of offering an inexplicably empty subcategory.
+    await tester.enterText(find.byType(TextField), 'wash');
+    await tester.pumpAndSettle();
+    expect(find.text('Xpress Color'), findsNothing);
+    expect(find.text('Model Wash'), findsOneWidget);
+  });
+
+  testWidgets('a query that empties the selected range resets the filter',
+      (tester) async {
+    // Wide enough that the Xpress Color chip is on-screen and tappable —
+    // the range row scrolls horizontally on a phone.
+    tester.view.physicalSize = const Size(1600, 900);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+    await pumpPaints(tester);
+
+    await tester.tap(find.text('Vallejo'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Xpress Color'));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'sepia wash');
+    await tester.pumpAndSettle();
+
+    // The Xpress filter is gone, so the wash that matches the query shows
+    // instead of an empty list under a stale filter.
+    expect(find.text('Sepia Wash'), findsOneWidget);
+  });
+
   testWidgets('switching brand drops the old brand\'s range filter',
       (tester) async {
     await pumpPaints(tester);

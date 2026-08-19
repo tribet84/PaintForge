@@ -91,13 +91,14 @@ class _PaintsScreenState extends State<PaintsScreen> {
         (owned.isEmpty ? PaintScope.all : PaintScope.mine);
 
 
-    var results = catalog.search(
-      _searchController.text,
-      brand: _brandFilter,
-      range: _rangeFilter,
-    );
+    // Everything the current search + scope allows within the brand, BEFORE
+    // the range narrows it. The range chips are built from this same list, so
+    // a chip can never offer a subcategory the current search has emptied.
+    var brandResults =
+        catalog.search(_searchController.text, brand: _brandFilter);
     if (scope == PaintScope.mine) {
-      results = results.where((p) => owned.containsKey(p.id)).toList();
+      brandResults =
+          brandResults.where((p) => owned.containsKey(p.id)).toList();
     }
 
     // Count what the user can actually SEE. Raw inventory entries can include
@@ -122,19 +123,21 @@ class _PaintsScreenState extends State<PaintsScreen> {
     // Range chips only exist once a brand is picked: range names collide
     // across brands (several have a wash range), and a flat list of every
     // range in the catalogue would be longer than the brand row it refines.
-    // Catalog order is kept — the JSON sorts by range, then name.
-    final ranges = <String>{};
-    if (_brandFilter != null) {
-      final source = scope == PaintScope.mine
-          ? catalog.paints.where((p) => owned.containsKey(p.id))
-          : catalog.paints;
-      for (final paint in source) {
-        if (paint.brand == _brandFilter) ranges.add(paint.range);
-      }
-    }
+    // Built from brandResults — search and scope already applied — so every
+    // chip is guaranteed to have something behind it. When the query empties
+    // the selected range, its chip vanishes and the guard below resets the
+    // filter instead of stranding the user on an inexplicably empty list.
+    final ranges = <String>{
+      if (_brandFilter != null)
+        for (final paint in brandResults) paint.range,
+    };
     if (_rangeFilter != null && !ranges.contains(_rangeFilter)) {
       _rangeFilter = null;
     }
+
+    final results = _rangeFilter == null
+        ? brandResults
+        : brandResults.where((p) => p.range == _rangeFilter).toList();
 
     return SafeArea(
       child: Column(
