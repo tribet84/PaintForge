@@ -241,6 +241,13 @@
       "hex": "#F37021"
     },
     {
+      "id": "vallejo-72003-pale-flesh",
+      "name": "Pale Flesh",
+      "range": "Game Color",
+      "code": "72.003",
+      "hex": "#F2C6A0"
+    },
+    {
       "id": "vallejo-72042-parasite-brown",
       "name": "Parasite Brown",
       "range": "Game Color",
@@ -346,6 +353,62 @@
       "hex": "#A8B5C7"
     },
     {
+      "id": "vallejo-73201-black-wash",
+      "name": "Black Wash",
+      "range": "Game Color Wash",
+      "code": "73.201",
+      "hex": "#1C1A18"
+    },
+    {
+      "id": "vallejo-73207-blue-wash",
+      "name": "Blue Wash",
+      "range": "Game Color Wash",
+      "code": "73.207",
+      "hex": "#24487A"
+    },
+    {
+      "id": "vallejo-73204-flesh-wash",
+      "name": "Flesh Wash",
+      "range": "Game Color Wash",
+      "code": "73.204",
+      "hex": "#A85C34"
+    },
+    {
+      "id": "vallejo-73205-green-wash",
+      "name": "Green Wash",
+      "range": "Game Color Wash",
+      "code": "73.205",
+      "hex": "#2E5D33"
+    },
+    {
+      "id": "vallejo-73202-pale-grey-wash",
+      "name": "Pale Grey Wash",
+      "range": "Game Color Wash",
+      "code": "73.202",
+      "hex": "#9FA09B"
+    },
+    {
+      "id": "vallejo-73206-red-wash",
+      "name": "Red Wash",
+      "range": "Game Color Wash",
+      "code": "73.206",
+      "hex": "#7E1F1A"
+    },
+    {
+      "id": "vallejo-73200-sepia-wash",
+      "name": "Sepia Wash",
+      "range": "Game Color Wash",
+      "code": "73.200",
+      "hex": "#7A4E1C"
+    },
+    {
+      "id": "vallejo-73203-umber-wash",
+      "name": "Umber Wash",
+      "range": "Game Color Wash",
+      "code": "73.203",
+      "hex": "#4E3619"
+    },
+    {
       "id": "vallejo-70815-basic-skintone",
       "name": "Basic Skintone",
       "range": "Model Color",
@@ -395,6 +458,13 @@
       "hex": "#A87F33"
     },
     {
+      "id": "vallejo-70803-brown-rose",
+      "name": "Brown Rose",
+      "range": "Model Color",
+      "code": "70.803",
+      "hex": "#B5786A"
+    },
+    {
       "id": "vallejo-70941-burnt-umber",
       "name": "Burnt Umber",
       "range": "Model Color",
@@ -421,6 +491,13 @@
       "range": "Model Color",
       "code": "70.930",
       "hex": "#232D5D"
+    },
+    {
+      "id": "vallejo-70927-dark-flesh",
+      "name": "Dark Flesh",
+      "range": "Model Color",
+      "code": "70.927",
+      "hex": "#A65E42"
     },
     {
       "id": "vallejo-70994-dark-grey",
@@ -556,6 +633,13 @@
       "hex": "#8F8A62"
     },
     {
+      "id": "vallejo-70928-light-flesh",
+      "name": "Light Flesh",
+      "range": "Model Color",
+      "code": "70.928",
+      "hex": "#F1C6A7"
+    },
+    {
       "id": "vallejo-70990-light-grey",
       "name": "Light Grey",
       "range": "Model Color",
@@ -654,6 +738,13 @@
       "hex": "#6B3F23"
     },
     {
+      "id": "vallejo-70835-salmon-rose",
+      "name": "Salmon Rose",
+      "range": "Model Color",
+      "code": "70.835",
+      "hex": "#E59578"
+    },
+    {
       "id": "vallejo-70916-sand-yellow",
       "name": "Sand Yellow",
       "range": "Model Color",
@@ -715,6 +806,125 @@
       "range": "Model Color",
       "code": "70.913",
       "hex": "#C9962C"
+    },
+    {
+      "id": "vallejo-76518-black",
+      "name": "Black",
+      "range": "Model Wash",
+      "code": "76.518",
+      "hex": "#1B1B1B"
+    },
+    {
+      "id": "vallejo-76513-brown",
+      "name": "Brown",
+      "range": "Model Wash",
+      "code": "76.513",
+      "hex": "#6A4A2C"
+    },
+    {
+      "id": "vallejo-76514-dark-brown",
+      "name": "Dark Brown",
+      "range": "Model Wash",
+      "code": "76.514",
+      "hex": "#452F1C"
+    },
+    {
+      "id": "vallejo-76512-dark-green",
+      "name": "Dark Green",
+      "range": "Model Wash",
+      "code": "76.512",
+      "hex": "#2F4A33"
+    },
+    {
+      "id": "vallejo-76517-dark-grey",
+      "name": "Dark Grey",
+      "range": "Model Wash",
+      "code": "76.517",
+      "hex": "#454542"
+    },
+    {
+      "id": "vallejo-76520-dark-khaki-green",
+      "name": "Dark Khaki Green",
+      "range": "Model Wash",
+      "code": "76.520",
+      "hex": "#5C5B3E"
+    },
+    {
+      "id": "vallejo-76507-dark-rust",
+      "name": "Dark Rust",
+      "range": "Model Wash",
+      "code": "76.507",
+      "hex": "#64351C"
+    },
+    {
+      "id": "vallejo-76503-dark-yellow",
+      "name": "Dark Yellow",
+      "range": "Model Wash",
+      "code": "76.503",
+      "hex": "#A98A3E"
+    },
+    {
+      "id": "vallejo-76522-desert-dust",
+      "name": "Desert Dust",
+      "range": "Model Wash",
+      "code": "76.522",
+      "hex": "#C2A97E"
+    },
+    {
+      "id": "vallejo-76523-european-dust",
+      "name": "European Dust",
+      "range": "Model Wash",
+      "code": "76.523",
+      "hex": "#8F7C5F"
+    },
+    {
+      "id": "vallejo-76516-grey",
+      "name": "Grey",
+      "range": "Model Wash",
+      "code": "76.516",
+      "hex": "#75756F"
+    },
+    {
+      "id": "vallejo-76515-light-grey",
+      "name": "Light Grey",
+      "range": "Model Wash",
+      "code": "76.515",
+      "hex": "#A6A6A1"
+    },
+    {
+      "id": "vallejo-76505-light-rust",
+      "name": "Light Rust",
+      "range": "Model Wash",
+      "code": "76.505",
+      "hex": "#B25B2B"
+    },
+    {
+      "id": "vallejo-76521-oiled-earth",
+      "name": "Oiled Earth",
+      "range": "Model Wash",
+      "code": "76.521",
+      "hex": "#3E301F"
+    },
+    {
+      "id": "vallejo-76519-olive-green",
+      "name": "Olive Green",
+      "range": "Model Wash",
+      "code": "76.519",
+      "hex": "#55563A"
+    },
+    {
+      "id": "vallejo-76506-rust",
+      "name": "Rust",
+      "range": "Model Wash",
+      "code": "76.506",
+      "hex": "#8C4A22"
+    },
+    {
+      "id": "vallejo-76501-white",
+      "name": "White",
+      "range": "Model Wash",
+      "code": "76.501",
+      "hex": "#E9E7E1"
     },
     {
       "id": "vallejo-72423-black-lotus",
