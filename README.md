@@ -81,9 +81,19 @@ pointing at the `paintforge-d8cf2` project. Hosting serves `build/web` and rewri
 every route to `index.html`, so Flutter's router owns navigation.
 
 ```bash
-flutter build web --release
+flutter build web --release \
+  --dart-define=RECAPTCHA_SITE_KEY=<key> \
+  --dart-define=PHOTO_CDN_HOST=img.pintaminis.com \
+  --dart-define=BUILD_STAMP=$(date +%Y-%m-%d)-$(git rev-parse --short HEAD)
 firebase deploy --only hosting
 ```
+
+**The `RECAPTCHA_SITE_KEY` define is not optional for production.** App Check
+enforcement is ON for Firestore and Storage, so a build without the key signs
+in fine (Auth is unenforced) and then hangs forever on the first loader: the
+Firestore streams are rejected server-side, and the SDK just keeps retrying.
+The key is not a secret (it ships inside `main.dart.js`); find it with
+`gcloud recaptcha keys list --project=paintforge-d8cf2`.
 
 Live at <https://pintaminis.com>. The project site and the legal documents are
 at <https://www.pintaminis.com>.
