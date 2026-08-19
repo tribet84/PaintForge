@@ -52,3 +52,4 @@ lib/l10n/generated/
 
 # Local tooling cache (skill registry), not project code
 .atl/
+.playwright-cli/

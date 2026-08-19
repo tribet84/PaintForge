@@ -29,6 +29,31 @@ class PlatformStats {
   final int recipeLinks;
 }
 
+/// Platform activity during one week, for the admin panel's weekly charts.
+///
+/// These are ACTIVITY counts, not creation counts: most documents only carry
+/// an `updatedAt` (nothing stores a createdAt, and user docs have no date at
+/// all), so "recipes worked on this week" is answerable and "recipes created
+/// this week" is not. The one true creation metric is [newLinks] — link
+/// markers are written once and never updated.
+class WeeklyActivity {
+  const WeeklyActivity({
+    required this.weekStart,
+    required this.publishedUpdates,
+    required this.newLinks,
+    required this.recipeUpdates,
+    required this.inventoryUpdates,
+  });
+
+  /// Monday 00:00 local time.
+  final DateTime weekStart;
+
+  final int publishedUpdates;
+  final int newLinks;
+  final int recipeUpdates;
+  final int inventoryUpdates;
+}
+
 /// A published recipe as listed on the admin panel.
 class SharedRecipeSummary {
   const SharedRecipeSummary({
@@ -58,6 +83,9 @@ abstract class AdminStatsRepository {
 
   /// Most recently updated published recipes, with their link counts.
   Future<List<SharedRecipeSummary>> latestShared({int limit = 10});
+
+  /// Per-week activity, oldest week first, ending with the current week.
+  Future<List<WeeklyActivity>> weeklyActivity({int weeks = 8});
 }
 
 class FirestoreAdminStatsRepository implements AdminStatsRepository {
@@ -94,6 +122,49 @@ class FirestoreAdminStatsRepository implements AdminStatsRepository {
       publishedRecipes: counts[4],
       recipeLinks: counts[5],
     );
+  }
+
+  @override
+  Future<List<WeeklyActivity>> weeklyActivity({int weeks = 8}) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final currentMonday =
+        today.subtract(Duration(days: today.weekday - DateTime.monday));
+
+    // The range filters on collection groups need the COLLECTION_GROUP
+    // single-field indexes declared in firestore.indexes.json — without them
+    // Firestore rejects the query outright.
+    Future<int> inWeek(
+      Query<Map<String, dynamic>> query,
+      String field,
+      DateTime start,
+    ) {
+      return _count(query
+          .where(field, isGreaterThanOrEqualTo: start)
+          .where(field, isLessThan: start.add(const Duration(days: 7))));
+    }
+
+    return Future.wait([
+      for (var i = weeks - 1; i >= 0; i--)
+        () async {
+          final start = currentMonday.subtract(Duration(days: 7 * i));
+          final counts = await Future.wait([
+            inWeek(_firestore.collection('publishedRecipes'), 'updatedAt',
+                start),
+            inWeek(_firestore.collectionGroup('links'), 'linkedAt', start),
+            inWeek(_firestore.collectionGroup('recipes'), 'updatedAt', start),
+            inWeek(
+                _firestore.collectionGroup('inventory'), 'updatedAt', start),
+          ]);
+          return WeeklyActivity(
+            weekStart: start,
+            publishedUpdates: counts[0],
+            newLinks: counts[1],
+            recipeUpdates: counts[2],
+            inventoryUpdates: counts[3],
+          );
+        }(),
+    ]);
   }
 
   @override

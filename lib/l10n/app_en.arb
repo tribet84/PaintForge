@@ -458,6 +458,20 @@
       }
     }
   },
+  "adminTabTotals": "Totals",
+  "adminTabWeekly": "Weekly",
+  "adminWeeklyCaption": "{weeks, plural, other{Activity over the last {weeks} weeks}}",
+  "@adminWeeklyCaption": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "adminWeeklyLinks": "New recipe links",
+  "adminWeeklyPublished": "Shared recipes updated",
+  "adminWeeklyRecipes": "Recipes worked on",
+  "adminWeeklyInventory": "Inventory updates",
   "adminLoadErrorTitle": "Couldn't load statistics",
   "adminLoadErrorBody": "Check your connection and that this account has admin access, then try again.",
   "adminRetry": "Retry"

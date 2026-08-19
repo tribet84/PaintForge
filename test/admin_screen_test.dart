@@ -37,6 +37,23 @@ class FakeAdminStatsRepository implements AdminStatsRepository {
     if (failLoads) throw Exception('permission-denied');
     return shared;
   }
+
+  /// Deterministic ramp (0, 3, 6, …) so tests can assert exact bar values.
+  @override
+  Future<List<WeeklyActivity>> weeklyActivity({int weeks = 8}) async {
+    if (failLoads) throw Exception('permission-denied');
+    final monday = DateTime(2026, 8, 17);
+    return [
+      for (var i = 0; i < weeks; i++)
+        WeeklyActivity(
+          weekStart: monday.subtract(Duration(days: 7 * (weeks - 1 - i))),
+          publishedUpdates: i,
+          newLinks: i * 3,
+          recipeUpdates: i * 2,
+          inventoryUpdates: i * 5,
+        ),
+    ];
+  }
 }
 
 Future<void> pumpAdmin(
@@ -108,6 +125,22 @@ void main() {
   testWidgets('says so when nothing has been shared yet', (tester) async {
     await pumpAdmin(tester, FakeAdminStatsRepository(shared: const []));
     expect(find.text('Nothing has been shared yet.'), findsOneWidget);
+  });
+
+  testWidgets('the weekly tab draws one bar chart per metric', (tester) async {
+    await pumpAdmin(tester, FakeAdminStatsRepository());
+
+    await tester.tap(find.text('Weekly'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Activity over the last 8 weeks'), findsOneWidget);
+    expect(find.text('New recipe links'), findsOneWidget);
+    expect(find.text('Shared recipes updated'), findsOneWidget);
+    expect(find.text('Recipes worked on'), findsOneWidget);
+    expect(find.text('Inventory updates'), findsOneWidget);
+    // The last week of the ramp: links = 7*3, inventory = 7*5.
+    expect(find.text('21'), findsOneWidget);
+    expect(find.text('35'), findsOneWidget);
   });
 
   testWidgets('a failed load shows the error state, and retry recovers',

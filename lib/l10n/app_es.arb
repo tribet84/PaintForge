@@ -240,6 +240,13 @@
   "adminSectionLatestShared": "Últimas recetas compartidas",
   "adminNoSharedRecipes": "Todavía no se ha compartido nada.",
   "adminLinkCount": "{count, plural, =1{1 enlace} other{{count} enlaces}}",
+  "adminTabTotals": "Totales",
+  "adminTabWeekly": "Semanal",
+  "adminWeeklyCaption": "{weeks, plural, other{Actividad de las últimas {weeks} semanas}}",
+  "adminWeeklyLinks": "Nuevos enlaces a recetas",
+  "adminWeeklyPublished": "Recetas compartidas actualizadas",
+  "adminWeeklyRecipes": "Recetas trabajadas",
+  "adminWeeklyInventory": "Movimientos de inventario",
   "adminLoadErrorTitle": "No se pudieron cargar las estadísticas",
   "adminLoadErrorBody": "Comprueba tu conexión y que esta cuenta tiene acceso de administrador, y vuelve a intentarlo.",
   "adminRetry": "Reintentar"
