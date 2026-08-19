@@ -225,5 +225,21 @@
   "paintsBulkApplied": "{count, plural, =1{1 pintura actualizada} other{{count} pinturas actualizadas}}",
   "paintsMineEmptyFiltered": "Ninguna de tus pinturas coincide con este filtro.",
   "paintsAllEmptyFiltered": "Ninguna pintura coincide con esta búsqueda.",
-  "recipePhotoUploadFailed": "No se ha podido subir la foto. Tu receta no se ha guardado."
+  "recipePhotoUploadFailed": "No se ha podido subir la foto. Tu receta no se ha guardado.",
+  "adminTitle": "Panel de administración",
+  "adminEntrySubtitle": "Estadísticas de la plataforma",
+  "adminRefreshTooltip": "Actualizar",
+  "adminSectionTotals": "Totales de la plataforma",
+  "adminStatPainters": "Pintores registrados",
+  "adminStatInventory": "Pinturas en inventarios",
+  "adminStatLists": "Listas de pinturas",
+  "adminStatRecipes": "Recetas",
+  "adminStatPublished": "Recetas compartidas",
+  "adminStatLinks": "Recetas enlazadas",
+  "adminSectionLatestShared": "Últimas recetas compartidas",
+  "adminNoSharedRecipes": "Todavía no se ha compartido nada.",
+  "adminLinkCount": "{count, plural, =1{1 enlace} other{{count} enlaces}}",
+  "adminLoadErrorTitle": "No se pudieron cargar las estadísticas",
+  "adminLoadErrorBody": "Comprueba tu conexión y que esta cuenta tiene acceso de administrador, y vuelve a intentarlo.",
+  "adminRetry": "Reintentar"
 }

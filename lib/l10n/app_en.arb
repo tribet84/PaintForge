@@ -436,5 +436,28 @@
   },
   "paintsMineEmptyFiltered": "None of your paints match this filter.",
   "paintsAllEmptyFiltered": "No paints match this search.",
-  "recipePhotoUploadFailed": "The photo could not be uploaded. Your recipe was not saved."
+  "recipePhotoUploadFailed": "The photo could not be uploaded. Your recipe was not saved.",
+  "adminTitle": "Admin panel",
+  "adminEntrySubtitle": "Platform statistics",
+  "adminRefreshTooltip": "Refresh",
+  "adminSectionTotals": "Platform totals",
+  "adminStatPainters": "Registered painters",
+  "adminStatInventory": "Paints in inventories",
+  "adminStatLists": "Paint lists",
+  "adminStatRecipes": "Recipes",
+  "adminStatPublished": "Shared recipes",
+  "adminStatLinks": "Recipe links",
+  "adminSectionLatestShared": "Latest shared recipes",
+  "adminNoSharedRecipes": "Nothing has been shared yet.",
+  "adminLinkCount": "{count, plural, =1{1 link} other{{count} links}}",
+  "@adminLinkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adminLoadErrorTitle": "Couldn't load statistics",
+  "adminLoadErrorBody": "Check your connection and that this account has admin access, then try again.",
+  "adminRetry": "Retry"
 }

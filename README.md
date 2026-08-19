@@ -173,6 +173,12 @@ Firestore keeps an offline cache, so the app works without a connection and sync
 
 > Rules take up to a minute to propagate after `firebase deploy --only firestore:rules`. A 403 immediately after a deploy is usually propagation, not a broken rule.
 
+### Admin panel
+
+Settings shows an **Admin panel** entry, but only for the emails allowlisted in `lib/src/services/admin_access.dart`. The panel (`lib/src/features/admin/admin_screen.dart`) shows platform-wide totals — registered painters, inventory entries, paint lists, recipes, shared recipes, recipe links — plus the latest shared recipes with their link counts. Everything is computed with Firestore `count()` aggregations (`lib/src/data/admin_stats_repository.dart`), so no user documents are ever downloaded.
+
+The client-side check is cosmetic; the enforceable gate is the matching `isPlatformAdmin()` allowlist in `firestore.rules`, which grants **read-only** access across user subtrees via collection-group rules and requires `email_verified` — an unverified password account registered with the admin's address never qualifies. **Both allowlists must stay in sync**, and the rules change only takes effect after `firebase deploy --only firestore:rules`.
+
 ### Batched purchase feedback
 
 Confirming several purchases in quick succession is a common enough flow (working through a shopping list) that it needs its own affordance: `ActionBatcher` (`lib/src/services/action_batcher.dart`) coalesces rapid repeated actions into one summary event instead of one queued SnackBar per tap that then plays out long after the user stopped tapping. `ShoppingListScreen` uses it for individual "bought it" confirmations — a single purchase still names the paint ("Abaddon Black marked as owned"), but several within ~900ms settle into one aggregate message ("3 paints marked as bought"). The bulk "mark all as bought" action discards any pending single-purchase batch first, so its own summary is never followed by a redundant, stale one a moment later.

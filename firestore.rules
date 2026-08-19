@@ -6,6 +6,18 @@ rules_version = '2';
 // Deploy with: firebase deploy --only firestore:rules
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Platform admins may READ across all users for the in-app admin panel
+    // (Firestore count() aggregations — see the collection-group matches at
+    // the bottom). Keep this allowlist in sync with kAdminEmails in
+    // lib/src/services/admin_access.dart. email_verified is required so a
+    // password account registered with an unverified copy of this address
+    // never qualifies.
+    function isPlatformAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'admin@example.com'
+        && request.auth.token.email_verified == true;
+    }
+
     match /users/{userId} {
       function isOwner() {
         return request.auth != null && request.auth.uid == userId;
@@ -13,6 +25,8 @@ service cloud.firestore {
 
       // The user doc itself holds one-shot flags (e.g. sample recipe seeded).
       allow read, write: if isOwner();
+      // Admin panel: counting users needs list permission on the collection.
+      allow read: if isPlatformAdmin();
 
       // Paint status: users/{userId}/inventory/{paintId}
       match /inventory/{paintId} {
@@ -60,6 +74,25 @@ service cloud.firestore {
           && (request.auth.uid == linkerUid
             || get(/databases/$(database)/documents/publishedRecipes/$(publishedId)).data.ownerUid == request.auth.uid);
       }
+    }
+
+    // Admin panel: collection-group READS for the platform-wide count()
+    // aggregations. Overlapping matches OR together, so these only ADD the
+    // admin's read access — every rule above keeps working unchanged.
+    match /{path=**}/inventory/{paintId} {
+      allow read: if isPlatformAdmin();
+    }
+    match /{path=**}/paintLists/{listId} {
+      allow read: if isPlatformAdmin();
+    }
+    match /{path=**}/recipes/{recipeId} {
+      allow read: if isPlatformAdmin();
+    }
+    match /{path=**}/linkedRecipes/{publishedId} {
+      allow read: if isPlatformAdmin();
+    }
+    match /{path=**}/links/{linkerUid} {
+      allow read: if isPlatformAdmin();
     }
   }
 }
