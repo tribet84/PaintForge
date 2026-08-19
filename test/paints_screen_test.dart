@@ -132,8 +132,16 @@ void main() {
     await tester.enterText(find.byType(TextField), 'abaddon');
     await tester.pumpAndSettle();
 
-    expect(find.text('1 paint'), findsOneWidget);
-    expect(find.text('Abaddon Black'), findsOneWidget);
+    // Computed, not hard-coded: several ranges legitimately carry the same
+    // paint name (Base and Air both have an Abaddon Black), and the catalog
+    // keeps growing.
+    final matches = catalog.search('abaddon');
+    expect(matches, isNotEmpty);
+    expect(
+      find.text(matches.length == 1 ? '1 paint' : '${matches.length} paints'),
+      findsOneWidget,
+    );
+    expect(find.text('Abaddon Black'), findsNWidgets(matches.length));
   });
 
   testWidgets(
@@ -209,14 +217,15 @@ void main() {
 
       await tester.tap(find.text('Select all'));
       await tester.pumpAndSettle();
-      expect(find.text('1 selected'), findsOneWidget);
+      final matches = catalog.search('abaddon');
+      expect(find.text('${matches.length} selected'), findsOneWidget);
 
       await tester.tap(find.text('Owned'));
       await tester.pumpAndSettle();
 
-      final abaddon =
-          catalog.paints.firstWhere((p) => p.name == 'Abaddon Black');
-      expect(inventory.statusOf(abaddon.id), PaintStatus.inStock);
+      for (final paint in matches) {
+        expect(inventory.statusOf(paint.id), PaintStatus.inStock);
+      }
     });
 
     testWidgets('applying an action leaves selection mode', (tester) async {
