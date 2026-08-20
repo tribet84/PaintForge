@@ -45,6 +45,16 @@ abstract class AuthService {
   /// Firebase requires a *recent* sign-in for this; call a `reauthenticate*`
   /// method first or this throws `FirebaseAuthException(requires-recent-login)`.
   Future<void> deleteAccount();
+
+  /// True when the signed-in user carries the `admin` custom claim.
+  ///
+  /// The claim is granted server-side only (Admin API), so no admin identity
+  /// ever lives in this repository, and a client cannot grant it to itself.
+  /// This mirrors `isPlatformAdmin()` in firestore.rules, which reads the
+  /// same claim — the UI check is cosmetic, the rules check is the gate.
+  /// Claims travel inside the ID token, so a freshly granted admin appears
+  /// after the next sign-in (or token refresh), not instantly.
+  Future<bool> hasAdminClaim();
 }
 
 class FirebaseAuthService implements AuthService {
@@ -160,5 +170,13 @@ class FirebaseAuthService implements AuthService {
       await _googleSignIn.signOut();
     }
     await user.delete();
+  }
+
+  @override
+  Future<bool> hasAdminClaim() async {
+    final user = _auth.currentUser;
+    if (user == null) return false;
+    final token = await user.getIdTokenResult();
+    return token.claims?['admin'] == true;
   }
 }

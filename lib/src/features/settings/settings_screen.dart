@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../build_info.dart';
 import '../../data/catalog_repository.dart';
-import '../../services/admin_access.dart';
 import '../../services/auth_service.dart';
 import '../../services/external_link.dart';
 import '../../services/share_links.dart';
@@ -43,20 +42,25 @@ class SettingsScreen extends StatelessWidget {
             subtitle: user?.displayName != null ? Text(user?.email ?? '') : null,
           ),
           const Divider(),
-          // Cosmetic gate only — the enforceable one is the matching
-          // allowlist in firestore.rules.
-          if (isPlatformAdmin(
-            email: user?.email,
-            emailVerified: user?.emailVerified ?? false,
-          ))
-            ListTile(
-              leading: const Icon(Icons.query_stats),
-              title: Text(l10n.adminTitle),
-              subtitle: Text(l10n.adminEntrySubtitle),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute<void>(builder: (_) => const AdminScreen()),
-              ),
-            ),
+          // Cosmetic gate only — the enforceable one is the matching claim
+          // check in firestore.rules. The claim rides in the ID token, so no
+          // admin identity lives anywhere in this (public) repository.
+          FutureBuilder<bool>(
+            future: auth.hasAdminClaim(),
+            builder: (context, snapshot) {
+              if (snapshot.data != true) return const SizedBox.shrink();
+              return ListTile(
+                leading: const Icon(Icons.query_stats),
+                title: Text(l10n.adminTitle),
+                subtitle: Text(l10n.adminEntrySubtitle),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const AdminScreen(),
+                  ),
+                ),
+              );
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.palette_outlined),
             title: Text(l10n.settingsCatalogTitle),

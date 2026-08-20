@@ -8,14 +8,12 @@ service cloud.firestore {
   match /databases/{database}/documents {
     // Platform admins may READ across all users for the in-app admin panel
     // (Firestore count() aggregations — see the collection-group matches at
-    // the bottom). Keep this allowlist in sync with kAdminEmails in
-    // lib/src/services/admin_access.dart. email_verified is required so a
-    // password account registered with an unverified copy of this address
-    // never qualifies.
+    // the bottom). Admin is an Auth CUSTOM CLAIM, granted server-side only
+    // (Admin API), so no admin identity lives in this repository and no
+    // client can grant it to itself — user docs are client-writable, which
+    // is exactly why this must NOT be a Firestore field.
     function isPlatformAdmin() {
-      return request.auth != null
-        && request.auth.token.email == 'admin@example.com'
-        && request.auth.token.email_verified == true;
+      return request.auth != null && request.auth.token.admin == true;
     }
 
     match /users/{userId} {

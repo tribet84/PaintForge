@@ -7,37 +7,17 @@ import 'package:paintforge/src/features/settings/settings_screen.dart';
 import 'package:paintforge/src/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
-/// Just enough of a firebase_auth [User] for the settings screen: an email
-/// and its verification state. Everything else throws via noSuchMethod.
-class FakeUser implements User {
-  FakeUser({required String email, required bool emailVerified})
-      : _email = email,
-        _emailVerified = emailVerified;
-
-  final String _email;
-  final bool _emailVerified;
-
-  @override
-  String? get email => _email;
-
-  @override
-  bool get emailVerified => _emailVerified;
-
-  @override
-  String? get displayName => null;
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) =>
-      super.noSuchMethod(invocation);
-}
-
 class FakeAuthService implements AuthService {
-  FakeAuthService({this.user});
+  FakeAuthService({this.admin = false});
 
-  final User? user;
+  /// Whether this fake claims the signed-in user is a platform admin.
+  final bool admin;
 
   @override
-  User? get currentUser => user;
+  Future<bool> hasAdminClaim() async => admin;
+
+  @override
+  User? get currentUser => null;
 
   @override
   Stream<User?> authStateChanges() => const Stream.empty();
@@ -82,12 +62,12 @@ void main() {
     catalog = await CatalogRepository.loadFromAssets();
   });
 
-  Future<void> pumpSettings(WidgetTester tester, {User? user}) async {
+  Future<void> pumpSettings(WidgetTester tester, {required bool admin}) async {
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           Provider<CatalogRepository>.value(value: catalog),
-          Provider<AuthService>.value(value: FakeAuthService(user: user)),
+          Provider<AuthService>.value(value: FakeAuthService(admin: admin)),
         ],
         child: MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -100,29 +80,14 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('the admin entry shows for the verified admin account',
+  testWidgets('the admin entry shows for a user with the admin claim',
       (tester) async {
-    await pumpSettings(
-      tester,
-      user: FakeUser(email: 'admin@example.com', emailVerified: true),
-    );
+    await pumpSettings(tester, admin: true);
     expect(find.text('Admin panel'), findsOneWidget);
   });
 
   testWidgets('regular painters never see the admin entry', (tester) async {
-    await pumpSettings(
-      tester,
-      user: FakeUser(email: 'painter@example.com', emailVerified: true),
-    );
-    expect(find.text('Admin panel'), findsNothing);
-  });
-
-  testWidgets('an unverified copy of the admin address does not qualify',
-      (tester) async {
-    await pumpSettings(
-      tester,
-      user: FakeUser(email: 'admin@example.com', emailVerified: false),
-    );
+    await pumpSettings(tester, admin: false);
     expect(find.text('Admin panel'), findsNothing);
   });
 }

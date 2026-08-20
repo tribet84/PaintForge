@@ -51,6 +51,9 @@ class FakeAuthService implements AuthService {
   Future<void> reauthenticateWithGoogle() async {}
 
   @override
+  Future<bool> hasAdminClaim() async => false;
+
+  @override
   Future<void> deleteAccount() async {}
 }
 

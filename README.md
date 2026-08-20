@@ -185,9 +185,19 @@ Firestore keeps an offline cache, so the app works without a connection and sync
 
 ### Admin panel
 
-Settings shows an **Admin panel** entry, but only for the emails allowlisted in `lib/src/services/admin_access.dart`. The panel (`lib/src/features/admin/admin_screen.dart`) shows platform-wide totals — registered painters, inventory entries, paint lists, recipes, shared recipes, recipe links — plus the latest shared recipes with their link counts. Everything is computed with Firestore `count()` aggregations (`lib/src/data/admin_stats_repository.dart`), so no user documents are ever downloaded.
+Settings shows an **Admin panel** entry, but only for accounts carrying the `admin` Auth **custom claim**. The panel (`lib/src/features/admin/admin_screen.dart`) shows platform-wide totals and weekly activity charts — everything computed with Firestore `count()` aggregations (`lib/src/data/admin_stats_repository.dart`), so no user documents are ever downloaded.
 
-The client-side check is cosmetic; the enforceable gate is the matching `isPlatformAdmin()` allowlist in `firestore.rules`, which grants **read-only** access across user subtrees via collection-group rules and requires `email_verified` — an unverified password account registered with the admin's address never qualifies. **Both allowlists must stay in sync**, and the rules change only takes effect after `firebase deploy --only firestore:rules`.
+The client-side check (`AuthService.hasAdminClaim`) is cosmetic; the enforceable gate is `isPlatformAdmin()` in `firestore.rules`, which reads the same claim and grants **read-only** access across user subtrees via collection-group rules. The claim is deliberately NOT a Firestore field — user docs are client-writable, so a field could be self-granted — and no admin identity ever appears in this repository. Grant it server-side by uid:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -H "x-goog-user-project: paintforge-d8cf2" -H "Content-Type: application/json" \
+  -d '{"localId":"<uid>","customAttributes":"{\"admin\":true}"}' \
+  "https://identitytoolkit.googleapis.com/v1/projects/paintforge-d8cf2/accounts:update"
+```
+
+Claims ride in the ID token, so a freshly granted admin has to sign out and back in (or wait for the hourly token refresh) before the panel appears.
 
 ### Batched purchase feedback
 

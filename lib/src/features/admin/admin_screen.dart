@@ -7,10 +7,11 @@ import '../../widgets/paint_widgets.dart';
 
 /// Platform statistics, reachable only from the admin entry in Settings.
 ///
-/// The screen is gated twice: Settings only shows the entry for allowlisted
-/// admins (see admin_access.dart), and every query below is additionally
-/// enforced by the `isPlatformAdmin()` allowlist in `firestore.rules` — a
-/// non-admin who somehow pushed this route would only see the error state.
+/// The screen is gated twice: Settings only shows the entry when the signed-in
+/// user carries the `admin` custom claim (AuthService.hasAdminClaim), and
+/// every query below is additionally enforced by `isPlatformAdmin()` in
+/// `firestore.rules`, which reads the same claim — a non-admin who somehow
+/// pushed this route would only see the error state.
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key, AdminStatsRepository? repository})
       : _repository = repository;

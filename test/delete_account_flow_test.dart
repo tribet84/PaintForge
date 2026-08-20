@@ -54,6 +54,9 @@ class FakeAuthService implements AuthService {
   }
 
   @override
+  Future<bool> hasAdminClaim() async => false;
+
+  @override
   Future<void> deleteAccount() async {
     _deleteAttempts++;
     if (failFirstDeleteWithStaleLogin && _deleteAttempts == 1) {
@@ -247,6 +250,9 @@ class _OrderedAuthService implements AuthService {
   _OrderedAuthService(this._inner, this._order);
   final FakeAuthService _inner;
   final List<String> _order;
+
+  @override
+  Future<bool> hasAdminClaim() => _inner.hasAdminClaim();
 
   @override
   Stream<User?> authStateChanges() => _inner.authStateChanges();
