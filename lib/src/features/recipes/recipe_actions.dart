@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../models/recipe.dart';
 import '../../services/recipe_to_list.dart';
+import '../../services/share_links.dart';
 import '../../state/paint_lists_provider.dart';
+import '../../state/recipes_provider.dart';
 
 /// Asks whether to turn [recipe] into a paint list, and does it.
 ///
@@ -49,4 +52,40 @@ Future<void> createListFromRecipe(BuildContext context, Recipe recipe) async {
   messenger
     ..clearSnackBars()
     ..showSnackBar(SnackBar(content: Text(l10n.recipeListCreated(name))));
+}
+
+/// First-share flow: explains what publishing means, publishes, and leaves
+/// the link on the clipboard.
+///
+/// Shared between the detail screen's share button and the save-time nudge,
+/// so the consent dialog — publishing exposes the recipe AND an author name
+/// — can never be skipped by taking the shorter path.
+Future<void> confirmAndShareRecipe(BuildContext context, Recipe recipe) async {
+  final l10n = AppLocalizations.of(context);
+  final messenger = ScaffoldMessenger.of(context);
+  final recipes = context.read<RecipesProvider>();
+
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (dialogContext) => AlertDialog(
+      title: Text(l10n.recipeShareTitle),
+      content: Text(l10n.recipeShareBody),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(dialogContext).pop(false),
+          child: Text(l10n.actionCancel),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.of(dialogContext).pop(true),
+          child: Text(l10n.recipeShare),
+        ),
+      ],
+    ),
+  );
+  if (confirmed != true) return;
+
+  final publishedId = await recipes.publish(recipe);
+  if (publishedId == null) return;
+  await Clipboard.setData(ClipboardData(text: publicRecipeUrl(publishedId)));
+  messenger.showSnackBar(SnackBar(content: Text(l10n.recipeLinkCopied)));
 }

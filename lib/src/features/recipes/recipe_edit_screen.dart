@@ -12,6 +12,7 @@ import '../../state/recipes_provider.dart';
 import '../../widgets/technique_widgets.dart';
 import 'recipe_photo_picker.dart';
 import 'recipe_section_edit_screen.dart';
+import 'recipe_actions.dart';
 
 /// Create or edit a recipe: name, description, inspiration links and the
 /// per-section breakdown. Everything is edited as an in-memory draft and only
@@ -246,7 +247,37 @@ class _RecipeEditScreenState extends State<RecipeEditScreen> {
       updatedAt: widget.recipe?.updatedAt ?? DateTime.now(),
     );
     if (widget.recipe == null) {
-      await provider.create(draft);
+      final id = await provider.create(draft);
+      // The proud moment: a brand-new recipe with a photo of the finished
+      // mini. Offer sharing ONCE, as a snackbar action — dismissable by
+      // simply ignoring it. The action still routes through the consent
+      // dialog; the nudge shortens the path, never the explanation. Edits
+      // never nag: this only fires on first save.
+      if (photoUrl != null) {
+        final saved = Recipe(
+          id: id,
+          name: draft.name,
+          description: draft.description,
+          sections: draft.sections,
+          links: draft.links,
+          photoUrl: draft.photoUrl,
+          updatedAt: draft.updatedAt,
+        );
+        messenger.showSnackBar(
+          SnackBar(
+            content: Text(l10n.recipeShareNudge),
+            action: SnackBarAction(
+              label: l10n.recipeShareNudgeAction,
+              // The editor is popped by then; the navigator outlives it and
+              // its context can still host the consent dialog.
+              onPressed: () =>
+                  confirmAndShareRecipe(navigator.context, saved),
+            ),
+          ),
+        );
+        navigator.pop();
+        return;
+      }
     } else {
       await provider.update(draft);
     }

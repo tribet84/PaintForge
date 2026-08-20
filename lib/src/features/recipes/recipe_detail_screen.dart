@@ -200,33 +200,7 @@ class RecipeDetailScreen extends StatelessWidget {
     final recipes = context.read<RecipesProvider>();
 
     if (!recipe.isPublished) {
-      final confirmed = await showDialog<bool>(
-        context: context,
-        builder: (dialogContext) => AlertDialog(
-          title: Text(l10n.recipeShareTitle),
-          content: Text(l10n.recipeShareBody),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(false),
-              child: Text(l10n.actionCancel),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.of(dialogContext).pop(true),
-              child: Text(l10n.recipeShare),
-            ),
-          ],
-        ),
-      );
-      if (confirmed != true) return;
-
-      final publishedId = await recipes.publish(recipe);
-      if (publishedId == null) return;
-      await Clipboard.setData(
-        ClipboardData(text: publicRecipeUrl(publishedId)),
-      );
-      messenger.showSnackBar(
-        SnackBar(content: Text(l10n.recipeLinkCopied)),
-      );
+      await confirmAndShareRecipe(context, recipe);
       return;
     }
 

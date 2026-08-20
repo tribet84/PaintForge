@@ -15,6 +15,7 @@ import '../recipes/public_recipe_screen.dart';
 import '../recipes/recipes_screen.dart';
 import '../settings/settings_screen.dart';
 import '../shopping/shopping_list_screen.dart';
+import '../../services/install_hint.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,6 +26,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _index = 0;
+
+  /// Decided once per screen life: the answer cannot change mid-session,
+  /// and re-reading storage on every build would be noise.
+  late final bool _showInstallHint = shouldOfferInstallHint();
+  var _installHintDismissed = false;
 
   /// Tabs the user has actually opened.
   ///
@@ -122,6 +128,33 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (_showInstallHint && !_installHintDismissed)
+            Material(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        l10n.installHintBody,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                    IconButton(
+                      tooltip: l10n.actionClose,
+                      icon: const Icon(Icons.close, size: 18),
+                      onPressed: () {
+                        // An answer, not an obstacle: declined once is
+                        // declined for good.
+                        dismissInstallHint();
+                        setState(() => _installHintDismissed = true);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           const BannerAdWidget(),
           NavigationBar(
             selectedIndex: _index,
