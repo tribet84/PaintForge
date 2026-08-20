@@ -20,6 +20,9 @@ class FakeAuthService implements AuthService {
   User? get currentUser => null;
 
   @override
+  DateTime? get lastSignInTime => null;
+
+  @override
   Stream<User?> authStateChanges() => const Stream.empty();
 
   @override

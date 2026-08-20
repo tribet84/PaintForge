@@ -38,6 +38,21 @@ Future<void> runDeleteAccountFlow(BuildContext context) async {
   if (confirmed != true) return;
   if (!context.mounted) return;
 
+  // Firebase only honours account deletion from a session signed in within
+  // the last few minutes. The old shape found that out reactively — wipe
+  // everything, attempt the delete, get interrupted — so the identity prompt
+  // landed AFTER the long wipe, exactly when the user believed they were
+  // done. When the session is known to be stale, confirm identity first:
+  // the prompt then reads as a natural guard before something destructive,
+  // and once the wipe starts nothing interrupts it.
+  final lastSignIn = auth.lastSignInTime;
+  final sessionIsFresh = lastSignIn != null &&
+      DateTime.now().difference(lastSignIn) < const Duration(minutes: 4);
+  if (!sessionIsFresh) {
+    final reauthenticated = await _reauthenticate(context, auth);
+    if (!reauthenticated || !context.mounted) return;
+  }
+
   await _performDeletion(context, auth, accountRepository, messenger);
 }
 

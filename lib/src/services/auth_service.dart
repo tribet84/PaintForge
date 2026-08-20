@@ -40,6 +40,12 @@ abstract class AuthService {
   /// Re-proves identity via the Google flow. Throws if the user cancels it.
   Future<void> reauthenticateWithGoogle();
 
+  /// When the current session last proved its identity. Firebase demands a
+  /// sign-in fresher than a few minutes for destructive operations; knowing
+  /// this up front lets a flow re-authenticate BEFORE doing work, instead of
+  /// being interrupted after it.
+  DateTime? get lastSignInTime;
+
   /// Permanently deletes the signed-in Firebase Auth account.
   ///
   /// Firebase requires a *recent* sign-in for this; call a `reauthenticate*`
@@ -110,6 +116,10 @@ class FirebaseAuthService implements AuthService {
     }
     await _auth.signOut();
   }
+
+  @override
+  DateTime? get lastSignInTime =>
+      _auth.currentUser?.metadata.lastSignInTime;
 
   @override
   List<String> get providerIds =>

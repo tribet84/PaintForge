@@ -11,6 +11,11 @@ class FakeAuthService implements AuthService {
   var deleteCalled = false;
   var reauthCalled = false;
 
+  /// Fresh by default so tests exercise the un-prompted path; a test that
+  /// wants the up-front identity check sets this into the past.
+  @override
+  DateTime? lastSignInTime = DateTime.now();
+
   /// Makes the first deleteAccount() throw requires-recent-login, the way
   /// Firebase does for a session that has aged past its threshold.
   var failFirstDeleteWithStaleLogin = false;
@@ -231,6 +236,38 @@ void main() {
         reason: 'wiping the data first keeps the ID token those writes need',
       );
     });
+
+      testWidgets(
+          'a stale session confirms identity BEFORE any data is touched',
+          (tester) async {
+        // User-reported: the identity prompt used to land after the wipe, when
+        // the deletion already felt finished. With a session known to be stale,
+        // the prompt must come first — and cancelling it must leave every byte
+        // of data intact.
+        final auth = FakeAuthService()
+          ..lastSignInTime = DateTime.now().subtract(const Duration(hours: 2));
+        final repo = FakeAccountRepository();
+        await tester.pumpWidget(wrap(auth: auth, accountRepository: repo));
+
+        await tester.tap(find.text('open'));
+        await tester.pumpAndSettle();
+        await tester.enterText(find.byType(TextField), 'DELETE');
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Delete my account'));
+        await tester.pumpAndSettle();
+
+        // The re-auth dialog is already up, and nothing has been deleted.
+        expect(find.text('Confirm your identity'), findsOneWidget);
+        expect(repo.deleteAllCalled, isFalse,
+            reason: 'identity comes before destruction, not after');
+
+        // Walking away from the prompt must abort the whole flow.
+        await tester.tap(find.text('Cancel'));
+        await tester.pumpAndSettle();
+
+        expect(repo.deleteAllCalled, isFalse);
+        expect(auth.deleteCalled, isFalse);
+      });
   });
 }
 
@@ -253,6 +290,9 @@ class _OrderedAuthService implements AuthService {
 
   @override
   Future<bool> hasAdminClaim() => _inner.hasAdminClaim();
+
+  @override
+  DateTime? get lastSignInTime => _inner.lastSignInTime;
 
   @override
   Stream<User?> authStateChanges() => _inner.authStateChanges();

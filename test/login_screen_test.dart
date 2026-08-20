@@ -21,6 +21,9 @@ class FakeAuthService implements AuthService {
   User? get currentUser => null;
 
   @override
+  DateTime? get lastSignInTime => null;
+
+  @override
   Future<void> signInWithEmail(String email, String password) async {
     signedInEmail = email;
   }
