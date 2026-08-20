@@ -9,6 +9,7 @@ import '../../state/inventory_provider.dart';
 import '../../widgets/paint_widgets.dart';
 import '../../widgets/brand_loader.dart';
 import '../../widgets/shelf_starter.dart';
+import '../../widgets/paint_detail_sheet.dart';
 
 /// Which slice of the catalogue is on screen.
 enum PaintScope { mine, all }
@@ -546,7 +547,11 @@ class _PaintResults extends StatelessWidget {
 
   Widget _row(BuildContext context, Paint paint, {bool showBrand = true}) {
     if (!selecting) {
-      return PaintTile(paint: paint, showBrand: showBrand);
+      return PaintTile(
+        paint: paint,
+        showBrand: showBrand,
+        onTap: () => showPaintDetail(context, paint),
+      );
     }
     final checked = selection.contains(paint.id);
     return CheckboxListTile(

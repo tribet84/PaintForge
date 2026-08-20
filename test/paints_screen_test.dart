@@ -431,7 +431,8 @@ void main() {
           reason: 'switching have off removes it from the shelf entirely');
     });
 
-    testWidgets('the old action sheet is gone: a row tap opens nothing',
+    testWidgets(
+        'a row tap opens the paint card with equivalents — not the old menu',
         (tester) async {
       await pumpPaints(tester);
       await tester.enterText(find.byType(TextField), '72.051');
@@ -440,7 +441,13 @@ void main() {
       await tester.tap(find.text('Black'));
       await tester.pumpAndSettle();
 
-      expect(find.byType(BottomSheet), findsNothing);
+      expect(find.text('Close matches in other brands'), findsOneWidget);
+      // Vallejo's black should offer Citadel's — the question the card
+      // answers is "the recipe says one brand, I own another".
+      expect(find.text('Abaddon Black'), findsWidgets);
+      // The five-option action menu stays dead.
+      expect(find.text('I own it'), findsNothing);
+      expect(find.text('Add to shopping list'), findsNothing);
     });
   });
 

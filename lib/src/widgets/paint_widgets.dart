@@ -113,9 +113,11 @@ class PaintTile extends StatelessWidget {
     this.trailing,
     this.showBrand = true,
     this.showStatus = true,
+    this.onTap,
   });
 
   final Paint paint;
+  final VoidCallback? onTap;
   final Widget? trailing;
 
   /// Set false where the surrounding section is already a brand heading —
@@ -182,6 +184,7 @@ class PaintTile extends StatelessWidget {
       ),
       trailing:
           trailing ?? (showStatus ? StatusToggles(paint: paint) : null),
+      onTap: onTap,
     );
   }
 }
