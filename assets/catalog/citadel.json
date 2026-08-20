@@ -20,7 +20,8 @@
       "id": "citadel-angron-red-clear",
       "name": "Angron Red Clear",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#E21823"
     },
     {
       "id": "citadel-air-averland-sunset",
@@ -54,7 +55,8 @@
       "id": "citadel-calth-blue-clear",
       "name": "Calth Blue Clear",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#0087D1"
     },
     {
       "id": "citadel-air-castellan-green",
@@ -88,7 +90,8 @@
       "id": "citadel-eidolon-purple-clear",
       "name": "Eidolon Purple Clear",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#7D4D99"
     },
     {
       "id": "citadel-air-elysian-green",
@@ -122,7 +125,8 @@
       "id": "citadel-grey-knights-steel",
       "name": "Grey Knights Steel",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#465863"
     },
     {
       "id": "citadel-air-kantor-blue",
@@ -191,7 +195,8 @@
       "id": "citadel-mortarion-green",
       "name": "Mortarion Green",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#00832B"
     },
     {
       "id": "citadel-air-mournfang-brown",
@@ -204,7 +209,8 @@
       "id": "citadel-night-lords-blue",
       "name": "Night Lords Blue",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#002B5C"
     },
     {
       "id": "citadel-air-ogryn-camo",
@@ -217,7 +223,8 @@
       "id": "citadel-phalanx-yellow",
       "name": "Phalanx Yellow",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#FFE200"
     },
     {
       "id": "citadel-air-phoenician-purple",
@@ -258,7 +265,8 @@
       "id": "citadel-thallax-gold",
       "name": "Thallax Gold",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#722A0B"
     },
     {
       "id": "citadel-air-the-fang",
@@ -278,7 +286,8 @@
       "id": "citadel-typhon-ash",
       "name": "Typhon Ash",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#E4D8C1"
     },
     {
       "id": "citadel-air-ulthuan-grey",
@@ -298,7 +307,8 @@
       "id": "citadel-valdor-gold",
       "name": "Valdor Gold",
       "range": "Air",
-      "code": null
+      "code": null,
+      "hex": "#6D2711"
     },
     {
       "id": "citadel-air-white-scar",
