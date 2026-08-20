@@ -75,6 +75,15 @@ class SettingsScreen extends StatelessWidget {
             subtitle: const Text('1.0.0 · $buildStamp'),
           ),
           ListTile(
+            leading: const Icon(Icons.chat_bubble_outline),
+            title: Text(l10n.settingsFeedback),
+            subtitle: Text(l10n.settingsFeedbackSubtitle),
+            trailing: const Icon(Icons.open_in_new, size: 18),
+            // Straight into the mail client: feedback arrives while the
+            // friction is still felt, not when it is remembered in a chat.
+            onTap: () => openMailTo(kFeedbackEmail, subject: 'PintaMinis'),
+          ),
+          ListTile(
             leading: const Icon(Icons.gavel_outlined),
             title: Text(l10n.settingsLegal),
             subtitle: Text(l10n.settingsLegalSubtitle),

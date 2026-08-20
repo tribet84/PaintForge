@@ -18,6 +18,10 @@ const kAppUrl = 'https://app.pintaminis.com';
 /// someone deciding whether to.
 const kLegalUrl = '$kSiteUrl/legal';
 
+/// Where feedback lands. Routed by the domain's email service to the
+/// operator's inbox, so the address survives any future mailbox change.
+const kFeedbackEmail = 'feedback@pintaminis.com';
+
 /// Shareable URL for a published recipe.
 ///
 /// Uses the hash fragment so it works with Flutter web's default URL

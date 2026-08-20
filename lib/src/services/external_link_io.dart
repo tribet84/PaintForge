@@ -9,3 +9,13 @@ Future<bool> openExternalLink(String url) async {
   if (uri == null) return false;
   return launchUrl(uri, mode: LaunchMode.externalApplication);
 }
+
+/// Opens the user's mail client with a draft to [address].
+Future<bool> openMailTo(String address, {String? subject}) async {
+  final uri = Uri(
+    scheme: 'mailto',
+    path: address,
+    query: subject == null ? null : 'subject=${Uri.encodeComponent(subject)}',
+  );
+  return launchUrl(uri, mode: LaunchMode.externalApplication);
+}

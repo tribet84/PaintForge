@@ -6,6 +6,7 @@ import 'package:paintforge/src/features/paints/paints_screen.dart';
 import 'package:paintforge/src/models/inventory_entry.dart';
 import 'package:paintforge/src/models/paint.dart';
 import 'package:paintforge/src/state/inventory_provider.dart';
+import 'package:paintforge/src/widgets/shelf_starter.dart';
 import 'package:provider/provider.dart';
 
 import 'fakes.dart';
@@ -22,11 +23,15 @@ void main() {
     catalog = await CatalogRepository.loadFromAssets();
   });
 
+  late FakeInventoryRepository lastRepository;
+
   Future<InventoryProvider> pumpPaints(
     WidgetTester tester, {
     Map<String, PaintStatus> owned = const {},
+    bool skipStarter = true,
   }) async {
     final repository = FakeInventoryRepository();
+    lastRepository = repository;
     final inventory = InventoryProvider(repository: repository);
     addTearDown(inventory.dispose);
     for (final entry in owned.entries) {
@@ -48,6 +53,13 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
+    // An empty shelf now opens on the guided starter. Most tests here are
+    // about the regular catalogue, so skip it by default; starter tests pass
+    // skipStarter: false and meet it deliberately.
+    if (skipStarter && find.byType(ShelfStarter).evaluate().isNotEmpty) {
+      await tester.tap(find.text("I'd rather browse on my own"));
+      await tester.pumpAndSettle();
+    }
     return inventory;
   }
 
@@ -187,6 +199,7 @@ void main() {
     // The point of batching: N paints used to mean N round trips and N
     // billed operations. This fails loudly if the loop ever comes back.
     final repository = FakeInventoryRepository();
+    lastRepository = repository;
     final inventory = InventoryProvider(repository: repository);
     addTearDown(inventory.dispose);
 
@@ -204,6 +217,8 @@ void main() {
         ),
       ),
     );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("I'd rather browse on my own"));
     await tester.pumpAndSettle();
 
     await tester.enterText(find.byType(TextField), 'green');
@@ -315,6 +330,68 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(inventory.statusOf(abaddon.id), isNull);
+    });
+  });
+
+  group('shelf starter', () {
+    // Five of the first eight sign-ups left with an empty shelf. The starter
+    // is the answer, and these pin its contract: it greets an empty shelf,
+    // one tap selects a pot, one button writes the lot in a single batch,
+    // and it never traps anyone.
+    testWidgets('greets an empty shelf instead of the 640-paint catalogue',
+        (tester) async {
+      await pumpPaints(tester, skipStarter: false);
+
+      expect(find.byType(ShelfStarter), findsOneWidget);
+      expect(find.byType(SegmentedButton<PaintScope>), findsNothing);
+    });
+
+    testWidgets('does not appear for a shelf that already has paints',
+        (tester) async {
+      await pumpPaints(
+        tester,
+        owned: {'citadel-abaddon-black': PaintStatus.inStock},
+        skipStarter: false,
+      );
+
+      expect(find.byType(ShelfStarter), findsNothing);
+    });
+
+    testWidgets('adds the selection in ONE batched write', (tester) async {
+      final inventory = await pumpPaints(tester, skipStarter: false);
+      final repository = lastRepository;
+
+      await tester.tap(find.text('Abaddon Black'));
+      await tester.tap(find.text('Averland Sunset'));
+      await tester.pump();
+      await tester.tap(find.text('Add 2 paints to my shelf'));
+      await tester.pumpAndSettle();
+
+      expect(repository.writeCalls, 1,
+          reason: 'a 30-pot first session must not be 30 round trips');
+      // Not asserted by id: the grid may render the Air or the Base variant
+      // of a name first. What matters is that exactly the two tapped pots
+      // landed on the shelf as in-stock.
+      expect(inventory.entries.length, 2);
+      expect(
+        inventory.entries.values.every((e) => e.status == PaintStatus.inStock),
+        isTrue,
+      );
+      // The starter hands over to the regular catalogue once done.
+      expect(find.byType(ShelfStarter), findsNothing);
+    });
+
+    testWidgets('walking away lands on the catalogue with nothing written',
+        (tester) async {
+      await pumpPaints(tester, skipStarter: false);
+      final repository = lastRepository;
+
+      await tester.tap(find.text("I'd rather browse on my own"));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ShelfStarter), findsNothing);
+      expect(find.byType(SegmentedButton<PaintScope>), findsOneWidget);
+      expect(repository.writeCalls, 0);
     });
   });
 }

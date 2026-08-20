@@ -8,6 +8,7 @@ import '../../models/paint.dart';
 import '../../state/inventory_provider.dart';
 import '../../widgets/paint_widgets.dart';
 import '../../widgets/brand_loader.dart';
+import '../../widgets/shelf_starter.dart';
 
 /// Which slice of the catalogue is on screen.
 enum PaintScope { mine, all }
@@ -31,6 +32,7 @@ class PaintsScreen extends StatefulWidget {
 }
 
 class _PaintsScreenState extends State<PaintsScreen> {
+  var _starterDismissed = false;
   final _searchController = TextEditingController();
   PaintBrand? _brandFilter;
   String? _rangeFilter;
@@ -85,6 +87,15 @@ class _PaintsScreenState extends State<PaintsScreen> {
     // everyone on "All" and then visibly snaps to "Mine" a moment later.
     if (!inventory.loaded) {
       return const Center(child: BrandLoader());
+    }
+    // A brand-new shelf gets the guided starter instead of a 640-paint
+    // catalogue: of the first eight sign-ups, five left without marking a
+    // single pot. Dismissal is session-only on purpose — an empty shelf on
+    // the next visit is the same problem, so the same offer.
+    if (owned.isEmpty && !_starterDismissed) {
+      return ShelfStarter(
+        onDone: () => setState(() => _starterDismissed = true),
+      );
     }
     // First build decides the default; after that the user is in charge.
     final scope = _scope ??

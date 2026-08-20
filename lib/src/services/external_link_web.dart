@@ -29,3 +29,24 @@ Future<bool> openExternalLink(String url) async {
   anchor.remove();
   return true;
 }
+
+/// Opens the user's mail client with a draft to [address].
+///
+/// Separate from [openExternalLink] on purpose: that function refuses
+/// non-http(s) schemes as a safety net against `javascript:` URLs pasted
+/// into recipes, and a mailto: would be silently swallowed by it. Here the
+/// address is a compile-time constant of ours, not user input.
+Future<bool> openMailTo(String address, {String? subject}) async {
+  final uri = Uri(
+    scheme: 'mailto',
+    path: address,
+    query: subject == null ? null : 'subject=${Uri.encodeComponent(subject)}',
+  );
+  final anchor = web.document.createElement('a') as web.HTMLAnchorElement
+    ..href = uri.toString()
+    ..style.display = 'none';
+  web.document.body?.append(anchor);
+  anchor.click();
+  anchor.remove();
+  return true;
+}

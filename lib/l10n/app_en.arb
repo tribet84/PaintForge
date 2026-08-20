@@ -347,6 +347,8 @@
   "settingsVersion": "Version",
   "settingsLegal": "Legal",
   "settingsLegalSubtitle": "Privacy, terms and cookies",
+  "settingsFeedback": "Send feedback",
+  "settingsFeedbackSubtitle": "Tell me what is missing or broken",
   "settingsDangerZone": "Danger zone",
   "deleteAccountTitle": "Delete account",
   "deleteAccountSubtitle": "Permanently delete your account and all your data",
@@ -428,6 +430,11 @@
   "paintsSelectAllVisible": "Select all",
   "paintsSelectionCancel": "Cancel selection",
   "paintsBulkApplied": "{count, plural, =1{1 paint updated} other{{count} paints updated}}",
+  "shelfStarterTitle": "Set up your shelf",
+  "shelfStarterBody": "Pick a brand and tap every paint you own. You can fine-tune later — this is just to get your shelf started.",
+  "shelfStarterAdd": "{count, plural, =0{Select the paints you own} =1{Add 1 paint to my shelf} other{Add {count} paints to my shelf}}",
+  "shelfStarterSkip": "I'd rather browse on my own",
+  "@shelfStarterAdd": {"placeholders": {"count": {"type": "int"}}},
   "@paintsBulkApplied": {
     "placeholders": {
       "count": {
