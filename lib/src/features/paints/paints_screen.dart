@@ -541,15 +541,7 @@ class _PaintResults extends StatelessWidget {
 
   Widget _row(BuildContext context, Paint paint, {bool showBrand = true}) {
     if (!selecting) {
-      // In Mine, everything is owned by definition — stamping "Owned" on
-      // every row is noise that buries the rows that actually need action.
-      final implied = scope == PaintScope.mine &&
-          ownedStatus[paint.id]?.status == PaintStatus.inStock;
-      return PaintTile(
-        paint: paint,
-        showBrand: showBrand,
-        showStatus: !implied,
-      );
+      return PaintTile(paint: paint, showBrand: showBrand);
     }
     final checked = selection.contains(paint.id);
     return CheckboxListTile(

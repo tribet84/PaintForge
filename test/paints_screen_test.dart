@@ -394,4 +394,65 @@ void main() {
       expect(repository.writeCalls, 0);
     });
   });
+
+  group('status toggles', () {
+    // The two switches ARE the data model now: have alone is in-stock, want
+    // alone is the shopping list, both together is running low. This walks
+    // the full cycle through the real widgets.
+    testWidgets('have and want compose into all three statuses',
+        (tester) async {
+      final inventory = await pumpPaints(tester);
+      // A Vallejo code is the one search that yields exactly one row.
+      await tester.enterText(find.byType(TextField), '72.051');
+      await tester.pumpAndSettle();
+
+      final cart = find.byIcon(Icons.shopping_cart_outlined);
+      final check = find.byIcon(Icons.check_circle_outline);
+      expect(cart, findsOneWidget);
+
+      await tester.tap(cart);
+      await tester.pumpAndSettle();
+      expect(inventory.statusOf('vallejo-72051-black'), PaintStatus.wishlist,
+          reason: 'want alone puts it on the shopping list');
+
+      await tester.tap(check);
+      await tester.pumpAndSettle();
+      expect(inventory.statusOf('vallejo-72051-black'), PaintStatus.low,
+          reason: 'have AND want together mean running low');
+
+      await tester.tap(find.byIcon(Icons.shopping_cart));
+      await tester.pumpAndSettle();
+      expect(inventory.statusOf('vallejo-72051-black'), PaintStatus.inStock,
+          reason: 'switching want off leaves a pot I simply have');
+
+      await tester.tap(find.byIcon(Icons.check_circle));
+      await tester.pumpAndSettle();
+      expect(inventory.statusOf('vallejo-72051-black'), isNull,
+          reason: 'switching have off removes it from the shelf entirely');
+    });
+
+    testWidgets('the old action sheet is gone: a row tap opens nothing',
+        (tester) async {
+      await pumpPaints(tester);
+      await tester.enterText(find.byType(TextField), '72.051');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Black'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(BottomSheet), findsNothing);
+    });
+  });
+
+  group('shelf starter search', () {
+    testWidgets('typing narrows the grid to matching pots', (tester) async {
+      await pumpPaints(tester, skipStarter: false);
+
+      await tester.enterText(find.byType(TextField), 'averland');
+      await tester.pumpAndSettle();
+
+      expect(find.text('Averland Sunset'), findsWidgets);
+      expect(find.text('Abaddon Black'), findsNothing);
+    });
+  });
 }

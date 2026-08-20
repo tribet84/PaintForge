@@ -28,6 +28,31 @@ class InventoryProvider extends ChangeNotifier {
 
   PaintStatus? statusOf(String paintId) => _entries[paintId]?.status;
 
+  /// Flips the "I have it" half of a paint's state.
+  ///
+  /// The catalogue models a pot as two independent switches — have and want
+  /// — and derives the stored status from their combination: both on means
+  /// running low (I have it AND I need more). These two methods are the
+  /// only place that mapping lives.
+  Future<void> toggleHave(String paintId) {
+    return switch (statusOf(paintId)) {
+      null => setStatus(paintId, PaintStatus.inStock),
+      PaintStatus.wishlist => setStatus(paintId, PaintStatus.low),
+      PaintStatus.inStock => remove(paintId),
+      PaintStatus.low => setStatus(paintId, PaintStatus.wishlist),
+    };
+  }
+
+  /// Flips the "I want it" half. See [toggleHave].
+  Future<void> toggleWant(String paintId) {
+    return switch (statusOf(paintId)) {
+      null => setStatus(paintId, PaintStatus.wishlist),
+      PaintStatus.inStock => setStatus(paintId, PaintStatus.low),
+      PaintStatus.wishlist => remove(paintId),
+      PaintStatus.low => setStatus(paintId, PaintStatus.inStock),
+    };
+  }
+
   /// Paints the user physically owns (in stock or running low).
   List<InventoryEntry> get owned =>
       _entries.values.where((e) => e.owned).toList();

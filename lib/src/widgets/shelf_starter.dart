@@ -29,6 +29,13 @@ class ShelfStarter extends StatefulWidget {
 class _ShelfStarterState extends State<ShelfStarter> {
   PaintBrand _brand = PaintBrand.citadel;
   final _selected = <String>{};
+  final _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   Future<void> _addSelection() async {
     final l10n = AppLocalizations.of(context);
@@ -48,7 +55,7 @@ class _ShelfStarterState extends State<ShelfStarter> {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final catalog = context.read<CatalogRepository>();
-    final paints = catalog.search('', brand: _brand);
+    final paints = catalog.search(_searchController.text, brand: _brand);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -85,6 +92,29 @@ class _ShelfStarterState extends State<ShelfStarter> {
                 const SizedBox(width: 8),
               ],
             ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: TextField(
+            controller: _searchController,
+            onChanged: (_) => setState(() {}),
+            decoration: InputDecoration(
+              hintText: l10n.searchHint,
+              prefixIcon: const Icon(Icons.search),
+              isDense: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              suffixIcon: _searchController.text.isEmpty
+                  ? null
+                  : IconButton(
+                      icon: const Icon(Icons.clear),
+                      onPressed: () =>
+                          setState(_searchController.clear),
+                    ),
+            ),
           ),
         ),
         const SizedBox(height: 8),

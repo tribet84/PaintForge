@@ -5,7 +5,6 @@ import '../../l10n/generated/app_localizations.dart';
 import '../models/inventory_entry.dart';
 import '../models/paint.dart';
 import '../state/inventory_provider.dart';
-import '../state/paint_lists_provider.dart';
 import '../theme.dart';
 
 /// Round swatch showing the paint color.
@@ -36,71 +35,83 @@ class PaintSwatch extends StatelessWidget {
   }
 }
 
-/// Small colored label for an inventory status.
-class StatusChip extends StatelessWidget {
-  const StatusChip({super.key, required this.status, this.compact = false});
 
-  final PaintStatus status;
+/// The two-toggle control that replaced the five-option action sheet.
+///
+/// The insight came from the app's own community: a painter browsing the
+/// catalogue only ever asks two things of a pot — do I have it, do I want
+/// it. Everything the old sheet offered reduces to those two switches:
+///
+///   have ✓ alone        → in stock
+///   want 🛒 alone        → on the shopping list
+///   both together        → running low: I have it AND I need more
+///   neither              → not owned
+///
+/// "Running low" stops being an option to hunt for in a menu and becomes
+/// the natural consequence of switching both on. The readiness verdict and
+/// the shopping list's urgency grouping — both built on that third state —
+/// survive untouched.
+class StatusToggles extends StatelessWidget {
+  const StatusToggles({super.key, required this.paint});
 
-  /// Drops the wording and keeps the icon. Used where the row is already
-  /// telling the user what the status is — repeating it in every row costs
-  /// horizontal space and adds no information.
-  final bool compact;
+  final Paint paint;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final scheme = Theme.of(context).colorScheme;
     final brightness = Theme.of(context).brightness;
-    final (label, icon, color) = switch (status) {
-      PaintStatus.inStock => (
-          l10n.statusInStock,
-          Icons.check_circle,
-          StockColors.inStock(brightness),
-        ),
-      PaintStatus.low => (
-          l10n.statusLow,
-          Icons.hourglass_bottom,
-          StockColors.low(brightness),
-        ),
-      PaintStatus.wishlist => (
-          l10n.statusWishlist,
-          Icons.shopping_cart,
-          scheme.error,
-        ),
-    };
-    if (compact) {
-      // Still announced to screen readers, just not drawn.
-      return Tooltip(
-        message: label,
-        child: Icon(icon, size: 18, color: color),
-      );
-    }
+    final scheme = Theme.of(context).colorScheme;
+    final inventory = context.read<InventoryProvider>();
+    final status = context
+        .select<InventoryProvider, PaintStatus?>((p) => p.statusOf(paint.id));
+
+    final hasIt =
+        status == PaintStatus.inStock || status == PaintStatus.low;
+    final wantsIt =
+        status == PaintStatus.wishlist || status == PaintStatus.low;
+    // When both are on the pot is running low; amber on both icons reads as
+    // one combined state rather than two coincidences.
+    final lowTint = StockColors.low(brightness);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 16, color: color),
-        const SizedBox(width: 4),
-        Text(
-          label,
-          style: Theme.of(context)
-              .textTheme
-              .labelSmall
-              ?.copyWith(color: color, fontWeight: FontWeight.w600),
+        IconButton(
+          visualDensity: VisualDensity.compact,
+          isSelected: hasIt,
+          tooltip: l10n.statusInStock,
+          icon: const Icon(Icons.check_circle_outline),
+          selectedIcon: Icon(
+            Icons.check_circle,
+            color: status == PaintStatus.low
+                ? lowTint
+                : StockColors.inStock(brightness),
+          ),
+          onPressed: () => inventory.toggleHave(paint.id),
+        ),
+        IconButton(
+          visualDensity: VisualDensity.compact,
+          isSelected: wantsIt,
+          tooltip: l10n.statusWishlist,
+          icon: const Icon(Icons.shopping_cart_outlined),
+          selectedIcon: Icon(
+            Icons.shopping_cart,
+            color: status == PaintStatus.low ? lowTint : scheme.error,
+          ),
+          onPressed: () => inventory.toggleWant(paint.id),
         ),
       ],
     );
   }
 }
 
-/// List tile for a catalog paint; tapping opens the status action sheet.
+/// List tile for a catalog paint.
 class PaintTile extends StatelessWidget {
   const PaintTile({
     super.key,
     required this.paint,
     this.trailing,
     this.showBrand = true,
-    this.compactStatus = false,
     this.showStatus = true,
   });
 
@@ -112,18 +123,13 @@ class PaintTile extends StatelessWidget {
   /// subtitle on something the user already knows.
   final bool showBrand;
 
-  /// Show the status as an icon rather than icon + wording.
-  final bool compactStatus;
-
-  /// Suppress the status entirely. Passing `trailing: null` does NOT do this
-  /// — it falls through to the default chip — so screens that want a bare
-  /// row have to say so explicitly.
+  /// Suppress the toggles entirely. Passing `trailing: null` does NOT do
+  /// this — it falls through to the default toggles — so screens that want
+  /// a bare row have to say so explicitly.
   final bool showStatus;
 
   @override
   Widget build(BuildContext context) {
-    final status = context
-        .select<InventoryProvider, PaintStatus?>((p) => p.statusOf(paint.id));
     final subtitle = [
       if (showBrand) paint.brandName,
       paint.range,
@@ -145,160 +151,10 @@ class PaintTile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         style: Theme.of(context).textTheme.bodySmall,
       ),
-      trailing: trailing ??
-          (!showStatus || status == null
-              ? null
-              : StatusChip(status: status, compact: compactStatus)),
-      onTap: () => showPaintActions(context, paint),
+      trailing:
+          trailing ?? (showStatus ? StatusToggles(paint: paint) : null),
     );
   }
-}
-
-/// Bottom sheet with the inventory actions for [paint].
-Future<void> showPaintActions(BuildContext context, Paint paint) {
-  final inventory = context.read<InventoryProvider>();
-  return showModalBottomSheet<void>(
-    context: context,
-    showDragHandle: true,
-    builder: (sheetContext) {
-      final l10n = AppLocalizations.of(sheetContext);
-      final status = inventory.statusOf(paint.id);
-
-      Widget option({
-        required PaintStatus? value,
-        required IconData icon,
-        required String label,
-      }) {
-        final selected = status == value;
-        return ListTile(
-          leading: Icon(icon),
-          title: Text(label),
-          trailing: selected ? const Icon(Icons.check) : null,
-          selected: selected,
-          onTap: () {
-            if (value == null) {
-              inventory.remove(paint.id);
-            } else {
-              inventory.setStatus(paint.id, value);
-            }
-            Navigator.of(sheetContext).pop();
-          },
-        );
-      }
-
-      return SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: PaintSwatch(paint: paint, size: 48),
-              title: Text(
-                paint.name,
-                style: Theme.of(sheetContext).textTheme.titleMedium,
-              ),
-              subtitle: Text(
-                [
-                  paint.brandName,
-                  paint.range,
-                  if (paint.code != null) paint.code!,
-                ].join(' · '),
-              ),
-            ),
-            const Divider(height: 1),
-            option(
-              value: PaintStatus.inStock,
-              icon: Icons.check_circle_outline,
-              label: l10n.actionMarkInStock,
-            ),
-            option(
-              value: PaintStatus.low,
-              icon: Icons.hourglass_bottom,
-              label: l10n.actionMarkLow,
-            ),
-            option(
-              value: PaintStatus.wishlist,
-              icon: Icons.add_shopping_cart,
-              label: l10n.actionAddToShopping,
-            ),
-            ListTile(
-              leading: const Icon(Icons.playlist_add),
-              title: Text(l10n.actionAddToList),
-              onTap: () {
-                Navigator.of(sheetContext).pop();
-                showAddToListSheet(context, paint);
-              },
-            ),
-            if (status != null)
-              option(
-                value: null,
-                icon: Icons.delete_outline,
-                label: l10n.actionRemove,
-              ),
-            const SizedBox(height: 8),
-          ],
-        ),
-      );
-    },
-  );
-}
-
-/// Bottom sheet to toggle [paint] in and out of the user's paint lists.
-Future<void> showAddToListSheet(BuildContext context, Paint paint) {
-  return showModalBottomSheet<void>(
-    context: context,
-    showDragHandle: true,
-    builder: (sheetContext) {
-      final l10n = AppLocalizations.of(sheetContext);
-      // Watch, so the checkboxes reflect writes without closing the sheet.
-      final lists = sheetContext.watch<PaintListsProvider>();
-
-      return SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: PaintSwatch(paint: paint, size: 40),
-              title: Text(l10n.addToListTitle),
-              subtitle: Text(paint.name),
-            ),
-            const Divider(height: 1),
-            if (lists.lists.isEmpty)
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: Text(
-                  l10n.addToListEmpty,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(sheetContext).textTheme.bodyMedium,
-                ),
-              )
-            else
-              Flexible(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    for (final list in lists.lists)
-                      CheckboxListTile(
-                        value: list.paintIds.contains(paint.id),
-                        title: Text(list.name),
-                        subtitle:
-                            Text(l10n.listPaintCount(list.paintIds.length)),
-                        onChanged: (value) {
-                          if (value ?? false) {
-                            lists.addPaint(list.id, paint.id);
-                          } else {
-                            lists.removePaint(list.id, paint.id);
-                          }
-                        },
-                      ),
-                  ],
-                ),
-              ),
-            const SizedBox(height: 8),
-          ],
-        ),
-      );
-    },
-  );
 }
 
 /// Shared empty-state placeholder.
