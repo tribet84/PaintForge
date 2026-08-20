@@ -38,6 +38,13 @@ class ListsScreen extends StatelessWidget {
               icon: Icons.checklist_rtl,
               title: l10n.listsEmptyTitle,
               body: l10n.listsEmptyBody,
+              // The message explains what a list is; the button is the next
+              // sentence. An empty state is a doorway, not a dead end.
+              action: FilledButton.icon(
+                onPressed: () => _createList(context),
+                icon: const Icon(Icons.add),
+                label: Text(l10n.listsNew),
+              ),
             )
           else
             ListView(

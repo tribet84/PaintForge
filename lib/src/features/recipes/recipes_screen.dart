@@ -37,6 +37,15 @@ class RecipesScreen extends StatelessWidget {
               icon: Icons.auto_stories_outlined,
               title: l10n.recipesEmptyTitle,
               body: l10n.recipesEmptyBody,
+              action: FilledButton.icon(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const RecipeEditScreen(),
+                  ),
+                ),
+                icon: const Icon(Icons.add),
+                label: Text(l10n.recipesNew),
+              ),
             )
           else
             ListView(
