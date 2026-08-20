@@ -383,6 +383,7 @@
   "paintDetailsCode": "Code",
   "paintDetailsBrand": "Brand",
   "equivalentsTitle": "Close matches in other brands",
+  "shelfSubstitutesTitle": "From your shelf",
   "equivalentsNone": "No close match in another brand",
   "equivalentsTierTwin": "Twin",
   "equivalentsTierClose": "Very close",

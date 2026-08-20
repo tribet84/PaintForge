@@ -504,4 +504,49 @@ void main() {
           reason: 'both switches on reads as one state, written out');
     });
   });
+
+  group('shelf substitutes on the paint card', () {
+    testWidgets('a paint you lack shows which of YOUR pots stands in',
+        (tester) async {
+      // Owning Citadel's black and opening Vallejo's: the card should say
+      // "from your shelf: Abaddon Black" — the answer that costs nothing.
+      await pumpPaints(
+        tester,
+        owned: {'citadel-abaddon-black': PaintStatus.inStock},
+      );
+      // A stocked shelf lands on Mine; the pot we lack lives in All.
+      await tester.tap(find.descendant(
+        of: find.byType(SegmentedButton<PaintScope>),
+        matching: find.text('All'),
+      ));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField), '72.051');
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Black'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('From your shelf'), findsOneWidget);
+      expect(find.text('Abaddon Black'), findsWidgets);
+    });
+
+    testWidgets('a paint you already own offers no substitutes for itself',
+        (tester) async {
+      await pumpPaints(
+        tester,
+        owned: {
+          'vallejo-72051-black': PaintStatus.inStock,
+          'citadel-abaddon-black': PaintStatus.inStock,
+        },
+      );
+      await tester.enterText(find.byType(TextField), '72.051');
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Black'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('From your shelf'), findsNothing,
+          reason: 'you have the pot; there is nothing to substitute');
+      // The cross-brand section is still there for reference.
+      expect(find.text('Close matches in other brands'), findsOneWidget);
+    });
+  });
 }

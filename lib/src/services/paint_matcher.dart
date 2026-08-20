@@ -46,6 +46,38 @@ List<PaintMatch> crossBrandMatches(
   Paint paint, {
   int limit = 3,
 }) {
+  return _closest(
+    catalog.paints.where((c) => c.brand != paint.brand),
+    paint,
+    limit: limit,
+  );
+}
+
+/// The closest substitutes for [paint] among the pots the user already OWNS.
+///
+/// This is the money question: the recipe names a paint that is not on the
+/// shelf — which of MY bottles gets me there without buying anything?
+/// Unlike [crossBrandMatches], the same brand is welcome here: a substitute
+/// you own beats a purchase from any brand.
+List<PaintMatch> shelfSubstitutes(
+  CatalogRepository catalog,
+  Set<String> ownedIds,
+  Paint paint, {
+  int limit = 3,
+}) {
+  return _closest(
+    catalog.paints
+        .where((c) => c.id != paint.id && ownedIds.contains(c.id)),
+    paint,
+    limit: limit,
+  );
+}
+
+List<PaintMatch> _closest(
+  Iterable<Paint> candidates,
+  Paint paint, {
+  required int limit,
+}) {
   final color = paint.color;
   if (color == null) return const [];
 
@@ -53,8 +85,7 @@ List<PaintMatch> crossBrandMatches(
   final finish = _finishOf(paint);
 
   final scored = <({Paint paint, double deltaE})>[];
-  for (final candidate in catalog.paints) {
-    if (candidate.brand == paint.brand) continue;
+  for (final candidate in candidates) {
     if (_finishOf(candidate) != finish) continue;
     final candidateColor = candidate.color;
     if (candidateColor == null) continue;

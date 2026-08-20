@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/generated/app_localizations.dart';
 import '../data/catalog_repository.dart';
+import '../models/inventory_entry.dart';
 import '../models/paint.dart';
 import '../services/paint_matcher.dart';
+import '../state/inventory_provider.dart';
 import 'paint_widgets.dart';
 
 /// The paint's card: identity on top, cross-brand equivalents underneath.
@@ -22,7 +24,27 @@ Future<void> showPaintDetail(BuildContext context, Paint paint) {
       final l10n = AppLocalizations.of(sheetContext);
       final theme = Theme.of(sheetContext);
       final catalog = sheetContext.read<CatalogRepository>();
-      final matches = crossBrandMatches(catalog, paint);
+      // Watched, not read: toggling "I own it" inside this very sheet must
+      // update the shelf-substitutes section in place.
+      final inventory = sheetContext.watch<InventoryProvider>();
+      final ownedIds = {
+        for (final e in inventory.entries.values)
+          if (e.status == PaintStatus.inStock || e.status == PaintStatus.low)
+            e.paintId,
+      };
+
+      // The money section first: substitutes the user ALREADY OWNS, shown
+      // only when this pot is not on the shelf — if you own it, there is
+      // nothing to substitute.
+      final shelf = ownedIds.contains(paint.id)
+          ? const <PaintMatch>[]
+          : shelfSubstitutes(catalog, ownedIds, paint);
+      final shelfIds = {for (final m in shelf) m.paint.id};
+      // The brand list never repeats what the shelf already answered.
+      final matches = crossBrandMatches(catalog, paint, limit: 5)
+          .where((m) => !shelfIds.contains(m.paint.id))
+          .take(3)
+          .toList();
 
       return SafeArea(
         // Scrollable because it must not gamble on the screen: three match
@@ -45,6 +67,21 @@ Future<void> showPaintDetail(BuildContext context, Paint paint) {
               trailing: StatusToggles(paint: paint),
             ),
             const Divider(height: 1),
+            if (shelf.isNotEmpty) ...[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+                child: Text(
+                  l10n.shelfSubstitutesTitle,
+                  style: theme.textTheme.labelLarge
+                      ?.copyWith(color: theme.colorScheme.primary),
+                ),
+              ),
+              for (final match in shelf)
+                PaintTile(
+                  paint: match.paint,
+                  trailing: _TierChip(tier: match.tier),
+                ),
+            ],
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
               child: Text(

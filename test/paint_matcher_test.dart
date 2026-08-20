@@ -81,4 +81,47 @@ void main() {
           reason: 'guessing matches for ${p.name} would be invention');
     }
   });
+
+  group('shelfSubstitutes', () {
+    test('only ever offers pots the user actually owns', () {
+      final target = catalog.byId('citadel-mephiston-red')!;
+      final owned = {'tap-wp3118-pure-red', 'vallejo-72011-gory-red'};
+
+      for (final m in shelfSubstitutes(catalog, owned, target)) {
+        expect(owned, contains(m.paint.id));
+      }
+    });
+
+    test('the same brand is welcome — a substitute you own beats a purchase',
+        () {
+      // Owning Citadel's Evil Sunz Scarlet while looking at Citadel's
+      // Wild Rider Red: same brand, and exactly the answer wanted.
+      final target = catalog.byId('citadel-wild-rider-red')!;
+      final owned = {'citadel-evil-sunz-scarlet'};
+
+      final subs = shelfSubstitutes(catalog, owned, target);
+      expect(subs.map((m) => m.paint.id), contains('citadel-evil-sunz-scarlet'));
+    });
+
+    test('never offers the paint as a substitute for itself', () {
+      final target = catalog.byId('citadel-abaddon-black')!;
+      final owned = {'citadel-abaddon-black', 'vallejo-70950-black'};
+
+      final subs = shelfSubstitutes(catalog, owned, target);
+      expect(subs.map((m) => m.paint.id),
+          isNot(contains('citadel-abaddon-black')));
+    });
+
+    test('an empty shelf yields no substitutes, not an error', () {
+      final target = catalog.byId('citadel-mephiston-red')!;
+      expect(shelfSubstitutes(catalog, const {}, target), isEmpty);
+    });
+
+    test('finish families still hold: an owned gold cannot stand in for a red',
+        () {
+      final target = catalog.byId('citadel-mephiston-red')!;
+      final owned = {'tap-wp3189-bright-gold'};
+      expect(shelfSubstitutes(catalog, owned, target), isEmpty);
+    });
+  });
 }
