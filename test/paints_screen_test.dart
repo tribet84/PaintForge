@@ -455,4 +455,46 @@ void main() {
       expect(find.text('Abaddon Black'), findsNothing);
     });
   });
+
+  group('scope latching and status labels', () {
+    testWidgets('marking your first paint must NOT yank the toggle to Mine',
+        (tester) async {
+      // User-reported: browsing All with an empty shelf, marking one pot
+      // flipped the scope under their fingers, because the default was
+      // recomputed on every build instead of latched on the first one.
+      await pumpPaints(tester);
+      await tester.enterText(find.byType(TextField), '72.051');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.check_circle_outline));
+      await tester.pumpAndSettle();
+
+      final segmented = tester.widget<SegmentedButton<PaintScope>>(
+        find.byType(SegmentedButton<PaintScope>),
+      );
+      expect(segmented.selected, {PaintScope.all},
+          reason: 'the default is decided once; only the user changes it');
+    });
+
+    testWidgets('the row spells the status out next to the swatch',
+        (tester) async {
+      // Phones have no tooltips: the coloured word is what teaches a new
+      // user what the icon they just tapped means.
+      await pumpPaints(tester);
+      await tester.enterText(find.byType(TextField), '72.051');
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('To buy'), findsNothing);
+      await tester.tap(find.byIcon(Icons.shopping_cart_outlined));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('To buy'), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.check_circle_outline));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('Running low'), findsOneWidget,
+          reason: 'both switches on reads as one state, written out');
+    });
+  });
 }

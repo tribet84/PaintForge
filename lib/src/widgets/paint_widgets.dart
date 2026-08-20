@@ -130,11 +130,28 @@ class PaintTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final brightness = Theme.of(context).brightness;
+    final scheme = Theme.of(context).colorScheme;
+    final status = context
+        .select<InventoryProvider, PaintStatus?>((p) => p.statusOf(paint.id));
     final subtitle = [
       if (showBrand) paint.brandName,
       paint.range,
       if (paint.code != null) paint.code!,
     ].join(' · ');
+    // The status is written out, not just toggled: on a phone there is no
+    // hover and no tooltip, so the coloured word is what teaches a new user
+    // what the two icons they just tapped actually mean.
+    final (statusLabel, statusColor) = switch (status) {
+      null => (null, null),
+      PaintStatus.inStock => (
+          l10n.statusInStock,
+          StockColors.inStock(brightness)
+        ),
+      PaintStatus.low => (l10n.statusLow, StockColors.low(brightness)),
+      PaintStatus.wishlist => (l10n.statusWishlist, scheme.error),
+    };
     return ListTile(
       // These lists are long — 400+ paints in the catalog — so the row is
       // tightened to fit noticeably more on screen while staying above the
@@ -145,8 +162,20 @@ class PaintTile extends StatelessWidget {
       horizontalTitleGap: 12,
       leading: PaintSwatch(paint: paint, size: 36),
       title: Text(paint.name, maxLines: 1, overflow: TextOverflow.ellipsis),
-      subtitle: Text(
-        subtitle,
+      subtitle: Text.rich(
+        TextSpan(
+          text: subtitle,
+          children: [
+            if (showStatus && statusLabel != null)
+              TextSpan(
+                text: ' · $statusLabel',
+                style: TextStyle(
+                  color: statusColor,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+          ],
+        ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: Theme.of(context).textTheme.bodySmall,

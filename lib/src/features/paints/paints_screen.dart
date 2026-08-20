@@ -97,9 +97,14 @@ class _PaintsScreenState extends State<PaintsScreen> {
         onDone: () => setState(() => _starterDismissed = true),
       );
     }
-    // First build decides the default; after that the user is in charge.
-    final scope = _scope ??
-        (owned.isEmpty ? PaintScope.all : PaintScope.mine);
+    // The first loaded build LATCHES the default; after that only the user
+    // changes it. The previous `??` recomputed the default on every build,
+    // so marking your first paint flipped the toggle from All to Mine under
+    // your fingers mid-browse. Latching after the starter's early return
+    // also means completing the starter lands you on Mine — your new shelf —
+    // while skipping it lands you on All.
+    _scope ??= owned.isEmpty ? PaintScope.all : PaintScope.mine;
+    final scope = _scope!;
 
 
     // Everything the current search + scope allows within the brand, BEFORE
