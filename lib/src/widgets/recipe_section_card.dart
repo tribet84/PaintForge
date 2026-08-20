@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart' hide Paint;
 
+import 'package:provider/provider.dart';
+
 import '../../l10n/generated/app_localizations.dart';
 import '../data/catalog_repository.dart';
+import '../models/inventory_entry.dart';
 import '../models/paint.dart';
 import '../models/recipe.dart';
+import '../services/paint_matcher.dart';
+import '../state/inventory_provider.dart';
+import 'paint_detail_sheet.dart';
 import 'paint_widgets.dart';
 import 'technique_widgets.dart';
 
@@ -50,6 +56,7 @@ class RecipeSectionCard extends StatelessWidget {
                 _StepRow(
                   index: i + 1,
                   step: section.steps[i],
+                  catalog: catalog,
                   paint: section.steps[i].paintId == null
                       ? null
                       : catalog.byId(section.steps[i].paintId!),
@@ -66,15 +73,46 @@ class RecipeSectionCard extends StatelessWidget {
 }
 
 class _StepRow extends StatelessWidget {
-  const _StepRow({required this.index, required this.step, this.paint});
+  const _StepRow({
+    required this.index,
+    required this.step,
+    required this.catalog,
+    this.paint,
+  });
 
   final int index;
   final RecipeStep step;
+  final CatalogRepository catalog;
   final Paint? paint;
+
+  /// The best substitute the reader already owns, or null when the step's
+  /// paint is on their shelf (nothing to substitute), unknown, or nothing
+  /// they own comes honestly close.
+  ///
+  /// This is where the recipe feature and the colour matching earn their
+  /// keep together: the most expensive moment of following someone else's
+  /// recipe is the shopping list it implies. Each step answers with the
+  /// pot the reader already has before implying a purchase.
+  PaintMatch? _shelfSubstitute(BuildContext context) {
+    final target = paint;
+    if (target == null) return null;
+    final inventory = context.watch<InventoryProvider?>();
+    if (inventory == null) return null;
+    final ownedIds = {
+      for (final e in inventory.entries.values)
+        if (e.status == PaintStatus.inStock || e.status == PaintStatus.low)
+          e.paintId,
+    };
+    if (ownedIds.contains(target.id)) return null;
+    final subs = shelfSubstitutes(catalog, ownedIds, target, limit: 1);
+    return subs.isEmpty ? null : subs.first;
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+    final substitute = _shelfSubstitute(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
@@ -114,6 +152,39 @@ class _StepRow extends StatelessWidget {
                     step.note,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                if (substitute != null)
+                  InkWell(
+                    onTap: () => showPaintDetail(context, substitute.paint),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.swap_horiz,
+                              size: 14, color: theme.colorScheme.primary),
+                          const SizedBox(width: 4),
+                          Flexible(
+                            child: Text(
+                              '${l10n.shelfSubstitutesTitle}: '
+                              '${substitute.paint.name} · '
+                              '${switch (substitute.tier) {
+                                MatchTier.twin => l10n.equivalentsTierTwin,
+                                MatchTier.close => l10n.equivalentsTierClose,
+                                MatchTier.approximate =>
+                                  l10n.equivalentsTierApprox,
+                              }}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
               ],
