@@ -23,16 +23,23 @@ void main() {
     catalog = await CatalogRepository.loadFromAssets();
   });
 
+  late FakeInventoryRepository lastRepository;
+
   Future<InventoryProvider> pumpShoppingList(
     WidgetTester tester, {
     required List<String> lowPaintIds,
+    List<String> wishlistPaintIds = const [],
     Duration purchaseFeedbackDebounce = const Duration(milliseconds: 30),
   }) async {
     final repository = FakeInventoryRepository();
+    lastRepository = repository;
     final inventory = InventoryProvider(repository: repository);
     addTearDown(inventory.dispose);
     for (final paintId in lowPaintIds) {
       await inventory.setStatus(paintId, PaintStatus.low);
+    }
+    for (final paintId in wishlistPaintIds) {
+      await inventory.setStatus(paintId, PaintStatus.wishlist);
     }
 
     await tester.pumpWidget(
@@ -186,5 +193,52 @@ void main() {
       await tester.pump(const Duration(milliseconds: 500));
       expect(staleMessage, findsNothing);
     }
+  });
+
+  group('empty the wish list', () {
+    testWidgets('clears the wishes in ONE write and leaves the lows alone',
+        (tester) async {
+      final inventory = await pumpShoppingList(
+        tester,
+        lowPaintIds: ['citadel-abaddon-black'],
+        wishlistPaintIds: ['citadel-mephiston-red', 'citadel-macragge-blue'],
+      );
+      lastRepository.writeCalls = 0;
+
+      await tester.tap(find.byIcon(Icons.remove_shopping_cart_outlined));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Empty'));
+      await tester.pumpAndSettle();
+
+      expect(inventory.statusOf('citadel-mephiston-red'), isNull);
+      expect(inventory.statusOf('citadel-macragge-blue'), isNull);
+      expect(inventory.statusOf('citadel-abaddon-black'), PaintStatus.low,
+          reason: 'a running-low pot mirrors the shelf, not a wish — the '
+              'only honest ways off the list are buying it or marking it '
+              'full');
+      expect(lastRepository.writeCalls, 1);
+    });
+
+    testWidgets('cancelling clears nothing', (tester) async {
+      final inventory = await pumpShoppingList(
+        tester,
+        lowPaintIds: const [],
+        wishlistPaintIds: ['citadel-mephiston-red'],
+      );
+
+      await tester.tap(find.byIcon(Icons.remove_shopping_cart_outlined));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Cancel'));
+      await tester.pumpAndSettle();
+
+      expect(inventory.statusOf('citadel-mephiston-red'), PaintStatus.wishlist);
+    });
+
+    testWidgets('no wishes, no button — lows alone offer nothing to empty',
+        (tester) async {
+      await pumpShoppingList(tester, lowPaintIds: ['citadel-abaddon-black']);
+
+      expect(find.byIcon(Icons.remove_shopping_cart_outlined), findsNothing);
+    });
   });
 }

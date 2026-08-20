@@ -59,6 +59,13 @@
   "shoppingCopyTooltip": "Copy list",
   "shoppingShareTooltip": "Share list",
   "shoppingMarkAllBought": "Mark all as bought",
+  "shoppingClearWishlist": "Empty the wish list",
+  "shoppingClearTitle": "Empty the wish list?",
+  "shoppingClearBody": "{count, plural, =1{1 paint marked \"to buy\" will be removed from the list.} other{{count} paints marked \"to buy\" will be removed from the list.}} Paints running low stay: they reflect your shelf, not a wish.",
+  "shoppingClearAction": "Empty",
+  "shoppingCleared": "{count, plural, =1{1 paint removed from the list} other{{count} paints removed from the list}}",
+  "@shoppingClearBody": {"placeholders": {"count": {"type": "int"}}},
+  "@shoppingCleared": {"placeholders": {"count": {"type": "int"}}},
   "shoppingMarkAllConfirmTitle": "Mark everything as bought?",
   "shoppingMarkAllConfirmBody": "{count, plural, =1{1 paint will be marked as owned and leave the shopping list.} other{{count} paints will be marked as owned and leave the shopping list.}}",
   "@shoppingMarkAllConfirmBody": {

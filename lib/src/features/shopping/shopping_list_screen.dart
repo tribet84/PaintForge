@@ -149,6 +149,15 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       appBar: AppBar(
         title: Text(l10n.tabShopping),
         actions: [
+          // Emptying only touches the wish half of the cart. The running-low
+          // rows are not wishes — they mirror pots on the shelf, and the only
+          // honest ways off the list are buying them or marking them full.
+          if (wishlist.isNotEmpty)
+            IconButton(
+              tooltip: l10n.shoppingClearWishlist,
+              icon: const Icon(Icons.remove_shopping_cart_outlined),
+              onPressed: () => _confirmClearWishlist(context, wishlist),
+            ),
           IconButton(
             tooltip: l10n.shoppingMarkAllBought,
             icon: const Icon(Icons.done_all),
@@ -222,6 +231,40 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
   /// Bulk version of [_confirmPurchase] for the whole list at once — still
   /// gated behind a confirmation, since it is even easier to trigger by
   /// mistake than a single-paint tap.
+  Future<void> _confirmClearWishlist(
+    BuildContext context,
+    List<(InventoryEntry, Paint)> wishlist,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final inventory = context.read<InventoryProvider>();
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.shoppingClearTitle),
+        content: Text(l10n.shoppingClearBody(wishlist.length)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.actionCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.shoppingClearAction),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    // One batched write, not one per paint.
+    await inventory.removeAll([for (final (e, _) in wishlist) e.paintId]);
+    messenger.showSnackBar(
+      SnackBar(content: Text(l10n.shoppingCleared(wishlist.length))),
+    );
+  }
+
   Future<void> _confirmMarkAllPurchased(
     BuildContext context,
     List<(InventoryEntry, Paint)> low,
