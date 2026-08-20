@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../data/catalog_repository.dart';
-import '../../models/inventory_entry.dart';
 import '../../models/paint.dart';
 import '../../models/paint_list.dart';
 import '../../state/inventory_provider.dart';
@@ -13,6 +12,7 @@ import '../../widgets/paint_widgets.dart';
 import '../../widgets/readiness_detail.dart';
 import 'lists_screen.dart' show showListNameDialog;
 import 'paint_picker_screen.dart';
+import '../../services/add_missing_to_shopping.dart';
 
 /// One paint list: what it contains and whether it can be painted right now.
 class PaintListDetailScreen extends StatelessWidget {
@@ -120,7 +120,7 @@ class PaintListDetailScreen extends StatelessWidget {
                 heroTag: 'list-to-shopping',
                 backgroundColor: Theme.of(context).colorScheme.errorContainer,
                 foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
-                onPressed: () => _addMissingToShopping(context, list),
+                onPressed: () => addMissingToShopping(context, list.paintIds),
                 icon: const Icon(Icons.add_shopping_cart),
                 label: Text(l10n.listAddMissingToShopping),
               ),
@@ -195,24 +195,6 @@ class PaintListDetailScreen extends StatelessWidget {
 
   /// Puts every paint of the list that is missing or running low on the
   /// shopping list, without touching the ones already well stocked.
-  Future<void> _addMissingToShopping(
-    BuildContext context,
-    PaintList list,
-  ) async {
-    final l10n = AppLocalizations.of(context);
-    final messenger = ScaffoldMessenger.of(context);
-    final inventory = context.read<InventoryProvider>();
-
-    // Only paints with no entry at all need adding; low and wishlisted ones
-    // are already on the shopping list. One batched write, not one per paint.
-    final missing = list.paintIds
-        .where((paintId) => inventory.statusOf(paintId) == null)
-        .toList();
-    await inventory.setStatusForAll(missing, PaintStatus.wishlist);
-    messenger.showSnackBar(
-      SnackBar(content: Text(l10n.listAddedToShopping(missing.length))),
-    );
-  }
 }
 
 class _ReadinessHeader extends StatelessWidget {

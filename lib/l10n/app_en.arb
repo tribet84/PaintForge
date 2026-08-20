@@ -312,6 +312,13 @@
   "listPaintRemoved": "Paint removed from the list",
   "listAddMissingToShopping": "Add what's needed to the shopping list",
   "listAddedToShopping": "{count, plural, =0{Nothing to add} =1{1 paint added to the shopping list} other{{count} paints added to the shopping list}}",
+  "shoppingChoiceTitle": "Some of these have a stand-in",
+  "shoppingChoiceBody": "{substitutable, plural, =1{1 of the missing paints has a close match on your shelf.} other{{substitutable} of the missing paints have a close match on your shelf.}}",
+  "shoppingChoiceOnlyNeeded": "{count, plural, =1{Add only the 1 without} other{Add only the {count} without}}",
+  "shoppingChoiceAll": "{count, plural, other{Add all {count}}}",
+  "@shoppingChoiceBody": {"placeholders": {"substitutable": {"type": "int"}}},
+  "@shoppingChoiceOnlyNeeded": {"placeholders": {"count": {"type": "int"}}},
+  "@shoppingChoiceAll": {"placeholders": {"count": {"type": "int"}}},
   "@listAddedToShopping": {
     "placeholders": {
       "count": {

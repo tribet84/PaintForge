@@ -5,7 +5,6 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../data/catalog_repository.dart';
-import '../../models/inventory_entry.dart';
 import '../../models/recipe.dart';
 import '../../services/external_link.dart';
 import '../../services/share_links.dart';
@@ -18,6 +17,7 @@ import '../../widgets/recipe_section_card.dart';
 import 'recipe_actions.dart';
 import 'recipe_edit_screen.dart';
 import '../../widgets/recipe_photo_viewer.dart';
+import '../../services/add_missing_to_shopping.dart';
 
 /// One of the user's own recipes.
 class RecipeDetailScreen extends StatelessWidget {
@@ -184,7 +184,7 @@ class RecipeDetailScreen extends StatelessWidget {
               heroTag: 'recipe-to-shopping',
               backgroundColor: Theme.of(context).colorScheme.errorContainer,
               foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
-              onPressed: () => _addMissingToShopping(context, recipe),
+              onPressed: () => addMissingToShopping(context, recipe.allPaintIds),
               icon: const Icon(Icons.add_shopping_cart),
               label: Text(l10n.listAddMissingToShopping),
             )
@@ -301,24 +301,5 @@ class RecipeDetailScreen extends StatelessWidget {
     await provider.delete(recipe);
     messenger.showSnackBar(SnackBar(content: Text(l10n.recipeDeleted)));
     navigator.pop();
-  }
-
-  Future<void> _addMissingToShopping(
-    BuildContext context,
-    Recipe recipe,
-  ) async {
-    final l10n = AppLocalizations.of(context);
-    final messenger = ScaffoldMessenger.of(context);
-    final inventory = context.read<InventoryProvider>();
-
-    // Only paints with no entry at all need adding; the rest are already
-    // low or wishlisted, so they are on the list already.
-    final missing = recipe.allPaintIds
-        .where((paintId) => inventory.statusOf(paintId) == null)
-        .toList();
-    await inventory.setStatusForAll(missing, PaintStatus.wishlist);
-    messenger.showSnackBar(
-      SnackBar(content: Text(l10n.listAddedToShopping(missing.length))),
-    );
   }
 }

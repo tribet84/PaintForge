@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../data/catalog_repository.dart';
 import '../../data/published_recipe_repository.dart';
-import '../../models/inventory_entry.dart';
-import '../../models/recipe.dart';
 import '../../services/external_link.dart';
 import '../../state/inventory_provider.dart';
 import '../../state/recipes_provider.dart';
@@ -17,6 +15,7 @@ import '../../widgets/recipe_section_card.dart';
 import 'recipe_actions.dart';
 import '../../widgets/brand_loader.dart';
 import '../../widgets/recipe_photo_viewer.dart';
+import '../../services/add_missing_to_shopping.dart';
 
 /// A recipe shared by another painter, opened from a link or from the
 /// "linked recipes" section.
@@ -285,7 +284,7 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
                         Theme.of(context).colorScheme.errorContainer,
                     foregroundColor:
                         Theme.of(context).colorScheme.onErrorContainer,
-                    onPressed: () => _addMissingToShopping(context, recipe),
+                    onPressed: () => addMissingToShopping(context, recipe.allPaintIds),
                     icon: const Icon(Icons.add_shopping_cart),
                     label: Text(l10n.listAddMissingToShopping),
                   ),
@@ -329,24 +328,5 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
       messenger.showSnackBar(SnackBar(content: Text(l10n.recipeLinked)));
     }
     await _refreshLinkCount();
-  }
-
-  Future<void> _addMissingToShopping(
-    BuildContext context,
-    Recipe recipe,
-  ) async {
-    final l10n = AppLocalizations.of(context);
-    final messenger = ScaffoldMessenger.of(context);
-    final inventory = context.read<InventoryProvider>();
-
-    // Only paints with no entry at all need adding; the rest are already
-    // low or wishlisted, so they are on the list already.
-    final missing = recipe.allPaintIds
-        .where((paintId) => inventory.statusOf(paintId) == null)
-        .toList();
-    await inventory.setStatusForAll(missing, PaintStatus.wishlist);
-    messenger.showSnackBar(
-      SnackBar(content: Text(l10n.listAddedToShopping(missing.length))),
-    );
   }
 }
