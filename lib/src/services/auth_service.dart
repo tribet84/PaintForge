@@ -46,6 +46,14 @@ abstract class AuthService {
   /// being interrupted after it.
   DateTime? get lastSignInTime;
 
+  /// Sets the name other painters see on everything this account shares.
+  ///
+  /// Prerequisite for author pages: without it, an email/password account
+  /// publishes under the local part of its address, which is often a real
+  /// name — tolerable on a single shared link, unacceptable on a page that
+  /// aggregates someone's whole public activity.
+  Future<void> setDisplayName(String name);
+
   /// Permanently deletes the signed-in Firebase Auth account.
   ///
   /// Firebase requires a *recent* sign-in for this; call a `reauthenticate*`
@@ -180,6 +188,16 @@ class FirebaseAuthService implements AuthService {
       await _googleSignIn.signOut();
     }
     await user.delete();
+  }
+
+  @override
+  Future<void> setDisplayName(String name) async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+    await user.updateDisplayName(name);
+    // Reload so currentUser reflects the change immediately — the publish
+    // flow reads displayName from there.
+    await user.reload();
   }
 
   @override

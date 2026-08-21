@@ -11,8 +11,54 @@ import '../../widgets/account_avatar.dart';
 import '../admin/admin_screen.dart';
 import 'delete_account_flow.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  Future<void> _editDisplayName(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final auth = context.read<AuthService>();
+    final controller =
+        TextEditingController(text: auth.currentUser?.displayName ?? '');
+
+    final name = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.settingsDisplayName),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          maxLength: 40,
+          decoration: InputDecoration(helperText: l10n.settingsDisplayNameHint),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(l10n.actionCancel),
+          ),
+          FilledButton(
+            onPressed: () =>
+                Navigator.of(dialogContext).pop(controller.text.trim()),
+            child: Text(l10n.actionSave),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (name == null || name.isEmpty) return;
+
+    await auth.setDisplayName(name);
+    if (!mounted) return;
+    setState(() {});
+    messenger.showSnackBar(
+      SnackBar(content: Text(l10n.settingsDisplayNameSaved)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +86,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             title: Text(user?.displayName ?? user?.email ?? ''),
             subtitle: user?.displayName != null ? Text(user?.email ?? '') : null,
+            trailing: const Icon(Icons.edit_outlined, size: 18),
+            onTap: () => _editDisplayName(context),
           ),
           const Divider(),
           // Cosmetic gate only — the enforceable one is the matching claim

@@ -231,6 +231,12 @@ class FakePublishedRecipeRepository implements PublishedRecipeRepository {
       Stream.value(_published[publishedId]);
 
   @override
+  Future<List<PublishedRecipe>> byAuthor(String ownerUid) async => [
+        for (final p in _published.values)
+          if (p.ownerUid == ownerUid) p,
+      ]..sort((a, b) => b.recipe.updatedAt.compareTo(a.recipe.updatedAt));
+
+  @override
   Stream<List<String>> watchLinkedIds() =>
       _replay(_linkedController, () => _linkedIds.toList());
 

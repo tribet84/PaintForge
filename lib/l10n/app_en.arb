@@ -197,7 +197,7 @@
     }
   },
   "recipeShareTitle": "Share this recipe?",
-  "recipeShareBody": "Anyone with the link can view it and link it to their account. When you update the recipe, everyone sees your latest version — links follow the recipe, they never copy it.",
+  "recipeShareBody": "Anyone with the link can view it and link it to their account. When you update the recipe, everyone sees your latest version — links follow the recipe, they never copy it. It will also appear on your author page, next to everything else you share.",
   "recipeSharedBadge": "Shared",
   "recipeLinkCopied": "Link copied to clipboard",
   "recipeCopyLink": "Copy link",
@@ -206,6 +206,13 @@
   "recipeStopSharingBody": "The link will stop working and the recipe will disappear from the accounts that linked it. Your local copy is not affected.",
   "recipeUnpublished": "Recipe is no longer shared",
   "recipeByAuthor": "by {author}",
+  "authorRecipesTitle": "Recipes by {name}",
+  "authorRecipesCount": "{count, plural, =1{1 shared recipe} other{{count} shared recipes}}",
+  "settingsDisplayName": "Display name",
+  "settingsDisplayNameHint": "How other painters see you on shared recipes",
+  "settingsDisplayNameSaved": "Name updated — it will appear on what you publish from now on",
+  "@authorRecipesTitle": {"placeholders": {"name": {"type": "String"}}},
+  "@authorRecipesCount": {"placeholders": {"count": {"type": "int"}}},
   "@recipeByAuthor": {
     "placeholders": {
       "author": {

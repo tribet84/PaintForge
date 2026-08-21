@@ -39,6 +39,14 @@ abstract class PublishedRecipeRepository {
 
   Stream<PublishedRecipe?> watchPublished(String publishedId);
 
+  /// Every recipe this author currently has published, newest first.
+  ///
+  /// Backs the author page — reachable only from a recipe the viewer
+  /// already holds a link to, so a short list reads as a person's shelf,
+  /// never as an empty marketplace. Sorted client-side: the list is
+  /// human-sized and a composite index would be infrastructure for nothing.
+  Future<List<PublishedRecipe>> byAuthor(String ownerUid);
+
   /// Ids of the public recipes the user has linked into their account.
   Stream<List<String>> watchLinkedIds();
 
@@ -114,36 +122,53 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
 
   @override
   Stream<PublishedRecipe?> watchPublished(String publishedId) {
-    return _published.doc(publishedId).snapshots().map((snapshot) {
-      final data = snapshot.data();
-      final ownerUid = data?['ownerUid'] as String?;
-      final name = data?['name'] as String?;
-      if (data == null || ownerUid == null || name == null) return null;
-      return PublishedRecipe(
-        id: snapshot.id,
-        ownerUid: ownerUid,
-        authorName: data['authorName'] as String? ?? '',
-        recipe: Recipe(
-          id: snapshot.id,
-          name: name,
-          description: data['description'] as String? ?? '',
-          sections: (data['sections'] as List<dynamic>? ?? const [])
-              .whereType<Map<String, dynamic>>()
-              .map(RecipeSection.fromMap)
-              .whereType<RecipeSection>()
-              .toList(),
-          links: (data['links'] as List<dynamic>? ?? const [])
-              .whereType<Map<String, dynamic>>()
-              .map(RecipeLink.fromMap)
-              .whereType<RecipeLink>()
-              .toList(),
-          photo: data['photo'] as String?,
-          photoUrl: data['photoUrl'] as String?,
-          updatedAt:
-              (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-        ),
-      );
-    });
+    return _published
+        .doc(publishedId)
+        .snapshots()
+        .map((snapshot) => _fromData(snapshot.id, snapshot.data()));
+  }
+
+  @override
+  Future<List<PublishedRecipe>> byAuthor(String ownerUid) async {
+    final snapshot =
+        await _published.where('ownerUid', isEqualTo: ownerUid).get();
+    final recipes = [
+      for (final doc in snapshot.docs)
+        if (_fromData(doc.id, doc.data()) case final recipe?) recipe,
+    ]..sort((a, b) => b.recipe.updatedAt.compareTo(a.recipe.updatedAt));
+    return recipes;
+  }
+
+  /// One parser for every read path, so the author page can never disagree
+  /// with the single-recipe view about what a published doc means.
+  PublishedRecipe? _fromData(String id, Map<String, dynamic>? data) {
+    final ownerUid = data?['ownerUid'] as String?;
+    final name = data?['name'] as String?;
+    if (data == null || ownerUid == null || name == null) return null;
+    return PublishedRecipe(
+      id: id,
+      ownerUid: ownerUid,
+      authorName: data['authorName'] as String? ?? '',
+      recipe: Recipe(
+        id: id,
+        name: name,
+        description: data['description'] as String? ?? '',
+        sections: (data['sections'] as List<dynamic>? ?? const [])
+            .whereType<Map<String, dynamic>>()
+            .map(RecipeSection.fromMap)
+            .whereType<RecipeSection>()
+            .toList(),
+        links: (data['links'] as List<dynamic>? ?? const [])
+            .whereType<Map<String, dynamic>>()
+            .map(RecipeLink.fromMap)
+            .whereType<RecipeLink>()
+            .toList(),
+        photo: data['photo'] as String?,
+        photoUrl: data['photoUrl'] as String?,
+        updatedAt:
+            (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      ),
+    );
   }
 
   @override

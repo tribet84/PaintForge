@@ -16,6 +16,7 @@ import 'recipe_actions.dart';
 import '../../widgets/brand_loader.dart';
 import '../../widgets/recipe_photo_viewer.dart';
 import '../../services/add_missing_to_shopping.dart';
+import 'author_screen.dart';
 
 /// A recipe shared by another painter, opened from a link or from the
 /// "linked recipes" section.
@@ -197,13 +198,50 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
                     const Icon(Icons.link, size: 18),
                     const SizedBox(width: 6),
                     Expanded(
-                      child: Text(
-                        l10n.recipeByAuthor(
-                          published.authorName.isEmpty
-                              ? '—'
-                              : published.authorName,
+                      // The author's name is the door to everything else
+                      // they share — the only discovery path there is, on
+                      // purpose: reached from a recipe someone sent you, a
+                      // short list reads as a painter's shelf, not an empty
+                      // marketplace.
+                      child: InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => AuthorScreen(
+                              ownerUid: published.ownerUid,
+                              authorName: published.authorName.isEmpty
+                                  ? '—'
+                                  : published.authorName,
+                            ),
+                          ),
                         ),
-                        style: Theme.of(context).textTheme.titleSmall,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                l10n.recipeByAuthor(
+                                  published.authorName.isEmpty
+                                      ? '—'
+                                      : published.authorName,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary,
+                                    ),
+                              ),
+                            ),
+                            Icon(
+                              Icons.chevron_right,
+                              size: 18,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Text(
