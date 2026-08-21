@@ -13,8 +13,11 @@ class StockColors {
   static Color inStock(Brightness b) =>
       b == Brightness.dark ? const Color(0xFF7FC98A) : const Color(0xFF3E8E4E);
 
+  // Light amber is 0xFF8F5A00, not the prettier 0xFFB77410 it used to be:
+  // that one measured 3.8:1 against white, below the 4.5:1 the coloured
+  // status words need at body-text size.
   static Color low(Brightness b) =>
-      b == Brightness.dark ? const Color(0xFFE8B45C) : const Color(0xFFB77410);
+      b == Brightness.dark ? const Color(0xFFE8B45C) : const Color(0xFF8F5A00);
 
   static Color missing(Brightness b) =>
       b == Brightness.dark ? const Color(0xFF6E6157) : const Color(0xFFC9BDB3);
