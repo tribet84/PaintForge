@@ -213,13 +213,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           const SizedBox(height: 8),
           ListTile(
-            leading: AccountAvatar(
-              photoUrl: auth.photoUrl,
-              size: 40,
-              // Password accounts have no picture, so they keep the initial.
-              fallback: CircleAvatar(
-                child: Text(
-                  (user?.email ?? '?').substring(0, 1).toUpperCase(),
+            // The avatar is its own tap target: the pencil badge riding its
+            // corner changes the PHOTO, while the row (and its trailing
+            // pencil) keeps editing the display name. Editing a thing by
+            // touching the thing beats a second menu entry.
+            leading: InkWell(
+              onTap: () => _changeProfilePhoto(context),
+              customBorder: const CircleBorder(),
+              child: Semantics(
+                button: true,
+                label: l10n.settingsPhotoTitle,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    AccountAvatar(
+                      photoUrl: auth.photoUrl,
+                      size: 40,
+                      // Password accounts have no picture, so they keep
+                      // the initial.
+                      fallback: CircleAvatar(
+                        child: Text(
+                          (user?.email ?? '?').substring(0, 1).toUpperCase(),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: -2,
+                      bottom: -2,
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          shape: BoxShape.circle,
+                          // A hairline of surface colour so the badge stays
+                          // legible over any avatar photo.
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.surface,
+                            width: 1.5,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.edit,
+                          size: 12,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -227,12 +267,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: user?.displayName != null ? Text(user?.email ?? '') : null,
             trailing: const Icon(Icons.edit_outlined, size: 18),
             onTap: () => _editDisplayName(context),
-          ),
-          ListTile(
-            leading: const Icon(Icons.photo_camera_outlined),
-            title: Text(l10n.settingsPhotoTitle),
-            subtitle: Text(l10n.settingsPhotoSubtitle),
-            onTap: () => _changeProfilePhoto(context),
           ),
           const Divider(),
           // Cosmetic gate only — the enforceable one is the matching claim
