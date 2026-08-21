@@ -1,917 +1,19 @@
 {
   "brand": "armyPainter",
   "brandName": "The Army Painter",
+  "rangeOrder": [
+    "Warpaints Fanatic",
+    "Warpaints Fanatic Metallic",
+    "Warpaints Fanatic Wash",
+    "Warpaints Fanatic Effects",
+    "Speedpaint 2.0",
+    "Speedpaint 2.0 Metallics",
+    "Speedpaint",
+    "Warpaints",
+    "Warpaints Metallics",
+    "Washes"
+  ],
   "paints": [
-    {
-      "id": "ap-sp-blood-red",
-      "name": "Blood Red",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#9E1414"
-    },
-    {
-      "id": "ap-sp-crusader-skin",
-      "name": "Crusader Skin",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#C98D68"
-    },
-    {
-      "id": "ap-sp-dark-wood",
-      "name": "Dark Wood",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#4E3220"
-    },
-    {
-      "id": "ap-sp-gravelord-grey",
-      "name": "Gravelord Grey",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#6E7477"
-    },
-    {
-      "id": "ap-sp-grim-black",
-      "name": "Grim Black",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#232323"
-    },
-    {
-      "id": "ap-sp-hardened-leather",
-      "name": "Hardened Leather",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#7B5230"
-    },
-    {
-      "id": "ap-sp-highlord-blue",
-      "name": "Highlord Blue",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#2255A4"
-    },
-    {
-      "id": "ap-sp-malignant-green",
-      "name": "Malignant Green",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#3E7C34"
-    },
-    {
-      "id": "ap-sp-pallid-bone",
-      "name": "Pallid Bone",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#CBBE9A"
-    },
-    {
-      "id": "ap-sp-zealot-yellow",
-      "name": "Zealot Yellow",
-      "range": "Speedpaint",
-      "code": null,
-      "hex": "#F2B705"
-    },
-    {
-      "id": "tap-wp2007-absolution-green",
-      "name": "Absolution Green",
-      "range": "Speedpaint 2.0",
-      "code": "WP2007",
-      "hex": "#214A28"
-    },
-    {
-      "id": "tap-wp2036-aged-hide",
-      "name": "Aged Hide",
-      "range": "Speedpaint 2.0",
-      "code": "WP2036",
-      "hex": "#D56C4F"
-    },
-    {
-      "id": "tap-wp2045-algae-green",
-      "name": "Algae Green",
-      "range": "Speedpaint 2.0",
-      "code": "WP2045",
-      "hex": "#9CAA53"
-    },
-    {
-      "id": "tap-wp2060-ancient-honey",
-      "name": "Ancient Honey",
-      "range": "Speedpaint 2.0",
-      "code": "WP2060",
-      "hex": "#EBBD21"
-    },
-    {
-      "id": "tap-wp2025-ashen-stone",
-      "name": "Ashen Stone",
-      "range": "Speedpaint 2.0",
-      "code": "WP2025",
-      "hex": "#B3B9B9"
-    },
-    {
-      "id": "tap-wp2024-battleship-grey",
-      "name": "Battleship Grey",
-      "range": "Speedpaint 2.0",
-      "code": "WP2024",
-      "hex": "#B7C6C9"
-    },
-    {
-      "id": "tap-wp2049-beowulf-blue",
-      "name": "Beowulf Blue",
-      "range": "Speedpaint 2.0",
-      "code": "WP2049",
-      "hex": "#0C3F80"
-    },
-    {
-      "id": "tap-wp2076-blinding-light",
-      "name": "Blinding Light",
-      "range": "Speedpaint 2.0",
-      "code": "WP2076",
-      "hex": "#F5F4EF"
-    },
-    {
-      "id": "tap-wp2010-blood-red",
-      "name": "Blood Red",
-      "range": "Speedpaint 2.0",
-      "code": "WP2010",
-      "hex": "#DB3016"
-    },
-    {
-      "id": "tap-wp2039-bony-matter",
-      "name": "Bony Matter",
-      "range": "Speedpaint 2.0",
-      "code": "WP2039",
-      "hex": "#B69471"
-    },
-    {
-      "id": "tap-wp2058-bright-red",
-      "name": "Bright Red",
-      "range": "Speedpaint 2.0",
-      "code": "WP2058",
-      "hex": "#E15A3D"
-    },
-    {
-      "id": "tap-wp2067-brownish-decay",
-      "name": "Brownish Decay",
-      "range": "Speedpaint 2.0",
-      "code": "WP2067",
-      "hex": "#7B6C33"
-    },
-    {
-      "id": "tap-wp2083-burnished-red",
-      "name": "Burnished Red",
-      "range": "Speedpaint 2.0",
-      "code": "WP2083",
-      "hex": "#633B33"
-    },
-    {
-      "id": "tap-wp2026-burnt-moss",
-      "name": "Burnt Moss",
-      "range": "Speedpaint 2.0",
-      "code": "WP2026",
-      "hex": "#4D5A50"
-    },
-    {
-      "id": "tap-wp2008-camo-cloak",
-      "name": "Camo Cloak",
-      "range": "Speedpaint 2.0",
-      "code": "WP2008",
-      "hex": "#5A713B"
-    },
-    {
-      "id": "tap-wp2046-caribbean-ocean",
-      "name": "Caribbean Ocean",
-      "range": "Speedpaint 2.0",
-      "code": "WP2046",
-      "hex": "#09A6B5"
-    },
-    {
-      "id": "tap-wp2055-carmine-dragon",
-      "name": "Carmine Dragon",
-      "range": "Speedpaint 2.0",
-      "code": "WP2055",
-      "hex": "#DC3058"
-    },
-    {
-      "id": "tap-wp2048-charming-chartreuse",
-      "name": "Charming Chartreuse",
-      "range": "Speedpaint 2.0",
-      "code": "WP2048",
-      "hex": "#C9CF47"
-    },
-    {
-      "id": "tap-wp2022-cloudburst-blue",
-      "name": "Cloudburst Blue",
-      "range": "Speedpaint 2.0",
-      "code": "WP2022",
-      "hex": "#3C4258"
-    },
-    {
-      "id": "tap-wp2004-crusader-skin",
-      "name": "Crusader Skin",
-      "range": "Speedpaint 2.0",
-      "code": "WP2004",
-      "hex": "#EB9A5B"
-    },
-    {
-      "id": "tap-wp2005-dark-wood",
-      "name": "Dark Wood",
-      "range": "Speedpaint 2.0",
-      "code": "WP2005",
-      "hex": "#482D1A"
-    },
-    {
-      "id": "tap-wp2040-desolate-brown",
-      "name": "Desolate Brown",
-      "range": "Speedpaint 2.0",
-      "code": "WP2040",
-      "hex": "#7A703B"
-    },
-    {
-      "id": "tap-wp2054-dusk-red",
-      "name": "Dusk Red",
-      "range": "Speedpaint 2.0",
-      "code": "WP2054",
-      "hex": "#603E3D"
-    },
-    {
-      "id": "tap-wp2033-familiar-pink",
-      "name": "Familiar Pink",
-      "range": "Speedpaint 2.0",
-      "code": "WP2033",
-      "hex": "#D62F7F"
-    },
-    {
-      "id": "tap-wp2062-fire-drake",
-      "name": "Fire Drake",
-      "range": "Speedpaint 2.0",
-      "code": "WP2062",
-      "hex": "#D2916B"
-    },
-    {
-      "id": "tap-wp2017-fire-giant-orange",
-      "name": "Fire Giant Orange",
-      "range": "Speedpaint 2.0",
-      "code": "WP2017",
-      "hex": "#E77924"
-    },
-    {
-      "id": "tap-wp2044-forest-sprite",
-      "name": "Forest Sprite",
-      "range": "Speedpaint 2.0",
-      "code": "WP2044",
-      "hex": "#6FA045"
-    },
-    {
-      "id": "tap-wp2042-ghillie-dew",
-      "name": "Ghillie Dew",
-      "range": "Speedpaint 2.0",
-      "code": "WP2042",
-      "hex": "#90AC23"
-    },
-    {
-      "id": "tap-wp2047-ghoul-green",
-      "name": "Ghoul Green",
-      "range": "Speedpaint 2.0",
-      "code": "WP2047",
-      "hex": "#44A963"
-    },
-    {
-      "id": "tap-wp2038-goddess-glow",
-      "name": "Goddess Glow",
-      "range": "Speedpaint 2.0",
-      "code": "WP2038",
-      "hex": "#9A5751"
-    },
-    {
-      "id": "tap-wp2002-gravelord-grey",
-      "name": "Gravelord Grey",
-      "range": "Speedpaint 2.0",
-      "code": "WP2002",
-      "hex": "#44474C"
-    },
-    {
-      "id": "tap-wp2001-grim-black",
-      "name": "Grim Black",
-      "range": "Speedpaint 2.0",
-      "code": "WP2001",
-      "hex": "#161511"
-    },
-    {
-      "id": "tap-wp2043-gunner-camo",
-      "name": "Gunner Camo",
-      "range": "Speedpaint 2.0",
-      "code": "WP2043",
-      "hex": "#325141"
-    },
-    {
-      "id": "tap-wp2023-hardened-leather",
-      "name": "Hardened Leather",
-      "range": "Speedpaint 2.0",
-      "code": "WP2023",
-      "hex": "#8C501E"
-    },
-    {
-      "id": "tap-wp2015-highlord-blue",
-      "name": "Highlord Blue",
-      "range": "Speedpaint 2.0",
-      "code": "WP2015",
-      "hex": "#1B5682"
-    },
-    {
-      "id": "tap-wp2018-hive-dweller-purple",
-      "name": "Hive Dweller Purple",
-      "range": "Speedpaint 2.0",
-      "code": "WP2018",
-      "hex": "#57366B"
-    },
-    {
-      "id": "tap-wp2003-holy-white",
-      "name": "Holy White",
-      "range": "Speedpaint 2.0",
-      "code": "WP2003",
-      "hex": "#E2E1DC"
-    },
-    {
-      "id": "tap-wp2077-howling-sand",
-      "name": "Howling Sand",
-      "range": "Speedpaint 2.0",
-      "code": "WP2077",
-      "hex": "#CECFB0"
-    },
-    {
-      "id": "tap-wp2082-lizardfolk-cyan",
-      "name": "Lizardfolk Cyan",
-      "range": "Speedpaint 2.0",
-      "code": "WP2082",
-      "hex": "#39989C"
-    },
-    {
-      "id": "tap-wp2079-maggot-skin",
-      "name": "Maggot Skin",
-      "range": "Speedpaint 2.0",
-      "code": "WP2079",
-      "hex": "#CBC861"
-    },
-    {
-      "id": "tap-wp2014-magic-blue",
-      "name": "Magic Blue",
-      "range": "Speedpaint 2.0",
-      "code": "WP2014",
-      "hex": "#0B79AE"
-    },
-    {
-      "id": "tap-wp2059-maize-yellow",
-      "name": "Maize Yellow",
-      "range": "Speedpaint 2.0",
-      "code": "WP2059",
-      "hex": "#F6D31F"
-    },
-    {
-      "id": "tap-wp2011-malignant-green",
-      "name": "Malignant Green",
-      "range": "Speedpaint 2.0",
-      "code": "WP2011",
-      "hex": "#BECB3D"
-    },
-    {
-      "id": "tap-wp2032-moody-mauve",
-      "name": "Moody Mauve",
-      "range": "Speedpaint 2.0",
-      "code": "WP2032",
-      "hex": "#A14F7D"
-    },
-    {
-      "id": "tap-wp2034-moonlake-coral",
-      "name": "Moonlake Coral",
-      "range": "Speedpaint 2.0",
-      "code": "WP2034",
-      "hex": "#A5396D"
-    },
-    {
-      "id": "tap-wp2078-mummified-grime",
-      "name": "Mummified Grime",
-      "range": "Speedpaint 2.0",
-      "code": "WP2078",
-      "hex": "#666748"
-    },
-    {
-      "id": "tap-wp2057-murder-scene",
-      "name": "Murder Scene",
-      "range": "Speedpaint 2.0",
-      "code": "WP2057",
-      "hex": "#6E2A39"
-    },
-    {
-      "id": "tap-wp2063-noble-skin",
-      "name": "Noble Skin",
-      "range": "Speedpaint 2.0",
-      "code": "WP2063",
-      "hex": "#4F493D"
-    },
-    {
-      "id": "tap-wp2061-nuclear-sunrise",
-      "name": "Nuclear Sunrise",
-      "range": "Speedpaint 2.0",
-      "code": "WP2061",
-      "hex": "#E56F25"
-    },
-    {
-      "id": "tap-wp2027-occultist-cloak",
-      "name": "Occultist Cloak",
-      "range": "Speedpaint 2.0",
-      "code": "WP2027",
-      "hex": "#30323E"
-    },
-    {
-      "id": "tap-wp2066-ochre-clay",
-      "name": "Ochre Clay",
-      "range": "Speedpaint 2.0",
-      "code": "WP2066",
-      "hex": "#B8A936"
-    },
-    {
-      "id": "tap-wp2009-orc-skin",
-      "name": "Orc Skin",
-      "range": "Speedpaint 2.0",
-      "code": "WP2009",
-      "hex": "#258335"
-    },
-    {
-      "id": "tap-wp2006-pallid-bone",
-      "name": "Pallid Bone",
-      "range": "Speedpaint 2.0",
-      "code": "WP2006",
-      "hex": "#E1CC95"
-    },
-    {
-      "id": "tap-wp2088-pastel-indigo",
-      "name": "Pastel Indigo",
-      "range": "Speedpaint 2.0",
-      "code": "WP2088",
-      "hex": "#9FBCDA"
-    },
-    {
-      "id": "tap-wp2087-pastel-lavender",
-      "name": "Pastel Lavender",
-      "range": "Speedpaint 2.0",
-      "code": "WP2087",
-      "hex": "#D5BFD4"
-    },
-    {
-      "id": "tap-wp2085-pastel-salmon",
-      "name": "Pastel Salmon",
-      "range": "Speedpaint 2.0",
-      "code": "WP2085",
-      "hex": "#F3C498"
-    },
-    {
-      "id": "tap-wp2089-pastel-seafoam",
-      "name": "Pastel Seafoam",
-      "range": "Speedpaint 2.0",
-      "code": "WP2089",
-      "hex": "#B8D7C8"
-    },
-    {
-      "id": "tap-wp2084-pastel-yellow",
-      "name": "Pastel Yellow",
-      "range": "Speedpaint 2.0",
-      "code": "WP2084",
-      "hex": "#F6E178"
-    },
-    {
-      "id": "tap-wp2037-peachy-flesh",
-      "name": "Peachy Flesh",
-      "range": "Speedpaint 2.0",
-      "code": "WP2037",
-      "hex": "#EDA668"
-    },
-    {
-      "id": "tap-wp2035-periwinkle-purple",
-      "name": "Periwinkle Purple",
-      "range": "Speedpaint 2.0",
-      "code": "WP2035",
-      "hex": "#585396"
-    },
-    {
-      "id": "tap-wp2019-plasmatic-bolt",
-      "name": "Plasmatic Bolt",
-      "range": "Speedpaint 2.0",
-      "code": "WP2019",
-      "hex": "#0A9B8C"
-    },
-    {
-      "id": "tap-wp2056-poppy-red",
-      "name": "Poppy Red",
-      "range": "Speedpaint 2.0",
-      "code": "WP2056",
-      "hex": "#C8453B"
-    },
-    {
-      "id": "tap-wp2086-princess-pink",
-      "name": "Princess Pink",
-      "range": "Speedpaint 2.0",
-      "code": "WP2086",
-      "hex": "#E29FB0"
-    },
-    {
-      "id": "tap-wp2021-purple-alchemy",
-      "name": "Purple Alchemy",
-      "range": "Speedpaint 2.0",
-      "code": "WP2021",
-      "hex": "#AE3F6A"
-    },
-    {
-      "id": "tap-wp2031-purple-swarm",
-      "name": "Purple Swarm",
-      "range": "Speedpaint 2.0",
-      "code": "WP2031",
-      "hex": "#653483"
-    },
-    {
-      "id": "tap-wp2053-raging-sea",
-      "name": "Raging Sea",
-      "range": "Speedpaint 2.0",
-      "code": "WP2053",
-      "hex": "#1B95A4"
-    },
-    {
-      "id": "tap-wp2080-rigor-mortis",
-      "name": "Rigor Mortis",
-      "range": "Speedpaint 2.0",
-      "code": "WP2080",
-      "hex": "#ADAD6F"
-    },
-    {
-      "id": "tap-wp2050-royal-robes",
-      "name": "Royal Robes",
-      "range": "Speedpaint 2.0",
-      "code": "WP2050",
-      "hex": "#5363A1"
-    },
-    {
-      "id": "tap-wp2065-ruddy-fur",
-      "name": "Ruddy Fur",
-      "range": "Speedpaint 2.0",
-      "code": "WP2065",
-      "hex": "#9D4925"
-    },
-    {
-      "id": "tap-wp2016-runic-grey",
-      "name": "Runic Grey",
-      "range": "Speedpaint 2.0",
-      "code": "WP2016",
-      "hex": "#557989"
-    },
-    {
-      "id": "tap-wp2020-sand-golem",
-      "name": "Sand Golem",
-      "range": "Speedpaint 2.0",
-      "code": "WP2020",
-      "hex": "#CB9413"
-    },
-    {
-      "id": "tap-wp2068-satchel-brown",
-      "name": "Satchel Brown",
-      "range": "Speedpaint 2.0",
-      "code": "WP2068",
-      "hex": "#583D32"
-    },
-    {
-      "id": "tap-wp2041-shamrock-green",
-      "name": "Shamrock Green",
-      "range": "Speedpaint 2.0",
-      "code": "WP2041",
-      "hex": "#60AB2C"
-    },
-    {
-      "id": "tap-wp2012-slaughter-red",
-      "name": "Slaughter Red",
-      "range": "Speedpaint 2.0",
-      "code": "WP2012",
-      "hex": "#991926"
-    },
-    {
-      "id": "tap-wp2081-thunderbird-blue",
-      "name": "Thunderbird Blue",
-      "range": "Speedpaint 2.0",
-      "code": "WP2081",
-      "hex": "#66B797"
-    },
-    {
-      "id": "tap-wp2052-tidal-wave",
-      "name": "Tidal Wave",
-      "range": "Speedpaint 2.0",
-      "code": "WP2052",
-      "hex": "#1278B6"
-    },
-    {
-      "id": "tap-wp2051-tyrian-navy",
-      "name": "Tyrian Navy",
-      "range": "Speedpaint 2.0",
-      "code": "WP2051",
-      "hex": "#2A414F"
-    },
-    {
-      "id": "tap-wp2064-warrior-skin",
-      "name": "Warrior Skin",
-      "range": "Speedpaint 2.0",
-      "code": "WP2064",
-      "hex": "#A37051"
-    },
-    {
-      "id": "tap-wp2013-zealot-yellow",
-      "name": "Zealot Yellow",
-      "range": "Speedpaint 2.0",
-      "code": "WP2013",
-      "hex": "#F4D008"
-    },
-    {
-      "id": "tap-wp2075-aztec-gold",
-      "name": "Aztec Gold",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2075",
-      "hex": "#62732F"
-    },
-    {
-      "id": "tap-wp2073-brazen-copper",
-      "name": "Brazen Copper",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2073",
-      "hex": "#6A3D37"
-    },
-    {
-      "id": "tap-wp2030-broadsword-silver",
-      "name": "Broadsword Silver",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2030",
-      "hex": "#595854"
-    },
-    {
-      "id": "tap-wp2072-enchanted-steel",
-      "name": "Enchanted Steel",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2072",
-      "hex": "#4F595B"
-    },
-    {
-      "id": "tap-wp2070-glittering-loot",
-      "name": "Glittering Loot",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2070",
-      "hex": "#836608"
-    },
-    {
-      "id": "tap-wp2069-golden-armour",
-      "name": "Golden Armour",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2069",
-      "hex": "#714808"
-    },
-    {
-      "id": "tap-wp2074-hoard-bronze",
-      "name": "Hoard Bronze",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2074",
-      "hex": "#867240"
-    },
-    {
-      "id": "tap-wp2028-hoplite-gold",
-      "name": "Hoplite Gold",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2028",
-      "hex": "#907317"
-    },
-    {
-      "id": "tap-wp2071-polished-silver",
-      "name": "Polished Silver",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2071",
-      "hex": "#888782"
-    },
-    {
-      "id": "tap-wp2029-talos-bronze",
-      "name": "Talos Bronze",
-      "range": "Speedpaint 2.0 Metallics",
-      "code": "WP2029",
-      "hex": "#6B3B27"
-    },
-    {
-      "id": "ap-alien-purple",
-      "name": "Alien Purple",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#5E2D79"
-    },
-    {
-      "id": "ap-angel-green",
-      "name": "Angel Green",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#17472C"
-    },
-    {
-      "id": "ap-army-green",
-      "name": "Army Green",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#5C6B3C"
-    },
-    {
-      "id": "ap-ash-grey",
-      "name": "Ash Grey",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#9EA3A5"
-    },
-    {
-      "id": "ap-barbarian-flesh",
-      "name": "Barbarian Flesh",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#D29B72"
-    },
-    {
-      "id": "ap-castle-grey",
-      "name": "Castle Grey",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#7E8283"
-    },
-    {
-      "id": "ap-crystal-blue",
-      "name": "Crystal Blue",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#3E8ECC"
-    },
-    {
-      "id": "ap-daemonic-yellow",
-      "name": "Daemonic Yellow",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#FFD400"
-    },
-    {
-      "id": "ap-deep-blue",
-      "name": "Deep Blue",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#1D2F63"
-    },
-    {
-      "id": "ap-desert-yellow",
-      "name": "Desert Yellow",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#B5924A"
-    },
-    {
-      "id": "ap-dragon-red",
-      "name": "Dragon Red",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#8F1013"
-    },
-    {
-      "id": "ap-electric-blue",
-      "name": "Electric Blue",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#5EB2E5"
-    },
-    {
-      "id": "ap-fur-brown",
-      "name": "Fur Brown",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#A0522D"
-    },
-    {
-      "id": "ap-goblin-green",
-      "name": "Goblin Green",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#6FA344"
-    },
-    {
-      "id": "ap-greenskin",
-      "name": "Greenskin",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#3E7B3F"
-    },
-    {
-      "id": "ap-hydra-turquoise",
-      "name": "Hydra Turquoise",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#0F8583"
-    },
-    {
-      "id": "ap-kobold-skin",
-      "name": "Kobold Skin",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#E2A88B"
-    },
-    {
-      "id": "ap-lava-orange",
-      "name": "Lava Orange",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#E85D1F"
-    },
-    {
-      "id": "ap-leather-brown",
-      "name": "Leather Brown",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#8B5A2E"
-    },
-    {
-      "id": "ap-matt-black",
-      "name": "Matt Black",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#1B1B1B"
-    },
-    {
-      "id": "ap-matt-white",
-      "name": "Matt White",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#FAFAFA"
-    },
-    {
-      "id": "ap-moon-dust",
-      "name": "Moon Dust",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#E8C874"
-    },
-    {
-      "id": "ap-necrotic-flesh",
-      "name": "Necrotic Flesh",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#AABB8E"
-    },
-    {
-      "id": "ap-oak-brown",
-      "name": "Oak Brown",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#5F3E23"
-    },
-    {
-      "id": "ap-pure-red",
-      "name": "Pure Red",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#BE1219"
-    },
-    {
-      "id": "ap-skeleton-bone",
-      "name": "Skeleton Bone",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#CFC08C"
-    },
-    {
-      "id": "ap-tanned-flesh",
-      "name": "Tanned Flesh",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#B87352"
-    },
-    {
-      "id": "ap-ultramarine-blue",
-      "name": "Ultramarine Blue",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#20488F"
-    },
-    {
-      "id": "ap-uniform-grey",
-      "name": "Uniform Grey",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#61686E"
-    },
-    {
-      "id": "ap-voidshield-blue",
-      "name": "Voidshield Blue",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#2C6EA8"
-    },
-    {
-      "id": "ap-wolf-grey",
-      "name": "Wolf Grey",
-      "range": "Warpaints",
-      "code": null,
-      "hex": "#A9B7C9"
-    },
     {
       "id": "tap-wp3032-abyssal-blue",
       "name": "Abyssal Blue",
@@ -2045,97 +1147,6 @@
       "hex": "#993243"
     },
     {
-      "id": "tap-wp3166-dark-rust",
-      "name": "Dark Rust",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3166",
-      "hex": "#290F12"
-    },
-    {
-      "id": "tap-wp3177-data-system-glow",
-      "name": "Data System Glow",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3177",
-      "hex": "#87C866"
-    },
-    {
-      "id": "tap-wp3163-disgusting-slime",
-      "name": "Disgusting Slime",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3163",
-      "hex": "#A5C345"
-    },
-    {
-      "id": "tap-wp3164-dry-blood",
-      "name": "Dry Blood",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3164",
-      "hex": "#24000E"
-    },
-    {
-      "id": "tap-wp3167-fresh-rust",
-      "name": "Fresh Rust",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3167",
-      "hex": "#C25428"
-    },
-    {
-      "id": "tap-wp3178-lens-flare-glow",
-      "name": "Lens Flare Glow",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3178",
-      "hex": "#FFF464"
-    },
-    {
-      "id": "tap-wp3169-oil-stains",
-      "name": "Oil Stains",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3169",
-      "hex": "#1D252B"
-    },
-    {
-      "id": "tap-wp3170-oozing-vomit",
-      "name": "Oozing Vomit",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3170",
-      "hex": "#7B5C1D"
-    },
-    {
-      "id": "tap-wp3176-plasma-coil-glow",
-      "name": "Plasma Coil Glow",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3176",
-      "hex": "#5ECDF4"
-    },
-    {
-      "id": "tap-wp3180-power-node-glow",
-      "name": "Power Node Glow",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3180",
-      "hex": "#F286B5"
-    },
-    {
-      "id": "tap-wp3179-radiation-glow",
-      "name": "Radiation Glow",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3179",
-      "hex": "#FBB375"
-    },
-    {
-      "id": "tap-wp3165-true-blood",
-      "name": "True Blood",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3165",
-      "hex": "#8D0422"
-    },
-    {
-      "id": "tap-wp3168-verdigris",
-      "name": "Verdigris",
-      "range": "Warpaints Fanatic Effects",
-      "code": "WP3168",
-      "hex": "#61B89B"
-    },
-    {
       "id": "tap-wp3189-bright-gold",
       "name": "Bright Gold",
       "range": "Warpaints Fanatic Metallic",
@@ -2379,6 +1390,1007 @@
       "range": "Warpaints Fanatic Wash",
       "code": "WP3200",
       "hex": "#211913"
+    },
+    {
+      "id": "tap-wp3166-dark-rust",
+      "name": "Dark Rust",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3166",
+      "hex": "#290F12"
+    },
+    {
+      "id": "tap-wp3177-data-system-glow",
+      "name": "Data System Glow",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3177",
+      "hex": "#87C866"
+    },
+    {
+      "id": "tap-wp3163-disgusting-slime",
+      "name": "Disgusting Slime",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3163",
+      "hex": "#A5C345"
+    },
+    {
+      "id": "tap-wp3164-dry-blood",
+      "name": "Dry Blood",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3164",
+      "hex": "#24000E"
+    },
+    {
+      "id": "tap-wp3167-fresh-rust",
+      "name": "Fresh Rust",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3167",
+      "hex": "#C25428"
+    },
+    {
+      "id": "tap-wp3178-lens-flare-glow",
+      "name": "Lens Flare Glow",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3178",
+      "hex": "#FFF464"
+    },
+    {
+      "id": "tap-wp3169-oil-stains",
+      "name": "Oil Stains",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3169",
+      "hex": "#1D252B"
+    },
+    {
+      "id": "tap-wp3170-oozing-vomit",
+      "name": "Oozing Vomit",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3170",
+      "hex": "#7B5C1D"
+    },
+    {
+      "id": "tap-wp3176-plasma-coil-glow",
+      "name": "Plasma Coil Glow",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3176",
+      "hex": "#5ECDF4"
+    },
+    {
+      "id": "tap-wp3180-power-node-glow",
+      "name": "Power Node Glow",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3180",
+      "hex": "#F286B5"
+    },
+    {
+      "id": "tap-wp3179-radiation-glow",
+      "name": "Radiation Glow",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3179",
+      "hex": "#FBB375"
+    },
+    {
+      "id": "tap-wp3165-true-blood",
+      "name": "True Blood",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3165",
+      "hex": "#8D0422"
+    },
+    {
+      "id": "tap-wp3168-verdigris",
+      "name": "Verdigris",
+      "range": "Warpaints Fanatic Effects",
+      "code": "WP3168",
+      "hex": "#61B89B"
+    },
+    {
+      "id": "tap-wp2007-absolution-green",
+      "name": "Absolution Green",
+      "range": "Speedpaint 2.0",
+      "code": "WP2007",
+      "hex": "#214A28"
+    },
+    {
+      "id": "tap-wp2036-aged-hide",
+      "name": "Aged Hide",
+      "range": "Speedpaint 2.0",
+      "code": "WP2036",
+      "hex": "#D56C4F"
+    },
+    {
+      "id": "tap-wp2045-algae-green",
+      "name": "Algae Green",
+      "range": "Speedpaint 2.0",
+      "code": "WP2045",
+      "hex": "#9CAA53"
+    },
+    {
+      "id": "tap-wp2060-ancient-honey",
+      "name": "Ancient Honey",
+      "range": "Speedpaint 2.0",
+      "code": "WP2060",
+      "hex": "#EBBD21"
+    },
+    {
+      "id": "tap-wp2025-ashen-stone",
+      "name": "Ashen Stone",
+      "range": "Speedpaint 2.0",
+      "code": "WP2025",
+      "hex": "#B3B9B9"
+    },
+    {
+      "id": "tap-wp2024-battleship-grey",
+      "name": "Battleship Grey",
+      "range": "Speedpaint 2.0",
+      "code": "WP2024",
+      "hex": "#B7C6C9"
+    },
+    {
+      "id": "tap-wp2049-beowulf-blue",
+      "name": "Beowulf Blue",
+      "range": "Speedpaint 2.0",
+      "code": "WP2049",
+      "hex": "#0C3F80"
+    },
+    {
+      "id": "tap-wp2076-blinding-light",
+      "name": "Blinding Light",
+      "range": "Speedpaint 2.0",
+      "code": "WP2076",
+      "hex": "#F5F4EF"
+    },
+    {
+      "id": "tap-wp2010-blood-red",
+      "name": "Blood Red",
+      "range": "Speedpaint 2.0",
+      "code": "WP2010",
+      "hex": "#DB3016"
+    },
+    {
+      "id": "tap-wp2039-bony-matter",
+      "name": "Bony Matter",
+      "range": "Speedpaint 2.0",
+      "code": "WP2039",
+      "hex": "#B69471"
+    },
+    {
+      "id": "tap-wp2058-bright-red",
+      "name": "Bright Red",
+      "range": "Speedpaint 2.0",
+      "code": "WP2058",
+      "hex": "#E15A3D"
+    },
+    {
+      "id": "tap-wp2067-brownish-decay",
+      "name": "Brownish Decay",
+      "range": "Speedpaint 2.0",
+      "code": "WP2067",
+      "hex": "#7B6C33"
+    },
+    {
+      "id": "tap-wp2083-burnished-red",
+      "name": "Burnished Red",
+      "range": "Speedpaint 2.0",
+      "code": "WP2083",
+      "hex": "#633B33"
+    },
+    {
+      "id": "tap-wp2026-burnt-moss",
+      "name": "Burnt Moss",
+      "range": "Speedpaint 2.0",
+      "code": "WP2026",
+      "hex": "#4D5A50"
+    },
+    {
+      "id": "tap-wp2008-camo-cloak",
+      "name": "Camo Cloak",
+      "range": "Speedpaint 2.0",
+      "code": "WP2008",
+      "hex": "#5A713B"
+    },
+    {
+      "id": "tap-wp2046-caribbean-ocean",
+      "name": "Caribbean Ocean",
+      "range": "Speedpaint 2.0",
+      "code": "WP2046",
+      "hex": "#09A6B5"
+    },
+    {
+      "id": "tap-wp2055-carmine-dragon",
+      "name": "Carmine Dragon",
+      "range": "Speedpaint 2.0",
+      "code": "WP2055",
+      "hex": "#DC3058"
+    },
+    {
+      "id": "tap-wp2048-charming-chartreuse",
+      "name": "Charming Chartreuse",
+      "range": "Speedpaint 2.0",
+      "code": "WP2048",
+      "hex": "#C9CF47"
+    },
+    {
+      "id": "tap-wp2022-cloudburst-blue",
+      "name": "Cloudburst Blue",
+      "range": "Speedpaint 2.0",
+      "code": "WP2022",
+      "hex": "#3C4258"
+    },
+    {
+      "id": "tap-wp2004-crusader-skin",
+      "name": "Crusader Skin",
+      "range": "Speedpaint 2.0",
+      "code": "WP2004",
+      "hex": "#EB9A5B"
+    },
+    {
+      "id": "tap-wp2005-dark-wood",
+      "name": "Dark Wood",
+      "range": "Speedpaint 2.0",
+      "code": "WP2005",
+      "hex": "#482D1A"
+    },
+    {
+      "id": "tap-wp2040-desolate-brown",
+      "name": "Desolate Brown",
+      "range": "Speedpaint 2.0",
+      "code": "WP2040",
+      "hex": "#7A703B"
+    },
+    {
+      "id": "tap-wp2054-dusk-red",
+      "name": "Dusk Red",
+      "range": "Speedpaint 2.0",
+      "code": "WP2054",
+      "hex": "#603E3D"
+    },
+    {
+      "id": "tap-wp2033-familiar-pink",
+      "name": "Familiar Pink",
+      "range": "Speedpaint 2.0",
+      "code": "WP2033",
+      "hex": "#D62F7F"
+    },
+    {
+      "id": "tap-wp2062-fire-drake",
+      "name": "Fire Drake",
+      "range": "Speedpaint 2.0",
+      "code": "WP2062",
+      "hex": "#D2916B"
+    },
+    {
+      "id": "tap-wp2017-fire-giant-orange",
+      "name": "Fire Giant Orange",
+      "range": "Speedpaint 2.0",
+      "code": "WP2017",
+      "hex": "#E77924"
+    },
+    {
+      "id": "tap-wp2044-forest-sprite",
+      "name": "Forest Sprite",
+      "range": "Speedpaint 2.0",
+      "code": "WP2044",
+      "hex": "#6FA045"
+    },
+    {
+      "id": "tap-wp2042-ghillie-dew",
+      "name": "Ghillie Dew",
+      "range": "Speedpaint 2.0",
+      "code": "WP2042",
+      "hex": "#90AC23"
+    },
+    {
+      "id": "tap-wp2047-ghoul-green",
+      "name": "Ghoul Green",
+      "range": "Speedpaint 2.0",
+      "code": "WP2047",
+      "hex": "#44A963"
+    },
+    {
+      "id": "tap-wp2038-goddess-glow",
+      "name": "Goddess Glow",
+      "range": "Speedpaint 2.0",
+      "code": "WP2038",
+      "hex": "#9A5751"
+    },
+    {
+      "id": "tap-wp2002-gravelord-grey",
+      "name": "Gravelord Grey",
+      "range": "Speedpaint 2.0",
+      "code": "WP2002",
+      "hex": "#44474C"
+    },
+    {
+      "id": "tap-wp2001-grim-black",
+      "name": "Grim Black",
+      "range": "Speedpaint 2.0",
+      "code": "WP2001",
+      "hex": "#161511"
+    },
+    {
+      "id": "tap-wp2043-gunner-camo",
+      "name": "Gunner Camo",
+      "range": "Speedpaint 2.0",
+      "code": "WP2043",
+      "hex": "#325141"
+    },
+    {
+      "id": "tap-wp2023-hardened-leather",
+      "name": "Hardened Leather",
+      "range": "Speedpaint 2.0",
+      "code": "WP2023",
+      "hex": "#8C501E"
+    },
+    {
+      "id": "tap-wp2015-highlord-blue",
+      "name": "Highlord Blue",
+      "range": "Speedpaint 2.0",
+      "code": "WP2015",
+      "hex": "#1B5682"
+    },
+    {
+      "id": "tap-wp2018-hive-dweller-purple",
+      "name": "Hive Dweller Purple",
+      "range": "Speedpaint 2.0",
+      "code": "WP2018",
+      "hex": "#57366B"
+    },
+    {
+      "id": "tap-wp2003-holy-white",
+      "name": "Holy White",
+      "range": "Speedpaint 2.0",
+      "code": "WP2003",
+      "hex": "#E2E1DC"
+    },
+    {
+      "id": "tap-wp2077-howling-sand",
+      "name": "Howling Sand",
+      "range": "Speedpaint 2.0",
+      "code": "WP2077",
+      "hex": "#CECFB0"
+    },
+    {
+      "id": "tap-wp2082-lizardfolk-cyan",
+      "name": "Lizardfolk Cyan",
+      "range": "Speedpaint 2.0",
+      "code": "WP2082",
+      "hex": "#39989C"
+    },
+    {
+      "id": "tap-wp2079-maggot-skin",
+      "name": "Maggot Skin",
+      "range": "Speedpaint 2.0",
+      "code": "WP2079",
+      "hex": "#CBC861"
+    },
+    {
+      "id": "tap-wp2014-magic-blue",
+      "name": "Magic Blue",
+      "range": "Speedpaint 2.0",
+      "code": "WP2014",
+      "hex": "#0B79AE"
+    },
+    {
+      "id": "tap-wp2059-maize-yellow",
+      "name": "Maize Yellow",
+      "range": "Speedpaint 2.0",
+      "code": "WP2059",
+      "hex": "#F6D31F"
+    },
+    {
+      "id": "tap-wp2011-malignant-green",
+      "name": "Malignant Green",
+      "range": "Speedpaint 2.0",
+      "code": "WP2011",
+      "hex": "#BECB3D"
+    },
+    {
+      "id": "tap-wp2032-moody-mauve",
+      "name": "Moody Mauve",
+      "range": "Speedpaint 2.0",
+      "code": "WP2032",
+      "hex": "#A14F7D"
+    },
+    {
+      "id": "tap-wp2034-moonlake-coral",
+      "name": "Moonlake Coral",
+      "range": "Speedpaint 2.0",
+      "code": "WP2034",
+      "hex": "#A5396D"
+    },
+    {
+      "id": "tap-wp2078-mummified-grime",
+      "name": "Mummified Grime",
+      "range": "Speedpaint 2.0",
+      "code": "WP2078",
+      "hex": "#666748"
+    },
+    {
+      "id": "tap-wp2057-murder-scene",
+      "name": "Murder Scene",
+      "range": "Speedpaint 2.0",
+      "code": "WP2057",
+      "hex": "#6E2A39"
+    },
+    {
+      "id": "tap-wp2063-noble-skin",
+      "name": "Noble Skin",
+      "range": "Speedpaint 2.0",
+      "code": "WP2063",
+      "hex": "#4F493D"
+    },
+    {
+      "id": "tap-wp2061-nuclear-sunrise",
+      "name": "Nuclear Sunrise",
+      "range": "Speedpaint 2.0",
+      "code": "WP2061",
+      "hex": "#E56F25"
+    },
+    {
+      "id": "tap-wp2027-occultist-cloak",
+      "name": "Occultist Cloak",
+      "range": "Speedpaint 2.0",
+      "code": "WP2027",
+      "hex": "#30323E"
+    },
+    {
+      "id": "tap-wp2066-ochre-clay",
+      "name": "Ochre Clay",
+      "range": "Speedpaint 2.0",
+      "code": "WP2066",
+      "hex": "#B8A936"
+    },
+    {
+      "id": "tap-wp2009-orc-skin",
+      "name": "Orc Skin",
+      "range": "Speedpaint 2.0",
+      "code": "WP2009",
+      "hex": "#258335"
+    },
+    {
+      "id": "tap-wp2006-pallid-bone",
+      "name": "Pallid Bone",
+      "range": "Speedpaint 2.0",
+      "code": "WP2006",
+      "hex": "#E1CC95"
+    },
+    {
+      "id": "tap-wp2088-pastel-indigo",
+      "name": "Pastel Indigo",
+      "range": "Speedpaint 2.0",
+      "code": "WP2088",
+      "hex": "#9FBCDA"
+    },
+    {
+      "id": "tap-wp2087-pastel-lavender",
+      "name": "Pastel Lavender",
+      "range": "Speedpaint 2.0",
+      "code": "WP2087",
+      "hex": "#D5BFD4"
+    },
+    {
+      "id": "tap-wp2085-pastel-salmon",
+      "name": "Pastel Salmon",
+      "range": "Speedpaint 2.0",
+      "code": "WP2085",
+      "hex": "#F3C498"
+    },
+    {
+      "id": "tap-wp2089-pastel-seafoam",
+      "name": "Pastel Seafoam",
+      "range": "Speedpaint 2.0",
+      "code": "WP2089",
+      "hex": "#B8D7C8"
+    },
+    {
+      "id": "tap-wp2084-pastel-yellow",
+      "name": "Pastel Yellow",
+      "range": "Speedpaint 2.0",
+      "code": "WP2084",
+      "hex": "#F6E178"
+    },
+    {
+      "id": "tap-wp2037-peachy-flesh",
+      "name": "Peachy Flesh",
+      "range": "Speedpaint 2.0",
+      "code": "WP2037",
+      "hex": "#EDA668"
+    },
+    {
+      "id": "tap-wp2035-periwinkle-purple",
+      "name": "Periwinkle Purple",
+      "range": "Speedpaint 2.0",
+      "code": "WP2035",
+      "hex": "#585396"
+    },
+    {
+      "id": "tap-wp2019-plasmatic-bolt",
+      "name": "Plasmatic Bolt",
+      "range": "Speedpaint 2.0",
+      "code": "WP2019",
+      "hex": "#0A9B8C"
+    },
+    {
+      "id": "tap-wp2056-poppy-red",
+      "name": "Poppy Red",
+      "range": "Speedpaint 2.0",
+      "code": "WP2056",
+      "hex": "#C8453B"
+    },
+    {
+      "id": "tap-wp2086-princess-pink",
+      "name": "Princess Pink",
+      "range": "Speedpaint 2.0",
+      "code": "WP2086",
+      "hex": "#E29FB0"
+    },
+    {
+      "id": "tap-wp2021-purple-alchemy",
+      "name": "Purple Alchemy",
+      "range": "Speedpaint 2.0",
+      "code": "WP2021",
+      "hex": "#AE3F6A"
+    },
+    {
+      "id": "tap-wp2031-purple-swarm",
+      "name": "Purple Swarm",
+      "range": "Speedpaint 2.0",
+      "code": "WP2031",
+      "hex": "#653483"
+    },
+    {
+      "id": "tap-wp2053-raging-sea",
+      "name": "Raging Sea",
+      "range": "Speedpaint 2.0",
+      "code": "WP2053",
+      "hex": "#1B95A4"
+    },
+    {
+      "id": "tap-wp2080-rigor-mortis",
+      "name": "Rigor Mortis",
+      "range": "Speedpaint 2.0",
+      "code": "WP2080",
+      "hex": "#ADAD6F"
+    },
+    {
+      "id": "tap-wp2050-royal-robes",
+      "name": "Royal Robes",
+      "range": "Speedpaint 2.0",
+      "code": "WP2050",
+      "hex": "#5363A1"
+    },
+    {
+      "id": "tap-wp2065-ruddy-fur",
+      "name": "Ruddy Fur",
+      "range": "Speedpaint 2.0",
+      "code": "WP2065",
+      "hex": "#9D4925"
+    },
+    {
+      "id": "tap-wp2016-runic-grey",
+      "name": "Runic Grey",
+      "range": "Speedpaint 2.0",
+      "code": "WP2016",
+      "hex": "#557989"
+    },
+    {
+      "id": "tap-wp2020-sand-golem",
+      "name": "Sand Golem",
+      "range": "Speedpaint 2.0",
+      "code": "WP2020",
+      "hex": "#CB9413"
+    },
+    {
+      "id": "tap-wp2068-satchel-brown",
+      "name": "Satchel Brown",
+      "range": "Speedpaint 2.0",
+      "code": "WP2068",
+      "hex": "#583D32"
+    },
+    {
+      "id": "tap-wp2041-shamrock-green",
+      "name": "Shamrock Green",
+      "range": "Speedpaint 2.0",
+      "code": "WP2041",
+      "hex": "#60AB2C"
+    },
+    {
+      "id": "tap-wp2012-slaughter-red",
+      "name": "Slaughter Red",
+      "range": "Speedpaint 2.0",
+      "code": "WP2012",
+      "hex": "#991926"
+    },
+    {
+      "id": "tap-wp2081-thunderbird-blue",
+      "name": "Thunderbird Blue",
+      "range": "Speedpaint 2.0",
+      "code": "WP2081",
+      "hex": "#66B797"
+    },
+    {
+      "id": "tap-wp2052-tidal-wave",
+      "name": "Tidal Wave",
+      "range": "Speedpaint 2.0",
+      "code": "WP2052",
+      "hex": "#1278B6"
+    },
+    {
+      "id": "tap-wp2051-tyrian-navy",
+      "name": "Tyrian Navy",
+      "range": "Speedpaint 2.0",
+      "code": "WP2051",
+      "hex": "#2A414F"
+    },
+    {
+      "id": "tap-wp2064-warrior-skin",
+      "name": "Warrior Skin",
+      "range": "Speedpaint 2.0",
+      "code": "WP2064",
+      "hex": "#A37051"
+    },
+    {
+      "id": "tap-wp2013-zealot-yellow",
+      "name": "Zealot Yellow",
+      "range": "Speedpaint 2.0",
+      "code": "WP2013",
+      "hex": "#F4D008"
+    },
+    {
+      "id": "tap-wp2075-aztec-gold",
+      "name": "Aztec Gold",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2075",
+      "hex": "#62732F"
+    },
+    {
+      "id": "tap-wp2073-brazen-copper",
+      "name": "Brazen Copper",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2073",
+      "hex": "#6A3D37"
+    },
+    {
+      "id": "tap-wp2030-broadsword-silver",
+      "name": "Broadsword Silver",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2030",
+      "hex": "#595854"
+    },
+    {
+      "id": "tap-wp2072-enchanted-steel",
+      "name": "Enchanted Steel",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2072",
+      "hex": "#4F595B"
+    },
+    {
+      "id": "tap-wp2070-glittering-loot",
+      "name": "Glittering Loot",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2070",
+      "hex": "#836608"
+    },
+    {
+      "id": "tap-wp2069-golden-armour",
+      "name": "Golden Armour",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2069",
+      "hex": "#714808"
+    },
+    {
+      "id": "tap-wp2074-hoard-bronze",
+      "name": "Hoard Bronze",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2074",
+      "hex": "#867240"
+    },
+    {
+      "id": "tap-wp2028-hoplite-gold",
+      "name": "Hoplite Gold",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2028",
+      "hex": "#907317"
+    },
+    {
+      "id": "tap-wp2071-polished-silver",
+      "name": "Polished Silver",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2071",
+      "hex": "#888782"
+    },
+    {
+      "id": "tap-wp2029-talos-bronze",
+      "name": "Talos Bronze",
+      "range": "Speedpaint 2.0 Metallics",
+      "code": "WP2029",
+      "hex": "#6B3B27"
+    },
+    {
+      "id": "ap-sp-blood-red",
+      "name": "Blood Red",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#9E1414"
+    },
+    {
+      "id": "ap-sp-crusader-skin",
+      "name": "Crusader Skin",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#C98D68"
+    },
+    {
+      "id": "ap-sp-dark-wood",
+      "name": "Dark Wood",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#4E3220"
+    },
+    {
+      "id": "ap-sp-gravelord-grey",
+      "name": "Gravelord Grey",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#6E7477"
+    },
+    {
+      "id": "ap-sp-grim-black",
+      "name": "Grim Black",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#232323"
+    },
+    {
+      "id": "ap-sp-hardened-leather",
+      "name": "Hardened Leather",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#7B5230"
+    },
+    {
+      "id": "ap-sp-highlord-blue",
+      "name": "Highlord Blue",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#2255A4"
+    },
+    {
+      "id": "ap-sp-malignant-green",
+      "name": "Malignant Green",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#3E7C34"
+    },
+    {
+      "id": "ap-sp-pallid-bone",
+      "name": "Pallid Bone",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#CBBE9A"
+    },
+    {
+      "id": "ap-sp-zealot-yellow",
+      "name": "Zealot Yellow",
+      "range": "Speedpaint",
+      "code": null,
+      "hex": "#F2B705"
+    },
+    {
+      "id": "ap-alien-purple",
+      "name": "Alien Purple",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#5E2D79"
+    },
+    {
+      "id": "ap-angel-green",
+      "name": "Angel Green",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#17472C"
+    },
+    {
+      "id": "ap-army-green",
+      "name": "Army Green",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#5C6B3C"
+    },
+    {
+      "id": "ap-ash-grey",
+      "name": "Ash Grey",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#9EA3A5"
+    },
+    {
+      "id": "ap-barbarian-flesh",
+      "name": "Barbarian Flesh",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#D29B72"
+    },
+    {
+      "id": "ap-castle-grey",
+      "name": "Castle Grey",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#7E8283"
+    },
+    {
+      "id": "ap-crystal-blue",
+      "name": "Crystal Blue",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#3E8ECC"
+    },
+    {
+      "id": "ap-daemonic-yellow",
+      "name": "Daemonic Yellow",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#FFD400"
+    },
+    {
+      "id": "ap-deep-blue",
+      "name": "Deep Blue",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#1D2F63"
+    },
+    {
+      "id": "ap-desert-yellow",
+      "name": "Desert Yellow",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#B5924A"
+    },
+    {
+      "id": "ap-dragon-red",
+      "name": "Dragon Red",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#8F1013"
+    },
+    {
+      "id": "ap-electric-blue",
+      "name": "Electric Blue",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#5EB2E5"
+    },
+    {
+      "id": "ap-fur-brown",
+      "name": "Fur Brown",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#A0522D"
+    },
+    {
+      "id": "ap-goblin-green",
+      "name": "Goblin Green",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#6FA344"
+    },
+    {
+      "id": "ap-greenskin",
+      "name": "Greenskin",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#3E7B3F"
+    },
+    {
+      "id": "ap-hydra-turquoise",
+      "name": "Hydra Turquoise",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#0F8583"
+    },
+    {
+      "id": "ap-kobold-skin",
+      "name": "Kobold Skin",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#E2A88B"
+    },
+    {
+      "id": "ap-lava-orange",
+      "name": "Lava Orange",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#E85D1F"
+    },
+    {
+      "id": "ap-leather-brown",
+      "name": "Leather Brown",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#8B5A2E"
+    },
+    {
+      "id": "ap-matt-black",
+      "name": "Matt Black",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#1B1B1B"
+    },
+    {
+      "id": "ap-matt-white",
+      "name": "Matt White",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#FAFAFA"
+    },
+    {
+      "id": "ap-moon-dust",
+      "name": "Moon Dust",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#E8C874"
+    },
+    {
+      "id": "ap-necrotic-flesh",
+      "name": "Necrotic Flesh",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#AABB8E"
+    },
+    {
+      "id": "ap-oak-brown",
+      "name": "Oak Brown",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#5F3E23"
+    },
+    {
+      "id": "ap-pure-red",
+      "name": "Pure Red",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#BE1219"
+    },
+    {
+      "id": "ap-skeleton-bone",
+      "name": "Skeleton Bone",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#CFC08C"
+    },
+    {
+      "id": "ap-tanned-flesh",
+      "name": "Tanned Flesh",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#B87352"
+    },
+    {
+      "id": "ap-ultramarine-blue",
+      "name": "Ultramarine Blue",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#20488F"
+    },
+    {
+      "id": "ap-uniform-grey",
+      "name": "Uniform Grey",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#61686E"
+    },
+    {
+      "id": "ap-voidshield-blue",
+      "name": "Voidshield Blue",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#2C6EA8"
+    },
+    {
+      "id": "ap-wolf-grey",
+      "name": "Wolf Grey",
+      "range": "Warpaints",
+      "code": null,
+      "hex": "#A9B7C9"
     },
     {
       "id": "ap-greedy-gold",

@@ -26,15 +26,30 @@ class CatalogRepository {
       final data = jsonDecode(raw) as Map<String, dynamic>;
       final brand = PaintBrand.fromId(data['brand'] as String);
       final brandName = data['brandName'] as String;
-      for (final entry in data['paints'] as List<dynamic>) {
-        paints.add(
+      final brandPaints = <Paint>[
+        for (final entry in data['paints'] as List<dynamic>)
           Paint.fromJson(
             entry as Map<String, dynamic>,
             brand: brand,
             brandName: brandName,
           ),
-        );
-      }
+      ];
+      // Ranges come in the catalogue's curated order, not alphabetical:
+      // sorted by name, Citadel opened on "Air" and a newcomer's first
+      // screen was forty-six airbrush paints. The workhorse ranges go
+      // first; a range the file forgot to place sorts after the curated
+      // ones rather than breaking the load.
+      final order = (data['rangeOrder'] as List<dynamic>? ?? const [])
+          .cast<String>();
+      final rank = {for (var i = 0; i < order.length; i++) order[i]: i};
+      brandPaints.sort((a, b) {
+        final byRange = (rank[a.range] ?? order.length)
+            .compareTo(rank[b.range] ?? order.length);
+        if (byRange != 0) return byRange;
+        if (a.range != b.range) return a.range.compareTo(b.range);
+        return a.name.compareTo(b.name);
+      });
+      paints.addAll(brandPaints);
     }
     return CatalogRepository._(List.unmodifiable(paints));
   }

@@ -1,33 +1,201 @@
 {
   "brand": "greenStuffWorld",
   "brandName": "Green Stuff World",
+  "rangeOrder": [
+    "Intensity Ink",
+    "Dipping Ink",
+    "Fluor Paint",
+    "Maxx Darth"
+  ],
   "paints": [
-    {"id": "gsw-maxx-darth-black", "name": "Maxx Darth Black", "range": "Maxx Darth", "code": null, "hex": "#0A0A0A"},
-    {"id": "gsw-dip-black", "name": "Black Dip", "range": "Dipping Ink", "code": null, "hex": "#20201E"},
-    {"id": "gsw-dip-brown", "name": "Brown Dip", "range": "Dipping Ink", "code": null, "hex": "#5C3A1E"},
-    {"id": "gsw-dip-sepia", "name": "Sepia Dip", "range": "Dipping Ink", "code": null, "hex": "#8A5A20"},
-    {"id": "gsw-dip-skin", "name": "Skin Dip", "range": "Dipping Ink", "code": null, "hex": "#B06A42"},
-    {"id": "gsw-dip-green", "name": "Green Dip", "range": "Dipping Ink", "code": null, "hex": "#2F6A33"},
-    {"id": "gsw-dip-blue", "name": "Blue Dip", "range": "Dipping Ink", "code": null, "hex": "#1F4C8F"},
-    {"id": "gsw-dip-red", "name": "Red Dip", "range": "Dipping Ink", "code": null, "hex": "#8F1A1A"},
-    {"id": "gsw-dip-purple", "name": "Purple Dip", "range": "Dipping Ink", "code": null, "hex": "#4E2A6B"},
-    {"id": "gsw-dip-yellow", "name": "Yellow Dip", "range": "Dipping Ink", "code": null, "hex": "#D9A404"},
-    {"id": "gsw-dip-orange", "name": "Orange Dip", "range": "Dipping Ink", "code": null, "hex": "#D2691E"},
-    {"id": "gsw-dip-turquoise", "name": "Turquoise Dip", "range": "Dipping Ink", "code": null, "hex": "#12808A"},
-    {"id": "gsw-dip-fuchsia", "name": "Fuchsia Dip", "range": "Dipping Ink", "code": null, "hex": "#B0367A"},
-    {"id": "gsw-fluor-yellow", "name": "Fluor Yellow", "range": "Fluor Paint", "code": null, "hex": "#F7FF00"},
-    {"id": "gsw-fluor-orange", "name": "Fluor Orange", "range": "Fluor Paint", "code": null, "hex": "#FF6D00"},
-    {"id": "gsw-fluor-red", "name": "Fluor Red", "range": "Fluor Paint", "code": null, "hex": "#FF2B2B"},
-    {"id": "gsw-fluor-magenta", "name": "Fluor Magenta", "range": "Fluor Paint", "code": null, "hex": "#FF1DCE"},
-    {"id": "gsw-fluor-green", "name": "Fluor Green", "range": "Fluor Paint", "code": null, "hex": "#39FF14"},
-    {"id": "gsw-fluor-blue", "name": "Fluor Blue", "range": "Fluor Paint", "code": null, "hex": "#00B7FF"},
-    {"id": "gsw-ink-black", "name": "Black Intensity Ink", "range": "Intensity Ink", "code": null, "hex": "#111111"},
-    {"id": "gsw-ink-white", "name": "White Intensity Ink", "range": "Intensity Ink", "code": null, "hex": "#F5F5F5"},
-    {"id": "gsw-ink-yellow", "name": "Yellow Intensity Ink", "range": "Intensity Ink", "code": null, "hex": "#F5C400"},
-    {"id": "gsw-ink-magenta", "name": "Magenta Intensity Ink", "range": "Intensity Ink", "code": null, "hex": "#C4106E"},
-    {"id": "gsw-ink-cyan", "name": "Cyan Intensity Ink", "range": "Intensity Ink", "code": null, "hex": "#0093C9"},
-    {"id": "gsw-ink-green", "name": "Green Intensity Ink", "range": "Intensity Ink", "code": null, "hex": "#0E7C3A"},
-    {"id": "gsw-ink-red", "name": "Red Intensity Ink", "range": "Intensity Ink", "code": null, "hex": "#B01414"},
-    {"id": "gsw-ink-blue", "name": "Blue Intensity Ink", "range": "Intensity Ink", "code": null, "hex": "#1C3F94"}
+    {
+      "id": "gsw-ink-black",
+      "name": "Black Intensity Ink",
+      "range": "Intensity Ink",
+      "code": null,
+      "hex": "#111111"
+    },
+    {
+      "id": "gsw-ink-blue",
+      "name": "Blue Intensity Ink",
+      "range": "Intensity Ink",
+      "code": null,
+      "hex": "#1C3F94"
+    },
+    {
+      "id": "gsw-ink-cyan",
+      "name": "Cyan Intensity Ink",
+      "range": "Intensity Ink",
+      "code": null,
+      "hex": "#0093C9"
+    },
+    {
+      "id": "gsw-ink-green",
+      "name": "Green Intensity Ink",
+      "range": "Intensity Ink",
+      "code": null,
+      "hex": "#0E7C3A"
+    },
+    {
+      "id": "gsw-ink-magenta",
+      "name": "Magenta Intensity Ink",
+      "range": "Intensity Ink",
+      "code": null,
+      "hex": "#C4106E"
+    },
+    {
+      "id": "gsw-ink-red",
+      "name": "Red Intensity Ink",
+      "range": "Intensity Ink",
+      "code": null,
+      "hex": "#B01414"
+    },
+    {
+      "id": "gsw-ink-white",
+      "name": "White Intensity Ink",
+      "range": "Intensity Ink",
+      "code": null,
+      "hex": "#F5F5F5"
+    },
+    {
+      "id": "gsw-ink-yellow",
+      "name": "Yellow Intensity Ink",
+      "range": "Intensity Ink",
+      "code": null,
+      "hex": "#F5C400"
+    },
+    {
+      "id": "gsw-dip-black",
+      "name": "Black Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#20201E"
+    },
+    {
+      "id": "gsw-dip-blue",
+      "name": "Blue Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#1F4C8F"
+    },
+    {
+      "id": "gsw-dip-brown",
+      "name": "Brown Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#5C3A1E"
+    },
+    {
+      "id": "gsw-dip-fuchsia",
+      "name": "Fuchsia Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#B0367A"
+    },
+    {
+      "id": "gsw-dip-green",
+      "name": "Green Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#2F6A33"
+    },
+    {
+      "id": "gsw-dip-orange",
+      "name": "Orange Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#D2691E"
+    },
+    {
+      "id": "gsw-dip-purple",
+      "name": "Purple Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#4E2A6B"
+    },
+    {
+      "id": "gsw-dip-red",
+      "name": "Red Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#8F1A1A"
+    },
+    {
+      "id": "gsw-dip-sepia",
+      "name": "Sepia Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#8A5A20"
+    },
+    {
+      "id": "gsw-dip-skin",
+      "name": "Skin Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#B06A42"
+    },
+    {
+      "id": "gsw-dip-turquoise",
+      "name": "Turquoise Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#12808A"
+    },
+    {
+      "id": "gsw-dip-yellow",
+      "name": "Yellow Dip",
+      "range": "Dipping Ink",
+      "code": null,
+      "hex": "#D9A404"
+    },
+    {
+      "id": "gsw-fluor-blue",
+      "name": "Fluor Blue",
+      "range": "Fluor Paint",
+      "code": null,
+      "hex": "#00B7FF"
+    },
+    {
+      "id": "gsw-fluor-green",
+      "name": "Fluor Green",
+      "range": "Fluor Paint",
+      "code": null,
+      "hex": "#39FF14"
+    },
+    {
+      "id": "gsw-fluor-magenta",
+      "name": "Fluor Magenta",
+      "range": "Fluor Paint",
+      "code": null,
+      "hex": "#FF1DCE"
+    },
+    {
+      "id": "gsw-fluor-orange",
+      "name": "Fluor Orange",
+      "range": "Fluor Paint",
+      "code": null,
+      "hex": "#FF6D00"
+    },
+    {
+      "id": "gsw-fluor-red",
+      "name": "Fluor Red",
+      "range": "Fluor Paint",
+      "code": null,
+      "hex": "#FF2B2B"
+    },
+    {
+      "id": "gsw-fluor-yellow",
+      "name": "Fluor Yellow",
+      "range": "Fluor Paint",
+      "code": null,
+      "hex": "#F7FF00"
+    },
+    {
+      "id": "gsw-maxx-darth-black",
+      "name": "Maxx Darth Black",
+      "range": "Maxx Darth",
+      "code": null,
+      "hex": "#0A0A0A"
+    }
   ]
 }

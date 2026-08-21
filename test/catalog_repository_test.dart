@@ -59,6 +59,24 @@ Future<void> main() async {
     expect(citadel.length, greaterThan(50));
   });
 
+  test('ranges come out in curated order, workhorse ranges first', () {
+    // Alphabetical range order opened the catalogue on Citadel "Air" — a
+    // newcomer's first screen was forty-six airbrush paints. The JSON's
+    // rangeOrder is the display contract; first seen must be Base.
+    final citadel = repository.search('', brand: PaintBrand.citadel);
+    expect(citadel.first.range, 'Base');
+
+    final seen = <String>[];
+    for (final paint in citadel) {
+      if (seen.isEmpty || seen.last != paint.range) seen.add(paint.range);
+    }
+    expect(seen, ['Base', 'Layer', 'Shade', 'Contrast', 'Dry', 'Technical', 'Air'],
+        reason: 'each range appears once, in curated order — no interleaving');
+
+    final vallejo = repository.search('', brand: PaintBrand.vallejo);
+    expect(vallejo.first.range, 'Model Color');
+  });
+
   test('byId resolves a known paint with parsed color', () {
     final paint = repository.byId('citadel-mephiston-red');
     expect(paint, isNotNull);

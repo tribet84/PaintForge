@@ -93,7 +93,18 @@ def main() -> int:
             print('  ', e)
         return 1
 
-    catalogue['paints'].sort(key=lambda p: (p['range'], p['name']))
+    # Keep the file in the same curated range order the app displays, so a
+    # diff after adding paints reads as insertions, not a reshuffle. A new
+    # range must be given a slot in rangeOrder — refusing is better than
+    # silently parking it at the end forever.
+    rank = {r: i for i, r in enumerate(catalogue.get('rangeOrder', []))}
+    if rank:
+        unplaced = {p['range'] for p in catalogue['paints']} - set(rank)
+        if unplaced:
+            print(f'REJECTED — add these ranges to rangeOrder first: {unplaced}')
+            return 1
+    catalogue['paints'].sort(
+        key=lambda p: (rank.get(p['range'], len(rank)), p['range'], p['name']))
     with open(catalogue_path, 'w') as f:
         json.dump(catalogue, f, indent=2, ensure_ascii=False)
         f.write('\n')
