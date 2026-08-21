@@ -10,6 +10,11 @@ abstract class RecipePhotoRepository {
   /// Uploads [bytes] and returns the download URL to store on the recipe.
   Future<String> upload(Uint8List bytes);
 
+  /// Uploads a profile picture and returns its download URL. Kept in this
+  /// repository because it is the same boundary — "this user's images in
+  /// Storage" — and account deletion must sweep both in one place.
+  Future<String> uploadAvatar(Uint8List bytes);
+
   /// Removes a previously uploaded photo. Safe to call with a URL that is
   /// already gone.
   Future<void> deleteByUrl(String url);
@@ -28,12 +33,26 @@ class FirebaseRecipePhotoRepository implements RecipePhotoRepository {
 
   Reference get _folder => _storage.ref('users/$uid/recipePhotos');
 
+  Reference get _avatarFolder => _storage.ref('users/$uid/avatar');
+
   @override
   Future<String> upload(Uint8List bytes) async {
     // Named by timestamp rather than by recipe id: a brand-new recipe has no
     // id until it is saved, and the editor uploads as part of saving.
     final name = '${DateTime.now().microsecondsSinceEpoch}.jpg';
-    final ref = _folder.child(name);
+    return _put(_folder.child(name), bytes);
+  }
+
+  @override
+  Future<String> uploadAvatar(Uint8List bytes) async {
+    // Timestamped like recipe photos, NOT a fixed "avatar.jpg": the URL
+    // changes on every update, so the hard immutable caching below can never
+    // pin an old face to the account. The caller deletes the previous object.
+    final name = '${DateTime.now().microsecondsSinceEpoch}.jpg';
+    return _put(_avatarFolder.child(name), bytes);
+  }
+
+  Future<String> _put(Reference ref, Uint8List bytes) async {
     await ref.putData(
       bytes,
       SettableMetadata(
@@ -59,11 +78,13 @@ class FirebaseRecipePhotoRepository implements RecipePhotoRepository {
 
   @override
   Future<void> deleteAll() async {
-    try {
-      final listing = await _folder.listAll();
-      await Future.wait(listing.items.map((item) => item.delete()));
-    } catch (error) {
-      debugPrint('Recipe photo cleanup skipped: $error');
+    for (final folder in [_folder, _avatarFolder]) {
+      try {
+        final listing = await folder.listAll();
+        await Future.wait(listing.items.map((item) => item.delete()));
+      } catch (error) {
+        debugPrint('Photo cleanup skipped for ${folder.fullPath}: $error');
+      }
     }
   }
 }

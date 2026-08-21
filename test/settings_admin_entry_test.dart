@@ -47,6 +47,9 @@ class FakeAuthService implements AuthService {
   Future<void> setDisplayName(String name) async {}
 
   @override
+  Future<void> setPhotoUrl(String url) async {}
+
+  @override
   List<String> get providerIds => const ['password'];
 
   @override

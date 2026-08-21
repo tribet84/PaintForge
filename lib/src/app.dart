@@ -161,6 +161,9 @@ class _AuthGate extends StatelessWidget {
                     user.displayName ??
                     user.email?.split('@').first ??
                     'Anonymous painter',
+                // Through the service, not the captured user: the getter
+                // also checks providerData, where Google parks the photo.
+                authorPhotoUrl: () => auth.photoUrl,
               ),
             ),
             Provider<SampleRecipeSeeder>(

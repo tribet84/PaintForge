@@ -8,12 +8,18 @@ class PublishedRecipe {
     required this.id,
     required this.ownerUid,
     required this.authorName,
+    this.authorPhotoUrl,
     required this.recipe,
   });
 
   final String id;
   final String ownerUid;
   final String authorName;
+
+  /// Denormalised like [authorName]: viewers cannot read another account's
+  /// Auth profile, so the face travels with the recipe. Null for authors
+  /// without a picture and for docs published before this field existed.
+  final String? authorPhotoUrl;
 
   /// The shared content. `recipe.updatedAt` is the author's last update —
   /// followers always see the latest version because links point here
@@ -30,10 +36,26 @@ class PublishedRecipe {
 /// count computable without any server code.
 abstract class PublishedRecipeRepository {
   /// Publishes [recipe] and returns the public id.
-  Future<String> publish(Recipe recipe, {required String authorName});
+  Future<String> publish(
+    Recipe recipe, {
+    required String authorName,
+    String? authorPhotoUrl,
+  });
 
   /// Pushes the latest content of an already-published recipe.
-  Future<void> updatePublished(Recipe recipe, {required String authorName});
+  Future<void> updatePublished(
+    Recipe recipe, {
+    required String authorName,
+    String? authorPhotoUrl,
+  });
+
+  /// Rewrites the author's name and picture on everything they currently
+  /// have published, WITHOUT touching updatedAt — a new face or name is not
+  /// news and must never ring a follower's bell.
+  Future<void> updateAuthorProfile({
+    required String authorName,
+    String? authorPhotoUrl,
+  });
 
   Future<void> unpublish(String publishedId);
 
@@ -93,9 +115,15 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
   CollectionReference<Map<String, dynamic>> get _linked =>
       _firestore.collection('users').doc(uid).collection('linkedRecipes');
 
-  Map<String, dynamic> _publicMap(Recipe recipe, String authorName) => {
+  Map<String, dynamic> _publicMap(
+    Recipe recipe,
+    String authorName,
+    String? authorPhotoUrl,
+  ) =>
+      {
         'ownerUid': uid,
         'authorName': authorName,
+        if (authorPhotoUrl != null) 'authorPhotoUrl': authorPhotoUrl,
         'name': recipe.name,
         'description': recipe.description,
         'sections': recipe.sections.map((s) => s.toMap()).toList(),
@@ -106,16 +134,47 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
       };
 
   @override
-  Future<String> publish(Recipe recipe, {required String authorName}) async {
-    final doc = await _published.add(_publicMap(recipe, authorName));
+  Future<String> publish(
+    Recipe recipe, {
+    required String authorName,
+    String? authorPhotoUrl,
+  }) async {
+    final doc =
+        await _published.add(_publicMap(recipe, authorName, authorPhotoUrl));
     return doc.id;
   }
 
   @override
-  Future<void> updatePublished(Recipe recipe, {required String authorName}) {
+  Future<void> updatePublished(
+    Recipe recipe, {
+    required String authorName,
+    String? authorPhotoUrl,
+  }) {
     final publishedId = recipe.publishedId;
     if (publishedId == null) return Future.value();
-    return _published.doc(publishedId).set(_publicMap(recipe, authorName));
+    return _published
+        .doc(publishedId)
+        .set(_publicMap(recipe, authorName, authorPhotoUrl));
+  }
+
+  @override
+  Future<void> updateAuthorProfile({
+    required String authorName,
+    String? authorPhotoUrl,
+  }) async {
+    final snapshot = await _published.where('ownerUid', isEqualTo: uid).get();
+    if (snapshot.docs.isEmpty) return;
+    final batch = _firestore.batch();
+    for (final doc in snapshot.docs) {
+      batch.update(doc.reference, {
+        'authorName': authorName,
+        // A removed picture must actually disappear from the public docs,
+        // not linger as the last uploaded face.
+        'authorPhotoUrl':
+            authorPhotoUrl ?? FieldValue.delete(),
+      });
+    }
+    await batch.commit();
   }
 
   @override
@@ -169,6 +228,7 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
       id: id,
       ownerUid: ownerUid,
       authorName: data['authorName'] as String? ?? '',
+      authorPhotoUrl: data['authorPhotoUrl'] as String?,
       recipe: Recipe(
         id: id,
         name: name,

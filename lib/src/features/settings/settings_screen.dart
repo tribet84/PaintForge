@@ -5,13 +5,17 @@ import 'package:provider/provider.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../build_info.dart';
 import '../../data/catalog_repository.dart';
+import '../../data/recipe_photo_repository.dart';
 import '../../services/app_settings.dart';
 import '../../services/auth_service.dart';
 import '../../services/external_link.dart';
+import '../../services/image_compressor.dart';
 import '../../services/install_hint.dart';
 import '../../services/share_links.dart';
+import '../../state/recipes_provider.dart';
 import '../../widgets/account_avatar.dart';
 import '../admin/admin_screen.dart';
+import '../recipes/recipe_photo_picker.dart';
 import 'delete_account_flow.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -86,10 +90,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  /// An avatar renders at 56 px at its largest; 512 leaves room for dense
+  /// screens without paying recipe-photo weight for a face.
+  static const _avatarCompressor =
+      ImageCompressor(maxDimension: 512, maxBytes: 150 * 1024);
+
+  Future<void> _changeProfilePhoto(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final auth = context.read<AuthService>();
+    final photos = context.read<RecipePhotoRepository>();
+    final recipes = context.read<RecipesProvider>();
+    final previousUrl = auth.photoUrl;
+
+    final bytes =
+        await pickAndCompressRecipePhoto(context, compressor: _avatarCompressor);
+    if (bytes == null) return;
+
+    final url = await photos.uploadAvatar(bytes);
+    await auth.setPhotoUrl(url);
+    // Old publishes must wear the new face too — this also drags along any
+    // display-name change that never got propagated.
+    await recipes.refreshAuthorProfile();
+    // Last and best-effort: the pointer already moved, so losing the old
+    // object cleanup is cosmetic. Google-hosted photos are not ours to
+    // delete; refFromURL simply rejects them inside deleteByUrl.
+    if (previousUrl != null) {
+      await photos.deleteByUrl(previousUrl);
+    }
+
+    if (!mounted) return;
+    setState(() {});
+    messenger.showSnackBar(
+      SnackBar(content: Text(l10n.settingsPhotoSaved)),
+    );
+  }
+
   Future<void> _editDisplayName(BuildContext context) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
     final auth = context.read<AuthService>();
+    final recipes = context.read<RecipesProvider>();
     final controller =
         TextEditingController(text: auth.currentUser?.displayName ?? '');
 
@@ -120,6 +161,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (name == null || name.isEmpty) return;
 
     await auth.setDisplayName(name);
+    // A renamed author renames their whole public catalogue, not just
+    // future publishes.
+    await recipes.refreshAuthorProfile();
     if (!mounted) return;
     setState(() {});
     messenger.showSnackBar(
@@ -155,6 +199,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: user?.displayName != null ? Text(user?.email ?? '') : null,
             trailing: const Icon(Icons.edit_outlined, size: 18),
             onTap: () => _editDisplayName(context),
+          ),
+          ListTile(
+            leading: const Icon(Icons.photo_camera_outlined),
+            title: Text(l10n.settingsPhotoTitle),
+            subtitle: Text(l10n.settingsPhotoSubtitle),
+            onTap: () => _changeProfilePhoto(context),
           ),
           const Divider(),
           // Cosmetic gate only — the enforceable one is the matching claim

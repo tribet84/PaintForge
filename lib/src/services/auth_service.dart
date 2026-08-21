@@ -54,6 +54,11 @@ abstract class AuthService {
   /// aggregates someone's whole public activity.
   Future<void> setDisplayName(String name);
 
+  /// Points the account's profile picture at [url] — an image already
+  /// uploaded to Storage. Auth stores only the pointer; the bytes live in
+  /// the user's own Storage folder where account deletion can reach them.
+  Future<void> setPhotoUrl(String url);
+
   /// Permanently deletes the signed-in Firebase Auth account.
   ///
   /// Firebase requires a *recent* sign-in for this; call a `reauthenticate*`
@@ -197,6 +202,16 @@ class FirebaseAuthService implements AuthService {
     await user.updateDisplayName(name);
     // Reload so currentUser reflects the change immediately — the publish
     // flow reads displayName from there.
+    await user.reload();
+  }
+
+  @override
+  Future<void> setPhotoUrl(String url) async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+    await user.updatePhotoURL(url);
+    // Same reason as setDisplayName: the AppBar avatar and the publish flow
+    // read the profile synchronously right after this returns.
     await user.reload();
   }
 

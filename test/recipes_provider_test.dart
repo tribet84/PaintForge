@@ -97,4 +97,45 @@ void main() {
     );
     expect(recipes.isLinked(publishedId), isTrue);
   });
+
+  test('publishing carries the author photo alongside the name', () async {
+    final withPhoto = RecipesProvider(
+      repository: repository,
+      publishedRepository: published,
+      authorName: () => 'Author',
+      authorPhotoUrl: () => 'https://storage.test/avatar.jpg',
+    );
+    addTearDown(withPhoto.dispose);
+    await settle();
+
+    final recipe = await createRecipe();
+    final publishedId = await withPhoto.publish(recipe);
+    final doc = await published.watchPublished(publishedId!).first;
+
+    expect(doc!.authorPhotoUrl, 'https://storage.test/avatar.jpg');
+  });
+
+  test('refreshAuthorProfile renames old publishes without ringing bells',
+      () async {
+    final recipe = await createRecipe();
+    final publishedId = await recipes.publish(recipe);
+    final before = await published.watchPublished(publishedId!).first;
+
+    // The user changes name and picture in Settings, long after publishing.
+    final renamed = RecipesProvider(
+      repository: repository,
+      publishedRepository: published,
+      authorName: () => 'New Name',
+      authorPhotoUrl: () => 'https://storage.test/new-face.jpg',
+    );
+    addTearDown(renamed.dispose);
+    await renamed.refreshAuthorProfile();
+
+    final after = await published.watchPublished(publishedId).first;
+    expect(after!.authorName, 'New Name');
+    expect(after.authorPhotoUrl, 'https://storage.test/new-face.jpg');
+    // Identity is not news: the content timestamp the bell filters on must
+    // survive the rewrite untouched.
+    expect(after.recipe.updatedAt, before!.recipe.updatedAt);
+  });
 }

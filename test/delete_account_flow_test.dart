@@ -46,6 +46,9 @@ class FakeAuthService implements AuthService {
   Future<void> setDisplayName(String name) async {}
 
   @override
+  Future<void> setPhotoUrl(String url) async {}
+
+  @override
   List<String> providerIds = const ['password'];
 
   @override
@@ -299,6 +302,9 @@ class _OrderedAuthService implements AuthService {
 
   @override
   Future<void> setDisplayName(String name) => _inner.setDisplayName(name);
+
+  @override
+  Future<void> setPhotoUrl(String url) => _inner.setPhotoUrl(url);
 
   @override
   Stream<User?> authStateChanges() => _inner.authStateChanges();

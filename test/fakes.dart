@@ -209,19 +209,28 @@ class FakePublishedRecipeRepository implements PublishedRecipeRepository {
       _published.remove(publishedId);
 
   @override
-  Future<String> publish(Recipe recipe, {required String authorName}) async {
+  Future<String> publish(
+    Recipe recipe, {
+    required String authorName,
+    String? authorPhotoUrl,
+  }) async {
     final id = 'pub-${_published.length}';
     _published[id] = PublishedRecipe(
       id: id,
       ownerUid: uid,
       authorName: authorName,
+      authorPhotoUrl: authorPhotoUrl,
       recipe: recipe,
     );
     return id;
   }
 
   @override
-  Future<void> updatePublished(Recipe recipe, {required String authorName}) async {
+  Future<void> updatePublished(
+    Recipe recipe, {
+    required String authorName,
+    String? authorPhotoUrl,
+  }) async {
     final id = recipe.publishedId;
     if (id == null) return;
     // A real Firestore .set() recreates a deleted doc under the same id —
@@ -230,8 +239,28 @@ class FakePublishedRecipeRepository implements PublishedRecipeRepository {
       id: id,
       ownerUid: uid,
       authorName: authorName,
+      authorPhotoUrl: authorPhotoUrl,
       recipe: recipe,
     );
+  }
+
+  @override
+  Future<void> updateAuthorProfile({
+    required String authorName,
+    String? authorPhotoUrl,
+  }) async {
+    // Same contract as Firestore: identity fields change, updatedAt does
+    // not — a new face must never ring a follower's bell.
+    for (final entry in _published.entries.toList()) {
+      if (entry.value.ownerUid != uid) continue;
+      _published[entry.key] = PublishedRecipe(
+        id: entry.value.id,
+        ownerUid: entry.value.ownerUid,
+        authorName: authorName,
+        authorPhotoUrl: authorPhotoUrl,
+        recipe: entry.value.recipe,
+      );
+    }
   }
 
   @override

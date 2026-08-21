@@ -21,6 +21,12 @@ class FakeRecipePhotoRepository implements RecipePhotoRepository {
   }
 
   @override
+  Future<String> uploadAvatar(Uint8List bytes) async {
+    uploaded.add(bytes);
+    return nextUrl;
+  }
+
+  @override
   Future<void> deleteByUrl(String url) async => deletedUrls.add(url);
 
   @override

@@ -10,6 +10,7 @@ import '../../services/external_link.dart';
 import '../../state/follows_provider.dart';
 import '../../state/inventory_provider.dart';
 import '../../state/recipes_provider.dart';
+import '../../widgets/author_avatar.dart';
 import '../../widgets/paint_list_widgets.dart';
 import '../../widgets/paint_widgets.dart';
 import '../../widgets/recipe_photo.dart';
@@ -234,8 +235,15 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
                 // Author + freshness: the reason linking beats cloning.
                 Row(
                   children: [
-                    const Icon(Icons.bookmark_outlined, size: 18),
-                    const SizedBox(width: 6),
+                    // The face, not a bookmark glyph: the author IS the
+                    // point of this row, and the avatar is what makes a
+                    // recipe read as a person's work instead of a document.
+                    AuthorAvatar(
+                      name: published.authorName,
+                      photoUrl: published.authorPhotoUrl,
+                      size: 28,
+                    ),
+                    const SizedBox(width: 8),
                     Expanded(
                       // The author's name is the door to everything else
                       // they share — the only discovery path there is, on
@@ -250,6 +258,7 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
                               authorName: published.authorName.isEmpty
                                   ? '—'
                                   : published.authorName,
+                              authorPhotoUrl: published.authorPhotoUrl,
                             ),
                           ),
                         ),

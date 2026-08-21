@@ -433,6 +433,9 @@
     }
   },
   "settingsVersion": "Version",
+  "settingsPhotoTitle": "Change profile photo",
+  "settingsPhotoSubtitle": "Shown next to the recipes you share",
+  "settingsPhotoSaved": "Profile photo updated",
   "settingsLanguage": "Language",
   "settingsLanguageSystem": "System default",
   "settingsInstallTitle": "Add to home screen",

@@ -14,10 +14,12 @@ class RecipesProvider extends ChangeNotifier {
     PublishedRecipeRepository? publishedRepository,
     RecipePhotoRepository? photoRepository,
     String Function()? authorName,
+    String? Function()? authorPhotoUrl,
   })  : _repository = repository,
         _publishedRepository = publishedRepository,
         _photoRepository = photoRepository,
-        _authorName = authorName ?? (() => '') {
+        _authorName = authorName ?? (() => ''),
+        _authorPhotoUrl = authorPhotoUrl ?? (() => null) {
     _subscription = _repository.watchRecipes().listen((recipes) {
       _recipes = recipes;
       _loaded = true;
@@ -34,6 +36,7 @@ class RecipesProvider extends ChangeNotifier {
   final PublishedRecipeRepository? _publishedRepository;
   final RecipePhotoRepository? _photoRepository;
   final String Function() _authorName;
+  final String? Function() _authorPhotoUrl;
   StreamSubscription<List<Recipe>>? _subscription;
   StreamSubscription<List<String>>? _linkedSubscription;
 
@@ -65,6 +68,7 @@ class RecipesProvider extends ChangeNotifier {
       await _publishedRepository?.updatePublished(
         recipe,
         authorName: _authorName(),
+        authorPhotoUrl: _authorPhotoUrl(),
       );
     }
   }
@@ -93,18 +97,35 @@ class RecipesProvider extends ChangeNotifier {
     final published = _publishedRepository;
     if (published == null) return null;
     if (recipe.publishedId != null) {
-      await published.updatePublished(recipe, authorName: _authorName());
+      await published.updatePublished(
+        recipe,
+        authorName: _authorName(),
+        authorPhotoUrl: _authorPhotoUrl(),
+      );
       if (!recipe.isPublished) {
         await _repository.update(recipe.copyWith(published: true));
       }
       return recipe.publishedId;
     }
-    final publishedId =
-        await published.publish(recipe, authorName: _authorName());
+    final publishedId = await published.publish(
+      recipe,
+      authorName: _authorName(),
+      authorPhotoUrl: _authorPhotoUrl(),
+    );
     await _repository.update(
       recipe.copyWith(publishedId: publishedId, published: true),
     );
     return publishedId;
+  }
+
+  /// Pushes the current display name and profile picture onto everything
+  /// this account has published. Called after either changes in Settings —
+  /// without it, old publishes would wear the old identity forever.
+  Future<void> refreshAuthorProfile() async {
+    await _publishedRepository?.updateAuthorProfile(
+      authorName: _authorName(),
+      authorPhotoUrl: _authorPhotoUrl(),
+    );
   }
 
   Future<void> unpublish(Recipe recipe) async {

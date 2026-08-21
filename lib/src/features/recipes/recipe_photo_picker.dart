@@ -11,7 +11,8 @@ const _compressor = ImageCompressor();
 
 /// Runs the decode/resize/encode off the UI thread. A camera photo is big
 /// enough that doing this inline visibly freezes the app.
-Uint8List _compressInIsolate(Uint8List bytes) => _compressor.compress(bytes);
+Uint8List _compressWith((ImageCompressor, Uint8List) args) =>
+    args.$1.compress(args.$2);
 
 /// Lets the user pick a photo and compresses it ON THE DEVICE, returning the
 /// bytes ready to upload.
@@ -20,9 +21,15 @@ Uint8List _compressInIsolate(Uint8List bytes) => _compressor.compress(bytes);
 /// saves, so uploading here would leave an orphaned object in Storage every
 /// time someone picked a photo and then backed out.
 ///
+/// [compressor] defaults to the recipe-photo budget; callers with smaller
+/// targets (the profile avatar) pass their own.
+///
 /// Returns null if the user cancelled, or if the image could not be
 /// processed — with a message explaining which.
-Future<Uint8List?> pickAndCompressRecipePhoto(BuildContext context) async {
+Future<Uint8List?> pickAndCompressRecipePhoto(
+  BuildContext context, {
+  ImageCompressor compressor = _compressor,
+}) async {
   final l10n = AppLocalizations.of(context);
   final messenger = ScaffoldMessenger.of(context);
 
@@ -57,8 +64,8 @@ Future<Uint8List?> pickAndCompressRecipePhoto(BuildContext context) async {
     // compute() spawns an isolate on mobile/desktop; on web it falls back to
     // running inline, which is unavoidable there.
     final compressed = kIsWeb
-        ? _compressInIsolate(bytes)
-        : await compute(_compressInIsolate, bytes);
+        ? _compressWith((compressor, bytes))
+        : await compute(_compressWith, (compressor, bytes));
     messenger.clearSnackBars();
     return compressed;
   } on PhotoCompressionException catch (error) {

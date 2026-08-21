@@ -6,6 +6,7 @@ import '../../data/published_recipe_repository.dart';
 import '../../services/auth_service.dart';
 import '../../state/follows_provider.dart';
 import '../../state/inventory_provider.dart';
+import '../../widgets/author_avatar.dart';
 import '../../widgets/brand_loader.dart';
 import '../../widgets/recipe_card.dart';
 import 'public_recipe_screen.dart';
@@ -23,10 +24,16 @@ class AuthorScreen extends StatefulWidget {
     super.key,
     required this.ownerUid,
     required this.authorName,
+    this.authorPhotoUrl,
   });
 
   final String ownerUid;
   final String authorName;
+
+  /// Passed by the caller when it already has the picture (the public
+  /// recipe view does), so the header face renders before the recipe list
+  /// resolves. When null, the first loaded recipe supplies it.
+  final String? authorPhotoUrl;
 
   @override
   State<AuthorScreen> createState() => _AuthorScreenState();
@@ -60,6 +67,12 @@ class _AuthorScreenState extends State<AuthorScreen> {
           if (recipes == null) {
             return const Center(child: BrandLoader());
           }
+          // The caller's copy of the picture wins for instant paint; docs
+          // published after an avatar change may carry a fresher one.
+          final photoUrl = widget.authorPhotoUrl ??
+              recipes
+                  .map((p) => p.authorPhotoUrl)
+                  .firstWhere((url) => url != null, orElse: () => null);
           return ListView(
             padding: const EdgeInsets.fromLTRB(8, 8, 8, 24),
             children: [
@@ -67,10 +80,21 @@ class _AuthorScreenState extends State<AuthorScreen> {
                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                 child: Row(
                   children: [
+                    AuthorAvatar(
+                      name: widget.authorName,
+                      photoUrl: photoUrl,
+                      size: 56,
+                    ),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(
+                            widget.authorName,
+                            style: Theme.of(context).textTheme.titleMedium,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           Text(
                             l10n.authorRecipesCount(recipes.length),
                             style: Theme.of(context).textTheme.bodySmall,
