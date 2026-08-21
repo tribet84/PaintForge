@@ -111,7 +111,11 @@ class _AuthorScreenState extends State<AuthorScreen> {
                   recipe: published.recipe,
                   origin: RecipeOrigin.linked,
                   authorName: published.authorName,
-                  readiness: published.recipe.readiness(inventory.entries),
+                  // An empty shelf gets no verdict — this page is where
+                  // newcomers land from a shared link, before owning a pot.
+                  readiness: inventory.entries.isEmpty
+                      ? null
+                      : published.recipe.readiness(inventory.entries),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (_) =>

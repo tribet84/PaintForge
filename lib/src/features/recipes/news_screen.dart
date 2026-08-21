@@ -53,7 +53,11 @@ class _NewsScreenState extends State<NewsScreen> {
                     recipe: published.recipe,
                     origin: RecipeOrigin.linked,
                     authorName: published.authorName,
-                    readiness: published.recipe.readiness(inventory.entries),
+                    // Same rule as everywhere else: no readiness verdict
+                    // against an empty shelf.
+                    readiness: inventory.entries.isEmpty
+                        ? null
+                        : published.recipe.readiness(inventory.entries),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (_) =>

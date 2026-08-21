@@ -57,7 +57,13 @@ class RecipesScreen extends StatelessWidget {
                     origin: recipe.isPublished
                         ? RecipeOrigin.ownShared
                         : RecipeOrigin.ownPrivate,
-                    readiness: recipe.readiness(inventory.entries),
+                    // No verdict against an empty shelf: grading every card
+                    // "Missing paints" before the user owns a single pot is
+                    // noise, and it made the sample recipe greet brand-new
+                    // accounts with a red warning.
+                    readiness: inventory.entries.isEmpty
+                        ? null
+                        : recipe.readiness(inventory.entries),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (_) => RecipeDetailScreen(recipeId: recipe.id),
@@ -138,7 +144,11 @@ class _LinkedRecipeCard extends StatelessWidget {
           recipe: published.recipe,
           origin: RecipeOrigin.linked,
           authorName: published.authorName,
-          readiness: published.recipe.readiness(inventory.entries),
+          // Same rule as the owner's cards above: an empty shelf gets no
+          // verdict, not a wall of red.
+          readiness: inventory.entries.isEmpty
+              ? null
+              : published.recipe.readiness(inventory.entries),
           onTap: () => Navigator.of(context).push(
             MaterialPageRoute<void>(
               builder: (_) => PublicRecipeScreen(publishedId: publishedId),
