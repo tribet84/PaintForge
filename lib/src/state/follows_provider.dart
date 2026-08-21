@@ -50,8 +50,15 @@ class FollowsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> follow(String authorUid, String authorName) =>
-      _repository.follow(authorUid, authorName);
+  /// No-op when already following: the repository write is an unconditional
+  /// set, so repeating it would reset the follow's seenUpTo watermark and
+  /// silently swallow that author's unseen news. Callers guard on
+  /// [isFollowing] too, but this list starts empty until the first snapshot
+  /// arrives — the one window where a guard upstream can be wrong.
+  Future<void> follow(String authorUid, String authorName) async {
+    if (isFollowing(authorUid)) return;
+    await _repository.follow(authorUid, authorName);
+  }
 
   Future<void> unfollow(String authorUid) => _repository.unfollow(authorUid);
 

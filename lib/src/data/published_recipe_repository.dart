@@ -253,7 +253,12 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
   }
 
   @override
-  Future<void> follow(String authorUid, String authorName) {
+  Future<void> follow(String authorUid, String authorName) async {
+    // Following twice must be a no-op, not a rewrite: the set below stamps a
+    // fresh seenUpTo, and re-stamping an existing follow would silently mark
+    // that author's unseen news as seen. The read-then-write is not atomic,
+    // but the loser of that race merely rewrites the same young watermark.
+    if ((await _following.doc(authorUid).get()).exists) return;
     // One batch so the private list and the public marker (the author's
     // follower count) can never drift apart — same discipline as link().
     final batch = _firestore.batch()
@@ -264,7 +269,7 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
       ..set(_followerMarker(authorUid), {
         'followedAt': FieldValue.serverTimestamp(),
       });
-    return batch.commit();
+    await batch.commit();
   }
 
   @override

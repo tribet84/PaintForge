@@ -16,11 +16,19 @@ import '../state/inventory_provider.dart';
 /// Here it is one tap per pot: pick your brand, tap everything you own, one
 /// button writes the lot in a single batch.
 class ShelfStarter extends StatefulWidget {
-  const ShelfStarter({super.key, required this.onDone});
+  const ShelfStarter({
+    super.key,
+    required this.onDone,
+    required this.onSkip,
+  });
 
-  /// Called when the user adds their selection or walks away — either way
-  /// the regular catalogue takes over.
+  /// Called when the user adds their selection — the starter did its job.
   final VoidCallback onDone;
+
+  /// Called when the user walks away without adding anything. Kept separate
+  /// from [onDone] because the caller treats it as a lasting answer ("I'd
+  /// rather browse on my own"), not a postponement.
+  final VoidCallback onSkip;
 
   @override
   State<ShelfStarter> createState() => _ShelfStarterState();
@@ -155,7 +163,7 @@ class _ShelfStarterState extends State<ShelfStarter> {
                 // Never a trap: the full catalogue is one tap away, and the
                 // starter simply does not come back once dismissed.
                 TextButton(
-                  onPressed: widget.onDone,
+                  onPressed: widget.onSkip,
                   child: Text(l10n.shelfStarterSkip),
                 ),
               ],

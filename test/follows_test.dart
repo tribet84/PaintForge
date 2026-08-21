@@ -48,12 +48,35 @@ void main() {
           DateTime.now().subtract(const Duration(seconds: 40))))
       ..seed(published('p2', 'ana', 'Second',
           DateTime.now().subtract(const Duration(seconds: 20))));
-    // El fake reordena el reloj del seguidor para simular el paso del tiempo.
+    // The fake rewinds the follower's clock to simulate time passing.
     repository.backdateSeen(
         'ana', DateTime.now().subtract(const Duration(minutes: 5)));
     await settle();
 
     expect(provider.news.map((p) => p.recipe.name), ['Second', 'First']);
+  });
+
+  test('re-following never resets the seen watermark', () async {
+    final repository = FakePublishedRecipeRepository();
+    final provider = FollowsProvider(repository: repository);
+    addTearDown(provider.dispose);
+
+    await provider.follow('ana', 'Ana');
+    repository.seed(published('p1', 'ana', 'Unseen news',
+        DateTime.now().subtract(const Duration(seconds: 20))));
+    repository.backdateSeen(
+        'ana', DateTime.now().subtract(const Duration(minutes: 5)));
+    await settle();
+    expect(provider.news, hasLength(1), reason: 'sanity: the bell is ringing');
+
+    // A second follow — e.g. the nudge firing before the first snapshot
+    // loads — must not stamp a fresh watermark over the unseen news.
+    // Straight at the repository: the provider has its own isFollowing
+    // guard, and this test is about the layer underneath it.
+    await repository.follow('ana', 'Ana');
+    await settle();
+
+    expect(provider.news, hasLength(1));
   });
 
   test('marking seen clears the bell', () async {

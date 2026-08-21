@@ -291,6 +291,9 @@ class FakePublishedRecipeRepository implements PublishedRecipeRepository {
 
   @override
   Future<void> follow(String authorUid, String authorName) async {
+    // Mirrors the Firestore contract: re-following is a no-op, never a
+    // rewrite of the seenUpTo watermark.
+    if (_following.containsKey(authorUid)) return;
     _following[authorUid] = (
       authorUid: authorUid,
       authorName: authorName,

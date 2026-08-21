@@ -12,6 +12,7 @@ class AppSettings extends ChangeNotifier {
 
   static const _localeKey = 'localeOverride';
   static const _paintCardHintKey = 'paintCardHintDismissed';
+  static const _shelfStarterKey = 'shelfStarterDismissed';
 
   final SharedPreferences _prefs;
 
@@ -42,6 +43,17 @@ class AppSettings extends ChangeNotifier {
 
   Future<void> dismissPaintCardHint() async {
     await _prefs.setBool(_paintCardHintKey, true);
+    notifyListeners();
+  }
+
+  /// Set when the user walks away from the guided shelf starter. "I'd
+  /// rather browse on my own" is an answer, not a postponement — the
+  /// starter used to come back on every visit while the shelf stayed
+  /// empty, which turned a one-time offer into a recurring toll booth.
+  bool get shelfStarterDismissed => _prefs.getBool(_shelfStarterKey) ?? false;
+
+  Future<void> dismissShelfStarter() async {
+    await _prefs.setBool(_shelfStarterKey, true);
     notifyListeners();
   }
 }

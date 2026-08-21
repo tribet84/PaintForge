@@ -92,11 +92,17 @@ class _PaintsScreenState extends State<PaintsScreen> {
     }
     // A brand-new shelf gets the guided starter instead of a 640-paint
     // catalogue: of the first eight sign-ups, five left without marking a
-    // single pot. Dismissal is session-only on purpose — an empty shelf on
-    // the next visit is the same problem, so the same offer.
-    if (owned.isEmpty && !_starterDismissed) {
+    // single pot. Skipping it is remembered on the device: re-offering on
+    // every visit turned "I'd rather browse on my own" into a question the
+    // user had to answer again and again. Completing it only hides it for
+    // the session — if the shelf is ever emptied, the same problem deserves
+    // the same offer.
+    if (owned.isEmpty &&
+        !_starterDismissed &&
+        !context.watch<AppSettings>().shelfStarterDismissed) {
       return ShelfStarter(
         onDone: () => setState(() => _starterDismissed = true),
+        onSkip: () => context.read<AppSettings>().dismissShelfStarter(),
       );
     }
     // The first loaded build LATCHES the default; after that only the user

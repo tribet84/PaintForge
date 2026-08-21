@@ -11,6 +11,8 @@ import 'package:paintforge/src/state/paint_lists_provider.dart';
 import 'package:paintforge/src/state/recipes_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'package:paintforge/src/services/app_settings.dart';
+
 import 'fakes.dart';
 
 /// Opening the app used to fetch lists AND recipes even for someone who only
@@ -35,10 +37,12 @@ void main() {
     final inventory = InventoryProvider(repository: FakeInventoryRepository());
     addTearDown(inventory.dispose);
 
+    final settings = await testAppSettings();
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           Provider<CatalogRepository>.value(value: catalog),
+          ChangeNotifierProvider<AppSettings>.value(value: settings),
           Provider<AuthService>.value(value: _StubAuthService()),
           Provider<PublishedRecipeRepository>.value(value: published),
           ChangeNotifierProvider<FollowsProvider>(
@@ -98,10 +102,12 @@ void main() {
     final inventory = InventoryProvider(repository: FakeInventoryRepository());
     addTearDown(inventory.dispose);
 
+    final settings = await testAppSettings();
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           Provider<CatalogRepository>.value(value: catalog),
+          ChangeNotifierProvider<AppSettings>.value(value: settings),
           Provider<AuthService>.value(value: _StubAuthService()),
           Provider<PublishedRecipeRepository>.value(value: published),
           ChangeNotifierProvider<FollowsProvider>(

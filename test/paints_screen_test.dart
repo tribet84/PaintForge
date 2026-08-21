@@ -418,6 +418,36 @@ void main() {
       expect(find.byType(SegmentedButton<PaintScope>), findsOneWidget);
       expect(repository.writeCalls, 0);
     });
+
+    testWidgets('walking away is remembered — the starter never comes back',
+        (tester) async {
+      await pumpPaints(tester, skipStarter: false);
+
+      await tester.tap(find.text("I'd rather browse on my own"));
+      await tester.pumpAndSettle();
+
+      // The refusal reaches storage, so the next app start — a fresh
+      // AppSettings over the same device storage — skips the starter.
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getBool('shelfStarterDismissed'), isTrue);
+      final reloaded = await AppSettings.load();
+      expect(reloaded.shelfStarterDismissed, isTrue);
+    });
+
+    testWidgets('adding paints does NOT burn the offer for an emptied shelf',
+        (tester) async {
+      await pumpPaints(tester, skipStarter: false);
+
+      await tester.tap(find.text('Abaddon Black'));
+      await tester.pump();
+      await tester.tap(find.text('Add 1 paint to my shelf'));
+      await tester.pumpAndSettle();
+
+      // Completing the starter is not a refusal: if this shelf is ever
+      // emptied again, the same problem deserves the same offer.
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getBool('shelfStarterDismissed'), isNull);
+    });
   });
 
   group('status toggles', () {

@@ -105,7 +105,9 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
     if (accepted != true) return;
 
     await recipes.link(published.id);
-    _showLinkedSnackBar(published);
+    // The write above yields; the user may have navigated away during it,
+    // and the nudge reads providers through a context that must be alive.
+    if (mounted) _showLinkedSnackBar(published);
     await _refreshLinkCount();
   }
 
