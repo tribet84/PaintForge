@@ -30,7 +30,7 @@ _Finish _finishOf(Paint paint) {
   if (range.contains('metallic')) return _Finish.metallic;
   const translucent = [
     'contrast', 'shade', 'speedpaint', 'xpress', 'wash',
-    'dipping ink', 'intensity ink', 'quickshade',
+    'dipping ink', 'intensity ink', 'quickshade', '3gen ink',
   ];
   if (translucent.any(range.contains)) return _Finish.translucent;
   return _Finish.opaque;

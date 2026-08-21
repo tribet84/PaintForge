@@ -5,7 +5,8 @@ enum PaintBrand {
   citadel,
   vallejo,
   armyPainter,
-  greenStuffWorld;
+  greenStuffWorld,
+  ak;
 
   static PaintBrand fromId(String id) =>
       PaintBrand.values.firstWhere((b) => b.name == id);

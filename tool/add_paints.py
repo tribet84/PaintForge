@@ -44,7 +44,8 @@ def main() -> int:
     additions = json.load(open(additions_path))
 
     prefix = {'citadel': 'citadel', 'vallejo': 'vallejo',
-              'army_painter': 'tap', 'green_stuff_world': 'gsw'}[
+              'army_painter': 'tap', 'green_stuff_world': 'gsw',
+              'ak': 'ak'}[
         catalogue_path.split('/')[-1].removesuffix('.json')]
 
     existing_ids = {p['id'] for p in catalogue['paints']}

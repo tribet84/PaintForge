@@ -497,9 +497,13 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Close matches in other brands'), findsOneWidget);
-      // Vallejo's black should offer Citadel's — the question the card
-      // answers is "the recipe says one brand, I own another".
-      expect(find.text('Abaddon Black'), findsWidgets);
+      // Vallejo's black should offer another brand's black — the question
+      // the card answers is "the recipe says one brand, I own another".
+      // Army Painter's Matt Black is the colour twin, so it is always on
+      // the card; which blacks fill the remaining slots shifts whenever a
+      // new brand joins the catalogue (AK's arrival pushed Abaddon Black
+      // off the top three).
+      expect(find.text('Matt Black'), findsWidgets);
       // The five-option action menu stays dead.
       expect(find.text('I own it'), findsNothing);
       expect(find.text('Add to shopping list'), findsNothing);

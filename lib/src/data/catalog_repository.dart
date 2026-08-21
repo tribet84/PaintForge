@@ -13,6 +13,7 @@ class CatalogRepository {
     'assets/catalog/vallejo.json',
     'assets/catalog/army_painter.json',
     'assets/catalog/green_stuff_world.json',
+    'assets/catalog/ak.json',
   ];
 
   final List<Paint> paints;

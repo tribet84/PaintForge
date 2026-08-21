@@ -1,0 +1,3377 @@
+{
+  "brand": "ak",
+  "brandName": "AK Interactive",
+  "rangeOrder": [
+    "3Gen Standard",
+    "3Gen Intense",
+    "3Gen Pastel",
+    "3Gen Figures",
+    "3Gen Metallic",
+    "3Gen Ink",
+    "3Gen Primer",
+    "3Gen Air",
+    "3Gen AFV"
+  ],
+  "paints": [
+    {
+      "id": "ak-ak11152-alga-green",
+      "name": "Alga Green",
+      "range": "3Gen Standard",
+      "code": "AK11152",
+      "hex": "#555E1B"
+    },
+    {
+      "id": "ak-ak11086-amaranth-red",
+      "name": "Amaranth Red",
+      "range": "3Gen Standard",
+      "code": "AK11086",
+      "hex": "#CF4E27"
+    },
+    {
+      "id": "ak-ak11183-amethyst-blue",
+      "name": "Amethyst Blue",
+      "range": "3Gen Standard",
+      "code": "AK11183",
+      "hex": "#332A47"
+    },
+    {
+      "id": "ak-ak11167-anthracite-grey",
+      "name": "Anthracite Grey",
+      "range": "3Gen Standard",
+      "code": "AK11167",
+      "hex": "#1C2A2B"
+    },
+    {
+      "id": "ak-ak11170-aquatic-turquoise",
+      "name": "Aquatic Turquoise",
+      "range": "3Gen Standard",
+      "code": "AK11170",
+      "hex": "#006557"
+    },
+    {
+      "id": "ak-ak11172-archaic-turquoise",
+      "name": "Archaic Turquoise",
+      "range": "3Gen Standard",
+      "code": "AK11172",
+      "hex": "#003839"
+    },
+    {
+      "id": "ak-ak11024-ash-grey",
+      "name": "Ash Grey",
+      "range": "3Gen Standard",
+      "code": "AK11024",
+      "hex": "#42423A"
+    },
+    {
+      "id": "ak-ak11021-basalt-grey",
+      "name": "Basalt Grey",
+      "range": "3Gen Standard",
+      "code": "AK11021",
+      "hex": "#5B605A"
+    },
+    {
+      "id": "ak-ak11052-basic-skin-tone",
+      "name": "Basic Skin Tone",
+      "range": "3Gen Standard",
+      "code": "AK11052",
+      "hex": "#F7B57B"
+    },
+    {
+      "id": "ak-ak11030-beige",
+      "name": "Beige",
+      "range": "3Gen Standard",
+      "code": "AK11030",
+      "hex": "#E2B848"
+    },
+    {
+      "id": "ak-ak11064-beige-red",
+      "name": "Beige Red",
+      "range": "3Gen Standard",
+      "code": "AK11064",
+      "hex": "#DE935A"
+    },
+    {
+      "id": "ak-ak11160-black-green",
+      "name": "Black Green",
+      "range": "3Gen Standard",
+      "code": "AK11160",
+      "hex": "#131E0D"
+    },
+    {
+      "id": "ak-ak11098-black-red",
+      "name": "Black Red",
+      "range": "3Gen Standard",
+      "code": "AK11098",
+      "hex": "#42271E"
+    },
+    {
+      "id": "ak-ak11089-blood-red",
+      "name": "Blood Red",
+      "range": "3Gen Standard",
+      "code": "AK11089",
+      "hex": "#C52219"
+    },
+    {
+      "id": "ak-ak11011-blue-grey",
+      "name": "Blue Grey",
+      "range": "3Gen Standard",
+      "code": "AK11011",
+      "hex": "#C7D0CD"
+    },
+    {
+      "id": "ak-ak11070-blue-violet",
+      "name": "Blue Violet",
+      "range": "3Gen Standard",
+      "code": "AK11070",
+      "hex": "#886DA4"
+    },
+    {
+      "id": "ak-ak11169-blue-green",
+      "name": "Blue-green",
+      "range": "3Gen Standard",
+      "code": "AK11169",
+      "hex": "#358578"
+    },
+    {
+      "id": "ak-ak11094-bordeaux-red",
+      "name": "Bordeaux Red",
+      "range": "3Gen Standard",
+      "code": "AK11094",
+      "hex": "#A13B2F"
+    },
+    {
+      "id": "ak-ak11093-brick-red",
+      "name": "Brick Red",
+      "range": "3Gen Standard",
+      "code": "AK11093",
+      "hex": "#9E4429"
+    },
+    {
+      "id": "ak-ak11127-british-khaki",
+      "name": "British Khaki",
+      "range": "3Gen Standard",
+      "code": "AK11127",
+      "hex": "#654D1F"
+    },
+    {
+      "id": "ak-ak11063-brown-rose",
+      "name": "Brown Rose",
+      "range": "3Gen Standard",
+      "code": "AK11063",
+      "hex": "#D78464"
+    },
+    {
+      "id": "ak-ak11151-brownish-green",
+      "name": "Brownish Green",
+      "range": "3Gen Standard",
+      "code": "AK11151",
+      "hex": "#57460E"
+    },
+    {
+      "id": "ak-ak11031-buff",
+      "name": "Buff",
+      "range": "3Gen Standard",
+      "code": "AK11031",
+      "hex": "#D1AC5C"
+    },
+    {
+      "id": "ak-ak11079-burn-orange",
+      "name": "Burn Orange",
+      "range": "3Gen Standard",
+      "code": "AK11079",
+      "hex": "#DB5E30"
+    },
+    {
+      "id": "ak-ak11097-burnt-red",
+      "name": "Burnt Red",
+      "range": "3Gen Standard",
+      "code": "AK11097",
+      "hex": "#533125"
+    },
+    {
+      "id": "ak-ak11111-burnt-umber",
+      "name": "Burnt Umber",
+      "range": "3Gen Standard",
+      "code": "AK11111",
+      "hex": "#2D1E01"
+    },
+    {
+      "id": "ak-ak11085-cadmium-red",
+      "name": "Cadmium Red",
+      "range": "3Gen Standard",
+      "code": "AK11085",
+      "hex": "#E9582C"
+    },
+    {
+      "id": "ak-ak11156-camouflage-green",
+      "name": "Camouflage Green",
+      "range": "3Gen Standard",
+      "code": "AK11156",
+      "hex": "#4F411C"
+    },
+    {
+      "id": "ak-ak11091-carmine",
+      "name": "Carmine",
+      "range": "3Gen Standard",
+      "code": "AK11091",
+      "hex": "#B83E26"
+    },
+    {
+      "id": "ak-ak11113-chocolate-chipping",
+      "name": "Chocolate (chipping)",
+      "range": "3Gen Standard",
+      "code": "AK11113",
+      "hex": "#331E09"
+    },
+    {
+      "id": "ak-ak11214-clear-blue",
+      "name": "Clear Blue",
+      "range": "3Gen Standard",
+      "code": "AK11214",
+      "hex": "#0D265C"
+    },
+    {
+      "id": "ak-ak11216-clear-green",
+      "name": "Clear Green",
+      "range": "3Gen Standard",
+      "code": "AK11216",
+      "hex": "#029837"
+    },
+    {
+      "id": "ak-ak11218-clear-orange",
+      "name": "Clear Orange",
+      "range": "3Gen Standard",
+      "code": "AK11218",
+      "hex": "#EB5D0B"
+    },
+    {
+      "id": "ak-ak11213-clear-red",
+      "name": "Clear Red",
+      "range": "3Gen Standard",
+      "code": "AK11213",
+      "hex": "#C61215"
+    },
+    {
+      "id": "ak-ak11215-clear-smoke",
+      "name": "Clear Smoke",
+      "range": "3Gen Standard",
+      "code": "AK11215",
+      "hex": "#734C21"
+    },
+    {
+      "id": "ak-ak11217-clear-yellow",
+      "name": "Clear Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11217",
+      "hex": "#F49401"
+    },
+    {
+      "id": "ak-ak11155-command-green",
+      "name": "Command Green",
+      "range": "3Gen Standard",
+      "code": "AK11155",
+      "hex": "#312E0D"
+    },
+    {
+      "id": "ak-ak11181-dark-blue",
+      "name": "Dark Blue",
+      "range": "3Gen Standard",
+      "code": "AK11181",
+      "hex": "#1E2D4C"
+    },
+    {
+      "id": "ak-ak11164-dark-blue-grey",
+      "name": "Dark Blue-grey",
+      "range": "3Gen Standard",
+      "code": "AK11164",
+      "hex": "#4A5E53"
+    },
+    {
+      "id": "ak-ak11109-dark-brown",
+      "name": "Dark Brown",
+      "range": "3Gen Standard",
+      "code": "AK11109",
+      "hex": "#533914"
+    },
+    {
+      "id": "ak-ak11056-dark-flesh",
+      "name": "Dark Flesh",
+      "range": "3Gen Standard",
+      "code": "AK11056",
+      "hex": "#EBA43A"
+    },
+    {
+      "id": "ak-ak11146-dark-green",
+      "name": "Dark Green",
+      "range": "3Gen Standard",
+      "code": "AK11146",
+      "hex": "#224618"
+    },
+    {
+      "id": "ak-ak11133-dark-green-grey",
+      "name": "Dark Green-grey",
+      "range": "3Gen Standard",
+      "code": "AK11133",
+      "hex": "#3B4D3D"
+    },
+    {
+      "id": "ak-ak11022-dark-grey",
+      "name": "Dark Grey",
+      "range": "3Gen Standard",
+      "code": "AK11022",
+      "hex": "#494A45"
+    },
+    {
+      "id": "ak-ak11189-dark-prussian-blue",
+      "name": "Dark Prussian Blue",
+      "range": "3Gen Standard",
+      "code": "AK11189",
+      "hex": "#0A0C1B"
+    },
+    {
+      "id": "ak-ak11107-dark-rust",
+      "name": "Dark Rust",
+      "range": "3Gen Standard",
+      "code": "AK11107",
+      "hex": "#542303"
+    },
+    {
+      "id": "ak-ak11033-dark-sand",
+      "name": "Dark Sand",
+      "range": "3Gen Standard",
+      "code": "AK11033",
+      "hex": "#E6BC56"
+    },
+    {
+      "id": "ak-ak11190-dark-sea-blue",
+      "name": "Dark Sea Blue",
+      "range": "3Gen Standard",
+      "code": "AK11190",
+      "hex": "#0D1814"
+    },
+    {
+      "id": "ak-ak11015-dark-sea-grey",
+      "name": "Dark Sea Grey",
+      "range": "3Gen Standard",
+      "code": "AK11015",
+      "hex": "#7B7873"
+    },
+    {
+      "id": "ak-ak11083-dead-red",
+      "name": "Dead Red",
+      "range": "3Gen Standard",
+      "code": "AK11083",
+      "hex": "#F54949"
+    },
+    {
+      "id": "ak-ak11114-deck-tan",
+      "name": "Deck Tan",
+      "range": "3Gen Standard",
+      "code": "AK11114",
+      "hex": "#CCC4AF"
+    },
+    {
+      "id": "ak-ak11058-decomposed-flesh",
+      "name": "Decomposed Flesh",
+      "range": "3Gen Standard",
+      "code": "AK11058",
+      "hex": "#B7A261"
+    },
+    {
+      "id": "ak-ak11176-deep-sky-blue",
+      "name": "Deep Sky Blue",
+      "range": "3Gen Standard",
+      "code": "AK11176",
+      "hex": "#69B4C7"
+    },
+    {
+      "id": "ak-ak11095-dirty-red",
+      "name": "Dirty Red",
+      "range": "3Gen Standard",
+      "code": "AK11095",
+      "hex": "#7F190D"
+    },
+    {
+      "id": "ak-ak11043-dirty-yellow",
+      "name": "Dirty Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11043",
+      "hex": "#ECA71C"
+    },
+    {
+      "id": "ak-ak11177-ducat-blue",
+      "name": "Ducat Blue",
+      "range": "3Gen Standard",
+      "code": "AK11177",
+      "hex": "#3A889F"
+    },
+    {
+      "id": "ak-ak11144-emerald",
+      "name": "Emerald",
+      "range": "3Gen Standard",
+      "code": "AK11144",
+      "hex": "#036242"
+    },
+    {
+      "id": "ak-ak11020-english-grey",
+      "name": "English Grey",
+      "range": "3Gen Standard",
+      "code": "AK11020",
+      "hex": "#6D6D65"
+    },
+    {
+      "id": "ak-ak11153-extra-dark-green",
+      "name": "Extra Dark Green",
+      "range": "3Gen Standard",
+      "code": "AK11153",
+      "hex": "#243128"
+    },
+    {
+      "id": "ak-ak11135-faded-green",
+      "name": "Faded Green",
+      "range": "3Gen Standard",
+      "code": "AK11135",
+      "hex": "#7C8872"
+    },
+    {
+      "id": "ak-ak11178-fluorescent-blue",
+      "name": "Fluorescent Blue",
+      "range": "3Gen Standard",
+      "code": "AK11178",
+      "hex": "#004064"
+    },
+    {
+      "id": "ak-ak11129-fluorescent-green",
+      "name": "Fluorescent Green",
+      "range": "3Gen Standard",
+      "code": "AK11129",
+      "hex": "#98C31E"
+    },
+    {
+      "id": "ak-ak11068-fluorescent-magenta",
+      "name": "Fluorescent Magenta",
+      "range": "3Gen Standard",
+      "code": "AK11068",
+      "hex": "#FF4C69"
+    },
+    {
+      "id": "ak-ak11081-fluorescent-orange",
+      "name": "Fluorescent Orange",
+      "range": "3Gen Standard",
+      "code": "AK11081",
+      "hex": "#FE5102"
+    },
+    {
+      "id": "ak-ak11049-fluorescent-yellow",
+      "name": "Fluorescent Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11049",
+      "hex": "#F6F101"
+    },
+    {
+      "id": "ak-ak11166-french-blue",
+      "name": "French Blue",
+      "range": "3Gen Standard",
+      "code": "AK11166",
+      "hex": "#545653"
+    },
+    {
+      "id": "ak-ak11136-frog-green",
+      "name": "Frog Green",
+      "range": "3Gen Standard",
+      "code": "AK11136",
+      "hex": "#97B821"
+    },
+    {
+      "id": "ak-ak11154-german-field-grey",
+      "name": "German Field Grey",
+      "range": "3Gen Standard",
+      "code": "AK11154",
+      "hex": "#423E23"
+    },
+    {
+      "id": "ak-ak11025-german-grey",
+      "name": "German Grey",
+      "range": "3Gen Standard",
+      "code": "AK11025",
+      "hex": "#383830"
+    },
+    {
+      "id": "ak-ak11117-golden-brown",
+      "name": "Golden Brown",
+      "range": "3Gen Standard",
+      "code": "AK11117",
+      "hex": "#AB7602"
+    },
+    {
+      "id": "ak-ak11139-golden-olive",
+      "name": "Golden Olive",
+      "range": "3Gen Standard",
+      "code": "AK11139",
+      "hex": "#737B26"
+    },
+    {
+      "id": "ak-ak11041-golden-yellow",
+      "name": "Golden Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11041",
+      "hex": "#FEB449"
+    },
+    {
+      "id": "ak-ak11019-graphite",
+      "name": "Graphite",
+      "range": "3Gen Standard",
+      "code": "AK11019",
+      "hex": "#6C6E60"
+    },
+    {
+      "id": "ak-ak11140-grass-green",
+      "name": "Grass Green",
+      "range": "3Gen Standard",
+      "code": "AK11140",
+      "hex": "#62832C"
+    },
+    {
+      "id": "ak-ak11122-green-ochre",
+      "name": "Green Ochre",
+      "range": "3Gen Standard",
+      "code": "AK11122",
+      "hex": "#A68236"
+    },
+    {
+      "id": "ak-ak11134-green-sky",
+      "name": "Green Sky",
+      "range": "3Gen Standard",
+      "code": "AK11134",
+      "hex": "#8BB283"
+    },
+    {
+      "id": "ak-ak11126-green-brown",
+      "name": "Green-brown",
+      "range": "3Gen Standard",
+      "code": "AK11126",
+      "hex": "#705923"
+    },
+    {
+      "id": "ak-ak11132-green-grey",
+      "name": "Green-grey",
+      "range": "3Gen Standard",
+      "code": "AK11132",
+      "hex": "#DFE4BC"
+    },
+    {
+      "id": "ak-ak11005-greenish-white",
+      "name": "Greenish White",
+      "range": "3Gen Standard",
+      "code": "AK11005",
+      "hex": "#E4EECC"
+    },
+    {
+      "id": "ak-ak11016-grey-green",
+      "name": "Grey Green",
+      "range": "3Gen Standard",
+      "code": "AK11016",
+      "hex": "#808064"
+    },
+    {
+      "id": "ak-ak11165-grey-blue",
+      "name": "Grey-blue",
+      "range": "3Gen Standard",
+      "code": "AK11165",
+      "hex": "#5F6772"
+    },
+    {
+      "id": "ak-ak11125-grey-brown",
+      "name": "Grey-brown",
+      "range": "3Gen Standard",
+      "code": "AK11125",
+      "hex": "#705B3C"
+    },
+    {
+      "id": "ak-ak11112-grim-brown",
+      "name": "Grim Brown",
+      "range": "3Gen Standard",
+      "code": "AK11112",
+      "hex": "#211404"
+    },
+    {
+      "id": "ak-ak11008-grimy-grey",
+      "name": "Grimy Grey",
+      "range": "3Gen Standard",
+      "code": "AK11008",
+      "hex": "#DFC998"
+    },
+    {
+      "id": "ak-ak11150-gunship-green",
+      "name": "Gunship Green",
+      "range": "3Gen Standard",
+      "code": "AK11150",
+      "hex": "#485335"
+    },
+    {
+      "id": "ak-ak11108-hull-red",
+      "name": "Hull Red",
+      "range": "3Gen Standard",
+      "code": "AK11108",
+      "hex": "#381A02"
+    },
+    {
+      "id": "ak-ak11036-ice-yellow",
+      "name": "Ice Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11036",
+      "hex": "#FEEE8E"
+    },
+    {
+      "id": "ak-ak11180-imperial-blue",
+      "name": "Imperial Blue",
+      "range": "3Gen Standard",
+      "code": "AK11180",
+      "hex": "#192152"
+    },
+    {
+      "id": "ak-ak11138-interior-yellow-green",
+      "name": "Interior Yellow Green",
+      "range": "3Gen Standard",
+      "code": "AK11138",
+      "hex": "#ACA300"
+    },
+    {
+      "id": "ak-ak11163-intermediate-blue",
+      "name": "Intermediate Blue",
+      "range": "3Gen Standard",
+      "code": "AK11163",
+      "hex": "#676966"
+    },
+    {
+      "id": "ak-ak11149-intermediate-green",
+      "name": "Intermediate Green",
+      "range": "3Gen Standard",
+      "code": "AK11149",
+      "hex": "#506E32"
+    },
+    {
+      "id": "ak-ak11004-ivory",
+      "name": "Ivory",
+      "range": "3Gen Standard",
+      "code": "AK11004",
+      "hex": "#F3EEC8"
+    },
+    {
+      "id": "ak-ak11123-japanese-brown",
+      "name": "Japanese Brown",
+      "range": "3Gen Standard",
+      "code": "AK11123",
+      "hex": "#966D1B"
+    },
+    {
+      "id": "ak-ak11066-laser-magenta",
+      "name": "Laser Magenta",
+      "range": "3Gen Standard",
+      "code": "AK11066",
+      "hex": "#6B102F"
+    },
+    {
+      "id": "ak-ak11048-laser-yellow",
+      "name": "Laser Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11048",
+      "hex": "#F5EF2B"
+    },
+    {
+      "id": "ak-ak11023-lead-grey",
+      "name": "Lead Grey",
+      "range": "3Gen Standard",
+      "code": "AK11023",
+      "hex": "#464741"
+    },
+    {
+      "id": "ak-ak11110-leather-brown",
+      "name": "Leather Brown",
+      "range": "3Gen Standard",
+      "code": "AK11110",
+      "hex": "#46311E"
+    },
+    {
+      "id": "ak-ak11047-lemon-yellow",
+      "name": "Lemon Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11047",
+      "hex": "#FFE121"
+    },
+    {
+      "id": "ak-ak11100-light-brown",
+      "name": "Light Brown",
+      "range": "3Gen Standard",
+      "code": "AK11100",
+      "hex": "#CF8139"
+    },
+    {
+      "id": "ak-ak11115-light-earth",
+      "name": "Light Earth",
+      "range": "3Gen Standard",
+      "code": "AK11115",
+      "hex": "#D0B580"
+    },
+    {
+      "id": "ak-ak11050-light-flesh",
+      "name": "Light Flesh",
+      "range": "3Gen Standard",
+      "code": "AK11050",
+      "hex": "#FFDFB6"
+    },
+    {
+      "id": "ak-ak11141-light-green",
+      "name": "Light Green",
+      "range": "3Gen Standard",
+      "code": "AK11141",
+      "hex": "#59922B"
+    },
+    {
+      "id": "ak-ak11077-light-orange",
+      "name": "Light Orange",
+      "range": "3Gen Standard",
+      "code": "AK11077",
+      "hex": "#F07A3C"
+    },
+    {
+      "id": "ak-ak11186-light-prussian-blue",
+      "name": "Light Prussian Blue",
+      "range": "3Gen Standard",
+      "code": "AK11186",
+      "hex": "#132A38"
+    },
+    {
+      "id": "ak-ak11105-light-rust",
+      "name": "Light Rust",
+      "range": "3Gen Standard",
+      "code": "AK11105",
+      "hex": "#DB5615"
+    },
+    {
+      "id": "ak-ak11071-lilac",
+      "name": "Lilac",
+      "range": "3Gen Standard",
+      "code": "AK11071",
+      "hex": "#656074"
+    },
+    {
+      "id": "ak-ak11137-lime-green",
+      "name": "Lime Green",
+      "range": "3Gen Standard",
+      "code": "AK11137",
+      "hex": "#819F1D"
+    },
+    {
+      "id": "ak-ak11145-lizard-green",
+      "name": "Lizard Green",
+      "range": "3Gen Standard",
+      "code": "AK11145",
+      "hex": "#175A31"
+    },
+    {
+      "id": "ak-ak11051-luminous-flesh",
+      "name": "Luminous Flesh",
+      "range": "3Gen Standard",
+      "code": "AK11051",
+      "hex": "#EDC180"
+    },
+    {
+      "id": "ak-ak11128-luminous-green",
+      "name": "Luminous Green",
+      "range": "3Gen Standard",
+      "code": "AK11128",
+      "hex": "#CDD742"
+    },
+    {
+      "id": "ak-ak11082-luminous-orange",
+      "name": "Luminous Orange",
+      "range": "3Gen Standard",
+      "code": "AK11082",
+      "hex": "#F18700"
+    },
+    {
+      "id": "ak-ak11067-magenta",
+      "name": "Magenta",
+      "range": "3Gen Standard",
+      "code": "AK11067",
+      "hex": "#B1325F"
+    },
+    {
+      "id": "ak-ak11106-mahogany-brown",
+      "name": "Mahogany Brown",
+      "range": "3Gen Standard",
+      "code": "AK11106",
+      "hex": "#622A05"
+    },
+    {
+      "id": "ak-ak11092-matt-red",
+      "name": "Matt Red",
+      "range": "3Gen Standard",
+      "code": "AK11092",
+      "hex": "#B5311C"
+    },
+    {
+      "id": "ak-ak11184-medium-blue",
+      "name": "Medium Blue",
+      "range": "3Gen Standard",
+      "code": "AK11184",
+      "hex": "#163A48"
+    },
+    {
+      "id": "ak-ak11054-medium-flesh-tone",
+      "name": "Medium Flesh Tone",
+      "range": "3Gen Standard",
+      "code": "AK11054",
+      "hex": "#C98230"
+    },
+    {
+      "id": "ak-ak11010-medium-grey",
+      "name": "Medium Grey",
+      "range": "3Gen Standard",
+      "code": "AK11010",
+      "hex": "#B6B8A3"
+    },
+    {
+      "id": "ak-ak11148-medium-olive-green",
+      "name": "Medium Olive Green",
+      "range": "3Gen Standard",
+      "code": "AK11148",
+      "hex": "#3E501C"
+    },
+    {
+      "id": "ak-ak11078-medium-orange",
+      "name": "Medium Orange",
+      "range": "3Gen Standard",
+      "code": "AK11078",
+      "hex": "#FA682C"
+    },
+    {
+      "id": "ak-ak11103-medium-rust",
+      "name": "Medium Rust",
+      "range": "3Gen Standard",
+      "code": "AK11103",
+      "hex": "#9C4B30"
+    },
+    {
+      "id": "ak-ak11034-medium-sand",
+      "name": "Medium Sand",
+      "range": "3Gen Standard",
+      "code": "AK11034",
+      "hex": "#CC9B35"
+    },
+    {
+      "id": "ak-ak11014-medium-sea-grey",
+      "name": "Medium Sea Grey",
+      "range": "3Gen Standard",
+      "code": "AK11014",
+      "hex": "#A19B81"
+    },
+    {
+      "id": "ak-ak11124-middle-stone",
+      "name": "Middle Stone",
+      "range": "3Gen Standard",
+      "code": "AK11124",
+      "hex": "#8B7029"
+    },
+    {
+      "id": "ak-ak11143-mint-green",
+      "name": "Mint Green",
+      "range": "3Gen Standard",
+      "code": "AK11143",
+      "hex": "#008C5F"
+    },
+    {
+      "id": "ak-ak11120-mud-brown",
+      "name": "Mud Brown",
+      "range": "3Gen Standard",
+      "code": "AK11120",
+      "hex": "#705331"
+    },
+    {
+      "id": "ak-ak11018-neutral-grey",
+      "name": "Neutral Grey",
+      "range": "3Gen Standard",
+      "code": "AK11018",
+      "hex": "#696E68"
+    },
+    {
+      "id": "ak-ak11173-ocean-blue",
+      "name": "Ocean Blue",
+      "range": "3Gen Standard",
+      "code": "AK11173",
+      "hex": "#1E3636"
+    },
+    {
+      "id": "ak-ak11099-ocher-orange",
+      "name": "Ocher Orange",
+      "range": "3Gen Standard",
+      "code": "AK11099",
+      "hex": "#F5A75F"
+    },
+    {
+      "id": "ak-ak11118-ochre",
+      "name": "Ochre",
+      "range": "3Gen Standard",
+      "code": "AK11118",
+      "hex": "#C7932D"
+    },
+    {
+      "id": "ak-ak11002-offwhite",
+      "name": "Offwhite",
+      "range": "3Gen Standard",
+      "code": "AK11002",
+      "hex": "#EBEBE1"
+    },
+    {
+      "id": "ak-ak11062-old-rose",
+      "name": "Old Rose",
+      "range": "3Gen Standard",
+      "code": "AK11062",
+      "hex": "#FE9679"
+    },
+    {
+      "id": "ak-ak11147-olive-green",
+      "name": "Olive Green",
+      "range": "3Gen Standard",
+      "code": "AK11147",
+      "hex": "#4B5F20"
+    },
+    {
+      "id": "ak-ak11101-orange-brown",
+      "name": "Orange Brown",
+      "range": "3Gen Standard",
+      "code": "AK11101",
+      "hex": "#B1581E"
+    },
+    {
+      "id": "ak-ak11188-oxford",
+      "name": "Oxford",
+      "range": "3Gen Standard",
+      "code": "AK11188",
+      "hex": "#353942"
+    },
+    {
+      "id": "ak-ak11161-pale-blue",
+      "name": "Pale Blue",
+      "range": "3Gen Standard",
+      "code": "AK11161",
+      "hex": "#B4C4B7"
+    },
+    {
+      "id": "ak-ak11013-pale-grey",
+      "name": "Pale Grey",
+      "range": "3Gen Standard",
+      "code": "AK11013",
+      "hex": "#AEAFB4"
+    },
+    {
+      "id": "ak-ak11032-pale-sand",
+      "name": "Pale Sand",
+      "range": "3Gen Standard",
+      "code": "AK11032",
+      "hex": "#EFD581"
+    },
+    {
+      "id": "ak-ak11038-pale-yellow",
+      "name": "Pale Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11038",
+      "hex": "#FEDD58"
+    },
+    {
+      "id": "ak-ak11130-pistachio",
+      "name": "Pistachio",
+      "range": "3Gen Standard",
+      "code": "AK11130",
+      "hex": "#DCD225"
+    },
+    {
+      "id": "ak-ak11039-purulent-yellow",
+      "name": "Purulent Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11039",
+      "hex": "#EBD03B"
+    },
+    {
+      "id": "ak-ak11053-radiant-flesh",
+      "name": "Radiant Flesh",
+      "range": "3Gen Standard",
+      "code": "AK11053",
+      "hex": "#FEB254"
+    },
+    {
+      "id": "ak-ak11046-radiant-yellow",
+      "name": "Radiant Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11046",
+      "hex": "#FFD409"
+    },
+    {
+      "id": "ak-ak11017-reddish-grey",
+      "name": "Reddish Grey",
+      "range": "3Gen Standard",
+      "code": "AK11017",
+      "hex": "#7B6B52"
+    },
+    {
+      "id": "ak-ak11158-reflective-green",
+      "name": "Reflective Green",
+      "range": "3Gen Standard",
+      "code": "AK11158",
+      "hex": "#352E11"
+    },
+    {
+      "id": "ak-ak11007-rock-grey",
+      "name": "Rock Grey",
+      "range": "3Gen Standard",
+      "code": "AK11007",
+      "hex": "#C1B897"
+    },
+    {
+      "id": "ak-ak11027-rubber-black",
+      "name": "Rubber Black",
+      "range": "3Gen Standard",
+      "code": "AK11027",
+      "hex": "#29251A"
+    },
+    {
+      "id": "ak-ak11084-ruby",
+      "name": "Ruby",
+      "range": "3Gen Standard",
+      "code": "AK11084",
+      "hex": "#CF4747"
+    },
+    {
+      "id": "ak-ak11159-russian-green",
+      "name": "Russian Green",
+      "range": "3Gen Standard",
+      "code": "AK11159",
+      "hex": "#292907"
+    },
+    {
+      "id": "ak-ak11104-saddle-brown",
+      "name": "Saddle Brown",
+      "range": "3Gen Standard",
+      "code": "AK11104",
+      "hex": "#683A2B"
+    },
+    {
+      "id": "ak-ak11040-sahara-yellow",
+      "name": "Sahara Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11040",
+      "hex": "#B1930D"
+    },
+    {
+      "id": "ak-ak11061-salmon",
+      "name": "Salmon",
+      "range": "3Gen Standard",
+      "code": "AK11061",
+      "hex": "#F5A175"
+    },
+    {
+      "id": "ak-ak11035-sand-yellow",
+      "name": "Sand Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11035",
+      "hex": "#E9BD3A"
+    },
+    {
+      "id": "ak-ak11087-scarlet-red",
+      "name": "Scarlet Red",
+      "range": "3Gen Standard",
+      "code": "AK11087",
+      "hex": "#D03B27"
+    },
+    {
+      "id": "ak-ak11060-sickly-pink",
+      "name": "Sickly Pink",
+      "range": "3Gen Standard",
+      "code": "AK11060",
+      "hex": "#F6AF91"
+    },
+    {
+      "id": "ak-ak11006-silver-grey",
+      "name": "Silver Grey",
+      "range": "3Gen Standard",
+      "code": "AK11006",
+      "hex": "#E2D7B7"
+    },
+    {
+      "id": "ak-ak11175-sky-blue",
+      "name": "Sky Blue",
+      "range": "3Gen Standard",
+      "code": "AK11175",
+      "hex": "#88C2CD"
+    },
+    {
+      "id": "ak-ak11012-sky-grey",
+      "name": "Sky Grey",
+      "range": "3Gen Standard",
+      "code": "AK11012",
+      "hex": "#BBBAB6"
+    },
+    {
+      "id": "ak-ak11028-smoke-black",
+      "name": "Smoke Black",
+      "range": "3Gen Standard",
+      "code": "AK11028",
+      "hex": "#2B2B21"
+    },
+    {
+      "id": "ak-ak11174-snow-blue",
+      "name": "Snow Blue",
+      "range": "3Gen Standard",
+      "code": "AK11174",
+      "hex": "#CAE4E1"
+    },
+    {
+      "id": "ak-ak11162-spectrum-blue",
+      "name": "Spectrum Blue",
+      "range": "3Gen Standard",
+      "code": "AK11162",
+      "hex": "#B4BEBF"
+    },
+    {
+      "id": "ak-ak11185-star-blue",
+      "name": "Star Blue",
+      "range": "3Gen Standard",
+      "code": "AK11185",
+      "hex": "#014760"
+    },
+    {
+      "id": "ak-ak11187-strong-dark-blue",
+      "name": "Strong Dark Blue",
+      "range": "3Gen Standard",
+      "code": "AK11187",
+      "hex": "#04151F"
+    },
+    {
+      "id": "ak-ak11055-sunny-skin-tone",
+      "name": "Sunny Skin Tone",
+      "range": "3Gen Standard",
+      "code": "AK11055",
+      "hex": "#FFA84F"
+    },
+    {
+      "id": "ak-ak11121-tan-earth",
+      "name": "Tan Earth",
+      "range": "3Gen Standard",
+      "code": "AK11121",
+      "hex": "#7D5C33"
+    },
+    {
+      "id": "ak-ak11116-tan-yellow",
+      "name": "Tan Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11116",
+      "hex": "#D19849"
+    },
+    {
+      "id": "ak-ak11026-tenebrous-grey",
+      "name": "Tenebrous Grey",
+      "range": "3Gen Standard",
+      "code": "AK11026",
+      "hex": "#302C21"
+    },
+    {
+      "id": "ak-ak11171-turquoise",
+      "name": "Turquoise",
+      "range": "3Gen Standard",
+      "code": "AK11171",
+      "hex": "#004A4D"
+    },
+    {
+      "id": "ak-ak11179-ultramarine",
+      "name": "Ultramarine",
+      "range": "3Gen Standard",
+      "code": "AK11179",
+      "hex": "#1E357B"
+    },
+    {
+      "id": "ak-ak11157-us-dark-green",
+      "name": "Us Dark Green",
+      "range": "3Gen Standard",
+      "code": "AK11157",
+      "hex": "#423910"
+    },
+    {
+      "id": "ak-ak11057-vampiric-flesh",
+      "name": "Vampiric Flesh",
+      "range": "3Gen Standard",
+      "code": "AK11057",
+      "hex": "#CFBC81"
+    },
+    {
+      "id": "ak-ak11090-vermillion",
+      "name": "Vermillion",
+      "range": "3Gen Standard",
+      "code": "AK11090",
+      "hex": "#C44C33"
+    },
+    {
+      "id": "ak-ak11075-violet-red",
+      "name": "Violet Red",
+      "range": "3Gen Standard",
+      "code": "AK11075",
+      "hex": "#573536"
+    },
+    {
+      "id": "ak-ak11042-volcanic-yellow",
+      "name": "Volcanic Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11042",
+      "hex": "#F09218"
+    },
+    {
+      "id": "ak-ak11009-warm-grey",
+      "name": "Warm Grey",
+      "range": "3Gen Standard",
+      "code": "AK11009",
+      "hex": "#B6A88B"
+    },
+    {
+      "id": "ak-ak11003-white-grey",
+      "name": "White Grey",
+      "range": "3Gen Standard",
+      "code": "AK11003",
+      "hex": "#F5F5ED"
+    },
+    {
+      "id": "ak-ak11096-wine-red",
+      "name": "Wine Red",
+      "range": "3Gen Standard",
+      "code": "AK11096",
+      "hex": "#69140D"
+    },
+    {
+      "id": "ak-ak11044-yellow",
+      "name": "Yellow",
+      "range": "3Gen Standard",
+      "code": "AK11044",
+      "hex": "#FAB711"
+    },
+    {
+      "id": "ak-ak11029-black",
+      "name": "Black",
+      "range": "3Gen Intense",
+      "code": "AK11029",
+      "hex": "#101207"
+    },
+    {
+      "id": "ak-ak11182-deep-blue",
+      "name": "Deep Blue",
+      "range": "3Gen Intense",
+      "code": "AK11182",
+      "hex": "#1A4067"
+    },
+    {
+      "id": "ak-ak11102-deep-brown",
+      "name": "Deep Brown",
+      "range": "3Gen Intense",
+      "code": "AK11102",
+      "hex": "#854A2A"
+    },
+    {
+      "id": "ak-ak11142-deep-green",
+      "name": "Deep Green",
+      "range": "3Gen Intense",
+      "code": "AK11142",
+      "hex": "#1C6128"
+    },
+    {
+      "id": "ak-ak11080-deep-orange",
+      "name": "Deep Orange",
+      "range": "3Gen Intense",
+      "code": "AK11080",
+      "hex": "#FE5E14"
+    },
+    {
+      "id": "ak-ak11074-deep-purple",
+      "name": "Deep Purple",
+      "range": "3Gen Intense",
+      "code": "AK11074",
+      "hex": "#7A4967"
+    },
+    {
+      "id": "ak-ak11088-deep-red",
+      "name": "Deep Red",
+      "range": "3Gen Intense",
+      "code": "AK11088",
+      "hex": "#DC211A"
+    },
+    {
+      "id": "ak-ak11072-deep-violet",
+      "name": "Deep Violet",
+      "range": "3Gen Intense",
+      "code": "AK11072",
+      "hex": "#74536E"
+    },
+    {
+      "id": "ak-ak11045-deep-yellow",
+      "name": "Deep Yellow",
+      "range": "3Gen Intense",
+      "code": "AK11045",
+      "hex": "#FDC500"
+    },
+    {
+      "id": "ak-ak11065-intense-pink",
+      "name": "Intense Pink",
+      "range": "3Gen Intense",
+      "code": "AK11065",
+      "hex": "#E9748F"
+    },
+    {
+      "id": "ak-ak11001-white",
+      "name": "White",
+      "range": "3Gen Intense",
+      "code": "AK11001",
+      "hex": "#FFFFFF"
+    },
+    {
+      "id": "ak-ak11168-pastel-blue",
+      "name": "Pastel Blue",
+      "range": "3Gen Pastel",
+      "code": "AK11168",
+      "hex": "#BDDDB8"
+    },
+    {
+      "id": "ak-ak11131-pastel-green",
+      "name": "Pastel Green",
+      "range": "3Gen Pastel",
+      "code": "AK11131",
+      "hex": "#A9D099"
+    },
+    {
+      "id": "ak-ak11076-pastel-peach",
+      "name": "Pastel Peach",
+      "range": "3Gen Pastel",
+      "code": "AK11076",
+      "hex": "#F59A54"
+    },
+    {
+      "id": "ak-ak11059-pastel-pink",
+      "name": "Pastel Pink",
+      "range": "3Gen Pastel",
+      "code": "AK11059",
+      "hex": "#F9C1AA"
+    },
+    {
+      "id": "ak-ak11069-pastel-violet",
+      "name": "Pastel Violet",
+      "range": "3Gen Pastel",
+      "code": "AK11069",
+      "hex": "#FEE6F4"
+    },
+    {
+      "id": "ak-ak11037-pastel-yellow",
+      "name": "Pastel Yellow",
+      "range": "3Gen Pastel",
+      "code": "AK11037",
+      "hex": "#FDDA76"
+    },
+    {
+      "id": "ak-ak11401-base-flesh",
+      "name": "Base Flesh",
+      "range": "3Gen Figures",
+      "code": "AK11401",
+      "hex": "#824C30"
+    },
+    {
+      "id": "ak-ak11407-black-uniform-base",
+      "name": "Black Uniform Base",
+      "range": "3Gen Figures",
+      "code": "AK11407",
+      "hex": "#10100E"
+    },
+    {
+      "id": "ak-ak11437-british-uniform-base",
+      "name": "British Uniform Base",
+      "range": "3Gen Figures",
+      "code": "AK11437",
+      "hex": "#70542F"
+    },
+    {
+      "id": "ak-ak11438-british-uniform-lights",
+      "name": "British Uniform Lights",
+      "range": "3Gen Figures",
+      "code": "AK11438",
+      "hex": "#8C682A"
+    },
+    {
+      "id": "ak-ak11418-brown-black",
+      "name": "Brown Black",
+      "range": "3Gen Figures",
+      "code": "AK11418",
+      "hex": "#23160D"
+    },
+    {
+      "id": "ak-ak11436-canvas-tone",
+      "name": "Canvas Tone",
+      "range": "3Gen Figures",
+      "code": "AK11436",
+      "hex": "#52492A"
+    },
+    {
+      "id": "ak-ak11410-dark-green",
+      "name": "Dark Green",
+      "range": "3Gen Figures",
+      "code": "AK11410",
+      "hex": "#212F22"
+    },
+    {
+      "id": "ak-ak11421-dark-olive-green",
+      "name": "Dark Olive Green",
+      "range": "3Gen Figures",
+      "code": "AK11421",
+      "hex": "#2A3513"
+    },
+    {
+      "id": "ak-ak11405-dark-shadow-flesh",
+      "name": "Dark Shadow Flesh",
+      "range": "3Gen Figures",
+      "code": "AK11405",
+      "hex": "#5D2C27"
+    },
+    {
+      "id": "ak-ak11413-denison-tan-base",
+      "name": "Denison Tan Base",
+      "range": "3Gen Figures",
+      "code": "AK11413",
+      "hex": "#8F6C46"
+    },
+    {
+      "id": "ak-ak11440-desert-uniform-base",
+      "name": "Desert Uniform Base",
+      "range": "3Gen Figures",
+      "code": "AK11440",
+      "hex": "#9A6A15"
+    },
+    {
+      "id": "ak-ak11408-dot44-brown-base",
+      "name": "Dot44 Brown Base",
+      "range": "3Gen Figures",
+      "code": "AK11408",
+      "hex": "#554631"
+    },
+    {
+      "id": "ak-ak11435-field-drab",
+      "name": "Field Drab",
+      "range": "3Gen Figures",
+      "code": "AK11435",
+      "hex": "#7C5836"
+    },
+    {
+      "id": "ak-ak11425-field-grey-base-1-green-uniform",
+      "name": "Field Grey Base  1 (green Uniform)",
+      "range": "3Gen Figures",
+      "code": "AK11425",
+      "hex": "#423E25"
+    },
+    {
+      "id": "ak-ak11423-field-grey-base-2-grey-uniform",
+      "name": "Field Grey Base  2 (grey Uniform)",
+      "range": "3Gen Figures",
+      "code": "AK11423",
+      "hex": "#424437"
+    },
+    {
+      "id": "ak-ak11439-french-greyish-blue",
+      "name": "French Greyish Blue",
+      "range": "3Gen Figures",
+      "code": "AK11439",
+      "hex": "#415057"
+    },
+    {
+      "id": "ak-ak11427-green-uniform-base",
+      "name": "Green Uniform Base",
+      "range": "3Gen Figures",
+      "code": "AK11427",
+      "hex": "#303821"
+    },
+    {
+      "id": "ak-ak11426-grey-blue",
+      "name": "Grey Blue",
+      "range": "3Gen Figures",
+      "code": "AK11426",
+      "hex": "#747879"
+    },
+    {
+      "id": "ak-ak11424-grey-green",
+      "name": "Grey Green",
+      "range": "3Gen Figures",
+      "code": "AK11424",
+      "hex": "#9B9352"
+    },
+    {
+      "id": "ak-ak11403-highlight-flesh",
+      "name": "Highlight Flesh",
+      "range": "3Gen Figures",
+      "code": "AK11403",
+      "hex": "#FBCFA2"
+    },
+    {
+      "id": "ak-ak11402-light-flesh",
+      "name": "Light Flesh",
+      "range": "3Gen Figures",
+      "code": "AK11402",
+      "hex": "#D1957B"
+    },
+    {
+      "id": "ak-ak11411-light-green",
+      "name": "Light Green",
+      "range": "3Gen Figures",
+      "code": "AK11411",
+      "hex": "#788E43"
+    },
+    {
+      "id": "ak-ak11428-light-green-uniform",
+      "name": "Light Green Uniform",
+      "range": "3Gen Figures",
+      "code": "AK11428",
+      "hex": "#575F2C"
+    },
+    {
+      "id": "ak-ak11412-medium-green",
+      "name": "Medium Green",
+      "range": "3Gen Figures",
+      "code": "AK11412",
+      "hex": "#2B3B1E"
+    },
+    {
+      "id": "ak-ak11422-ocher-khaki",
+      "name": "Ocher Khaki",
+      "range": "3Gen Figures",
+      "code": "AK11422",
+      "hex": "#A3853C"
+    },
+    {
+      "id": "ak-ak11409-orange-tan",
+      "name": "Orange Tan",
+      "range": "3Gen Figures",
+      "code": "AK11409",
+      "hex": "#CA8B48"
+    },
+    {
+      "id": "ak-ak11434-red-brown",
+      "name": "Red Brown",
+      "range": "3Gen Figures",
+      "code": "AK11434",
+      "hex": "#7A4231"
+    },
+    {
+      "id": "ak-ak11406-reddish-black",
+      "name": "Reddish Black",
+      "range": "3Gen Figures",
+      "code": "AK11406",
+      "hex": "#3C2221"
+    },
+    {
+      "id": "ak-ak11432-russian-blue-base",
+      "name": "Russian Blue Base",
+      "range": "3Gen Figures",
+      "code": "AK11432",
+      "hex": "#12161F"
+    },
+    {
+      "id": "ak-ak11431-russian-blue-lights",
+      "name": "Russian Blue Lights",
+      "range": "3Gen Figures",
+      "code": "AK11431",
+      "hex": "#222836"
+    },
+    {
+      "id": "ak-ak11430-russian-uniform-base",
+      "name": "Russian Uniform Base",
+      "range": "3Gen Figures",
+      "code": "AK11430",
+      "hex": "#595F23"
+    },
+    {
+      "id": "ak-ak11429-russian-uniform-lights",
+      "name": "Russian Uniform Lights",
+      "range": "3Gen Figures",
+      "code": "AK11429",
+      "hex": "#6E7321"
+    },
+    {
+      "id": "ak-ak11404-shadow-flesh",
+      "name": "Shadow Flesh",
+      "range": "3Gen Figures",
+      "code": "AK11404",
+      "hex": "#90433B"
+    },
+    {
+      "id": "ak-ak11414-splittermuster-base",
+      "name": "Splittermuster Base",
+      "range": "3Gen Figures",
+      "code": "AK11414",
+      "hex": "#756C45"
+    },
+    {
+      "id": "ak-ak11415-splittermuster-green-spots",
+      "name": "Splittermuster Green Spots",
+      "range": "3Gen Figures",
+      "code": "AK11415",
+      "hex": "#303E27"
+    },
+    {
+      "id": "ak-ak11433-us-olive-base-uniform",
+      "name": "Us Olive Base Uniform",
+      "range": "3Gen Figures",
+      "code": "AK11433",
+      "hex": "#544C1E"
+    },
+    {
+      "id": "ak-ak11417-waffen-brown",
+      "name": "Waffen Brown",
+      "range": "3Gen Figures",
+      "code": "AK11417",
+      "hex": "#634427"
+    },
+    {
+      "id": "ak-ak11416-waffen-brown-grey",
+      "name": "Waffen Brown Grey",
+      "range": "3Gen Figures",
+      "code": "AK11416",
+      "hex": "#4A392F"
+    },
+    {
+      "id": "ak-ak11420-waffen-green",
+      "name": "Waffen Green",
+      "range": "3Gen Figures",
+      "code": "AK11420",
+      "hex": "#323F23"
+    },
+    {
+      "id": "ak-ak11419-waffen-red-brown",
+      "name": "Waffen Red Brown",
+      "range": "3Gen Figures",
+      "code": "AK11419",
+      "hex": "#4B2D25"
+    },
+    {
+      "id": "ak-ak11207-aluminium",
+      "name": "Aluminium",
+      "range": "3Gen Metallic",
+      "code": "AK11207",
+      "hex": "#AFAFAF"
+    },
+    {
+      "id": "ak-ak11202-anodized-violet",
+      "name": "Anodized Violet",
+      "range": "3Gen Metallic",
+      "code": "AK11202",
+      "hex": "#9D8696"
+    },
+    {
+      "id": "ak-ak11200-astral-beryllium",
+      "name": "Astral Beryllium",
+      "range": "3Gen Metallic",
+      "code": "AK11200",
+      "hex": "#799E8D"
+    },
+    {
+      "id": "ak-ak11194-brass",
+      "name": "Brass",
+      "range": "3Gen Metallic",
+      "code": "AK11194",
+      "hex": "#A55D09"
+    },
+    {
+      "id": "ak-ak11196-bronze",
+      "name": "Bronze",
+      "range": "3Gen Metallic",
+      "code": "AK11196",
+      "hex": "#7F5405"
+    },
+    {
+      "id": "ak-ak11198-burnt-tin",
+      "name": "Burnt Tin",
+      "range": "3Gen Metallic",
+      "code": "AK11198",
+      "hex": "#331702"
+    },
+    {
+      "id": "ak-ak11201-cobalt-blue",
+      "name": "Cobalt Blue",
+      "range": "3Gen Metallic",
+      "code": "AK11201",
+      "hex": "#012136"
+    },
+    {
+      "id": "ak-ak11197-copper",
+      "name": "Copper",
+      "range": "3Gen Metallic",
+      "code": "AK11197",
+      "hex": "#BD500B"
+    },
+    {
+      "id": "ak-ak11208-dark-aluminium",
+      "name": "Dark Aluminium",
+      "range": "3Gen Metallic",
+      "code": "AK11208",
+      "hex": "#787878"
+    },
+    {
+      "id": "ak-ak11204-emerald-metallic-green",
+      "name": "Emerald Metallic Green",
+      "range": "3Gen Metallic",
+      "code": "AK11204",
+      "hex": "#21753A"
+    },
+    {
+      "id": "ak-ak11203-foundry-red",
+      "name": "Foundry Red",
+      "range": "3Gen Metallic",
+      "code": "AK11203",
+      "hex": "#C53733"
+    },
+    {
+      "id": "ak-ak11191-gold",
+      "name": "Gold",
+      "range": "3Gen Metallic",
+      "code": "AK11191",
+      "hex": "#9E6806"
+    },
+    {
+      "id": "ak-ak11212-gun-metal",
+      "name": "Gun Metal",
+      "range": "3Gen Metallic",
+      "code": "AK11212",
+      "hex": "#4E4E4C"
+    },
+    {
+      "id": "ak-ak11199-metallic-blue",
+      "name": "Metallic Blue",
+      "range": "3Gen Metallic",
+      "code": "AK11199",
+      "hex": "#829C99"
+    },
+    {
+      "id": "ak-ak11210-natural-steel",
+      "name": "Natural Steel",
+      "range": "3Gen Metallic",
+      "code": "AK11210",
+      "hex": "#A7A6A1"
+    },
+    {
+      "id": "ak-ak11211-oily-steel",
+      "name": "Oily Steel",
+      "range": "3Gen Metallic",
+      "code": "AK11211",
+      "hex": "#A7A491"
+    },
+    {
+      "id": "ak-ak11192-old-gold",
+      "name": "Old Gold",
+      "range": "3Gen Metallic",
+      "code": "AK11192",
+      "hex": "#B89402"
+    },
+    {
+      "id": "ak-ak11206-pearl",
+      "name": "Pearl",
+      "range": "3Gen Metallic",
+      "code": "AK11206",
+      "hex": "#F5EFD5"
+    },
+    {
+      "id": "ak-ak11195-rusty-brass",
+      "name": "Rusty Brass",
+      "range": "3Gen Metallic",
+      "code": "AK11195",
+      "hex": "#A04D0B"
+    },
+    {
+      "id": "ak-ak11193-rusty-gold",
+      "name": "Rusty Gold",
+      "range": "3Gen Metallic",
+      "code": "AK11193",
+      "hex": "#734B03"
+    },
+    {
+      "id": "ak-ak11209-silver",
+      "name": "Silver",
+      "range": "3Gen Metallic",
+      "code": "AK11209",
+      "hex": "#A0AAAC"
+    },
+    {
+      "id": "ak-ak11229-burnt-umber",
+      "name": "Burnt Umber",
+      "range": "3Gen Ink",
+      "code": "AK11229",
+      "hex": "#1D1405"
+    },
+    {
+      "id": "ak-ak11223-carbon-black",
+      "name": "Carbon Black",
+      "range": "3Gen Ink",
+      "code": "AK11223",
+      "hex": "#110801"
+    },
+    {
+      "id": "ak-ak11226-dark-green",
+      "name": "Dark Green",
+      "range": "3Gen Ink",
+      "code": "AK11226",
+      "hex": "#01663E"
+    },
+    {
+      "id": "ak-ak11225-luminous-green",
+      "name": "Luminous Green",
+      "range": "3Gen Ink",
+      "code": "AK11225",
+      "hex": "#73B72C"
+    },
+    {
+      "id": "ak-ak11228-night-blue",
+      "name": "Night Blue",
+      "range": "3Gen Ink",
+      "code": "AK11228",
+      "hex": "#0B1C26"
+    },
+    {
+      "id": "ak-ak11227-penetrating-red",
+      "name": "Penetrating Red",
+      "range": "3Gen Ink",
+      "code": "AK11227",
+      "hex": "#B64026"
+    },
+    {
+      "id": "ak-ak11224-purple",
+      "name": "Purple",
+      "range": "3Gen Ink",
+      "code": "AK11224",
+      "hex": "#B47C89"
+    },
+    {
+      "id": "ak-ak11219-sepia",
+      "name": "Sepia",
+      "range": "3Gen Ink",
+      "code": "AK11219",
+      "hex": "#230D00"
+    },
+    {
+      "id": "ak-ak11221-skin",
+      "name": "Skin",
+      "range": "3Gen Ink",
+      "code": "AK11221",
+      "hex": "#943718"
+    },
+    {
+      "id": "ak-ak11222-sooty-black",
+      "name": "Sooty Black",
+      "range": "3Gen Ink",
+      "code": "AK11222",
+      "hex": "#5F5D48"
+    },
+    {
+      "id": "ak-ak11230-titanium-white",
+      "name": "Titanium White",
+      "range": "3Gen Ink",
+      "code": "AK11230",
+      "hex": "#FFFFFF"
+    },
+    {
+      "id": "ak-ak11220-turquoise",
+      "name": "Turquoise",
+      "range": "3Gen Ink",
+      "code": "AK11220",
+      "hex": "#005E5E"
+    },
+    {
+      "id": "ak-ak11242-black-primer",
+      "name": "Black Primer",
+      "range": "3Gen Primer",
+      "code": "AK11242",
+      "hex": "#232125"
+    },
+    {
+      "id": "ak-ak11248-desert-sand-surface-primer",
+      "name": "Desert Sand Surface Primer",
+      "range": "3Gen Primer",
+      "code": "AK11248",
+      "hex": "#FDE3A6"
+    },
+    {
+      "id": "ak-ak11245-dunkelgelb-ral-7028-dark-yellow",
+      "name": "Dunkelgelb RAL 7028 Dark Yellow",
+      "range": "3Gen Primer",
+      "code": "AK11245",
+      "hex": "#DBA849"
+    },
+    {
+      "id": "ak-ak11241-grey-primer",
+      "name": "Grey Primer",
+      "range": "3Gen Primer",
+      "code": "AK11241",
+      "hex": "#C0C1C5"
+    },
+    {
+      "id": "ak-ak11247-minium-red-surface-primer",
+      "name": "Minium Red Surface Primer",
+      "range": "3Gen Primer",
+      "code": "AK11247",
+      "hex": "#F2373D"
+    },
+    {
+      "id": "ak-ak11249-olive-drab-surface-primer",
+      "name": "Olive Drab Surface Primer",
+      "range": "3Gen Primer",
+      "code": "AK11249",
+      "hex": "#655238"
+    },
+    {
+      "id": "ak-ak11246-russian-green-surface-primer",
+      "name": "Russian Green Surface Primer",
+      "range": "3Gen Primer",
+      "code": "AK11246",
+      "hex": "#385B2F"
+    },
+    {
+      "id": "ak-ak11250-rust-surface-primer",
+      "name": "Rust Surface Primer",
+      "range": "3Gen Primer",
+      "code": "AK11250",
+      "hex": "#852F25"
+    },
+    {
+      "id": "ak-ak11251-tracks-surface-primer",
+      "name": "Tracks Surface Primer",
+      "range": "3Gen Primer",
+      "code": "AK11251",
+      "hex": "#5D3B2C"
+    },
+    {
+      "id": "ak-ak11239-varnish-gloss",
+      "name": "Varnish Gloss",
+      "range": "3Gen Primer",
+      "code": "AK11239",
+      "hex": "#FEFEFE"
+    },
+    {
+      "id": "ak-ak11237-varnish-matt",
+      "name": "Varnish Matt",
+      "range": "3Gen Primer",
+      "code": "AK11237",
+      "hex": "#DADBE1"
+    },
+    {
+      "id": "ak-ak11238-varnish-satin",
+      "name": "Varnish Satin",
+      "range": "3Gen Primer",
+      "code": "AK11238",
+      "hex": "#F5F6F8"
+    },
+    {
+      "id": "ak-ak11240-white-primer",
+      "name": "White Primer",
+      "range": "3Gen Primer",
+      "code": "AK11240",
+      "hex": "#EAEAEA"
+    },
+    {
+      "id": "ak-ak11911-a-14-interior-steel-grey",
+      "name": "A-14 Interior Steel Grey",
+      "range": "3Gen Air",
+      "code": "AK11911",
+      "hex": "#637174"
+    },
+    {
+      "id": "ak-ak11912-a-18f-light-grey-blue",
+      "name": "A-18f Light Grey-blue",
+      "range": "3Gen Air",
+      "code": "AK11912",
+      "hex": "#83A398"
+    },
+    {
+      "id": "ak-ak11913-a-19f-grass-green",
+      "name": "A-19f Grass Green",
+      "range": "3Gen Air",
+      "code": "AK11913",
+      "hex": "#52643A"
+    },
+    {
+      "id": "ak-ak11914-a-21m-light-yellowish-brown",
+      "name": "A-21m Light Yellowish Brown",
+      "range": "3Gen Air",
+      "code": "AK11914",
+      "hex": "#8F8762"
+    },
+    {
+      "id": "ak-ak11863-ana-613-olive-drab",
+      "name": "ANA 613 Olive Drab",
+      "range": "3Gen Air",
+      "code": "AK11863",
+      "hex": "#595647"
+    },
+    {
+      "id": "ak-ak11867-adc-grey-fs-16473",
+      "name": "Adc Grey FS 16473",
+      "range": "3Gen Air",
+      "code": "AK11867",
+      "hex": "#9FAAA6"
+    },
+    {
+      "id": "ak-ak11908-ae-9-aii-light-grey",
+      "name": "Ae-9/aii Light Grey",
+      "range": "3Gen Air",
+      "code": "AK11908",
+      "hex": "#D3D4CE"
+    },
+    {
+      "id": "ak-ak11877-aggressor-blue-fs-35109",
+      "name": "Aggressor Blue FS 35109",
+      "range": "3Gen Air",
+      "code": "AK11877",
+      "hex": "#3B6C71"
+    },
+    {
+      "id": "ak-ak11885-aggressor-grey-fs-36251",
+      "name": "Aggressor Grey FS 36251",
+      "range": "3Gen Air",
+      "code": "AK11885",
+      "hex": "#818284"
+    },
+    {
+      "id": "ak-ak11909-aii-green",
+      "name": "Aii Green",
+      "range": "3Gen Air",
+      "code": "AK11909",
+      "hex": "#323D1B"
+    },
+    {
+      "id": "ak-ak11910-aii-light-blue",
+      "name": "Aii Light Blue",
+      "range": "3Gen Air",
+      "code": "AK11910",
+      "hex": "#7BA3AD"
+    },
+    {
+      "id": "ak-ak11879-air-superiority-blue-fs-35450",
+      "name": "Air Superiority Blue FS 35450",
+      "range": "3Gen Air",
+      "code": "AK11879",
+      "hex": "#89AFC2"
+    },
+    {
+      "id": "ak-ak11917-amt-11-blue-grey",
+      "name": "Amt-11 Blue-grey",
+      "range": "3Gen Air",
+      "code": "AK11917",
+      "hex": "#465960"
+    },
+    {
+      "id": "ak-ak11918-amt-12-dark-grey",
+      "name": "Amt-12 Dark Grey",
+      "range": "3Gen Air",
+      "code": "AK11918",
+      "hex": "#293436"
+    },
+    {
+      "id": "ak-ak11915-amt-4-a-24m-green",
+      "name": "Amt-4 (a-24m) Green",
+      "range": "3Gen Air",
+      "code": "AK11915",
+      "hex": "#405021"
+    },
+    {
+      "id": "ak-ak11916-amt-7-light-blue",
+      "name": "Amt-7 Light Blue",
+      "range": "3Gen Air",
+      "code": "AK11916",
+      "hex": "#6790A6"
+    },
+    {
+      "id": "ak-ak11878-blue-fs-35190",
+      "name": "Blue FS 35190",
+      "range": "3Gen Air",
+      "code": "AK11878",
+      "hex": "#5C979F"
+    },
+    {
+      "id": "ak-ak11857-bronze-green",
+      "name": "Bronze Green",
+      "range": "3Gen Air",
+      "code": "AK11857",
+      "hex": "#273423"
+    },
+    {
+      "id": "ak-ak11890-camouflage-grey-fs-36622",
+      "name": "Camouflage Grey FS 36622",
+      "range": "3Gen Air",
+      "code": "AK11890",
+      "hex": "#C1BFB2"
+    },
+    {
+      "id": "ak-ak11887-dark-ghost-grey-fs-36320",
+      "name": "Dark Ghost Grey FS 36320",
+      "range": "3Gen Air",
+      "code": "AK11887",
+      "hex": "#89939C"
+    },
+    {
+      "id": "ak-ak11884-dark-gull-grey-fs-36231",
+      "name": "Dark Gull Grey FS 36231",
+      "range": "3Gen Air",
+      "code": "AK11884",
+      "hex": "#7F8386"
+    },
+    {
+      "id": "ak-ak11860-dark-olive-drab-41",
+      "name": "Dark Olive Drab 41",
+      "range": "3Gen Air",
+      "code": "AK11860",
+      "hex": "#524F40"
+    },
+    {
+      "id": "ak-ak11864-deep-sea-blue",
+      "name": "Deep Sea Blue",
+      "range": "3Gen Air",
+      "code": "AK11864",
+      "hex": "#36434C"
+    },
+    {
+      "id": "ak-ak11880-duck-egg-blue-fs-35622",
+      "name": "Duck Egg Blue FS 35622",
+      "range": "3Gen Air",
+      "code": "AK11880",
+      "hex": "#C3CFC5"
+    },
+    {
+      "id": "ak-ak11873-dull-dark-green-fs-34092",
+      "name": "Dull Dark Green FS 34092",
+      "range": "3Gen Air",
+      "code": "AK11873",
+      "hex": "#485750"
+    },
+    {
+      "id": "ak-ak11883-f-15-dark-grey-mod-eagle-fs-36176",
+      "name": "F-15 Dark Grey (mod Eagle) FS 36176",
+      "range": "3Gen Air",
+      "code": "AK11883",
+      "hex": "#6E7881"
+    },
+    {
+      "id": "ak-ak11875-field-green-fs-34097",
+      "name": "Field Green FS 34097",
+      "range": "3Gen Air",
+      "code": "AK11875",
+      "hex": "#686D2A"
+    },
+    {
+      "id": "ak-ak11876-green-fs-34258",
+      "name": "Green FS 34258",
+      "range": "3Gen Air",
+      "code": "AK11876",
+      "hex": "#7F815A"
+    },
+    {
+      "id": "ak-ak11907-grey-blue-1920s-1930s",
+      "name": "Grey-blue 1920s-1930s",
+      "range": "3Gen Air",
+      "code": "AK11907",
+      "hex": "#9AB2A4"
+    },
+    {
+      "id": "ak-ak11882-have-glass-grey-fs-36170",
+      "name": "Have Glass Grey FS 36170",
+      "range": "3Gen Air",
+      "code": "AK11882",
+      "hex": "#6E6D6B"
+    },
+    {
+      "id": "ak-ak11899-ija-1-hairyokushoku-grey-green",
+      "name": "IJA  1 Hairyokushoku (grey-green)",
+      "range": "3Gen Air",
+      "code": "AK11899",
+      "hex": "#A7A896"
+    },
+    {
+      "id": "ak-ak11902-ija-21-midori-iro-green",
+      "name": "IJA  21 Midori Iro (green)",
+      "range": "3Gen Air",
+      "code": "AK11902",
+      "hex": "#2F422C"
+    },
+    {
+      "id": "ak-ak11903-ija-27-ao-midori-iro-blue-green",
+      "name": "IJA  27 Ao Midori Iro (blue-green)",
+      "range": "3Gen Air",
+      "code": "AK11903",
+      "hex": "#02362A"
+    },
+    {
+      "id": "ak-ak11904-ija-29-ki-midori-iro-yellow-green",
+      "name": "IJA  29 Ki Midori Iro (yellow-green)",
+      "range": "3Gen Air",
+      "code": "AK11904",
+      "hex": "#767026"
+    },
+    {
+      "id": "ak-ak11900-ija-3-hairanshoku-grey-indigo",
+      "name": "IJA  3 Hairanshoku (grey Indigo)",
+      "range": "3Gen Air",
+      "code": "AK11900",
+      "hex": "#495E59"
+    },
+    {
+      "id": "ak-ak11905-ija-30-karekusa-iro-dry-grass",
+      "name": "IJA  30 Karekusa Iro (dry Grass)",
+      "range": "3Gen Air",
+      "code": "AK11905",
+      "hex": "#867855"
+    },
+    {
+      "id": "ak-ak11906-ija-31-cha-kasshoku-tea-colour",
+      "name": "IJA  31 Cha Kasshoku (tea Colour)",
+      "range": "3Gen Air",
+      "code": "AK11906",
+      "hex": "#665043"
+    },
+    {
+      "id": "ak-ak11901-ija-7-ohryuko-nana-go-shoku-olive-brown",
+      "name": "IJA  7 Ohryuko Nana Go Shoku (Olive Brown)",
+      "range": "3Gen Air",
+      "code": "AK11901",
+      "hex": "#4F4929"
+    },
+    {
+      "id": "ak-ak11893-ijn-d1-deep-green-black",
+      "name": "IJN D1 Deep Green Black",
+      "range": "3Gen Air",
+      "code": "AK11893",
+      "hex": "#29352B"
+    },
+    {
+      "id": "ak-ak11894-ijn-d2-green-black",
+      "name": "IJN D2 Green Black",
+      "range": "3Gen Air",
+      "code": "AK11894",
+      "hex": "#253532"
+    },
+    {
+      "id": "ak-ak11891-ijn-j3-hai-iro-grey",
+      "name": "IJN J3 Hai-iro (grey)",
+      "range": "3Gen Air",
+      "code": "AK11891",
+      "hex": "#919388"
+    },
+    {
+      "id": "ak-ak11892-ijn-j3-sp-amber-grey",
+      "name": "IJN J3 Sp (amber Grey)",
+      "range": "3Gen Air",
+      "code": "AK11892",
+      "hex": "#948E74"
+    },
+    {
+      "id": "ak-ak11896-ijn-m3-m-mitsubishi-interior-green",
+      "name": "IJN M3 (m) Mitsubishi Interior Green",
+      "range": "3Gen Air",
+      "code": "AK11896",
+      "hex": "#666232"
+    },
+    {
+      "id": "ak-ak11897-ijn-m3-n-nakajima-interior-green",
+      "name": "IJN M3 (n) Nakajima Interior Green",
+      "range": "3Gen Air",
+      "code": "AK11897",
+      "hex": "#4F4929"
+    },
+    {
+      "id": "ak-ak11895-ijn-q1-anti-glare-blue-black",
+      "name": "IJN Q1 Anti-glare Blue-black",
+      "range": "3Gen Air",
+      "code": "AK11895",
+      "hex": "#1B2325"
+    },
+    {
+      "id": "ak-ak11898-ijn-ija-aotake",
+      "name": "Ijn/ija Aotake",
+      "range": "3Gen Air",
+      "code": "AK11898",
+      "hex": "#015E70"
+    },
+    {
+      "id": "ak-ak11868-insignia-white-fs-17875",
+      "name": "Insignia White FS 17875",
+      "range": "3Gen Air",
+      "code": "AK11868",
+      "hex": "#E5E7DA"
+    },
+    {
+      "id": "ak-ak11888-light-ghost-grey-fs-36375",
+      "name": "Light Ghost Grey FS 36375",
+      "range": "3Gen Air",
+      "code": "AK11888",
+      "hex": "#9CA5AC"
+    },
+    {
+      "id": "ak-ak11889-light-grey-fs-36495",
+      "name": "Light Grey FS 36495",
+      "range": "3Gen Air",
+      "code": "AK11889",
+      "hex": "#C3C7C6"
+    },
+    {
+      "id": "ak-ak11866-light-gull-grey-fs-16440",
+      "name": "Light Gull Grey FS 16440",
+      "range": "3Gen Air",
+      "code": "AK11866",
+      "hex": "#ADADA3"
+    },
+    {
+      "id": "ak-ak11865-m-485-blue-grey",
+      "name": "M-485 Blue-grey",
+      "range": "3Gen Air",
+      "code": "AK11865",
+      "hex": "#70848B"
+    },
+    {
+      "id": "ak-ak11861-medium-green-42",
+      "name": "Medium Green 42",
+      "range": "3Gen Air",
+      "code": "AK11861",
+      "hex": "#46523E"
+    },
+    {
+      "id": "ak-ak11886-medium-grey-fs-36270",
+      "name": "Medium Grey FS 36270",
+      "range": "3Gen Air",
+      "code": "AK11886",
+      "hex": "#84898C"
+    },
+    {
+      "id": "ak-ak11881-medium-gunship-grey-fs-36118",
+      "name": "Medium Gunship Grey FS 36118",
+      "range": "3Gen Air",
+      "code": "AK11881",
+      "hex": "#5D616A"
+    },
+    {
+      "id": "ak-ak11920-mig-25-mig-31-grey",
+      "name": "Mig-25/mig-31 Grey",
+      "range": "3Gen Air",
+      "code": "AK11920",
+      "hex": "#BFC0BB"
+    },
+    {
+      "id": "ak-ak11862-neutral-grey-43",
+      "name": "Neutral Grey 43",
+      "range": "3Gen Air",
+      "code": "AK11862",
+      "hex": "#6A6B66"
+    },
+    {
+      "id": "ak-ak11809-pc10-late",
+      "name": "Pc10 Late",
+      "range": "3Gen Air",
+      "code": "AK11809",
+      "hex": "#3C412A"
+    },
+    {
+      "id": "ak-ak11810-pc12",
+      "name": "Pc12",
+      "range": "3Gen Air",
+      "code": "AK11810",
+      "hex": "#3E352C"
+    },
+    {
+      "id": "ak-ak11845-raf-azure-blue",
+      "name": "RAF Azure Blue",
+      "range": "3Gen Air",
+      "code": "AK11845",
+      "hex": "#7C9CC3"
+    },
+    {
+      "id": "ak-ak11854-raf-camouflage-barley-grey-bs381c-626",
+      "name": "RAF Camouflage (barley) Grey Bs381c/626",
+      "range": "3Gen Air",
+      "code": "AK11854",
+      "hex": "#949C9E"
+    },
+    {
+      "id": "ak-ak11856-raf-camouflage-beige-hemp-bs381c-389",
+      "name": "RAF Camouflage Beige (hemp) Bs381c/389",
+      "range": "3Gen Air",
+      "code": "AK11856",
+      "hex": "#9C947F"
+    },
+    {
+      "id": "ak-ak11847-raf-cockpit-grey-green",
+      "name": "RAF Cockpit Grey-green",
+      "range": "3Gen Air",
+      "code": "AK11847",
+      "hex": "#728067"
+    },
+    {
+      "id": "ak-ak11855-raf-dark-camouflage-grey-bs381c-629",
+      "name": "RAF Dark Camouflage Grey Bs381c/629",
+      "range": "3Gen Air",
+      "code": "AK11855",
+      "hex": "#72797F"
+    },
+    {
+      "id": "ak-ak11841-raf-dark-earth",
+      "name": "RAF Dark Earth",
+      "range": "3Gen Air",
+      "code": "AK11841",
+      "hex": "#71563B"
+    },
+    {
+      "id": "ak-ak11840-raf-dark-green",
+      "name": "RAF Dark Green",
+      "range": "3Gen Air",
+      "code": "AK11840",
+      "hex": "#56564C"
+    },
+    {
+      "id": "ak-ak11851-raf-dark-sea-grey-bs381c-638",
+      "name": "RAF Dark Sea Grey Bs381c/638",
+      "range": "3Gen Air",
+      "code": "AK11851",
+      "hex": "#676A6F"
+    },
+    {
+      "id": "ak-ak11849-raf-dark-slate-grey",
+      "name": "RAF Dark Slate Grey",
+      "range": "3Gen Air",
+      "code": "AK11849",
+      "hex": "#5E5C50"
+    },
+    {
+      "id": "ak-ak11850-raf-extra-dark-sea-grey-bs381c-640",
+      "name": "RAF Extra Dark Sea Grey Bs381c/640",
+      "range": "3Gen Air",
+      "code": "AK11850",
+      "hex": "#4C555C"
+    },
+    {
+      "id": "ak-ak11853-raf-light-aircraft-grey-bs381c-627",
+      "name": "RAF Light Aircraft Grey Bs381c/627",
+      "range": "3Gen Air",
+      "code": "AK11853",
+      "hex": "#AFB0AA"
+    },
+    {
+      "id": "ak-ak11843-raf-medium-sea-grey-bs381c-637",
+      "name": "RAF Medium Sea Grey Bs381c/637",
+      "range": "3Gen Air",
+      "code": "AK11843",
+      "hex": "#818C92"
+    },
+    {
+      "id": "ak-ak11846-raf-middle-stone",
+      "name": "RAF Middle Stone",
+      "range": "3Gen Air",
+      "code": "AK11846",
+      "hex": "#A67E39"
+    },
+    {
+      "id": "ak-ak11842-raf-ocean-grey",
+      "name": "RAF Ocean Grey",
+      "range": "3Gen Air",
+      "code": "AK11842",
+      "hex": "#5C6769"
+    },
+    {
+      "id": "ak-ak11852-raf-pru-blue-bs381c-636",
+      "name": "RAF PRU Blue Bs381c/636",
+      "range": "3Gen Air",
+      "code": "AK11852",
+      "hex": "#526A76"
+    },
+    {
+      "id": "ak-ak11844-raf-sky-fs-34424",
+      "name": "RAF Sky / FS 34424",
+      "range": "3Gen Air",
+      "code": "AK11844",
+      "hex": "#B3B59F"
+    },
+    {
+      "id": "ak-ak11848-raf-sky-grey",
+      "name": "RAF Sky Grey",
+      "range": "3Gen Air",
+      "code": "AK11848",
+      "hex": "#A0A4A3"
+    },
+    {
+      "id": "ak-ak11811-rlm-02-rlm-grau-1938",
+      "name": "RLM 02 Rlm-grau (1938)",
+      "range": "3Gen Air",
+      "code": "AK11811",
+      "hex": "#979481"
+    },
+    {
+      "id": "ak-ak11812-rlm-02-rlm-grau-1941",
+      "name": "RLM 02 Rlm-grau (1941)",
+      "range": "3Gen Air",
+      "code": "AK11812",
+      "hex": "#817C5E"
+    },
+    {
+      "id": "ak-ak11813-rlm-04",
+      "name": "RLM 04",
+      "range": "3Gen Air",
+      "code": "AK11813",
+      "hex": "#F1A502"
+    },
+    {
+      "id": "ak-ak11814-rlm-61",
+      "name": "RLM 61",
+      "range": "3Gen Air",
+      "code": "AK11814",
+      "hex": "#58504D"
+    },
+    {
+      "id": "ak-ak11815-rlm-62",
+      "name": "RLM 62",
+      "range": "3Gen Air",
+      "code": "AK11815",
+      "hex": "#65684B"
+    },
+    {
+      "id": "ak-ak11816-rlm-63",
+      "name": "RLM 63",
+      "range": "3Gen Air",
+      "code": "AK11816",
+      "hex": "#7D7A67"
+    },
+    {
+      "id": "ak-ak11817-rlm-65-1938",
+      "name": "RLM 65 (1938)",
+      "range": "3Gen Air",
+      "code": "AK11817",
+      "hex": "#85A1A4"
+    },
+    {
+      "id": "ak-ak11818-rlm-65-1941",
+      "name": "RLM 65 (1941)",
+      "range": "3Gen Air",
+      "code": "AK11818",
+      "hex": "#90A096"
+    },
+    {
+      "id": "ak-ak11819-rlm-66-1938",
+      "name": "RLM 66 (1938)",
+      "range": "3Gen Air",
+      "code": "AK11819",
+      "hex": "#343C3E"
+    },
+    {
+      "id": "ak-ak11820-rlm-66-1941",
+      "name": "RLM 66 (1941)",
+      "range": "3Gen Air",
+      "code": "AK11820",
+      "hex": "#51524C"
+    },
+    {
+      "id": "ak-ak11821-rlm-70",
+      "name": "RLM 70",
+      "range": "3Gen Air",
+      "code": "AK11821",
+      "hex": "#45483F"
+    },
+    {
+      "id": "ak-ak11822-rlm-71",
+      "name": "RLM 71",
+      "range": "3Gen Air",
+      "code": "AK11822",
+      "hex": "#504E42"
+    },
+    {
+      "id": "ak-ak11823-rlm-72",
+      "name": "RLM 72",
+      "range": "3Gen Air",
+      "code": "AK11823",
+      "hex": "#454641"
+    },
+    {
+      "id": "ak-ak11824-rlm-73",
+      "name": "RLM 73",
+      "range": "3Gen Air",
+      "code": "AK11824",
+      "hex": "#414840"
+    },
+    {
+      "id": "ak-ak11825-rlm-74",
+      "name": "RLM 74",
+      "range": "3Gen Air",
+      "code": "AK11825",
+      "hex": "#595853"
+    },
+    {
+      "id": "ak-ak11826-rlm-75",
+      "name": "RLM 75",
+      "range": "3Gen Air",
+      "code": "AK11826",
+      "hex": "#6D6D6D"
+    },
+    {
+      "id": "ak-ak11829-rlm-76-late-war-variation",
+      "name": "RLM 76 Late War Variation",
+      "range": "3Gen Air",
+      "code": "AK11829",
+      "hex": "#C1C19D"
+    },
+    {
+      "id": "ak-ak11827-rlm-76-version-1",
+      "name": "RLM 76 Version 1",
+      "range": "3Gen Air",
+      "code": "AK11827",
+      "hex": "#A8B5A4"
+    },
+    {
+      "id": "ak-ak11828-rlm-76-version-2",
+      "name": "RLM 76 Version 2",
+      "range": "3Gen Air",
+      "code": "AK11828",
+      "hex": "#AEBEBE"
+    },
+    {
+      "id": "ak-ak11830-rlm-78-1941",
+      "name": "RLM 78 (1941)",
+      "range": "3Gen Air",
+      "code": "AK11830",
+      "hex": "#80979F"
+    },
+    {
+      "id": "ak-ak11831-rlm-78-1942",
+      "name": "RLM 78 (1942)",
+      "range": "3Gen Air",
+      "code": "AK11831",
+      "hex": "#889D98"
+    },
+    {
+      "id": "ak-ak11832-rlm-79-1941",
+      "name": "RLM 79 (1941)",
+      "range": "3Gen Air",
+      "code": "AK11832",
+      "hex": "#E6A058"
+    },
+    {
+      "id": "ak-ak11833-rlm-79-1942",
+      "name": "RLM 79 (1942)",
+      "range": "3Gen Air",
+      "code": "AK11833",
+      "hex": "#9C704D"
+    },
+    {
+      "id": "ak-ak11834-rlm-80",
+      "name": "RLM 80",
+      "range": "3Gen Air",
+      "code": "AK11834",
+      "hex": "#575644"
+    },
+    {
+      "id": "ak-ak11835-rlm-81-version-1",
+      "name": "RLM 81 Version 1",
+      "range": "3Gen Air",
+      "code": "AK11835",
+      "hex": "#575644"
+    },
+    {
+      "id": "ak-ak11836-rlm-81-version-2",
+      "name": "RLM 81 Version 2",
+      "range": "3Gen Air",
+      "code": "AK11836",
+      "hex": "#464C3E"
+    },
+    {
+      "id": "ak-ak11837-rlm-81-version-3",
+      "name": "RLM 81 Version 3",
+      "range": "3Gen Air",
+      "code": "AK11837",
+      "hex": "#5A5044"
+    },
+    {
+      "id": "ak-ak11838-rlm-82",
+      "name": "RLM 82",
+      "range": "3Gen Air",
+      "code": "AK11838",
+      "hex": "#4D5B4A"
+    },
+    {
+      "id": "ak-ak11839-rlm-83",
+      "name": "RLM 83",
+      "range": "3Gen Air",
+      "code": "AK11839",
+      "hex": "#384452"
+    },
+    {
+      "id": "ak-ak11919-radome-amp-wheel-hub-green",
+      "name": "Radome &amp; Wheel Hub Green",
+      "range": "3Gen Air",
+      "code": "AK11919",
+      "hex": "#2C652E"
+    },
+    {
+      "id": "ak-ak11870-radome-tan-fs-33613",
+      "name": "Radome Tan FS 33613",
+      "range": "3Gen Air",
+      "code": "AK11870",
+      "hex": "#E7C7A1"
+    },
+    {
+      "id": "ak-ak11869-sand-fs-33531",
+      "name": "Sand FS 33531",
+      "range": "3Gen Air",
+      "code": "AK11869",
+      "hex": "#C6B49E"
+    },
+    {
+      "id": "ak-ak11872-us-army-helo-drab-fs-34031",
+      "name": "Us Army Helo Drab FS 34031",
+      "range": "3Gen Air",
+      "code": "AK11872",
+      "hex": "#464742"
+    },
+    {
+      "id": "ak-ak11859-us-interior-yellow-green",
+      "name": "Us Interior Yellow Green",
+      "range": "3Gen Air",
+      "code": "AK11859",
+      "hex": "#868567"
+    },
+    {
+      "id": "ak-ak11874-usmc-green-fs-34095",
+      "name": "Usmc Green FS 34095",
+      "range": "3Gen Air",
+      "code": "AK11874",
+      "hex": "#585A19"
+    },
+    {
+      "id": "ak-ak11871-usmc-sand-fs-33711",
+      "name": "Usmc Sand FS 33711",
+      "range": "3Gen Air",
+      "code": "AK11871",
+      "hex": "#F8D092"
+    },
+    {
+      "id": "ak-ak11803-wwi-german-dark-green",
+      "name": "Wwi German Dark Green",
+      "range": "3Gen Air",
+      "code": "AK11803",
+      "hex": "#32452F"
+    },
+    {
+      "id": "ak-ak11801-wwi-german-fokker-grey",
+      "name": "Wwi German Fokker Grey",
+      "range": "3Gen Air",
+      "code": "AK11801",
+      "hex": "#7A8C7C"
+    },
+    {
+      "id": "ak-ak11808-wwi-german-grey-green-primer",
+      "name": "Wwi German Grey-green Primer",
+      "range": "3Gen Air",
+      "code": "AK11808",
+      "hex": "#BAC4A9"
+    },
+    {
+      "id": "ak-ak11806-wwi-german-light-blue",
+      "name": "Wwi German Light Blue",
+      "range": "3Gen Air",
+      "code": "AK11806",
+      "hex": "#C8DEEC"
+    },
+    {
+      "id": "ak-ak11802-wwi-german-light-green",
+      "name": "Wwi German Light Green",
+      "range": "3Gen Air",
+      "code": "AK11802",
+      "hex": "#71925B"
+    },
+    {
+      "id": "ak-ak11807-wwi-german-lilac",
+      "name": "Wwi German Lilac",
+      "range": "3Gen Air",
+      "code": "AK11807",
+      "hex": "#B193AF"
+    },
+    {
+      "id": "ak-ak11804-wwi-german-mauve",
+      "name": "Wwi German Mauve",
+      "range": "3Gen Air",
+      "code": "AK11804",
+      "hex": "#80667F"
+    },
+    {
+      "id": "ak-ak11805-wwi-german-red-brown",
+      "name": "Wwi German Red Brown",
+      "range": "3Gen Air",
+      "code": "AK11805",
+      "hex": "#673512"
+    },
+    {
+      "id": "ak-ak11858-zinc-chromate-yellow",
+      "name": "Zinc Chromate Yellow",
+      "range": "3Gen Air",
+      "code": "AK11858",
+      "hex": "#E2D000"
+    },
+    {
+      "id": "ak-ak11387-3b-au-zb-au",
+      "name": "3b Au/zb Au",
+      "range": "3Gen AFV",
+      "code": "AK11387",
+      "hex": "#1F2211"
+    },
+    {
+      "id": "ak-ak11345-apc-interior-light-green-fs24533",
+      "name": "Apc Interior Light Green (fs24533)",
+      "range": "3Gen AFV",
+      "code": "AK11345",
+      "hex": "#C9CBA3"
+    },
+    {
+      "id": "ak-ak11347-australian-camouflage-brown",
+      "name": "Australian Camouflage Brown",
+      "range": "3Gen AFV",
+      "code": "AK11347",
+      "hex": "#AA8C5A"
+    },
+    {
+      "id": "ak-ak11348-australian-camouflage-green",
+      "name": "Australian Camouflage Green",
+      "range": "3Gen AFV",
+      "code": "AK11348",
+      "hex": "#5F621F"
+    },
+    {
+      "id": "ak-ak11367-base-green-protective",
+      "name": "Base Green (protective)",
+      "range": "3Gen AFV",
+      "code": "AK11367",
+      "hex": "#373622"
+    },
+    {
+      "id": "ak-ak11381-british-dark-olive-green-pfi",
+      "name": "British Dark Olive Green Pfi",
+      "range": "3Gen AFV",
+      "code": "AK11381",
+      "hex": "#49442E"
+    },
+    {
+      "id": "ak-ak11382-british-desert-pink-zi",
+      "name": "British Desert Pink Zi",
+      "range": "3Gen AFV",
+      "code": "AK11382",
+      "hex": "#F09060"
+    },
+    {
+      "id": "ak-ak11383-british-light-mud",
+      "name": "British Light Mud",
+      "range": "3Gen AFV",
+      "code": "AK11383",
+      "hex": "#A5915E"
+    },
+    {
+      "id": "ak-ak11362-british-sand-yellow",
+      "name": "British Sand Yellow",
+      "range": "3Gen AFV",
+      "code": "AK11362",
+      "hex": "#E1A43A"
+    },
+    {
+      "id": "ak-ak11349-carc-tan-686a-fs33446",
+      "name": "Carc Tan 686a (fs33446)",
+      "range": "3Gen AFV",
+      "code": "AK11349",
+      "hex": "#B69262"
+    },
+    {
+      "id": "ak-ak11333-cremeweiss",
+      "name": "Cremeweiss",
+      "range": "3Gen AFV",
+      "code": "AK11333",
+      "hex": "#E8DEAD"
+    },
+    {
+      "id": "ak-ak11342-dark-green-fs34102",
+      "name": "Dark Green (fs34102)",
+      "range": "3Gen AFV",
+      "code": "AK11342",
+      "hex": "#363D1E"
+    },
+    {
+      "id": "ak-ak11344-field-drab-fs30118",
+      "name": "Field Drab (fs30118)",
+      "range": "3Gen AFV",
+      "code": "AK11344",
+      "hex": "#58401E"
+    },
+    {
+      "id": "ak-ak11346-forest-green-fs34079",
+      "name": "Forest Green (fs34079)",
+      "range": "3Gen AFV",
+      "code": "AK11346",
+      "hex": "#2A3517"
+    },
+    {
+      "id": "ak-ak11363-french-army-desert-sand",
+      "name": "French Army Desert Sand",
+      "range": "3Gen AFV",
+      "code": "AK11363",
+      "hex": "#D0A66C"
+    },
+    {
+      "id": "ak-ak11364-french-army-green",
+      "name": "French Army Green",
+      "range": "3Gen AFV",
+      "code": "AK11364",
+      "hex": "#4B584E"
+    },
+    {
+      "id": "ak-ak11365-french-army-grey-blue",
+      "name": "French Army Grey-blue",
+      "range": "3Gen AFV",
+      "code": "AK11365",
+      "hex": "#2F4747"
+    },
+    {
+      "id": "ak-ak11354-idf-early-sand-yellow",
+      "name": "IDF Early Sand Yellow",
+      "range": "3Gen AFV",
+      "code": "AK11354",
+      "hex": "#8F7F4B"
+    },
+    {
+      "id": "ak-ak11355-idf-green",
+      "name": "IDF Green",
+      "range": "3Gen AFV",
+      "code": "AK11355",
+      "hex": "#32361D"
+    },
+    {
+      "id": "ak-ak11352-idf-modern-grey",
+      "name": "IDF Modern Grey",
+      "range": "3Gen AFV",
+      "code": "AK11352",
+      "hex": "#6D582D"
+    },
+    {
+      "id": "ak-ak11353-idf-sand-grey-1970s-1980s",
+      "name": "IDF Sand Grey 1970s-1980s",
+      "range": "3Gen AFV",
+      "code": "AK11353",
+      "hex": "#73643B"
+    },
+    {
+      "id": "ak-ak11373-khaki-green-no-3",
+      "name": "Khaki Green No.3",
+      "range": "3Gen AFV",
+      "code": "AK11373",
+      "hex": "#4F4231"
+    },
+    {
+      "id": "ak-ak11357-laf-green",
+      "name": "Laf Green",
+      "range": "3Gen AFV",
+      "code": "AK11357",
+      "hex": "#2E3022"
+    },
+    {
+      "id": "ak-ak11377-light-stone-no-61",
+      "name": "Light Stone No.61",
+      "range": "3Gen AFV",
+      "code": "AK11377",
+      "hex": "#D1B359"
+    },
+    {
+      "id": "ak-ak11343-merdc-sand-fs30277",
+      "name": "Merdc Sand (fs30277)",
+      "range": "3Gen AFV",
+      "code": "AK11343",
+      "hex": "#866E48"
+    },
+    {
+      "id": "ak-ak11350-modern-spanish-green",
+      "name": "Modern Spanish Green",
+      "range": "3Gen AFV",
+      "code": "AK11350",
+      "hex": "#2C341D"
+    },
+    {
+      "id": "ak-ak11366-mustard-yellow",
+      "name": "Mustard Yellow",
+      "range": "3Gen AFV",
+      "code": "AK11366",
+      "hex": "#CB982F"
+    },
+    {
+      "id": "ak-ak11360-nato-black",
+      "name": "NATO Black",
+      "range": "3Gen AFV",
+      "code": "AK11360",
+      "hex": "#262425"
+    },
+    {
+      "id": "ak-ak11359-nato-brown",
+      "name": "NATO Brown",
+      "range": "3Gen AFV",
+      "code": "AK11359",
+      "hex": "#493325"
+    },
+    {
+      "id": "ak-ak11358-nato-green",
+      "name": "NATO Green",
+      "range": "3Gen AFV",
+      "code": "AK11358",
+      "hex": "#2B3F26"
+    },
+    {
+      "id": "ak-ak11361-new-iraqi-army-sand",
+      "name": "New Iraqi Army Sand",
+      "range": "3Gen AFV",
+      "code": "AK11361",
+      "hex": "#D8BC7D"
+    },
+    {
+      "id": "ak-ak11335-n-1-light-green-fs34151",
+      "name": "Nº1 Light Green (fs34151)",
+      "range": "3Gen AFV",
+      "code": "AK11335",
+      "hex": "#5F621F"
+    },
+    {
+      "id": "ak-ak11340-n-13-desert-sand-fs30279",
+      "name": "Nº13 Desert Sand (fs30279)",
+      "range": "3Gen AFV",
+      "code": "AK11340",
+      "hex": "#A78464"
+    },
+    {
+      "id": "ak-ak11336-n-5-earth-brown-fs30099",
+      "name": "Nº5 Earth Brown (fs30099)",
+      "range": "3Gen AFV",
+      "code": "AK11336",
+      "hex": "#4F3A27"
+    },
+    {
+      "id": "ak-ak11337-n-6-earth-yellow-fs30257",
+      "name": "Nº6 Earth Yellow (fs30257)",
+      "range": "3Gen AFV",
+      "code": "AK11337",
+      "hex": "#A67437"
+    },
+    {
+      "id": "ak-ak11338-n-8-earth-red-fs30117",
+      "name": "Nº8 Earth Red (fs30117)",
+      "range": "3Gen AFV",
+      "code": "AK11338",
+      "hex": "#6D3D26"
+    },
+    {
+      "id": "ak-ak11339-n-9-olive-drab-fs33070",
+      "name": "Nº9 Olive Drab (fs33070)",
+      "range": "3Gen AFV",
+      "code": "AK11339",
+      "hex": "#3D4023"
+    },
+    {
+      "id": "ak-ak11341-ocean-gray-fs35164",
+      "name": "Ocean Gray (fs35164)",
+      "range": "3Gen AFV",
+      "code": "AK11341",
+      "hex": "#4B5B6B"
+    },
+    {
+      "id": "ak-ak11334-olive-drab-base",
+      "name": "Olive Drab Base",
+      "range": "3Gen AFV",
+      "code": "AK11334",
+      "hex": "#58542E"
+    },
+    {
+      "id": "ak-ak11378-portland-stone-no-64",
+      "name": "Portland Stone No.64",
+      "range": "3Gen AFV",
+      "code": "AK11378",
+      "hex": "#F1DFA1"
+    },
+    {
+      "id": "ak-ak11371-protective-green-1920s-1930s",
+      "name": "Protective Green 1920s-1930s",
+      "range": "3Gen AFV",
+      "code": "AK11371",
+      "hex": "#24361E"
+    },
+    {
+      "id": "ak-ak11325-ral-1039-f9-sandbeige",
+      "name": "RAL 1039 F9 Sandbeige",
+      "range": "3Gen AFV",
+      "code": "AK11325",
+      "hex": "#BB9B62"
+    },
+    {
+      "id": "ak-ak11309-ral-6003-olivgr-n-opt-1",
+      "name": "RAL 6003 Olivgrün Opt.1",
+      "range": "3Gen AFV",
+      "code": "AK11309",
+      "hex": "#4E5220"
+    },
+    {
+      "id": "ak-ak11310-ral-6003-olivgr-n-opt-2",
+      "name": "RAL 6003 Olivgrün Opt.2",
+      "range": "3Gen AFV",
+      "code": "AK11310",
+      "hex": "#3C3815"
+    },
+    {
+      "id": "ak-ak11308-ral-6007-gr-n",
+      "name": "RAL 6007 Grün",
+      "range": "3Gen AFV",
+      "code": "AK11308",
+      "hex": "#2A2D1C"
+    },
+    {
+      "id": "ak-ak11311-ral-6011-resedagr-n",
+      "name": "RAL 6011 Resedagrün",
+      "range": "3Gen AFV",
+      "code": "AK11311",
+      "hex": "#616D3F"
+    },
+    {
+      "id": "ak-ak11312-ral-6011b-resedagr-n",
+      "name": "RAL 6011b Resedagrün",
+      "range": "3Gen AFV",
+      "code": "AK11312",
+      "hex": "#5A6334"
+    },
+    {
+      "id": "ak-ak11323-ral-6040-f9-helloliv",
+      "name": "RAL 6040 F9 Helloliv",
+      "range": "3Gen AFV",
+      "code": "AK11323",
+      "hex": "#675A30"
+    },
+    {
+      "id": "ak-ak11313-ral-7008-graugr-n",
+      "name": "RAL 7008 Graugrün",
+      "range": "3Gen AFV",
+      "code": "AK11313",
+      "hex": "#817136"
+    },
+    {
+      "id": "ak-ak11314-ral-7008-graugr-n-opt-2",
+      "name": "RAL 7008 Graugrün Opt 2",
+      "range": "3Gen AFV",
+      "code": "AK11314",
+      "hex": "#6D7539"
+    },
+    {
+      "id": "ak-ak11307-ral-7009-hellgrau",
+      "name": "RAL 7009 Hellgrau",
+      "range": "3Gen AFV",
+      "code": "AK11307",
+      "hex": "#65624F"
+    },
+    {
+      "id": "ak-ak11315-ral-7017-dunkelbraun",
+      "name": "RAL 7017 Dunkelbraun",
+      "range": "3Gen AFV",
+      "code": "AK11315",
+      "hex": "#4E3D2D"
+    },
+    {
+      "id": "ak-ak11316-ral-7021-dunkelgrau",
+      "name": "RAL 7021 Dunkelgrau",
+      "range": "3Gen AFV",
+      "code": "AK11316",
+      "hex": "#1D2120"
+    },
+    {
+      "id": "ak-ak11317-ral-7027-grau",
+      "name": "RAL 7027 Grau",
+      "range": "3Gen AFV",
+      "code": "AK11317",
+      "hex": "#827B5F"
+    },
+    {
+      "id": "ak-ak11318-ral-7028-dunkelgelb-initial",
+      "name": "RAL 7028 Dunkelgelb (initial)",
+      "range": "3Gen AFV",
+      "code": "AK11318",
+      "hex": "#A48A40"
+    },
+    {
+      "id": "ak-ak11320-ral-7028-dunkelgelb-variant",
+      "name": "RAL 7028 Dunkelgelb (variant)",
+      "range": "3Gen AFV",
+      "code": "AK11320",
+      "hex": "#E3CF88"
+    },
+    {
+      "id": "ak-ak11319-ral-7028-dunkelgelb-ausgabe-1944",
+      "name": "RAL 7028 Dunkelgelb Ausgabe 1944",
+      "range": "3Gen AFV",
+      "code": "AK11319",
+      "hex": "#967B36"
+    },
+    {
+      "id": "ak-ak11327-ral-8000-gelbbraun",
+      "name": "RAL 8000 Gelbbraun",
+      "range": "3Gen AFV",
+      "code": "AK11327",
+      "hex": "#846829"
+    },
+    {
+      "id": "ak-ak11328-ral-8012-rotbraun",
+      "name": "RAL 8012 Rotbraun",
+      "range": "3Gen AFV",
+      "code": "AK11328",
+      "hex": "#6D2114"
+    },
+    {
+      "id": "ak-ak11329-ral-8013-rotbraun",
+      "name": "RAL 8013 Rotbraun",
+      "range": "3Gen AFV",
+      "code": "AK11329",
+      "hex": "#531812"
+    },
+    {
+      "id": "ak-ak11330-ral-8017-rotbraun",
+      "name": "RAL 8017 Rotbraun",
+      "range": "3Gen AFV",
+      "code": "AK11330",
+      "hex": "#3C251D"
+    },
+    {
+      "id": "ak-ak11331-ral-8020-braun",
+      "name": "RAL 8020 Braun",
+      "range": "3Gen AFV",
+      "code": "AK11331",
+      "hex": "#AC8355"
+    },
+    {
+      "id": "ak-ak11326-ral-8031-f9-sandbraun",
+      "name": "RAL 8031 F9 Sandbraun",
+      "range": "3Gen AFV",
+      "code": "AK11326",
+      "hex": "#A37841"
+    },
+    {
+      "id": "ak-ak11369-russian-dark-brown-6k",
+      "name": "Russian Dark Brown 6k",
+      "range": "3Gen AFV",
+      "code": "AK11369",
+      "hex": "#321507"
+    },
+    {
+      "id": "ak-ak11368-russian-green-4bo",
+      "name": "Russian Green 4bo",
+      "range": "3Gen AFV",
+      "code": "AK11368",
+      "hex": "#4C4D25"
+    },
+    {
+      "id": "ak-ak11370-russian-sand-7",
+      "name": "Russian Sand 7",
+      "range": "3Gen AFV",
+      "code": "AK11370",
+      "hex": "#967E50"
+    },
+    {
+      "id": "ak-ak11386-s-c-c-no-15-olive-drab",
+      "name": "S.c.c. No.15 Olive Drab",
+      "range": "3Gen AFV",
+      "code": "AK11386",
+      "hex": "#4D4B32"
+    },
+    {
+      "id": "ak-ak11384-s-c-c-no-1a-very-dark-brown",
+      "name": "S.c.c. No.1a Very Dark Brown",
+      "range": "3Gen AFV",
+      "code": "AK11384",
+      "hex": "#371E17"
+    },
+    {
+      "id": "ak-ak11385-s-c-c-no-2-brown",
+      "name": "S.c.c. No.2 Brown",
+      "range": "3Gen AFV",
+      "code": "AK11385",
+      "hex": "#855F2E"
+    },
+    {
+      "id": "ak-ak11374-silver-grey-no-28",
+      "name": "Silver Grey No.28",
+      "range": "3Gen AFV",
+      "code": "AK11374",
+      "hex": "#9F9D6A"
+    },
+    {
+      "id": "ak-ak11356-sla-blue",
+      "name": "Sla Blue",
+      "range": "3Gen AFV",
+      "code": "AK11356",
+      "hex": "#43605C"
+    },
+    {
+      "id": "ak-ak11375-slate-no-34",
+      "name": "Slate No.34",
+      "range": "3Gen AFV",
+      "code": "AK11375",
+      "hex": "#4D4C2D"
+    },
+    {
+      "id": "ak-ak11372-washable-white-paint",
+      "name": "Washable White Paint",
+      "range": "3Gen AFV",
+      "code": "AK11372",
+      "hex": "#FFFFFF"
+    },
+    {
+      "id": "ak-ak11351-wood-base",
+      "name": "Wood Base",
+      "range": "3Gen AFV",
+      "code": "AK11351",
+      "hex": "#A59468"
+    },
+    {
+      "id": "ak-ak11301-wwi-british-khaki-brown-base",
+      "name": "Wwi British Khaki Brown Base",
+      "range": "3Gen AFV",
+      "code": "AK11301",
+      "hex": "#52412D"
+    },
+    {
+      "id": "ak-ak11303-wwi-french-artillery-grey",
+      "name": "Wwi French Artillery Grey",
+      "range": "3Gen AFV",
+      "code": "AK11303",
+      "hex": "#545D6C"
+    },
+    {
+      "id": "ak-ak11304-wwi-french-brown",
+      "name": "Wwi French Brown",
+      "range": "3Gen AFV",
+      "code": "AK11304",
+      "hex": "#4D2A17"
+    },
+    {
+      "id": "ak-ak11305-wwi-french-green-1",
+      "name": "Wwi French Green 1",
+      "range": "3Gen AFV",
+      "code": "AK11305",
+      "hex": "#373F2A"
+    },
+    {
+      "id": "ak-ak11306-wwi-french-green-2",
+      "name": "Wwi French Green 2",
+      "range": "3Gen AFV",
+      "code": "AK11306",
+      "hex": "#2A281C"
+    },
+    {
+      "id": "ak-ak11302-wwi-french-milky-coffee",
+      "name": "Wwi French Milky Coffee",
+      "range": "3Gen AFV",
+      "code": "AK11302",
+      "hex": "#9A7B4D"
+    }
+  ]
+}

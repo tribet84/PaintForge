@@ -424,7 +424,7 @@
   "fieldRequired": "Required field",
   "settingsAccount": "Account",
   "settingsCatalogTitle": "Paint catalog",
-  "settingsCatalogSubtitle": "{count} paints from Citadel, Vallejo, The Army Painter and Green Stuff World",
+  "settingsCatalogSubtitle": "{count} paints from Citadel, Vallejo, The Army Painter, Green Stuff World and AK Interactive",
   "@settingsCatalogSubtitle": {
     "placeholders": {
       "count": {

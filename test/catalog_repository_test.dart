@@ -77,6 +77,20 @@ Future<void> main() async {
     expect(vallejo.first.range, 'Model Color');
   });
 
+  test('AK Interactive loads with its mini-first curated order', () {
+    final ak = repository.search('', brand: PaintBrand.ak);
+    expect(ak.length, 480);
+    // Miniature ranges lead; the scale-model camo ranges (Air, AFV) close.
+    expect(ak.first.range, '3Gen Standard');
+    expect(ak.last.range, '3Gen AFV');
+
+    final white = repository.byId('ak-ak11001-white');
+    expect(white, isNotNull);
+    expect(white!.name, 'White');
+    expect(white.code, 'AK11001');
+    expect(white.color, isNotNull);
+  });
+
   test('byId resolves a known paint with parsed color', () {
     final paint = repository.byId('citadel-mephiston-red');
     expect(paint, isNotNull);
