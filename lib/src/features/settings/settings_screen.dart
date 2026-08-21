@@ -1,4 +1,6 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart' show compute, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +18,12 @@ import '../../state/recipes_provider.dart';
 import '../../widgets/account_avatar.dart';
 import '../admin/admin_screen.dart';
 import '../recipes/recipe_photo_picker.dart';
+import 'avatar_crop_screen.dart';
 import 'delete_account_flow.dart';
+
+/// Off the UI thread on mobile/desktop; compute() needs a top-level target.
+Uint8List _compressAvatar((ImageCompressor, Uint8List) args) =>
+    args.$1.compress(args.$2);
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -98,14 +105,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _changeProfilePhoto(BuildContext context) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
+    final navigator = Navigator.of(context);
     final auth = context.read<AuthService>();
     final photos = context.read<RecipePhotoRepository>();
     final recipes = context.read<RecipesProvider>();
     final previousUrl = auth.photoUrl;
 
-    final bytes =
-        await pickAndCompressRecipePhoto(context, compressor: _avatarCompressor);
-    if (bytes == null) return;
+    // Full frame first, crop second, compress last: the crop square needs
+    // the whole photo to choose from, and compressing before cropping would
+    // throw away pixels the user might zoom into.
+    final original = await pickPhotoBytes(context);
+    if (original == null) return;
+    if (!mounted) return;
+    final cropped = await navigator.push<Uint8List>(
+      MaterialPageRoute(
+        builder: (_) => AvatarCropScreen(imageBytes: original),
+      ),
+    );
+    if (cropped == null) return;
+    final Uint8List bytes;
+    try {
+      bytes = kIsWeb
+          ? _compressAvatar((_avatarCompressor, cropped))
+          : await compute(_compressAvatar, (_avatarCompressor, cropped));
+    } on PhotoCompressionException {
+      messenger.showSnackBar(
+        SnackBar(content: Text(l10n.recipePhotoUnreadable)),
+      );
+      return;
+    }
 
     final url = await photos.uploadAvatar(bytes);
     await auth.setPhotoUrl(url);

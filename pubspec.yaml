@@ -30,6 +30,7 @@ dependencies:
   firebase_app_check: ^0.4.6
   flutter_svg: ^2.3.0
   shared_preferences: ^2.5.5
+  crop_your_image: ^2.0.0
 
 dev_dependencies:
   flutter_test:

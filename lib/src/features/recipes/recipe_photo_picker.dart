@@ -14,6 +14,42 @@ const _compressor = ImageCompressor();
 Uint8List _compressWith((ImageCompressor, Uint8List) args) =>
     args.$1.compress(args.$2);
 
+/// Picks a photo and returns its bytes UNCOMPRESSED (beyond the plugin's own
+/// 2048px ceiling). For flows that need the full frame before deciding what
+/// to keep — the avatar cropper works on these, then compresses the crop.
+Future<Uint8List?> pickPhotoBytes(BuildContext context) async {
+  final l10n = AppLocalizations.of(context);
+  final messenger = ScaffoldMessenger.of(context);
+
+  final source = await _chooseSource(context);
+  if (source == null) return null;
+
+  final XFile? picked;
+  try {
+    picked = await _pickImage(source);
+  } catch (_) {
+    messenger.showSnackBar(
+      SnackBar(content: Text(l10n.recipePhotoUnreadable)),
+    );
+    return null;
+  }
+  // Null without an exception is the user backing out of the picker —
+  // silence is the only right response to a cancel.
+  if (picked == null) return null;
+  return picked.readAsBytes();
+}
+
+Future<XFile?> _pickImage(ImageSource source) {
+  return ImagePicker().pickImage(
+    source: source,
+    // A first, cheap cut before the bytes ever reach us — the plugin can
+    // often ask the camera for a smaller image directly.
+    maxWidth: 2048,
+    maxHeight: 2048,
+    imageQuality: 90,
+  );
+}
+
 /// Lets the user pick a photo and compresses it ON THE DEVICE, returning the
 /// bytes ready to upload.
 ///
@@ -36,17 +72,9 @@ Future<Uint8List?> pickAndCompressRecipePhoto(
   final source = await _chooseSource(context);
   if (source == null) return null;
 
-  final picker = ImagePicker();
   final XFile? picked;
   try {
-    picked = await picker.pickImage(
-      source: source,
-      // A first, cheap cut before the bytes ever reach us — the plugin can
-      // often ask the camera for a smaller image directly.
-      maxWidth: 2048,
-      maxHeight: 2048,
-      imageQuality: 90,
-    );
+    picked = await _pickImage(source);
   } catch (_) {
     messenger.showSnackBar(
       SnackBar(content: Text(l10n.recipePhotoUnreadable)),
