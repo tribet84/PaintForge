@@ -45,6 +45,31 @@ service cloud.firestore {
       match /linkedRecipes/{publishedId} {
         allow read, write: if isOwner();
       }
+
+      // Authors this user follows, with the watermark of what they have
+      // already seen. Private: who you follow is nobody else's business.
+      match /following/{authorUid} {
+        allow read, write: if isOwner();
+      }
+    }
+
+    // One marker per follower of an author, keyed by the follower's uid —
+    // the same shape that keeps recipe link counts honest: the count is
+    // computable by anyone signed in, but each account holds exactly one
+    // vote and only over its own marker. The author cannot purge followers:
+    // unlike recipe links, a follow belongs to the follower alone.
+    match /follows/{authorUid}/followers/{followerUid} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.auth.uid == followerUid;
+      // The follower owns the follow — but the AUTHOR may also delete
+      // markers pointing at them, for the same reason recipe owners may
+      // delete link markers: account deletion has to sweep its own
+      // followers subtree, and a follower's marker outliving the followed
+      // account would be a ghost nobody could ever remove.
+      allow delete: if request.auth != null
+        && (request.auth.uid == followerUid
+            || request.auth.uid == authorUid);
     }
 
     // Public copies of shared recipes. Anyone signed in can read; only the

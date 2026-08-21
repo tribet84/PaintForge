@@ -56,7 +56,27 @@ abstract class PublishedRecipeRepository {
 
   /// How many painters have linked this recipe.
   Future<int> linkCount(String publishedId);
+
+  /// Authors this user follows, with the watermark of what they have
+  /// already seen from each.
+  Stream<List<Follow>> watchFollowing();
+
+  /// Start following [authorUid]. Sets the seen-watermark to now on
+  /// purpose: following someone is a subscription to their FUTURE work,
+  /// not a bell that immediately rings for their whole back catalogue.
+  Future<void> follow(String authorUid, String authorName);
+
+  Future<void> unfollow(String authorUid);
+
+  /// How many painters follow [authorUid].
+  Future<int> followerCount(String authorUid);
+
+  /// Moves the seen-watermark of every followed author to now.
+  Future<void> markAllSeen();
 }
+
+/// An author the user follows.
+typedef Follow = ({String authorUid, String authorName, DateTime seenUpTo});
 
 class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
   FirestorePublishedRecipeRepository({
@@ -205,5 +225,75 @@ class FirestorePublishedRecipeRepository implements PublishedRecipeRepository {
     final snapshot =
         await _published.doc(publishedId).collection('links').count().get();
     return snapshot.count ?? 0;
+  }
+
+  CollectionReference<Map<String, dynamic>> get _following =>
+      _firestore.collection('users').doc(uid).collection('following');
+
+  DocumentReference<Map<String, dynamic>> _followerMarker(
+    String authorUid,
+  ) =>
+      _firestore
+          .collection('follows')
+          .doc(authorUid)
+          .collection('followers')
+          .doc(uid);
+
+  @override
+  Stream<List<Follow>> watchFollowing() {
+    return _following.snapshots().map((snapshot) => [
+          for (final doc in snapshot.docs)
+            (
+              authorUid: doc.id,
+              authorName: doc.data()['authorName'] as String? ?? '',
+              seenUpTo: (doc.data()['seenUpTo'] as Timestamp?)?.toDate() ??
+                  DateTime.now(),
+            ),
+        ]);
+  }
+
+  @override
+  Future<void> follow(String authorUid, String authorName) {
+    // One batch so the private list and the public marker (the author's
+    // follower count) can never drift apart — same discipline as link().
+    final batch = _firestore.batch()
+      ..set(_following.doc(authorUid), {
+        'authorName': authorName,
+        'seenUpTo': FieldValue.serverTimestamp(),
+      })
+      ..set(_followerMarker(authorUid), {
+        'followedAt': FieldValue.serverTimestamp(),
+      });
+    return batch.commit();
+  }
+
+  @override
+  Future<void> unfollow(String authorUid) {
+    final batch = _firestore.batch()
+      ..delete(_following.doc(authorUid))
+      ..delete(_followerMarker(authorUid));
+    return batch.commit();
+  }
+
+  @override
+  Future<int> followerCount(String authorUid) async {
+    final snapshot = await _firestore
+        .collection('follows')
+        .doc(authorUid)
+        .collection('followers')
+        .count()
+        .get();
+    return snapshot.count ?? 0;
+  }
+
+  @override
+  Future<void> markAllSeen() async {
+    final snapshot = await _following.get();
+    if (snapshot.docs.isEmpty) return;
+    final batch = _firestore.batch();
+    for (final doc in snapshot.docs) {
+      batch.update(doc.reference, {'seenUpTo': FieldValue.serverTimestamp()});
+    }
+    await batch.commit();
   }
 }

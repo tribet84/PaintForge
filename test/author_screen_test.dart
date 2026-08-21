@@ -6,6 +6,9 @@ import 'package:paintforge/src/data/published_recipe_repository.dart';
 import 'package:paintforge/src/features/recipes/author_screen.dart';
 import 'package:paintforge/src/features/recipes/public_recipe_screen.dart';
 import 'package:paintforge/src/models/recipe.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:paintforge/src/services/auth_service.dart';
+import 'package:paintforge/src/state/follows_provider.dart';
 import 'package:paintforge/src/state/inventory_provider.dart';
 import 'package:paintforge/src/state/recipes_provider.dart';
 import 'package:provider/provider.dart';
@@ -49,6 +52,10 @@ void main() {
         providers: [
           Provider<CatalogRepository>.value(value: catalog),
           Provider<PublishedRecipeRepository>.value(value: repository),
+          Provider<AuthService>.value(value: _StubAuthService()),
+          ChangeNotifierProvider<FollowsProvider>(
+            create: (_) => FollowsProvider(repository: repository),
+          ),
           ChangeNotifierProvider<InventoryProvider>.value(value: inventory),
           ChangeNotifierProvider<RecipesProvider>.value(value: recipes),
         ],
@@ -105,4 +112,13 @@ void main() {
 
     expect(find.byType(PublicRecipeScreen), findsOneWidget);
   });
+}
+
+/// The author screen only asks who the current user is.
+class _StubAuthService implements AuthService {
+  @override
+  User? get currentUser => null;
+
+  @override
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

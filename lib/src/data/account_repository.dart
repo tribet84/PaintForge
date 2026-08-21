@@ -58,6 +58,27 @@ class FirestoreAccountRepository implements AccountRepository {
     }
     await _deleteAllDocs(_userDoc.collection('linkedRecipes'));
 
+    // Follows, both directions. Outgoing: this user's marker under each
+    // author they follow, then their own list. Incoming: the whole
+    // followers subtree pointing AT this account — the rules let an author
+    // sweep it precisely so no marker outlives the account it points to.
+    // The one thing that cannot be cleaned from here is other users'
+    // private following entries naming this account; those are owner-only
+    // by design, and they degrade to an author page with zero recipes.
+    final following = await _userDoc.collection('following').get();
+    for (final doc in following.docs) {
+      await _firestore
+          .collection('follows')
+          .doc(doc.id)
+          .collection('followers')
+          .doc(uid)
+          .delete();
+    }
+    await _deleteAllDocs(_userDoc.collection('following'));
+    await _deleteAllDocs(
+      _firestore.collection('follows').doc(uid).collection('followers'),
+    );
+
     // Uploaded photos are user data too, and Storage does not cascade with
     // the Firestore documents that referenced them.
     await _photos?.deleteAll();

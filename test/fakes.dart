@@ -254,4 +254,61 @@ class FakePublishedRecipeRepository implements PublishedRecipeRepository {
 
   @override
   Future<int> linkCount(String publishedId) async => 0;
+
+  final _following = <String, Follow>{};
+  final _followingController = StreamController<List<Follow>>.broadcast();
+  final _followerCounts = <String, int>{};
+
+  void _emitFollowing() =>
+      _followingController.add(_following.values.toList());
+
+  /// Test seam: pretend [authorUid] published/updated something at [when]
+  /// by moving the follower's watermark BEFORE it.
+  void backdateSeen(String authorUid, DateTime when) {
+    final f = _following[authorUid];
+    if (f == null) return;
+    _following[authorUid] =
+        (authorUid: f.authorUid, authorName: f.authorName, seenUpTo: when);
+    _emitFollowing();
+  }
+
+  @override
+  Stream<List<Follow>> watchFollowing() =>
+      _replay(_followingController, () => _following.values.toList());
+
+  @override
+  Future<void> follow(String authorUid, String authorName) async {
+    _following[authorUid] = (
+      authorUid: authorUid,
+      authorName: authorName,
+      seenUpTo: DateTime.now(),
+    );
+    _followerCounts[authorUid] = (_followerCounts[authorUid] ?? 0) + 1;
+    _emitFollowing();
+  }
+
+  @override
+  Future<void> unfollow(String authorUid) async {
+    if (_following.remove(authorUid) != null) {
+      _followerCounts[authorUid] = (_followerCounts[authorUid] ?? 1) - 1;
+    }
+    _emitFollowing();
+  }
+
+  @override
+  Future<int> followerCount(String authorUid) async =>
+      _followerCounts[authorUid] ?? 0;
+
+  @override
+  Future<void> markAllSeen() async {
+    final now = DateTime.now();
+    for (final e in _following.entries.toList()) {
+      _following[e.key] = (
+        authorUid: e.value.authorUid,
+        authorName: e.value.authorName,
+        seenUpTo: now,
+      );
+    }
+    _emitFollowing();
+  }
 }

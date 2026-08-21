@@ -17,6 +17,7 @@ import 'services/auth_service.dart';
 import 'services/sample_recipe_seeder.dart';
 import 'state/inventory_provider.dart';
 import 'state/paint_lists_provider.dart';
+import 'state/follows_provider.dart';
 import 'state/recipes_provider.dart';
 import 'theme.dart';
 import 'widgets/brand_loader.dart';
@@ -137,6 +138,10 @@ class _AuthGate extends StatelessWidget {
               value: publishedRepository,
             ),
             Provider<RecipePhotoRepository>.value(value: photoRepository),
+            ChangeNotifierProvider<FollowsProvider>(
+              create: (_) =>
+                  FollowsProvider(repository: publishedRepository),
+            ),
             ChangeNotifierProvider<RecipesProvider>(
               create: (_) => RecipesProvider(
                 repository: recipeRepository,

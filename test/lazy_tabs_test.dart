@@ -5,6 +5,7 @@ import 'package:paintforge/src/data/catalog_repository.dart';
 import 'package:paintforge/src/data/published_recipe_repository.dart';
 import 'package:paintforge/src/features/home/home_screen.dart';
 import 'package:paintforge/src/services/auth_service.dart';
+import 'package:paintforge/src/state/follows_provider.dart';
 import 'package:paintforge/src/state/inventory_provider.dart';
 import 'package:paintforge/src/state/paint_lists_provider.dart';
 import 'package:paintforge/src/state/recipes_provider.dart';
@@ -40,6 +41,9 @@ void main() {
           Provider<CatalogRepository>.value(value: catalog),
           Provider<AuthService>.value(value: _StubAuthService()),
           Provider<PublishedRecipeRepository>.value(value: published),
+          ChangeNotifierProvider<FollowsProvider>(
+            create: (_) => FollowsProvider(repository: published),
+          ),
           ChangeNotifierProvider<InventoryProvider>.value(value: inventory),
           // Left to build themselves, exactly as the real app does, so the
           // test measures when they are first READ.
@@ -100,6 +104,9 @@ void main() {
           Provider<CatalogRepository>.value(value: catalog),
           Provider<AuthService>.value(value: _StubAuthService()),
           Provider<PublishedRecipeRepository>.value(value: published),
+          ChangeNotifierProvider<FollowsProvider>(
+            create: (_) => FollowsProvider(repository: published),
+          ),
           ChangeNotifierProvider<InventoryProvider>.value(value: inventory),
           ChangeNotifierProvider<PaintListsProvider>(
             create: (_) =>

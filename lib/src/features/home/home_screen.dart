@@ -5,6 +5,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../services/auth_service.dart';
 import '../../services/sample_recipe_seeder.dart';
 import '../../services/share_links.dart';
+import '../../state/follows_provider.dart';
 import '../../state/inventory_provider.dart';
 import '../../widgets/brand_logo.dart';
 import '../../widgets/account_avatar.dart';
@@ -12,6 +13,7 @@ import '../../widgets/banner_ad_widget.dart';
 import '../lists/lists_screen.dart';
 import '../paints/paints_screen.dart';
 import '../recipes/public_recipe_screen.dart';
+import '../recipes/news_screen.dart';
 import '../recipes/recipes_screen.dart';
 import '../settings/settings_screen.dart';
 import '../shopping/shopping_list_screen.dart';
@@ -88,6 +90,23 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: false,
         actions: [
+          // The bell does not exist until you follow someone: a new user
+          // must never meet an empty inbox announcing loneliness.
+          if (context.watch<FollowsProvider>().following.isNotEmpty)
+            IconButton(
+              tooltip: l10n.newsTooltip,
+              icon: Badge(
+                isLabelVisible:
+                    context.watch<FollowsProvider>().news.isNotEmpty,
+                label: Text(
+                  '${context.watch<FollowsProvider>().news.length}',
+                ),
+                child: const Icon(Icons.notifications_none),
+              ),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (_) => const NewsScreen()),
+              ),
+            ),
           IconButton(
             tooltip: l10n.tabShopping,
             icon: Badge(
