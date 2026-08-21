@@ -4,8 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:paintforge/l10n/generated/app_localizations.dart';
 import 'package:paintforge/src/data/catalog_repository.dart';
 import 'package:paintforge/src/features/settings/settings_screen.dart';
+import 'package:paintforge/src/services/app_settings.dart';
 import 'package:paintforge/src/services/auth_service.dart';
 import 'package:provider/provider.dart';
+
+import 'fakes.dart';
 
 class FakeAuthService implements AuthService {
   FakeAuthService({this.admin = false});
@@ -69,11 +72,13 @@ void main() {
   });
 
   Future<void> pumpSettings(WidgetTester tester, {required bool admin}) async {
+    final settings = await testAppSettings();
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           Provider<CatalogRepository>.value(value: catalog),
           Provider<AuthService>.value(value: FakeAuthService(admin: admin)),
+          ChangeNotifierProvider<AppSettings>.value(value: settings),
         ],
         child: MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,

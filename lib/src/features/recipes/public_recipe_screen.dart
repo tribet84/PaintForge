@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../data/catalog_repository.dart';
 import '../../data/published_recipe_repository.dart';
+import '../../services/auth_service.dart';
 import '../../services/external_link.dart';
+import '../../state/follows_provider.dart';
 import '../../state/inventory_provider.dart';
 import '../../state/recipes_provider.dart';
 import '../../widgets/paint_list_widgets.dart';
@@ -103,8 +105,43 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
     if (accepted != true) return;
 
     await recipes.link(published.id);
-    messenger.showSnackBar(SnackBar(content: Text(l10n.recipeLinked)));
+    _showLinkedSnackBar(published);
     await _refreshLinkCount();
+  }
+
+  /// Confirms the bookmark and, when it applies, offers the follow in the
+  /// same breath. The moment someone saves a recipe is the one moment they
+  /// have shown interest in its author — a nudge anywhere else is spam.
+  void _showLinkedSnackBar(PublishedRecipe published) {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final follows = context.read<FollowsProvider>();
+    final selfUid = context.read<AuthService>().currentUser?.uid;
+
+    final authorName =
+        published.authorName.isEmpty ? '—' : published.authorName;
+    final offerFollow = published.ownerUid != selfUid &&
+        !follows.isFollowing(published.ownerUid);
+
+    if (!offerFollow) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.recipeLinked)));
+      return;
+    }
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(l10n.followNudge(authorName)),
+        duration: const Duration(seconds: 6),
+        action: SnackBarAction(
+          label: l10n.followAction,
+          onPressed: () async {
+            await follows.follow(published.ownerUid, published.authorName);
+            messenger.showSnackBar(
+              SnackBar(content: Text(l10n.followNudgeConfirmed(authorName))),
+            );
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -329,7 +366,7 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
                 ),
               FloatingActionButton.extended(
                 heroTag: 'public-link',
-                onPressed: () => _toggleLink(context, linked),
+                onPressed: () => _toggleLink(context, linked, published),
                 icon: Icon(linked ? Icons.bookmark_remove_outlined : Icons.bookmark_add_outlined),
                 label: Text(
                   linked ? l10n.recipeUnlinkAction : l10n.recipeLinkAction,
@@ -353,7 +390,11 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
     navigator.pop();
   }
 
-  Future<void> _toggleLink(BuildContext context, bool linked) async {
+  Future<void> _toggleLink(
+    BuildContext context,
+    bool linked,
+    PublishedRecipe published,
+  ) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
     final recipes = context.read<RecipesProvider>();
@@ -363,7 +404,7 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
       messenger.showSnackBar(SnackBar(content: Text(l10n.recipeUnlinked)));
     } else {
       await recipes.link(widget.publishedId);
-      messenger.showSnackBar(SnackBar(content: Text(l10n.recipeLinked)));
+      if (mounted) _showLinkedSnackBar(published);
     }
     await _refreshLinkCount();
   }

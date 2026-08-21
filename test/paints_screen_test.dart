@@ -5,9 +5,11 @@ import 'package:paintforge/src/data/catalog_repository.dart';
 import 'package:paintforge/src/features/paints/paints_screen.dart';
 import 'package:paintforge/src/models/inventory_entry.dart';
 import 'package:paintforge/src/models/paint.dart';
+import 'package:paintforge/src/services/app_settings.dart';
 import 'package:paintforge/src/state/inventory_provider.dart';
 import 'package:paintforge/src/widgets/shelf_starter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'fakes.dart';
 
@@ -29,6 +31,7 @@ void main() {
     WidgetTester tester, {
     Map<String, PaintStatus> owned = const {},
     bool skipStarter = true,
+    bool hintDismissed = true,
   }) async {
     final repository = FakeInventoryRepository();
     lastRepository = repository;
@@ -37,12 +40,15 @@ void main() {
     for (final entry in owned.entries) {
       await inventory.setStatus(entry.key, entry.value);
     }
+    final settings =
+        await testAppSettings(paintCardHintDismissed: hintDismissed);
 
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           Provider<CatalogRepository>.value(value: catalog),
           ChangeNotifierProvider<InventoryProvider>.value(value: inventory),
+          ChangeNotifierProvider<AppSettings>.value(value: settings),
         ],
         child: MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -62,6 +68,23 @@ void main() {
     }
     return inventory;
   }
+
+  testWidgets('the tap hint shows once and its dismissal sticks',
+      (tester) async {
+    await pumpPaints(tester, hintDismissed: false);
+
+    // The row's tap affordance is invisible, so the hint has to say it.
+    expect(find.textContaining('close matches'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Close'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('close matches'), findsNothing);
+
+    // Dismissal is persisted, not per-build: storage itself now carries the
+    // flag, so the hint stays gone on the next app start.
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getBool('paintCardHintDismissed'), isTrue);
+  });
 
   testWidgets('an empty shelf opens on All — Mine would be a blank screen',
       (tester) async {
@@ -202,12 +225,14 @@ void main() {
     lastRepository = repository;
     final inventory = InventoryProvider(repository: repository);
     addTearDown(inventory.dispose);
+    final settings = await testAppSettings();
 
     await tester.pumpWidget(
       MultiProvider(
         providers: [
           Provider<CatalogRepository>.value(value: catalog),
           ChangeNotifierProvider<InventoryProvider>.value(value: inventory),
+          ChangeNotifierProvider<AppSettings>.value(value: settings),
         ],
         child: MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,

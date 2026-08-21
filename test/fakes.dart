@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:paintforge/src/services/app_settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:paintforge/src/data/inventory_repository.dart';
 import 'package:paintforge/src/data/paint_list_repository.dart';
 import 'package:paintforge/src/data/published_recipe_repository.dart';
@@ -7,6 +10,16 @@ import 'package:paintforge/src/data/recipe_repository.dart';
 import 'package:paintforge/src/models/inventory_entry.dart';
 import 'package:paintforge/src/models/paint_list.dart';
 import 'package:paintforge/src/models/recipe.dart';
+
+/// Device-local settings backed by mocked storage. The hint starts dismissed
+/// by default so the many tests about catalogue behaviour are not asked to
+/// dismiss a banner first; hint tests opt in explicitly.
+Future<AppSettings> testAppSettings({bool paintCardHintDismissed = true}) {
+  SharedPreferences.setMockInitialValues({
+    if (paintCardHintDismissed) 'paintCardHintDismissed': true,
+  });
+  return AppSettings.load();
+}
 
 /// Replays current state to every new listener, the way a Firestore snapshot
 /// stream does, so providers see data immediately after construction.

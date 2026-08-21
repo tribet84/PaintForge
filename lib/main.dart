@@ -6,6 +6,7 @@ import 'src/app.dart';
 import 'src/data/catalog_repository.dart';
 import 'src/services/ads_service.dart';
 import 'src/services/app_check_service.dart';
+import 'src/services/app_settings.dart';
 import 'src/services/share_links.dart';
 
 Future<void> main() async {
@@ -34,6 +35,11 @@ Future<void> main() async {
   await AdsService.initialize();
 
   final catalog = await CatalogRepository.loadFromAssets();
+  final settings = await AppSettings.load();
 
-  runApp(PintaMinisApp(catalog: catalog, firebaseReady: firebaseReady));
+  runApp(PintaMinisApp(
+    catalog: catalog,
+    settings: settings,
+    firebaseReady: firebaseReady,
+  ));
 }

@@ -5,6 +5,8 @@ bool shouldOfferInstallHint() => false;
 
 void dismissInstallHint() {}
 
+bool isStandaloneDisplay() => false;
+
 // Referenced so the conditional export stays honest about what is shared.
 // ignore: unused_element
 final _logic = shouldShowInstallHint;

@@ -5,6 +5,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../data/catalog_repository.dart';
 import '../../models/inventory_entry.dart';
 import '../../models/paint.dart';
+import '../../services/app_settings.dart';
 import '../../state/inventory_provider.dart';
 import '../../widgets/paint_widgets.dart';
 import '../../widgets/brand_loader.dart';
@@ -188,6 +189,36 @@ class _PaintsScreenState extends State<PaintsScreen> {
               }),
               onRangeChanged: (value) => setState(() => _rangeFilter = value),
               onStartSelecting: () => setState(() => _selecting = true),
+            ),
+          // The row's tap target is invisible: the toggles soak up all the
+          // visual attention, and nothing suggests the row itself opens the
+          // paint card with its cross-brand matches. Said once, then gone
+          // for good on this device.
+          if (!_selecting &&
+              !context.watch<AppSettings>().paintCardHintDismissed)
+            Material(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Row(
+                  children: [
+                    const Icon(Icons.touch_app_outlined, size: 18),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        l10n.paintsTapHint,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                    IconButton(
+                      tooltip: l10n.actionClose,
+                      icon: const Icon(Icons.close, size: 18),
+                      onPressed: () =>
+                          context.read<AppSettings>().dismissPaintCardHint(),
+                    ),
+                  ],
+                ),
+              ),
             ),
           Expanded(
             child: _PaintResults(

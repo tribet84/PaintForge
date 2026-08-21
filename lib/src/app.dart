@@ -13,6 +13,7 @@ import 'data/recipe_photo_repository.dart';
 import 'data/recipe_repository.dart';
 import 'features/auth/login_screen.dart';
 import 'features/home/home_screen.dart';
+import 'services/app_settings.dart';
 import 'services/auth_service.dart';
 import 'services/sample_recipe_seeder.dart';
 import 'state/inventory_provider.dart';
@@ -26,10 +27,12 @@ class PintaMinisApp extends StatelessWidget {
   const PintaMinisApp({
     super.key,
     required this.catalog,
+    required this.settings,
     required this.firebaseReady,
   });
 
   final CatalogRepository catalog;
+  final AppSettings settings;
   final bool firebaseReady;
 
   @override
@@ -37,6 +40,7 @@ class PintaMinisApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<CatalogRepository>.value(value: catalog),
+        ChangeNotifierProvider<AppSettings>.value(value: settings),
         if (firebaseReady)
           Provider<AuthService>(create: (_) => FirebaseAuthService()),
       ],
@@ -64,8 +68,13 @@ class _PintaMinisMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // watch, not read: switching the language in Settings must rebuild the
+    // whole tree, and this widget is the highest point below the provider.
+    final locale =
+        context.watch<AppSettings?>()?.localeOverride;
     return MaterialApp(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+      locale: locale,
       theme: PintaMinisTheme.light(),
       darkTheme: PintaMinisTheme.dark(),
       localizationsDelegates: const [

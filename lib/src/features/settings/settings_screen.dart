@@ -1,11 +1,14 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../build_info.dart';
 import '../../data/catalog_repository.dart';
+import '../../services/app_settings.dart';
 import '../../services/auth_service.dart';
 import '../../services/external_link.dart';
+import '../../services/install_hint.dart';
 import '../../services/share_links.dart';
 import '../../widgets/account_avatar.dart';
 import '../admin/admin_screen.dart';
@@ -19,6 +22,70 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  String _languageLabel(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return switch (context.watch<AppSettings>().localeOverride?.languageCode) {
+      'en' => 'English',
+      'es' => 'Español',
+      // Language names are shown in their own language on purpose — someone
+      // stuck in the wrong locale must be able to recognise the way out.
+      _ => l10n.settingsLanguageSystem,
+    };
+  }
+
+  Future<void> _pickLanguage(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    final settings = context.read<AppSettings>();
+    final current = settings.localeOverride?.languageCode;
+
+    final choice = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => SimpleDialog(
+        title: Text(l10n.settingsLanguage),
+        children: [
+          for (final (code, label) in [
+            (null, l10n.settingsLanguageSystem),
+            ('en', 'English'),
+            ('es', 'Español'),
+          ])
+            ListTile(
+              title: Text(label),
+              trailing: code == current
+                  ? const Icon(Icons.check)
+                  : null,
+              // The sentinel keeps "system" distinguishable from "dismissed"
+              // in the dialog's return value.
+              onTap: () =>
+                  Navigator.of(dialogContext).pop(code ?? 'system'),
+            ),
+        ],
+      ),
+    );
+    if (choice == null) return;
+    await settings.setLocaleOverride(
+      choice == 'system' ? null : Locale(choice),
+    );
+  }
+
+  Future<void> _showInstallInstructions(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.settingsInstallTitle),
+        // Same copy as the one-time home banner: the tile is the permanent
+        // way back to it after the banner was dismissed.
+        content: Text(l10n.installHintBody),
+        actions: [
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(l10n.actionClose),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _editDisplayName(BuildContext context) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
@@ -110,17 +177,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           ListTile(
+            leading: const Icon(Icons.language),
+            title: Text(l10n.settingsLanguage),
+            subtitle: Text(_languageLabel(context)),
+            onTap: () => _pickLanguage(context),
+          ),
+          ListTile(
             leading: const Icon(Icons.palette_outlined),
             title: Text(l10n.settingsCatalogTitle),
             subtitle: Text(l10n.settingsCatalogSubtitle(catalog.paints.length)),
           ),
+          // Only in a browser tab: inside the installed app the instructions
+          // would describe a journey already completed.
+          if (kIsWeb && !isStandaloneDisplay())
+            ListTile(
+              leading: const Icon(Icons.install_mobile),
+              title: Text(l10n.settingsInstallTitle),
+              subtitle: Text(l10n.settingsInstallSubtitle),
+              onTap: () => _showInstallInstructions(context),
+            ),
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: Text(l10n.settingsVersion),
-            // The build stamp is injected at build time. Without it there is
-            // no way to tell a stale cached bundle from a fresh one, which
-            // turns "I don't see the update" into pure guesswork.
-            subtitle: const Text('1.0.0 · $buildStamp'),
+            subtitle: const Text('1.0.0'),
+            // The raw build stamp is a developer tool for proving a stale
+            // cache, not something every user should parse. It stays one tap
+            // away rather than one line down.
+            onTap: () => ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('1.0.0 · $buildStamp')),
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.chat_bubble_outline),

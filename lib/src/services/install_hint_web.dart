@@ -37,3 +37,13 @@ void dismissInstallHint() {
     web.window.localStorage.setItem(_dismissedKey, '1');
   } catch (_) {}
 }
+
+/// True when running as an installed app — the moment install instructions
+/// stop making sense.
+bool isStandaloneDisplay() {
+  try {
+    return web.window.matchMedia('(display-mode: standalone)').matches;
+  } catch (_) {
+    return false;
+  }
+}
