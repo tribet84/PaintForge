@@ -129,7 +129,7 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
           return Scaffold(
             appBar: AppBar(),
             body: EmptyState(
-              icon: Icons.link_off,
+              icon: Icons.bookmark_remove_outlined,
               title: l10n.recipeNotShared,
               body: l10n.recipeNotSharedBody,
               // Otherwise a dead link stays in the user's recipe list
@@ -195,7 +195,7 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
                 // Author + freshness: the reason linking beats cloning.
                 Row(
                   children: [
-                    const Icon(Icons.link, size: 18),
+                    const Icon(Icons.bookmark_outlined, size: 18),
                     const SizedBox(width: 6),
                     Expanded(
                       // The author's name is the door to everything else
@@ -330,7 +330,7 @@ class _PublicRecipeScreenState extends State<PublicRecipeScreen> {
               FloatingActionButton.extended(
                 heroTag: 'public-link',
                 onPressed: () => _toggleLink(context, linked),
-                icon: Icon(linked ? Icons.link_off : Icons.link),
+                icon: Icon(linked ? Icons.bookmark_remove_outlined : Icons.bookmark_add_outlined),
                 label: Text(
                   linked ? l10n.recipeUnlinkAction : l10n.recipeLinkAction,
                 ),

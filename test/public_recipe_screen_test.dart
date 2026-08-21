@@ -96,13 +96,13 @@ void main() {
     final state = await pumpScreen(tester, publishedId: 'pub-1', linked: true);
 
     expect(find.text('This recipe is not shared anymore'), findsOneWidget);
-    expect(find.text('Remove from my account'), findsOneWidget);
+    expect(find.text('Remove bookmark'), findsOneWidget);
 
-    await tester.tap(find.text('Remove from my account'));
+    await tester.tap(find.text('Remove bookmark'));
     await tester.pumpAndSettle();
 
     expect(state.recipes.isLinked('pub-1'), isFalse);
-    expect(find.text('Recipe removed from your account'), findsOneWidget);
+    expect(find.text('Removed from your bookmarks'), findsOneWidget);
   });
 
   testWidgets('an unshared recipe that was never linked offers nothing to remove',
@@ -110,6 +110,6 @@ void main() {
     await pumpScreen(tester, publishedId: 'pub-2', linked: false);
 
     expect(find.text('This recipe is not shared anymore'), findsOneWidget);
-    expect(find.text('Remove from my account'), findsNothing);
+    expect(find.text('Remove bookmark'), findsNothing);
   });
 }

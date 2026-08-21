@@ -43,8 +43,20 @@
   "shoppingClearBody": "{count, plural, =1{Se quitará 1 pintura marcada como «por comprar».} other{Se quitarán {count} pinturas marcadas como «por comprar».}} Las casi vacías se quedan: reflejan tu estantería, no un antojo.",
   "shoppingClearAction": "Vaciar",
   "shoppingCleared": "{count, plural, =1{1 pintura quitada de la lista} other{{count} pinturas quitadas de la lista}}",
-  "@shoppingClearBody": {"placeholders": {"count": {"type": "int"}}},
-  "@shoppingCleared": {"placeholders": {"count": {"type": "int"}}},
+  "@shoppingClearBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@shoppingCleared": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingMarkAllConfirmTitle": "¿Marcar todo como comprado?",
   "shoppingMarkAllConfirmBody": "{count, plural, =1{1 pintura pasará a “la tengo” y saldrá de la lista de compra.} other{{count} pinturas pasarán a “la tengo” y saldrán de la lista de compra.}}",
   "shoppingMarkAllDone": "{count, plural, =1{1 pintura marcada como comprada} other{{count} pinturas marcadas como compradas}}",
@@ -99,21 +111,21 @@
   "stepNoteHint": "p. ej. pincel seco generoso, muy diluido…",
   "recipeShare": "Compartir receta",
   "recipeInvitationTitle": "¿Guardar esta receta?",
-  "recipeInvitationBody": "“{name}” de {author}. Al vincularla la tendrás en tu cuenta y siempre verás la última versión del autor.",
-  "recipeInvitationLink": "Guardar en mi cuenta",
+  "recipeInvitationBody": "“{name}” de {author}. Al guardarla en favoritos la tendrás en tu cuenta y siempre verás la última versión del autor.",
+  "recipeInvitationLink": "Guardar en favoritos",
   "recipeInvitationJustLook": "Solo echar un vistazo",
-  "recipeAlreadyLinked": "Esta receta ya está en tu cuenta",
+  "recipeAlreadyLinked": "Esta receta ya está en tus favoritos",
   "recipeCreateList": "Crear una lista con esta receta",
   "recipeCreateListBody": "Se creará una lista nueva con las {count, plural, =1{1 pintura} other{{count} pinturas}} que usa “{name}”.",
   "recipeListCreated": "Lista “{name}” creada",
   "recipeShareTitle": "¿Compartir esta receta?",
-  "recipeShareBody": "Cualquiera con el enlace podrá verla y vincularla a su cuenta. Cuando la actualices, todos verán tu última versión — los vínculos siguen a la receta, nunca la copian. También aparecerá en tu página de autor, junto a todo lo demás que compartas.",
+  "recipeShareBody": "Cualquiera con el enlace podrá verla y guardarla en favoritos. Cuando la actualices, todos verán tu última versión — los favoritos siguen a la receta, nunca la copian. También aparecerá en tu página de autor, junto a todo lo demás que compartas.",
   "recipeSharedBadge": "Compartida",
   "recipeLinkCopied": "Enlace copiado al portapapeles",
   "recipeCopyLink": "Copiar enlace",
   "recipeShareLink": "Compartir enlace…",
   "recipeStopSharing": "Dejar de compartir",
-  "recipeStopSharingBody": "El enlace dejará de funcionar y la receta desaparecerá de las cuentas que la vincularon. Tu copia local no se ve afectada.",
+  "recipeStopSharingBody": "El enlace dejará de funcionar y la receta desaparecerá de los favoritos de quienes la guardaron. Tu copia local no se ve afectada.",
   "recipeUnpublished": "La receta ya no está compartida",
   "recipeByAuthor": "de {author}",
   "authorRecipesTitle": "Recetas de {name}",
@@ -121,16 +133,28 @@
   "settingsDisplayName": "Nombre visible",
   "settingsDisplayNameHint": "Cómo te ven otros pintores en las recetas compartidas",
   "settingsDisplayNameSaved": "Nombre actualizado — aparecerá en lo que publiques a partir de ahora",
-  "@authorRecipesTitle": {"placeholders": {"name": {"type": "String"}}},
-  "@authorRecipesCount": {"placeholders": {"count": {"type": "int"}}},
+  "@authorRecipesTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@authorRecipesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "recipeUpdatedOn": "Actualizada el {date}",
-  "recipeLinkAction": "Vincular a mi cuenta",
-  "recipeUnlinkAction": "Quitar de mi cuenta",
-  "recipeLinked": "Receta vinculada — siempre verás la última versión",
-  "recipeUnlinked": "Receta quitada de tu cuenta",
-  "recipeLinkedCount": "{count, plural, =0{Nadie ha vinculado esta receta todavía} =1{1 pintor ha vinculado esta receta} other{{count} pintores han vinculado esta receta}}",
-  "recipeLinkedSectionTitle": "Recetas vinculadas",
-  "recipeLinkedSectionHelp": "Recetas de otros pintores. Se actualizan solas cuando el autor las actualiza.",
+  "recipeLinkAction": "Guardar en favoritos",
+  "recipeUnlinkAction": "Quitar de favoritos",
+  "recipeLinked": "Guardada en favoritos — siempre verás la última versión",
+  "recipeUnlinked": "Quitada de tus favoritos",
+  "recipeLinkedCount": "{count, plural, =0{Nadie la ha guardado en favoritos todavía} =1{1 pintor la tiene en favoritos} other{{count} pintores la tienen en favoritos}}",
+  "recipeLinkedSectionTitle": "Favoritas",
+  "recipeLinkedSectionHelp": "Recetas de otros pintores guardadas en favoritos. Se actualizan solas cuando el autor las cambia.",
   "recipeNotShared": "Esta receta ya no está compartida",
   "recipeNotSharedBody": "El autor dejó de compartirla o el enlace no es correcto.",
   "recipeShareText": "{name} — una receta de PintaMinis: {url}",
@@ -175,9 +199,27 @@
   "shoppingChoiceBody": "{substitutable, plural, =1{1 de las que faltan tiene un bote muy parecido en tu estantería.} other{{substitutable} de las que faltan tienen un bote muy parecido en tu estantería.}}",
   "shoppingChoiceOnlyNeeded": "{count, plural, =1{Añadir solo la 1 sin sustituto} other{Añadir solo las {count} sin sustituto}}",
   "shoppingChoiceAll": "{count, plural, other{Añadir las {count}}}",
-  "@shoppingChoiceBody": {"placeholders": {"substitutable": {"type": "int"}}},
-  "@shoppingChoiceOnlyNeeded": {"placeholders": {"count": {"type": "int"}}},
-  "@shoppingChoiceAll": {"placeholders": {"count": {"type": "int"}}},
+  "@shoppingChoiceBody": {
+    "placeholders": {
+      "substitutable": {
+        "type": "int"
+      }
+    }
+  },
+  "@shoppingChoiceOnlyNeeded": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@shoppingChoiceAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "addToListTitle": "Añadir a una lista",
   "addToListEmpty": "Todavía no tienes listas. Crea una desde la pestaña Listas.",
   "signIn": "Iniciar sesión",
@@ -235,7 +277,7 @@
   "equivalentsTierApprox": "Aproximada",
   "equivalentsDisclaimer": "Según cartas de color publicadas — comprueba el bote real antes de comprar.",
   "recipePrivate": "Privada",
-  "recipeLinkedBadge": "Vinculada",
+  "recipeLinkedBadge": "Favorita",
   "recipePhoto": "Foto",
   "recipeAddPhoto": "Añadir foto",
   "recipeReplacePhoto": "Cambiar foto",
@@ -261,7 +303,13 @@
   "shelfStarterBody": "Elige una marca y toca todas las pinturas que tengas. Luego podrás afinarlo — esto es solo para arrancar.",
   "shelfStarterAdd": "{count, plural, =0{Selecciona las pinturas que tienes} =1{Añadir 1 pintura a mi estantería} other{Añadir {count} pinturas a mi estantería}}",
   "shelfStarterSkip": "Prefiero mirar por mi cuenta",
-  "@shelfStarterAdd": {"placeholders": {"count": {"type": "int"}}},
+  "@shelfStarterAdd": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "paintsMineEmptyFiltered": "Ninguna de tus pinturas coincide con este filtro.",
   "paintsAllEmptyFiltered": "Ninguna pintura coincide con esta búsqueda.",
   "recipePhotoUploadFailed": "No se ha podido subir la foto. Tu receta no se ha guardado.",

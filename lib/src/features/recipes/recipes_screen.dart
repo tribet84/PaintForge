@@ -113,7 +113,7 @@ class _LinkedRecipeCard extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: ListTile(
-              leading: const Icon(Icons.link_off),
+              leading: const Icon(Icons.bookmark_remove_outlined),
               title: Text(stillLoading ? l10n.loading : l10n.recipeNotShared),
               trailing: stillLoading
                   ? null

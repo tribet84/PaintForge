@@ -214,7 +214,8 @@ class _OriginBadge extends StatelessWidget {
     final (icon, label, color) = switch (origin) {
       RecipeOrigin.ownShared => (Icons.public, l10n.recipeSharedBadge, scheme.primary),
       RecipeOrigin.ownPrivate => (Icons.lock_outline, l10n.recipePrivate, scheme.outline),
-      RecipeOrigin.linked => (Icons.link, l10n.recipeLinkedBadge, scheme.tertiary),
+      RecipeOrigin.linked =>
+        (Icons.bookmark, l10n.recipeLinkedBadge, scheme.tertiary),
     };
 
     if (!onDark) {

@@ -64,8 +64,20 @@
   "shoppingClearBody": "{count, plural, =1{1 paint marked \"to buy\" will be removed from the list.} other{{count} paints marked \"to buy\" will be removed from the list.}} Paints running low stay: they reflect your shelf, not a wish.",
   "shoppingClearAction": "Empty",
   "shoppingCleared": "{count, plural, =1{1 paint removed from the list} other{{count} paints removed from the list}}",
-  "@shoppingClearBody": {"placeholders": {"count": {"type": "int"}}},
-  "@shoppingCleared": {"placeholders": {"count": {"type": "int"}}},
+  "@shoppingClearBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@shoppingCleared": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingMarkAllConfirmTitle": "Mark everything as bought?",
   "shoppingMarkAllConfirmBody": "{count, plural, =1{1 paint will be marked as owned and leave the shopping list.} other{{count} paints will be marked as owned and leave the shopping list.}}",
   "@shoppingMarkAllConfirmBody": {
@@ -162,7 +174,7 @@
   "stepNoteHint": "e.g. heavy drybrush, thin it down…",
   "recipeShare": "Share recipe",
   "recipeInvitationTitle": "Save this recipe?",
-  "recipeInvitationBody": "“{name}” by {author}. Linking it keeps it in your account and you will always see the author's latest version.",
+  "recipeInvitationBody": "“{name}” by {author}. Bookmark it and it stays in your account — you will always see the author's latest version.",
   "@recipeInvitationBody": {
     "placeholders": {
       "name": {
@@ -173,9 +185,9 @@
       }
     }
   },
-  "recipeInvitationLink": "Save to my account",
+  "recipeInvitationLink": "Bookmark it",
   "recipeInvitationJustLook": "Just have a look",
-  "recipeAlreadyLinked": "This recipe is already in your account",
+  "recipeAlreadyLinked": "Already in your bookmarks",
   "recipeCreateList": "Create a list from this recipe",
   "recipeCreateListBody": "A new list will be created with the {count, plural, =1{1 paint} other{{count} paints}} used in “{name}”.",
   "@recipeCreateListBody": {
@@ -197,13 +209,13 @@
     }
   },
   "recipeShareTitle": "Share this recipe?",
-  "recipeShareBody": "Anyone with the link can view it and link it to their account. When you update the recipe, everyone sees your latest version — links follow the recipe, they never copy it. It will also appear on your author page, next to everything else you share.",
+  "recipeShareBody": "Anyone with the link can view it and bookmark it. When you update the recipe, everyone sees your latest version — bookmarks follow the recipe, they never copy it. It will also appear on your author page, next to everything else you share.",
   "recipeSharedBadge": "Shared",
   "recipeLinkCopied": "Link copied to clipboard",
   "recipeCopyLink": "Copy link",
   "recipeShareLink": "Share link…",
   "recipeStopSharing": "Stop sharing",
-  "recipeStopSharingBody": "The link will stop working and the recipe will disappear from the accounts that linked it. Your local copy is not affected.",
+  "recipeStopSharingBody": "The link will stop working and the recipe will disappear from everyone's bookmarks. Your local copy is not affected.",
   "recipeUnpublished": "Recipe is no longer shared",
   "recipeByAuthor": "by {author}",
   "authorRecipesTitle": "Recipes by {name}",
@@ -211,8 +223,20 @@
   "settingsDisplayName": "Display name",
   "settingsDisplayNameHint": "How other painters see you on shared recipes",
   "settingsDisplayNameSaved": "Name updated — it will appear on what you publish from now on",
-  "@authorRecipesTitle": {"placeholders": {"name": {"type": "String"}}},
-  "@authorRecipesCount": {"placeholders": {"count": {"type": "int"}}},
+  "@authorRecipesTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@authorRecipesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "@recipeByAuthor": {
     "placeholders": {
       "author": {
@@ -228,11 +252,11 @@
       }
     }
   },
-  "recipeLinkAction": "Link to my account",
-  "recipeUnlinkAction": "Remove from my account",
-  "recipeLinked": "Recipe linked — you will always see the latest version",
-  "recipeUnlinked": "Recipe removed from your account",
-  "recipeLinkedCount": "{count, plural, =0{Nobody has linked this recipe yet} =1{1 painter has linked this recipe} other{{count} painters have linked this recipe}}",
+  "recipeLinkAction": "Bookmark",
+  "recipeUnlinkAction": "Remove bookmark",
+  "recipeLinked": "Bookmarked — you will always see the latest version",
+  "recipeUnlinked": "Removed from your bookmarks",
+  "recipeLinkedCount": "{count, plural, =0{Nobody has bookmarked this recipe yet} =1{1 painter bookmarked this recipe} other{{count} painters bookmarked this recipe}}",
   "@recipeLinkedCount": {
     "placeholders": {
       "count": {
@@ -240,8 +264,8 @@
       }
     }
   },
-  "recipeLinkedSectionTitle": "Linked recipes",
-  "recipeLinkedSectionHelp": "Recipes from other painters. They update automatically when the author updates them.",
+  "recipeLinkedSectionTitle": "Bookmarked",
+  "recipeLinkedSectionHelp": "Recipes from other painters you bookmarked. They update on their own whenever the author changes them.",
   "recipeNotShared": "This recipe is not shared anymore",
   "recipeNotSharedBody": "The author stopped sharing it or the link is wrong.",
   "recipeShareText": "{name} — a PintaMinis recipe: {url}",
@@ -330,9 +354,27 @@
   "shoppingChoiceBody": "{substitutable, plural, =1{1 of the missing paints has a close match on your shelf.} other{{substitutable} of the missing paints have a close match on your shelf.}}",
   "shoppingChoiceOnlyNeeded": "{count, plural, =1{Add only the 1 without} other{Add only the {count} without}}",
   "shoppingChoiceAll": "{count, plural, other{Add all {count}}}",
-  "@shoppingChoiceBody": {"placeholders": {"substitutable": {"type": "int"}}},
-  "@shoppingChoiceOnlyNeeded": {"placeholders": {"count": {"type": "int"}}},
-  "@shoppingChoiceAll": {"placeholders": {"count": {"type": "int"}}},
+  "@shoppingChoiceBody": {
+    "placeholders": {
+      "substitutable": {
+        "type": "int"
+      }
+    }
+  },
+  "@shoppingChoiceOnlyNeeded": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@shoppingChoiceAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "@listAddedToShopping": {
     "placeholders": {
       "count": {
@@ -411,7 +453,7 @@
   "equivalentsTierApprox": "Approximate",
   "equivalentsDisclaimer": "Based on published colour charts — check the real pot before buying.",
   "recipePrivate": "Private",
-  "recipeLinkedBadge": "Linked",
+  "recipeLinkedBadge": "Bookmarked",
   "recipePhoto": "Photo",
   "recipeAddPhoto": "Add photo",
   "recipeReplacePhoto": "Replace photo",
@@ -465,7 +507,13 @@
   "shelfStarterBody": "Pick a brand and tap every paint you own. You can fine-tune later — this is just to get your shelf started.",
   "shelfStarterAdd": "{count, plural, =0{Select the paints you own} =1{Add 1 paint to my shelf} other{Add {count} paints to my shelf}}",
   "shelfStarterSkip": "I'd rather browse on my own",
-  "@shelfStarterAdd": {"placeholders": {"count": {"type": "int"}}},
+  "@shelfStarterAdd": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "@paintsBulkApplied": {
     "placeholders": {
       "count": {
